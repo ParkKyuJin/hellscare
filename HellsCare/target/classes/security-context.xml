@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 권한별로 폴더명 변경하거나 필요한대로 사용하시면됩니다. 본인 스타일로 하셔도됩니다. 
+	security-form에 들어있는 파라미터값들은 파라미터 종류를 보여드리기 위해 작성했습니다. 파라미터에 대해 궁금하신점은 물어보셔도됩니다.-->
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/02_manager/**"
+				access="hasAuthority('USER_ADMIN')"/>
+		<security:intercept-url pattern="/01_guest/**"
+				access="isAuthenticated()"/>
+		<security:intercept-url pattern="/**"
+				access="permitAll"/>		
+		<security:form-login login-page="/guestlgin"
+		username-parameter="j_username"
+		password-parameter="j_password"
+		authentication-failure-url="/guestlgin"
+		login-processing-url="/hostlogin"
+		default-target-url="/02_manager/Manager"
+		/>
+		<security:logout />
+	</security:http>
+<!-- 방법2 DB방식 -->
+
+<security:authentication-manager>
+		<security:authentication-provider>
+		<security:password-encoder hash="bcrypt" /> 
+			<security:jdbc-user-service data-source-ref="dataSource"
+			users-by-username-query="SELECT password, enabled
+                                    FROM users
+                                    WHERE username = ?"
+            authorities-by-username-query="SELECT username, authority
+                        FROM authorities
+                        WHERE username = ?"
+
+/>
+		</security:authentication-provider>
+</security:authentication-manager>
+<!-- servlet-context.xml에 있는 데이터소스 연결 빈의 아이디를 갖다 붙여넣는다. 이름은 당연히 동일해야함. -->
+
+
+<!-- 암호화 클래스입니다. 변경할건 따로 없으니 나중에 불러서 사용하셔도됩니다. -->
+<bean id = "BCryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<!-- 방법1. IN 메모리 방식 -->
+		<!-- <security:authentication-manager>
+			<security:authentication-provider>
+				<security:user-service>
+					<security:user name="park" password="p1234" authorities="ROLE_USER"/>
+					<security:user name="kim" password="k1234" authorities="ROLE_USER"/>
+					<security:user name="manager" password="m1234" authorities="USER_MANAGER"/>
+					<security:user name="admin" password="a1234" authorities="USER_ADMIN"/>
+				</security:user-service>
+			</security:authentication-provider>
+		</security:authentication-manager> -->
+<!-- {noop}  높은버전에서 password 인식 키를 적어줘야함-->
+</beans>
