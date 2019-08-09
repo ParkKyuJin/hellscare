@@ -27,12 +27,12 @@ public class hellsCareController {
 	 //return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
 	 
 	//메인페이지 이동 컨트롤러. 테스트용
-	@RequestMapping("main")
+	@RequestMapping("host_main")
 	public String main(HttpServletRequest req, Model model){
 		//로거 작성 필수!
 		logger.info("URL ==> main");
 		// service.testSetvice(req, model);
-		return "Users/index";
+		return "host/host_main";
 	}
 	
 	//DAO를 타지 않는 메뉴 테스트
@@ -41,7 +41,7 @@ public class hellsCareController {
 		//로거 작성 필수!
 		logger.info("URL ==> main");
 		
-		return "index";
+		return "Users/index";
 	}
 
 }

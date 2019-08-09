@@ -14,7 +14,7 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="setting.jsp" %>
+	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
@@ -27,7 +27,7 @@
 
 	<!-- Document Wrapper
 	============================================= -->
-	<%@ include file="header.jsp" %>
+	<%@ include file="../include/header.jsp" %>
 
 		<section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
 			<div class="slider-parallax-inner">
@@ -37,7 +37,7 @@
 						<div class="swiper-slide dark" style="background-image: url('/hellscare/resources/images/yoga2.jpg');">
 							<div class="container clearfix">
 								<div class="slider-caption slider-caption-center">
-									<h2 data-animate="fadeInUp">Welcome to <font style="color:red">Hell</font>scare</h2>
+									<h2 data-animate="fadeInUp">Welcome to <font style="color:lightgreen">Health</font>care</h2>
 									<p class="d-none d-sm-block" data-animate="fadeInUp" data-delay="200">We provide you helpful healthcare information , check continuously your body status by using our device and give you some directions for your healthful life</p>
 								</div>
 							</div>
@@ -599,15 +599,16 @@
 
 		<!-- Footer
 		============================================= -->
-		<%@ include file="footer.jsp" %>
+		<%@ include file="../include/footer.jsp" %>
 
 	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
+	<div id="gotoTop" class="icon-angle-up"></div>
 
-	<%@ include file="footerScript.jsp" %>
+	<%@ include file="../include/footerScript.jsp" %>
 
 </body>
 </html>
