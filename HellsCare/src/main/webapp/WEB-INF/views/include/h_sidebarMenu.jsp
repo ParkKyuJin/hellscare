@@ -86,7 +86,7 @@
               </a>
               <ul class="sub">
               <li><a href="host_exercise">운동관리</a></li>
-              <li><a href="buttons.html">질병관리</a></li>
+              <li><a href="diseaseInfo">질병관리</a></li>
               <li><a href="host_DrugInfo">의약품 관리</a></li>
             </ul>
           </li>
@@ -106,8 +106,8 @@
               <span>식단관리</span>
               </a>
             <ul class="sub">
-              <li><a href="grids.html">음식 조회</a></li>
-              <li><a href="calendar.html">음식 등록</a></li>
+              <li><a href="host_foodList">음식 조회</a></li>
+              <li><a href="host_foodRegForm">음식 등록</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -116,8 +116,8 @@
               <span>게시판 관리</span>
               </a>
             <ul class="sub">
-              <li><a href="blank.html">공지사항 관리</a></li>
-              <li><a href="login.html">게시글 관리</a></li>
+              <li><a href="host_notice">공지사항 관리</a></li>
+              <li><a href="host_board">게시글 관리</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -132,7 +132,7 @@
             </ul>
           </li>
           <li>
-            <a href="host_main">
+            <a href="host_qna">
               <i class="fa fa-th"></i>
               <span>QnA 관리</span>
             </a>

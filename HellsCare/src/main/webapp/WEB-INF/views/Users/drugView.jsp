@@ -28,7 +28,24 @@
 <!-- Document Wrapper
 	============================================= -->
 		<%@ include file="../include/header.jsp"%>
+		
 	<div>
+	
+	
+	<section id="page-title">
+
+         <div class="container clearfix">
+            <h1>의약품 정보</h1>
+            <span>Drug Information</span>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="main">Home</a></li>
+               <li class="breadcrumb-item"><a href="drugInfo">DrugInfo</a></li>
+               <li class="breadcrumb-item"><a href="drugInfo">DrugView</a></li>
+            </ol>
+         </div>
+      </section><!-- #page-title end -->
+	
+	
 	<div align="center">
 	<img src="/hellscare/resources/images/drug/drugview1.png"> <br>
 	<img src="/hellscare/resources/images/drug/drugview2.png"> <br>

@@ -21,7 +21,6 @@
 		<!-- Page Title
 		============================================= -->
 		<section id="page-title">
-
 			<div class="container clearfix">
 				<h1>식단 추천</h1>
 				<span>회원님의 건강 정보에 맞게 맞춤형 식단을 추천합니다.</span>
@@ -31,7 +30,6 @@
 					<li class="breadcrumb-item active" aria-current="page">식단 추천</li>
 				</ol>
 			</div>
-
 		</section><!-- #page-title end -->
 		
 			<!-- Content
@@ -41,175 +39,191 @@
 			<div class="content-wrap">
 
 				<div class="container clearfix">
+				
+					<h3>월별 섭취 칼로리</h1>
+					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
+						<div class="chartjs-size-monitor" style="position: absolute; 
+							left: 0px; top: 0px; right : 0px; bottom : 0px; overflow : hidden; 
+							pointer-events : none; visibility : hidden; z-index: -1;">
+							
+							<div class="chartjs-size-monitor-expand" 
+								style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
+										pointer-events:none;visibility:hidden;z-index:-1;">
+								<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+							</div>
+						</div>
+						
+						<div class="chartjs-size-monitor-shrink" 
+							style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
+								pointer-events:none;visibility:hidden;z-index:-1;">
+							<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+						</div>
+						
+						<canvas id="chart-0" width="720" height="360" class="chartjs-render-monitor"
+							style="display: block; width: 720px; height : 360px;" />
+					</div>
+					<!-- <h1> 선 그래프 끝 </h1> -->
+					
+					<!-- <h1> 막대 그래프 </h1>
+					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+						<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; 
+							right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: 
+							hidden; z-index: -1;">
+							<div class="chartjs-size-monitor-expand" 
+							style="position:absolute;left:0; top:0;right:0;bottom:0;overflow:hidden;
+								pointer-events:none; visibility:hidden;z-index:-1;">
+								<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+							</div>
+							
+							<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;
+								bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+								<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+							</div>
+						</div>
+						
+						<canvas id="chart-1" width="720" height="360" class="chartjs-render-monitor" 
+							style="display: block; width: 720px; height: 360px;"></canvas>
+					</div>
+					<h1> 막대 그래프 끝 </h1> -->
 
+					
 					<!-- Post Content
 					============================================= -->
 					<div class="postcontent nobottommargin clearfix">
 			
-						<div class="divider"><i class="icon-circle"></i></div>
-			
-						<h3>대표 건강 식단</h3>
+						<h3>추천 식단</h3>
 			
 						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab">Home</a></li>
-						  <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li>
-						  <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="myTabDrop1" data-toggle="dropdown">Dropdown</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-							  <a class="dropdown-item" href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a>
-							  <a class="dropdown-item" href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a>
-							</ul>
-						  </li>
+						  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">이상적인 식단</a></li>
+						  <!-- <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li> -->
 						</ul>
 						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="home">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+						  <div class="tab-pane fade show active" id="reasonable_food">
+						  	<p>2000kcal</p>
+						  	<table class="table table-bordered">
+							  <thead style="align:center;">
+								<tr>
+								  <th colspan="2">아침</th>
+								  <th colspan="2">간식</th>
+								  <th colspan="2">점심</th>
+								  <th colspan="2">간식</th>
+								  <th colspan="2">저녁</th>
+								</tr>
+								<tr style="font-size: 14px;">
+									<td>음식명(g)</td>
+									<td>칼로리(kcal)</td>
+									<td>음식명(g)</td>
+									<td>칼로리(kcal)</td>
+									<td>음식명(g)</td>
+									<td>칼로리(kcal)</td>
+									<td>음식명(g)</td>
+									<td>칼로리(kcal)</td>
+									<td>음식명(g)</td>
+									<td>칼로리(kcal)</td>
+								</tr>
+							  </thead>
+							  <tbody style="font-size:12px;" >
+								<tr>
+								  <td>식빵 2장</td>
+								  <td>200</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>비빔밥(410)</td>
+								  <td>600</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>보리밥(300)</td>
+								  <td>600</td>
+								</tr>
+								
+								<tr>
+								  <td>우유</td>
+								  <td>125</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>아욱된장국(250)</td>
+								  <td>80</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>순두부찌개(300)</td>
+								  <td>180</td>
+								</tr>
+								
+								<tr>
+								  <td>달걀프라이(50)</td>
+								  <td>100</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>김무침(10)</td>
+								  <td>20</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>코다리찜(80)</td>
+								  <td>100</td>
+								</tr>
+								
+								<tr>
+								  <td>양배추샐러드(50)</td>
+								  <td>70</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>동치미(100)</td>
+								  <td>10</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>도토리무침(80)</td>
+								  <td>50</td>
+								</tr>
+								
+								<tr>
+								  <td>바나나 1개</td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>콩나물무침(70)</td>
+								  <td>50</td>
+								</tr>
+								
+								<tr>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>   </td>
+								  <td>배추김치(50)</td>
+								  <td>15</td>
+								</tr>
+							  </tbody>
+							  
+							  <tfoot>
+							  	<tr style="font-size:14px; align:center;">
+							  		<td colspan="2">595 kcal</td>
+							  		<td colspan="2"></td>
+							  		<td colspan="2">710 kcal</td>
+							  		<td colspan="2"></td>
+							  		<td colspan="2">695 kcal</td>
+							  	</tr>
+							  </tfoot>
+							</table>
+						  	
 						  </div>
-						  <div class="tab-pane fade" id="profile">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown1">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown2">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-						  </div>
-						</div>
-			
-						<div class="line"></div>
-			
-						<h4>Pills Navigation Style</h4>
-			
-						<ul id="myTab2" class="nav nav-pills boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#home2" data-toggle="tab">Home</a></li>
-						  <li class="nav-item"><a class="nav-link" href="#profile2" data-toggle="tab">Profile</a></li>
-						  <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="myTabDrop1" data-toggle="dropdown">Dropdown</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-							  <a class="dropdown-item" href="#dropdown3" tabindex="-1" data-toggle="tab">@fat</a>
-							  <a class="dropdown-item" href="#dropdown4" tabindex="-1" data-toggle="tab">@mdo</a>
-							</ul>
-						  </li>
-						</ul>
-						<div id="myTabContent2" class="tab-content">
-						  <div class="tab-pane fade show active" id="home2">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-						  </div>
-						  <div class="tab-pane fade" id="profile2">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown3">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown4">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-						  </div>
-						</div>
-			
-						<div class="line"></div>
-			
-						<h4>Side Tabs Style</h4>
-			
-						<div class="row">
-							<div class="col-4">
-								<div class="list-group" id="list-tab" role="tablist">
-									<a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-									<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-									<a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-									<a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
-								</div>
-							</div>
-							<div class="col-8">
-								<div class="tab-content" id="nav-tabContent">
-									<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nisi veritatis enim, eaque quibusdam eius vel? Vel natus adipisci sit, omnis et enim nostrum quia hic atque odit, numquam deleniti. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum libero vitae neque laboriosam suscipit cupiditate animi porro distinctio excepturi, beatae quas officiis dolorem sit aliquid vel ab consequatur eveniet soluta necessitatibus quidem? Iure, consequuntur non odio accusamus est repudiandae culpa!</p>
-									</div>
-									<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-										<p>Nobis laudantium est repellendus ad cumque ex quasi alias, quas veritatis nam optio deleniti itaque, expedita, quo quidem temporibus? Voluptate ratione numquam ex quae, culpa eos eum dolor a dolore vitae praesentium animi? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum earum beatae quibusdam aspernatur impedit fuga excepturi sapiente pariatur blanditiis provident repudiandae inventore veritatis tenetur eum nisi magni explicabo dolorem atque recusandae praesentium non, mollitia dignissimos fugit! Reiciendis consectetur eligendi corporis!</p>
-									</div>
-									<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-										<p>Quam aspernatur incidunt iure soluta consequatur veniam exercitationem deleniti ullam, molestiae similique odio facilis iusto numquam. Quasi voluptatem laborum deleniti neque, necessitatibus repellat, ipsam repudiandae dignissimos. Deleniti soluta facere fugiat repudiandae delectus, perspiciatis quibusdam animi odit, eius iste vitae modi nesciunt maiores quasi repellendus eaque ratione tempora eos minus eum excepturi qui praesentium, ipsam. Maiores nulla eum dolorum saepe ullam officia consequatur blanditiis harum aperiam sequi. Dolorem odio aliquid amet error eveniet excepturi quis, suscipit, cumque itaque ab dicta magnam dolorum voluptatum cupiditate placeat atque delectus eius facilis mollitia possimus!</p>
-									</div>
-									<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-										<p>Placeat doloribus earum voluptate delectus porro reprehenderit unde vero neque obcaecati, aperiam, dicta, tenetur labore consequuntur enim error quidem facere eum eveniet repellendus et fugit debitis! Laudantium, dolore quasi quae rem repellendus sit hic. Nobis vel ab ratione quisquam nesciunt blanditiis et itaque iste eos atque placeat expedita quis aliquam rerum dolore fuga, dicta. Veritatis inventore adipisci cupiditate ducimus laborum eaque atque deleniti repellendus pariatur veniam repellat id laudantium, asperiores provident tempora eveniet, nihil esse facere iusto aliquam maiores, iste. Quaerat, sapiente repudiandae aspernatur animi maiores, nesciunt veritatis quam, suscipit asperiores vitae itaque! Autem, architecto, repellendus. Laudantium labore, doloremque necessitatibus quod sint iure ab officiis delectus molestias sunt illum velit harum ullam! Blanditiis corporis reiciendis pariatur, amet magni animi. Laboriosam animi ducimus a.</p>
-									</div>
-								</div>
-							</div>
+						  
 						</div>
 			
 					</div><!-- .postcontent end -->
-			
-					<!-- Sidebar
-					============================================= -->
-					<div class="sidebar nobottommargin col_last clearfix">
-						<div class="sidebar-widgets-wrap">
-			
-							<div class="widget widget_links clearfix">
-			
-								<h4>Shortcodes</h4>
-								<ul>
-									<li><a href="animations.html"><div>Animations</div></a></li>
-									<li><a href="buttons.html"><div>Buttons</div></a></li>
-									<li><a href="carousel.html"><div>Carousel</div></a></li>
-									<li><a href="charts.html"><div>Charts</div></a></li>
-									<li><a href="clients.html"><div>Clients</div></a></li>
-									<li><a href="columns-grids.html"><div>Columns</div></a></li>
-									<li><a href="counters.html"><div>Counters</div></a></li>
-									<li><a href="dividers.html"><div>Dividers</div></a></li>
-									<li><a href="featured-boxes.html"><div>Icon Boxes</div></a></li>
-									<li><a href="gallery.html"><div>Galleries</div></a></li>
-									<li><a href="headings-dropcaps.html"><div>Heading Styles</div></a></li>
-									<li><a href="icon-lists.html"><div>Icon Lists</div></a></li>
-									<li><a href="labels-badges.html"><div>Labels</div></a></li>
-									<li><a href="lightbox.html"><div>Lightbox</div></a></li>
-									<li><a href="lists-cards.html"><div>Lists &amp; Cards</div></a></li>
-									<li><a href="maps.html"><div>Maps</div></a></li>
-									<li><a href="media-embeds.html"><div>Media Embeds</div></a></li>
-									<li><a href="modal-popovers.html"><div>Modal Boxes</div></a></li>
-									<li><a href="navigation.html"><div>Navigations</div></a></li>
-									<li><a href="pagination-progress.html"><div>Pagination</div></a></li>
-									<li><a href="pie-skills.html"><div>Pies &amp; Skills</div></a></li>
-									<li><a href="pricing.html"><div>Pricing Boxes</div></a></li>
-									<li><a href="process-steps.html"><div>Process Steps</div></a></li>
-									<li><a href="promo-boxes.html"><div>Promo Boxes</div></a></li>
-									<li><a href="quotes-blockquotes.html"><div>Blockquotes</div></a></li>
-									<li><a href="responsive.html"><div>Responsive</div></a></li>
-									<li><a href="sections.html"><div>Sections</div></a></li>
-									<li><a href="social-icons.html"><div>Social Icons</div></a></li>
-									<li><a href="style-boxes.html"><div>Alert Boxes</div></a></li>
-									<li><a href="styled-icons.html"><div>Styled Icons</div></a></li>
-									<li><a href="tables.html"><div>Tables</div></a></li>
-									<li><a href="tabs.html"><div>Tabs</div></a></li>
-									<li><a href="testimonials-twitter.html"><div>Testimonials</div></a></li>
-									<li><a href="thumbnails-slider.html"><div>Thumbnails</div></a></li>
-									<li><a href="toggles-accordions.html"><div>Toggles</div></a></li>
-								</ul>
-			
-							</div>
-			
-							<div class="widget clearfix">
-			
-								<h4>Dribbble Shots</h4>
-								<div id="dribbble-widget" class="dribbble-shots masonry-thumbs" data-user="envato" data-count="16" data-type="user"></div>
-			
-							</div>
-			
-							<div class="widget widget-twitter-feed clearfix">
-			
-								<h4>Twitter Feed</h4>
-								<ul class="iconlist twitter-feed" data-username="envato" data-count="2">
-									<li></li>
-								</ul>
-			
-								<a href="#" class="btn btn-secondary btn-sm fright">Follow Us on Twitter</a>
-			
-							</div>
-			
-						</div>
-					</div><!-- .sidebar end -->
+
 				</div>
 
 			</div>
+			
+			
 
 		</section><!-- #content end -->
 
@@ -232,5 +246,211 @@
 	<div id="gotoTop" class="icon-angle-up"></div>
 
 	<%@ include file="../include/footerScript.jsp"%>
+	
+	<script src="resources/js/chart.js"></script>
+	<script src="resources/js/chart-utils.js"></script>
+	
+	<script>
+
+		var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var config = {
+			type: 'line',
+			data: {
+				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				datasets: [{
+					label: "내가 섭취한 월별 칼로리",
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+					fill: false,
+				}, {
+					label: "평균 칼로리 기준치",
+					fill: false,
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor()
+					],
+				}]
+			},
+			options: {
+				responsive: true,
+				title:{
+					display:true,
+					text:'월별 섭취한 칼로리'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: '월'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: '칼로리'
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById("chart-0").getContext("2d");
+			window.myLine = new Chart(ctx, config);
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			config.data.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+
+			});
+
+			window.myLine.update();
+		});
+
+		var NUTRIENTS = ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"];
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"],
+			datasets: [{
+				label: '내가 섭취한 영양소',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: '영양소 한달 권장량',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById("chart-1").getContext("2d");
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: '한달 간 섭취한 영양소'
+					}
+				}
+			});
+
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			var zero = Math.random() < 0.2 ? true : false;
+			barChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+			window.myBar.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+			var dsColor = window.chartColors[colorName];
+			var newDataset = {
+				label: 'Dataset ' + barChartData.datasets.length,
+				backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+				borderColor: dsColor,
+				borderWidth: 1,
+				data: []
+			};
+
+			for (var index = 0; index < barChartData.labels.length; ++index) {
+				newDataset.data.push(randomScalingFactor());
+			}
+
+			barChartData.datasets.push(newDataset);
+			window.myBar.update();
+		});
+
+		document.getElementById('addData').addEventListener('click', function() {
+			if (barChartData.datasets.length > 0) {
+				var month = MONTHS[barChartData.labels.length % MONTHS.length];
+				barChartData.labels.push(month);
+
+				for (var index = 0; index < barChartData.datasets.length; ++index) {
+					//window.myBar.addData(randomScalingFactor(), index);
+					barChartData.datasets[index].data.push(randomScalingFactor());
+				}
+
+				window.myBar.update();
+			}
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			barChartData.datasets.splice(0, 1);
+			window.myBar.update();
+		});
+
+		document.getElementById('removeData').addEventListener('click', function() {
+			barChartData.labels.splice(-1, 1); // remove the label first
+
+			barChartData.datasets.forEach(function(dataset, datasetIndex) {
+				dataset.data.pop();
+			});
+
+			window.myBar.update();
+		});
+
+	</script>
 </body>
 </html>

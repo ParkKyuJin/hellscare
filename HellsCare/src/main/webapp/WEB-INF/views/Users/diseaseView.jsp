@@ -29,6 +29,24 @@
 	============================================= -->
 	<%@ include file="../include/header.jsp" %>
 	<div>
+	
+	<section id="page-title">
+
+         <div class="container clearfix">
+            <h1>질병 정보</h1>
+            <span>Disease Information</span>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="main">Home</a></li>
+               <li class="breadcrumb-item"><a href="disease">Disease</a></li>
+               <li class="breadcrumb-item"><a href="disease">DiseaseView</a></li>
+            </ol>
+         </div>
+      </section><!-- #page-title end -->
+	
+	
+	
+	
+	
 	<div align="center">
 	<img src="/hellscare/resources/images/disease/diseaseview1.png"> <br>
 	<img src="/hellscare/resources/images/disease/diseaseview2.png"> <br>

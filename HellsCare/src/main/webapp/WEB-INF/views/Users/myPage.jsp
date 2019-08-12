@@ -37,7 +37,7 @@
 
 <!-- Document Wrapper
 ============================================= -->
-<%@ include file="../include/loginHeader.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <!-- Page Title
 	============================================= -->
 	<section id="page-title">

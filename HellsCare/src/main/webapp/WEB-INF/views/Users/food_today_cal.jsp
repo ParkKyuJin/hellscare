@@ -41,581 +41,380 @@
 			<div class="content-wrap">
 
 				<div class="container clearfix">
+				
+					<div class="row justify-content-center">
+						<div class="col-lg-7 col-md-10">
+							<div class="card shadow-sm">
+								<div class="card-header">
+									<h4 class="mb-0">칼로리 입력</h4>
+								</div>
+								<div class="card-body">
 
-					<!-- Post Content
-					============================================= -->
-					<div class="postcontent nobottommargin clearfix">
-			
-						<h3>다이어트 식단</h3>
-			
-						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">이상적인 식단</a></li>
-						  <!-- <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li> -->
-						  <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="myTabDrop1" data-toggle="dropdown">칼로리별 식단</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-							  <a class="dropdown-item" href="#dropdown1" tabindex="-1" data-toggle="tab">1000 kcal 식단 1</a>
-							  <a class="dropdown-item" href="#dropdown2" tabindex="-1" data-toggle="tab">1000 kcal 식단 2</a>
-							  <a class="dropdown-item" href="#dropdown3" tabindex="-1" data-toggle="tab">1500 kcal 식단 1</a>
-							  <a class="dropdown-item" href="#dropdown4" tabindex="-1" data-toggle="tab">1500 kcal 식단 2</a>
-							</ul>
-						  </li>
-						</ul>
-						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="reasonable_food">
-						  	<p>2000kcal</p>
-						  	<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>식빵 2장</td>
-								  <td>200</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>비빔밥(410)</td>
-								  <td>600</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>보리밥(300)</td>
-								  <td>600</td>
-								</tr>
-								
-								<tr>
-								  <td>우유</td>
-								  <td>125</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>아욱된장국(250)</td>
-								  <td>80</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>순두부찌개(300)</td>
-								  <td>180</td>
-								</tr>
-								
-								<tr>
-								  <td>달걀프라이(50)</td>
-								  <td>100</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>김무침(10)</td>
-								  <td>20</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>코다리찜(80)</td>
-								  <td>100</td>
-								</tr>
-								
-								<tr>
-								  <td>양배추샐러드(50)</td>
-								  <td>70</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>동치미(100)</td>
-								  <td>10</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>도토리무침(80)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>바나나 1개</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>콩나물무침(70)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>배추김치(50)</td>
-								  <td>15</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">595 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">710 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">695 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  	
-						  	
-							<p></p>
-						  </div>
-						  <!-- <div class="tab-pane fade" id="profile">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-						  </div> -->
-						  <div class="tab-pane fade" id="dropdown1">
-							<p> 1000 kcal 식단 1</p>
-							<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>전복죽(50)</td>
-								  <td>125.8</td>
-								  <td>블랙커피<br/>(원두2)</td>
-								  <td>50</td>
-								  <td>보리밥(50)</td>
-								  <td>170</td>
-								  <td>자두(100)</td>
-								  <td>62</td>
-								  <td>현미밥(50)</td>
-								  <td>177</td>
-								</tr>
-								
-								<tr>
-								  <td>김치(100)</td>
-								  <td>32</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>미역국(150)</td>
-								  <td>67</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>시래기국(120)</td>
-								  <td>88</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>양파볶음(100)</td>
-								  <td>54</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>토란탕(110)</td>
-								  <td>83</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>겉절이(80)</td>
-								  <td>32</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>무우생채(100)</td>
-								  <td>27</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">157.8 kcal</td>
-							  		<td colspan="2">50 kcal</td>
-							  		<td colspan="2">323 kcal</td>
-							  		<td colspan="2">62 kcal</td>
-							  		<td colspan="2">375 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown2">
-							<p> 1000 kcal 식단 2</p>
-							<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>밤밥(60)</td>
-								  <td>149.7</td>
-								  <td>수박(100)</td>
-								  <td>22</td>
-								  <td>현미밥(60)</td>
-								  <td>170</td>
-								  <td>수박(100)</td>
-								  <td>22</td>
-								  <td>보리밥(50)</td>
-								  <td>183</td>
-								</tr>
-								
-								<tr>
-								  <td>미역된장국(27)</td>
-								  <td>41.5</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>불고기(90.7)</td>
-								  <td>67</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>무우국(100)</td>
-								  <td>31</td>
-								</tr>
-								
-								<tr>
-								  <td>오이김치(100)</td>
-								  <td>20</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>무우생채(80)</td>
-								  <td>54</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>멸치볶음(20)</td>
-								  <td>67</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>쌈장(15)</td>
-								  <td>19.5</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>청포묵무침(60)</td>
-								  <td>61.5</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>배추국(110)</td>
-								  <td>11</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>배추김치(80)</td>
-								  <td>15</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">211 kcal</td>
-							  		<td colspan="2">22 kcal</td>
-							  		<td colspan="2">403 kcal</td>
-							  		<td colspan="2">22 kcal</td>
-							  		<td colspan="2">360 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  </div>
-						  
-						  <div class="tab-pane fade" id="dropdown3">
-							<p> 1500 kcal 식단 1</p>
-							<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>밥(150)</td>
-								  <td>210</td>
-								  <td>우유(210)</td>
-								  <td>100</td>
-								  <td>밥(150)</td>
-								  <td>210</td>
-								  <td>사과(1/2)</td>
-								  <td>65</td>
-								  <td>밥(150)</td>
-								  <td>210</td>
-								</tr>
-								
-								<tr>
-								  <td>애탕국(250)</td>
-								  <td>150</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>냉이된장국(250)</td>
-								  <td>80</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>무우국(250)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>쥐어채볶음(20)</td>
-								  <td>60</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>갈치구이(50)</td>
-								  <td>70</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>연근조림(40)</td>
-								  <td>40</td>
-								</tr>
-								
-								<tr>
-								  <td>연근조림(40)</td>
-								  <td>40</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>풋고추<br>멸치볶음(50)</td>
-								  <td>100</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>도랑지<br>오리생채(70)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>김치(50)</td>
-								  <td>15</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>김치(50)</td>
-								  <td>15</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>김치(50)</td>
-								  <td>15</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">475 kcal</td>
-							  		<td colspan="2">100 kcal</td>
-							  		<td colspan="2">475 kcal</td>
-							  		<td colspan="2">65 kcal</td>
-							  		<td colspan="2">365 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  </div>
-						  
-						  <div class="tab-pane fade" id="dropdown4">
-							<p> 1500 kcal 식단 2</p>
-							<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>완두콩밥(150)</td>
-								  <td>210</td>
-								  <td>사과(1/2)</td>
-								  <td>60</td>
-								  <td>보리밥(150)</td>
-								  <td>210</td>
-								  <td>수박(250)</td>
-								  <td>100</td>
-								  <td>흑미밥(150)</td>
-								  <td>100</td>
-								</tr>
-								
-								<tr>
-								  <td>버섯국(70)</td>
-								  <td>130</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>두부된장(250)</td>
-								  <td>100</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>조개국(115)</td>
-								  <td>118</td>
-								</tr>
-								
-								<tr>
-								  <td>상추겉절이(35)</td>
-								  <td>60</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>미역줄기볶음(50)</td>
-								  <td>40</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>고추부각(20)</td>
-								  <td>60</td>
-								</tr>
-								
-								<tr>
-								  <td>김치(70)</td>
-								  <td>20</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>달걀조림 1개</td>
-								  <td>60</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>콩나물잡채(70)</td>
-								  <td>100</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>풋고추조림(40)</td>
-								  <td>41</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">439 kcal</td>
-							  		<td colspan="2">60 kcal</td>
-							  		<td colspan="2">440 kcal</td>
-							  		<td colspan="2">100 kcal</td>
-							  		<td colspan="2">419 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  </div>
+									<div class="form-widget">
+
+										<div class="form-result"></div>
+
+										<div class="form-process css3-spinner">
+											<div class="css3-spinner-double-bounce1"></div>
+											<div class="css3-spinner-double-bounce2"></div>
+										</div>
+
+										<form class="nobottommargin" id="template-contactform" name="template-contactform" action="include/form.php" method="post" enctype="multipart/form-data">
+
+											<div class="row">
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-name">밥<small class="text-danger">*</small></label>
+													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control">
+														<option value="" disabled selected>X</option>
+														<option value="white_rice">흰 쌀밥</option>
+														<option value="mixed_rice">잡곡밥</option>
+														<option value="brown_rice">현미밥</option>
+														<option value="barley_rice">보리밥</option>
+														<option value="porridge">죽</option>
+													</select>
+												</div>
+												
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-name">국 / 찌개<small class="text-danger">*</small></label>
+													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control">
+														<option value="" disabled selected>X</option>
+														<option value="white_rice">국</option>
+														<option value="mixed_rice">찌개</option>
+													</select>
+													
+													<!-- <select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control">
+														<option value="" disabled selected>X</option>
+														<option value="white_rice">국</option>
+														<option value="mixed_rice">찌개</option>
+													</select>
+													
+													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control">
+														<option value="" disabled selected>X</option>
+														<option value="white_rice">국</option>
+														<option value="mixed_rice">찌개</option>
+													</select> -->
+												</div>
+												
+												
+
+												<!-- <div class="col-12 bottommargin-sm">
+													<label for="template-contactform-email">Email Address<small class="text-danger">*</small></label>
+													<input type="email" name="template-contactform-email" id="template-contactform-email" class="form-control required" value="" placeholder="user@company.com">
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-password">Password:<small class="text-danger">*</small></label>
+													<input type="password" id="template-contactform-password" name="template-contactform-password" value="" class="form-control" placeholder="Enter Password" />
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-phone">Phone:</label>
+													<input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="form-control" placeholder="Enter your phone Number.." />
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label>Checkbox Options:</label>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="template-contactform-mobile" name="template-contactform-checkbox[]" value="Mobile">
+														<label class="form-check-label" for="template-contactform-mobile">Mobile</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="template-contactform-mail" name="template-contactform-checkbox[]" value="Email">
+														<label class="form-check-label" for="template-contactform-mail">Email</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="template-contactform-sms" name="template-contactform-checkbox[]" value="SMS" disabled selected checked>
+														<label class="form-check-label" for="template-contactform-sms">SMS(Disabled)</label>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label>Radio Options:</label>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="template-contactform-radio" id="template-contactform-radio-label1" value="Free Delivery" disabled checked>
+														<label class="form-check-label" for="template-contactform-radio-label1">Free Delivery(Disabled)</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="template-contactform-radio" id="template-contactform-radio-label2" value="Paypal">
+														<label class="form-check-label" for="template-contactform-radio-label2">Paypal</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="template-contactform-radio" id="template-contactform-radio-label3" value="Credit Card">
+														<label class="form-check-label" for="template-contactform-radio-label3">Credit Card</label>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-default-select">Single Select Box:</label>
+													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control">
+														<option value="" disabled selected>Select One</option>
+														<option value="Wordpress">Wordpress</option>
+														<option value="PHP / MySQL">PHP / MySQL</option>
+														<option value="HTML5 / CSS3">HTML5 / CSS3</option>
+														<option value="Graphic Design">Graphic Design</option>
+													</select>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-multiple-select">Multiple Selected Box:</label>
+													<select id="template-contactform-multiple-select" name="template-contactform-multiple-select[]" class="selectpicker form-control" multiple>
+														<option value="Mustard">Mustard</option>
+														<option value="Ketchup">Ketchup</option>
+														<option value="Relish">Relish</option>
+													</select>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-tags-select">Tags Select Box:</label>
+													<select class="select-tags input-select2 form-control" multiple="" tabindex="-1" aria-hidden="true" id="template-contactform-tags-select" name="template-contactform-tags-select[]" style="width: 100%;">
+														<option value="Orange" selected="selected">Orange</option>
+														<option value="White">White</option>
+														<option value="Purple" selected="selected">Purple</option>
+														<option value="Red">Red</option>
+														<option value="Blue">Blue</option>
+														<option value="Green">Green</option>
+													</select>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-budget">Input Group with Addons:</label>
+													<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text">$</span>
+													</div>
+													<input id="template-contactform-budget" name="template-contactform-budget" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Enter your Budget">
+														<div class="input-group-append">
+															<span class="input-group-text">.00</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-date">Date Time Picker:</label>
+													<div class="form-group mb-0">
+														<div class="input-group tleft">
+															<div class="input-group-prepend" data-target=".datetimepicker1" data-toggle="datetimepicker">
+																<div class="input-group-text"><i class="icon-calendar3"></i></div>
+															</div>
+															<input id="template-contactform-date" name="template-contactform-date" type="text" class="form-control datetimepicker-input datetimepicker1" data-target=".datetimepicker1" data-toggle="datetimepicker" placeholder="Select your Flexible Date & Time" />
+														</div>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-upload">Upload Images:</label><br>
+													<input id="template-contactform-upload" type="file" name="template-contactform-upload[]" multiple class="file file-loading" data-show-preview="false">
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-age" class="mb-3 clearfix">Select Your Age:</label>
+													<input id="template-contactform-age" name="template-contactform-age" class="range_01 input-range-slider" />
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-rating" class="mb-0">Ratings:</label>
+													<input id="template-contactform-rating" name="template-contactform-rating" type="number" class="rating" max="5" data-size="md">
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-platform" class="mb-3">Choose any Platform:</label><br>
+													<div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+														<label for="template-contactform-platform-mobile" class="btn btn-outline-secondary flex-fill t600 ls0 nott active">
+															<input type="radio" name="template-contactform-platform" id="template-contactform-platform-mobile" autocomplete="off" checked value="Mobile"> Mobile
+														</label>
+														<label for="template-contactform-platform-web" class="btn btn-outline-secondary flex-fill t600 ls0 nott">
+															<input type="radio" name="template-contactform-platform" id="template-contactform-platform-web" autocomplete="off" value="Web"> Web
+														</label>
+														<label for="template-contactform-platform-others" class="btn btn-outline-secondary flex-fill t600 ls0 nott">
+															<input type="radio" name="template-contactform-platform" id="template-contactform-platform-others" autocomplete="off" value="Others"> Others
+														</label>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-offers" class="mb-3">Get Offers &amp; Newsletters:</label><br>
+													<ul class="nav btn-group">
+														<li class="btn-group">
+															<a class="btn btn-outline-secondary px-4 active" data-toggle="pill" href="#offers-tab-1" role="tab">No</a>
+														</li>
+														<li class="btn-group">
+															<a class="btn btn-outline-secondary px-4" data-toggle="pill" href="#offers-tab-2" role="tab">Yes</a>
+														</li>
+													</ul>
+													<div class="tab-content">
+														<div class="tab-pane show active" id="offers-tab-1" role="tabpanel"></div>
+														<div class="tab-pane" id="offers-tab-2" role="tabpanel">
+															<label for="template-contactform-offers-subscriber" class="mt-4">Offers Subscriber Email Address:</label>
+															<input type="email" name="template-contactform-offers-subscriber" id="template-contactform-offers-subscriber" class="form-control" value="" placeholder="Enter your Email Address..">
+														</div>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-know-us" class="mb-3">How do You Know about us:</label><br>
+													<div class="btn-group btn-group-toggle nav" data-toggle="buttons">
+														<a href="#know-us-tab-1" class="btn btn-outline-secondary flex-fill active" data-toggle="tab">
+															<input type="radio" name="template-contactform-know-us" id="template-contactform-know-us-google" value="Google">Google
+														</a>
+														<a href="#know-us-tab-2" class="btn btn-outline-secondary flex-fill" data-toggle="tab">
+															<input type="radio" name="template-contactform-know-us" id="template-contactform-know-us-social" value="Social">Social Sites
+														</a>
+														<a href="#know-us-tab-3" class="btn btn-outline-secondary flex-fill" data-toggle="tab">
+															<input type="radio" name="template-contactform-know-us" id="template-contactform-know-us-friends" value="Friends">Friends
+														</a>
+														<a href="#know-us-tab-4" class="btn btn-outline-secondary flex-fill" data-toggle="tab">
+															<input type="radio" name="template-contactform-know-us" id="template-contactform-know-us-others" value="others">Others
+														</a>
+													</div>
+
+													<div class="tab-content">
+														<div class="tab-pane show active" id="know-us-tab-1"></div>
+														<div class="tab-pane" id="know-us-tab-2"></div>
+														<div class="tab-pane" id="know-us-tab-3"></div>
+														<div class="tab-pane" id="know-us-tab-4">
+															<label for="template-contactform-know-us-info" class="mt-4">Info:</label>
+															<textarea class="required form-control" id="template-contactform-know-us-info" name="template-contactform-know-us-info" rows="6" cols="20"></textarea>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label class="mb-3">Switch Input:</label><br>
+													<div class="d-flex align-items-center">
+														<div class="switch">
+															<input id="template-contactform-default-switch" name="template-contactform-default-switch" class="switch-toggle switch-toggle-round" type="checkbox">
+															<label for="template-contactform-default-switch"></label>
+														</div>
+														<label class="media-body text-muted ml-3" for="template-contactform-default-switch">
+													    	<span class="d-block text-dark mb-1 nott ls0">Default Switch</span>
+													    	<span class="d-block nott ls0 t400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+													    </label>
+												    </div>
+												    <div class="line my-3"></div>
+												    <div class="d-flex align-items-center">
+														<div class="switch">
+															<input id="template-contactform-checked-switch" name="template-contactform-checked-switch" class="switch-toggle switch-toggle-round" checked type="checkbox">
+															<label for="template-contactform-checked-switch"></label>
+														</div>
+														<label class="media-body text-muted ml-3" for="template-contactform-checked-switch">
+													        <span class="d-block text-dark mb-1 nott ls0">Checked Switch</span>
+													        <span class="d-block nott ls0 t400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, aut?</span>
+													    </label>
+												    </div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-url">URL with input Group(Autocomplete):</label>
+													<div class="input-group mb-3">
+													  <div class="input-group-prepend">
+													    <span class="input-group-text">themeforest.net/user/</span>
+													  </div>
+													  <input type="text" class="form-control" id="template-contactform-url" name="template-contactform-url" value="semicolonweb" aria-describedby="url address..">
+													</div>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label>Live Search (Max 3):</label><br>
+													<select class="selectpicker form-control" multiple data-live-search="true" data-size="12" data-max-options="3" title="Choose max 3 of the following..." name="template-contactform-livesearch[]">
+														<option value="China">China</option>
+														<option value="India">India</option>
+														<option value="Brazil">Brazil</option>
+														<option value="Indonesia">Indonesia</option>
+														<option value="Japan">Japan</option>
+														<option value="Russia">Russia</option>
+														<option value="Nigeria">Nigeria</option>
+														<option value="Mexico">Mexico</option>
+														<option value="Bangladesh">Bangladesh</option>
+														<option value="Germany">Germany</option>
+														<option value="Philippines">Philippines</option>
+														<option value="Vietnam">Vietnam</option>
+														<option value="United">United Kingdom</option>
+														<option value="France">France</option>
+														<option value="Thailand">Thailand</option>
+														<option value="Iran">Iran</option>
+														<option value="Turkey">Turkey</option>
+														<option value="Italy">Italy</option>
+														<option value="Egypt">Egypt</option>
+													</select>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-static-email">Static Email (Readonly & Disabled):</label><br>
+													<input type="text" readonly class="form-control-plaintext h6 bg-light px-3 rounded" id="template-contactform-static-email" name="template-contactform-static-email" value="email@example.com">
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-select-splitter">Select Splitter:</label>
+													<select id="template-contactform-select-splitter" size="1" class="form-control selectsplitter" name="template-contactform-select-splitter">
+														<optgroup label="Category 1">
+															<option value="1-1">Choice 1-1</option>
+															<option value="1-2">Choice 1-2</option>
+															<option value="1-3">Choice 1-3</option>
+															<option value="1-4">Choice 1-4</option>
+															<option value="1-5">Choice 1-5</option>
+															<option value="1-6">Choice 1-6</option>
+															<option value="1-7">Choice 1-7</option>
+															<option value="1-8">Choice 1-8</option>
+														</optgroup>
+														<optgroup label="Category 2">
+															<option value="2-1">Choice 2-1</option>
+															<option value="2-2">Choice 2-2</option>
+															<option value="2-3">Choice 2-3</option>
+															<option value="2-4">Choice 2-4</option>
+														</optgroup>
+														<optgroup label="Category 3">
+															<option value="3-1">Choice 3-1</option>
+															<option value="3-2">Choice 3-2</option>
+															<option value="3-3">Choice 3-3</option>
+															<option value="3-4">Choice 3-4</option>
+														</optgroup>
+													</select>
+												</div>
+
+												<div class="col-12 bottommargin-sm">
+													<label for="template-contactform-message">Textarea:<small class="text-danger">*</small></label>
+													<textarea class="required form-control textarea-message" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
+												</div>
+
+												<div class="col-12 hidden">
+													<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" />
+												</div> -->
+												<div class="col-12">
+													<button type="submit" name="template-contactform-submit" class="btn btn-secondary btn-block btn-lg">입력 완료</button>
+												</div>
+
+												<input type="hidden" name="prefix" value="template-contactform-">
+
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<br><br><br><br><br><br><br><br>
+					
+
+					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
+						<div class="chartjs-size-monitor" style="position: absolute; 
+							left: 0px; top: 0px; right : 0px; bottom : 0px; overflow : hidden; 
+							pointer-events : none; visibility : hidden; z-index: -1;">
+							
+							<div class="chartjs-size-monitor-expand" 
+								style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
+										pointer-events:none;visibility:hidden;z-index:-1;">
+								<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+							</div>
+							
 						</div>
 						
-						<div class="divider"><i class="icon-circle"></i></div>
-						
-						<h3>연령별 식단</h3>
-			
-						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab">Home</a></li>
-						  <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li>
-						  <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="myTabDrop1" data-toggle="dropdown">Dropdown</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-							  <a class="dropdown-item" href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a>
-							  <a class="dropdown-item" href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a>
-							</ul>
-						  </li>
-						</ul>
-						
-						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="home">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-						  </div>
-						  <div class="tab-pane fade" id="profile">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown1">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown2">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-						  </div>
-						</div>
-			
-						<div class="line"></div>
-			
-					</div><!-- .postcontent end -->
+						<canvas id="chart-0" width="720" height="360" class="chartjs-render-monitor"
+							style="display: block; width: 720px; height : 360px;" />
+					</div>
+
 				</div>
 
 			</div>
@@ -641,5 +440,126 @@
 	<div id="gotoTop" class="icon-angle-up"></div>
 
 	<%@ include file="../include/footerScript.jsp"%>
+	
+	<script src="resources/js/chart.js"></script>
+	<script src="resources/js/chart-utils.js"></script>
+	<script>
+
+		var NUTRIENTS = ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"];
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"],
+			datasets: [{
+				label: '내가 섭취한 칼로리',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}, {
+				label: '칼로리 하루 권장량',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				borderWidth: 1,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				]
+			}]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById("chart-0").getContext("2d");
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: '오늘 섭취한 칼로리'
+					}
+				}
+			});
+
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			var zero = Math.random() < 0.2 ? true : false;
+			barChartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return zero ? 0.0 : randomScalingFactor();
+				});
+
+			});
+			window.myBar.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+			var dsColor = window.chartColors[colorName];
+			var newDataset = {
+				label: 'Dataset ' + barChartData.datasets.length,
+				backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+				borderColor: dsColor,
+				borderWidth: 1,
+				data: []
+			};
+
+			for (var index = 0; index < barChartData.labels.length; ++index) {
+				newDataset.data.push(randomScalingFactor());
+			}
+
+			barChartData.datasets.push(newDataset);
+			window.myBar.update();
+		});
+
+		document.getElementById('addData').addEventListener('click', function() {
+			if (barChartData.datasets.length > 0) {
+				var month = MONTHS[barChartData.labels.length % MONTHS.length];
+				barChartData.labels.push(month);
+
+				for (var index = 0; index < barChartData.datasets.length; ++index) {
+					//window.myBar.addData(randomScalingFactor(), index);
+					barChartData.datasets[index].data.push(randomScalingFactor());
+				}
+
+				window.myBar.update();
+			}
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			barChartData.datasets.splice(0, 1);
+			window.myBar.update();
+		});
+
+		document.getElementById('removeData').addEventListener('click', function() {
+			barChartData.labels.splice(-1, 1); // remove the label first
+
+			barChartData.datasets.forEach(function(dataset, datasetIndex) {
+				dataset.data.pop();
+			});
+
+			window.myBar.update();
+		});
+
+	</script>
 </body>
 </html>

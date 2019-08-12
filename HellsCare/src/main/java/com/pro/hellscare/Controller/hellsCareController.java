@@ -179,6 +179,22 @@ public class hellsCareController {
 
 		return "Users/food_diet";
 	}
+	// 병원 위치
+	@RequestMapping("hospital_location")
+	public String hospital_location(HttpServletRequest req, Model model) {
+		logger.info("URL ==> hospital_location");
+		return "Users/hospital_location";
+	}
+	@RequestMapping("pharmacy_location")
+	public String pharmacy_location(HttpServletRequest req, Model model) {
+		logger.info("URL ==> pharmacy_location");
+		return "Users/pharmacy_location";
+	}
+	@RequestMapping("weather_info")
+	public String weather_info(HttpServletRequest req, Model model) {
+		logger.info("URL ==> weather_info");
+		return "Users/weather_info";
+	}
 //===동렬 part - end		
 
 //===한결 part - start
@@ -254,7 +270,20 @@ public class hellsCareController {
 		logger.info("URL ==> memList");
 		return "host/memList";
 	}
+	@RequestMapping("disease_reg")
+	public String medi_reg(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> disease_reg");
+		return "host/disease_reg";
+	}
+	@RequestMapping("diseaseInfo")
+	public String mediInfo(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> diseaseInfo");
+		return "host/diseaseInfo";
+	}
 //==나현 Part	 End	
+	
 	//==재관 Part	 Start
 	@RequestMapping("host_DrugInfo")
 	public String host_DrugInfo(HttpServletRequest req, Model model) {
@@ -263,4 +292,65 @@ public class hellsCareController {
 		return "host/host_DrugInfo";
 	}
 	//==재관 Part	 End
+	//==한결	 Part	 Start
+	@RequestMapping("host_qna")
+	public String host_qna(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_qna");
+		return "host/host_qna";
+	}
+	@RequestMapping("host_notice")
+	public String host_notice(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_notice");
+		return "host/host_notice";
+	}
+	@RequestMapping("host_board")
+	public String host_board(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_board");
+		return "host/host_board";
+	}
+	
+	@RequestMapping("host_boardContent")
+	public String host_boardContent(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_boardContent");
+		return "host/host_boardContent";
+	}
+	@RequestMapping("host_noticeContent")
+	public String host_noticeContent(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_noticeContent");
+		return "host/host_noticeContent";
+	}
+	@RequestMapping("host_qnaContent")
+	public String host_qnaContent(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_qnaContent");
+		return "host/host_qnaContent";
+	}
+	@RequestMapping("notice_write")
+	public String notice_write(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> notice_write");
+		return "host/notice_write";
+	}
+	//==한결 Part	 End
+	
+	//==동렬 Part	 Strart
+	@RequestMapping("host_foodList")
+	public String host_foodList(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_foodList");
+		return "host/host_foodList";
+	}
+	@RequestMapping("host_foodRegForm")
+	public String host_foodRegForm(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_foodRegForm");
+		return "host/host_foodRegForm";
+	}
+	
+	//==동렬 Part	 End
 }

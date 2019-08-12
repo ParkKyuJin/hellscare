@@ -19,7 +19,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>음식 조회</title>
 
   <!-- Favicons -->
   <link href="resources/img/favicon.png" rel="icon">
@@ -69,85 +69,61 @@
           <div class="col-md-12">
             <div class="content-panel">
               <table class="table table-striped table-advance table-hover">
-                <h4><i class="fa fa-angle-right"></i> 회원 목록 </h4>
+                <h4><i class="fa fa-angle-right"></i> 음식 조회 </h4>
                 <hr>
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i> Company</th>
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
-                    <th><i class="fa fa-bookmark"></i> Profit</th>
-                    <th><i class=" fa fa-edit"></i> Status</th>
+                    <th><i class="fa fa-bullhorn"></i> 음식명</th>
+                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> 음식 코드</th>
+                    <th><i class="fa fa-bookmark"></i> 일일 권장 칼로리</th>
+                    <th><i class=" fa fa-edit"></i> 권장 섭취량</th>
+                    <th>음식 종류</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      <a href="basic_table.html#">Company Ltd</a>
+                      <a href="basic_table.html#">현미밥</a>
                     </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12000.00$ </td>
-                    <td><span class="label label-info label-mini">Due</span></td>
+                    <td class="hidden-phone">R001</td>
+                    <td>123 kcal </td>
+                    <td><span class="label label-info label-mini">50 g</span></td>
+                    <td>밥류</td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">
-                        Dashio co
-                        </a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>17900.00$ </td>
-                    <td><span class="label label-warning label-mini">Due</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
+                  
                   <tr>
                     <td>
-                      <a href="basic_table.html#">
-                        Another Co
-                        </a>
+                      <a href="basic_table.html#">김치찌개</a>
                     </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>14400.00$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
+                    <td class="hidden-phone">S001</td>
+                    <td>256 kcal </td>
+                    <td><span class="label label-info label-mini">100 g</span></td>
+                    <td>찌개류</td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
+                  
                   <tr>
                     <td>
-                      <a href="basic_table.html#">Dashio ext</a>
+                      <a href="basic_table.html#">삼겹살</a>
                     </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
+                    <td class="hidden-phone">M001</td>
+                    <td>100 kcal </td>
+                    <td><span class="label label-info label-mini">80 g</span></td>
+                    <td>반찬류</td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">Total Ltd</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12120.00$ </td>
-                    <td><span class="label label-warning label-mini">Due</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
                 </tbody>

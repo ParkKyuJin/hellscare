@@ -49,168 +49,270 @@
 						<h3>다이어트 식품</h3>
 			
 						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">다이어트에 좋은 음식</a></li>
-						  <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">피해야할 음식</a></li>
+						  <li class="nav-item"><a class="nav-link active" href="#good_for_diet" data-toggle="tab">다이어트에 좋은 음식</a></li>
+						  <li class="nav-item"><a class="nav-link" href="#bad_for_diet" data-toggle="tab">피해야 할 음식</a></li>
 						</ul>
 						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="reasonable_food">
-						  	<p>2000kcal</p>
-						  	<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>식빵 2장</td>
-								  <td>200</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>비빔밥(410)</td>
-								  <td>600</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>보리밥(300)</td>
-								  <td>600</td>
-								</tr>
+						  <div class="tab-pane fade show active" id="good_for_diet">
+						  	<div class="table-responsive">
+						  		<div id="datatable1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+						  			<div class="row">
+						  				<div class="col-sm-12 col-md-3">
+						  					<div class="dataTable_length" id="datatable1_length">
+						  						<label>Show
+							  						<select name="datatable1_length" aria-controls="datatable1" 
+							  							class="custom-select custom-select-sm form-control form-control-sm">
+							  							<option value="10">10</option>
+							  							<option value="10">25</option>
+							  							<option value="10">50</option>
+							  							<option value="10">100</option>
+							  						</select>
+							  						entries
+						  						</label>
+						  					</div>
+						  				</div>
+						  				
+						  				<div class="col-sm-12 col-md-3">
+						  					<div id="datatable1_filter" class="dataTables_filter">
+						  						<label>
+						  							Search :
+						  							<input type="search" class="form-control form-control-sm" placeholder aria-controls="datatable1">
+						  						</label>
+						  					</div>
+						  				</div>
+						  			</div>
+						  			
+						  			<div class="row">
+						  				<div class="col-sm-12">
+						  					<table id="datatable1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>식품명</th>
+														<th>kcal</th>
+														<th>g</th>
+													</tr>
+												</thead>
+												<tfoot>
+													<tr>
+														<th>식품명</th>
+														<th>kcal</th>
+														<th>g</th>
+													</tr>
+												</tfoot>
+												<tbody>
+													<tr>
+														<td>김치</td>
+														<td>15</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>밥</td>
+														<td>200</td>
+														<td>2/3 공기</td>
+													</tr>
+													
+													<tr>
+														<td>콩밥</td>
+														<td>300</td>
+														<td>1인분</td>
+													</tr>
+													
+													<tr>
+														<td>현미</td>
+														<td>364</td>
+														<td>100</td>
+													</tr>
+													
+													<tr>
+														<td>미역국</td>
+														<td>80</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>멸치조림</td>
+														<td>28</td>
+														<td>10</td>
+													</tr>
+													
+													<tr>
+														<td>새우조림</td>
+														<td>40</td>
+														<td>25</td>
+													</tr>
+													
+													<tr>
+														<td>두부된장국</td>
+														<td>50</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>두부된장찌개</td>
+														<td>50</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>콩나물국</td>
+														<td>120</td>
+														<td>1인분</td>
+													</tr>
+													
+													<tr>
+														<td>두부</td>
+														<td>164</td>
+														<td>408 (1모)</td>
+													</tr>
+													
+													<tr>
+														<td>콩자반</td>
+														<td>137</td>
+														<td>40</td>
+													</tr>
+													
+													<tr>
+														<td>당근</td>
+														<td>137</td>
+														<td>100 (1개)</td>
+													</tr>
+													
+													<tr>
+														<td>오이</td>
+														<td>19</td>
+														<td>100 (1개)</td>
+													</tr>
+													
+													<tr>
+														<td>블랙커피</td>
+														<td>5</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>녹차</td>
+														<td>0</td>
+														<td>  </td>
+													</tr>
+													
+													<tr>
+														<td>보리차</td>
+														<td>0</td>
+														<td>  </td>
+													</tr>
+												</tbody>
+											</table>
+						  				</div>
+						  			</div>
+						  			
+						  			<div class="row">
+						  				<div class="col-sm-12 col-md-5">
+						  					<div class="dataTables_info" id="datatable1_info" role="status" aria-live="polite">
+						  						Showing 1 to 10 of 17 entries
+						  					</div>
+						  				</div>
+						  			</div>
+						  			
+						  		</div>
 								
-								<tr>
-								  <td>우유</td>
-								  <td>125</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>아욱된장국(250)</td>
-								  <td>80</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>순두부찌개(300)</td>
-								  <td>180</td>
-								</tr>
-								
-								<tr>
-								  <td>달걀프라이(50)</td>
-								  <td>100</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>김무침(10)</td>
-								  <td>20</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>코다리찜(80)</td>
-								  <td>100</td>
-								</tr>
-								
-								<tr>
-								  <td>양배추샐러드(50)</td>
-								  <td>70</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>동치미(100)</td>
-								  <td>10</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>도토리무침(80)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>바나나 1개</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>콩나물무침(70)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>배추김치(50)</td>
-								  <td>15</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">595 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">710 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">695 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  	
-						  	
-							<p></p>
+							</div>
 						  </div>
-						  <div class="tab-pane fade" id="profile">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+						  <div class="tab-pane fade" id="bad_for_diet">
+							<div class="table-responsive">
+								<table id="datatable1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th>식품명</th>
+											<th>kcal</th>
+											<th>g</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>식품명</th>
+											<th>kcal</th>
+											<th>g</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr>
+											<td>햄버거</td>
+											<td>488</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>돈까스</td>
+											<td>600</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>계란우동</td>
+											<td>520</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>매밀국수</td>
+											<td>552</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>튀김</td>
+											<td>472</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>피자</td>
+											<td>688</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>카레라이스</td>
+											<td>616</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>아이스크림</td>
+											<td>180</td>
+											<td>  </td>
+										</tr>
+										
+										<tr>
+											<td>마요네즈</td>
+											<td>90</td>
+											<td>1큰술</td>
+										</tr>
+										
+										<tr>
+											<td>소주</td>
+											<td>90</td>
+											<td>1잔</td>
+										</tr>
+										
+										<tr>
+											<td>맥주</td>
+											<td>185</td>
+											<td>1잔</td>
+										</tr>
+										
+										<tr>
+											<td>양주</td>
+											<td>140</td>
+											<td>50ml 1잔</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
 						  </div>
-						  
-						  
 						</div>
-						
-						<div class="divider"><i class="icon-circle"></i></div>
-						
-						<h3>연령별 식단</h3>
-			
-						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#home" data-toggle="tab">Home</a></li>
-						  <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li>
-						  <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="myTabDrop1" data-toggle="dropdown">Dropdown</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-							  <a class="dropdown-item" href="#dropdown1" tabindex="-1" data-toggle="tab">@fat</a>
-							  <a class="dropdown-item" href="#dropdown2" tabindex="-1" data-toggle="tab">@mdo</a>
-							</ul>
-						  </li>
-						</ul>
-						
-						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="home">
-							<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-						  </div>
-						  <div class="tab-pane fade" id="profile">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown1">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-						  </div>
-						  <div class="tab-pane fade" id="dropdown2">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-						  </div>
-						</div>
-			
-						<div class="line"></div>
-			
 					</div><!-- .postcontent end -->
 				</div>
 
@@ -235,7 +337,18 @@
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
+	
+	<!-- Bootstrap Data Table Plugin -->
+	<script src="resources/js/components/bs-datatable.js"></script>
 
 	<%@ include file="../include/footerScript.jsp"%>
+	
+	<script>
+
+		$(document).ready(function() {
+			$('#datatable1').dataTable();
+		});
+
+	</script>
 </body>
 </html>

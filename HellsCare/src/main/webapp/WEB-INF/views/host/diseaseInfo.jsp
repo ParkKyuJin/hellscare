@@ -69,14 +69,14 @@
           <div class="col-md-12">
             <div class="content-panel">
               <table class="table table-striped table-advance table-hover">
-                <h4><i class="fa fa-angle-right"></i> 회원 목록 </h4>
+                <h4><i class="fa fa-angle-right"></i> 약 목록   </h4>
                 <hr>
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i> Company</th>
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
-                    <th><i class="fa fa-bookmark"></i> Profit</th>
-                    <th><i class=" fa fa-edit"></i> Status</th>
+                    <th><i class="fa fa-bullhorn"></i> 업체명</th>
+                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> 제품명</th>
+                    <th><i class="fa fa-bookmark"></i> 약효분류 코드</th>
+                    <th><i class=" fa fa-edit"></i> 전문/일반</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -89,9 +89,9 @@
                     <td>12000.00$ </td>
                     <td><span class="label label-info label-mini">Due</span></td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='disease_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='disease_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
                   <tr>
@@ -104,37 +104,9 @@
                     <td>17900.00$ </td>
                     <td><span class="label label-warning label-mini">Due</span></td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">
-                        Another Co
-                        </a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>14400.00$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">Dashio ext</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='disease_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='disease_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
                   <tr>
@@ -145,9 +117,48 @@
                     <td>12120.00$ </td>
                     <td><span class="label label-warning label-mini">Due</span></td>
                     <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='disease_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='disease_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">Dashio ext</a>
+                    </td>
+                    <td class="hidden-phone">Lorem Ipsum dolor</td>
+                    <td>22000.50$ </td>
+                    <td><span class="label label-success label-mini">Paid</span></td>
+                    <td>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="basic_table.html#">Total Ltd</a>
+                    </td>
+                    <td class="hidden-phone">Lorem Ipsum dolor</td>
+                    <td>12120.00$ </td>
+                    <td><span class="label label-warning label-mini">Due</span></td>
+                    <td>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='disease_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='disease_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
+                    </td>
+                  </tr>
+                   <tr>
+                    <td>
+                      <a href="basic_table.html#">Total Ltd</a>
+                    </td>
+                    <td class="hidden-phone">Lorem Ipsum dolor</td>
+                    <td>12120.00$ </td>
+                    <td><span class="label label-warning label-mini">Due</span></td>
+                    <td>
+                      <button class="btn btn-light btn-xs"  onclick="location.href='disease_reg' ">등록</button>
+                      <button class="btn btn-light btn-xs" onclick="location.href='disease_reg' ">수정</button>
+                      <button class="btn btn-light btn-xs">삭제</button>
                     </td>
                   </tr>
                 </tbody>
