@@ -26,63 +26,72 @@
 
 				<!-- Primary Navigation
 				============================================= -->
-				<nav id="primary-menu" class="dark">
+				<nav id="primary-menu" class="dark" >
 
 					<ul>
-						<li class="current"><a href="index.html"><div>로그인</div></a></li>
 						<li><a href="#"><div>건강진단</div></a>
 							<ul style="background:white">
 							<!--@@@@@@@@@ 메뉴 배경색 바꾸는 곳 @@@@@@@@@@@@-->
-								<li><a href="shop.html"><div>건강진단 목록</div></a></li>
-								<li><a href="shop-2.html"><div>건강진단 결과</div></a></li>
+								<li><a href="nextpage" ><div style="color:black;">건강진단 목록</div></a></li>
+								<li><a href="healthstateresult"><div style="color:black;">건강진단 결과</div></a></li>
 							</ul>
 						</li>
 						<li><a href="#"><div>운동</div></a>
-							<ul>
-								<li><a href="shop.html"><div>운동 정보</div></a>
-									<ul>
-										<li><a href="shop-3.html"><div>운동정보 목록</div></a></li>
-										<li><a href="shop-3-right-sidebar.html"><div>운동상세보기</div></a></li>
-									</ul>
+							<ul style="background:white">
+								<li><a href="exercise"><div style="color:black;">운동 정보</div></a>
+									<!-- <ul style="background:white">
+										<li><a href="exercise"><div style="color:black;">운동정보 목록</div></a></li>
+									</ul> -->
 								</li>
-								<li><a href="shop-3.html"><div>즐겨찾기</div></a>
+								<li><a href="exercise_favorite"><div style="color:black;">즐겨찾기</div></a>
 								</li>
-								<li><a href="shop-2.html"><div>추천운동</div></a></li>
+							
 								
-								<li><a href="shop-1.html"><div>걸음수</div></a>
+								<li><a href="steps"><div style="color:black;">걸음수</div></a>
 								</li>
-								<li><a href="shop-category-parallax.html"><div>걸음수 랭킹</div></a></li>
+								<li><a href="stepsRank"><div style="color:black;">걸음수 랭킹</div></a></li>
 							</ul>
 						</li>
 						<li><a href="#"><div>식단</div></a>
-							<ul>
-								<li><a href="shop.html"><div>식단 정보</div></a></li>
-								<li><a href="shop-2.html"><div>식단 추천</div></a></li>
-								<li><a href="shop-2.html"><div>오늘의 칼로리</div></a></li>
-								<li><a href="shop-2.html"><div>다이어트 식품</div></a></li>
+							<ul style="background:white">
+								<li><a href="food_info"><div style="color:black;">식단 정보</div></a></li>
+								<li><a href="food_recommendation"><div style="color:black;">식단 추천</div></a></li>
+								<li><a href="food_today_cal"><div style="color:black;">오늘의 칼로리</div></a></li>
+								<li><a href="food_diet"><div style="color:black;">다이어트 식품</div></a></li>
 							</ul>
 						</li>
 							
-						<li><a href="shop.html"><div>정보</div></a>
-							<ul>
-								<li><a href="shop.html"><div>병원 정보</div></a></li>
-								<li><a href="shop.html"><div>약국 정보</div></a></li>
-								<li><a href="shop.html"><div>약 정보</div></a></li>
-								<li><a href="shop.html"><div>날씨 정보</div></a></li>
-								<li><a href="shop.html"><div>식중독 지수</div></a></li>
+						<li><a href="#"><div>정보</div></a>
+							<ul style="background:white">
+								<li><a href="shop.html"><div style="color:black;">병원 정보</div></a></li>
+								<li><a href="shop.html"><div style="color:black;">약국 정보</div></a></li>
+								<li><a href="drugInfo"><div style="color:black;">의약품 정보</div></a></li>
+								<li><a href="disease"><div style="color:black;">질병 정보</div></a></li>
+								<li><a href="shop.html"><div style="color:black;">날씨 정보</div></a></li>
+								<li><a href="shop.html"><div style="color:black;">식중독 지수</div></a></li>
 							</ul>
 						</li>
 						
 						<li><a href="#"><div>동호회</div></a>
-							<ul>
-								<li><a href="shop.html"><div>동호회 목록</div></a></li>
-								<li><a href="shop-3.html"><div>동호회 개설</div></a></li>
+							<ul style="background:white">
+								<li><a href="club"><div style="color:black;">동호회 목록</div></a></li>
+								<li><a href="makeClub"><div style="color:black;">동호회 개설</div></a></li>
 							</ul>
 						</li>
 						
-						<li class="mega-menu"><a href="#"><div>게시판</div></a>
+						<li class="mega-menu"><a href="boardList"><div>게시판</div></a>
 					</ul>
 					
+					<div id="top-account" class="dropdown">
+						<a href="#" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i></a>
+						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+							<a class="dropdown-item tleft" href="login_reg">Login</a>
+							<!-- <a class="dropdown-item tleft" href="#">MyPage <span class="badge badge-pill badge-secondary fright" style="margin-top: 3px;">5</span></a> -->
+							<a class="dropdown-item tleft" href="myPage">MyPage</a>
+<!-- 							<div class="dropdown-divider"></div> -->
+							<a class="dropdown-item tleft" href="#">Logout <i class="icon-signout"></i></a>
+						</ul>
+					</div>
 
 					<!-- Top Search
 					============================================= -->
@@ -91,6 +100,7 @@
 						<form action="search.html" method="get">
 							<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
 						</form>
+						
 					</div><!-- #top-search end -->
 
 				</nav><!-- #primary-menu end -->
@@ -98,7 +108,11 @@
 			</div>
 
 		</div>
-
+<script>
+		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
+			jQuery( '.flexslider .slide' ).resize();
+		});
+	</script>
 	</header><!-- #header end -->
 </body>
 </html>

@@ -23,7 +23,7 @@
 
 								<img src="/hellscare/resources/images/footer-widget-logo.png" alt="" class="footer-logo">
 
-								<div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+								<div style="background: url('/hellscare/resources/images/world-map.png') no-repeat center center; background-size: 100%;">
 									<address>
 										<strong>Headquarters:</strong><br>
 										서울특별시 금천구 가산동 426-5

@@ -27,7 +27,7 @@
 
 	<!-- Document Wrapper
 	============================================= -->
-	<%@ include file="../include/header.jsp" %>
+		<%@ include file="../include/header.jsp"%>
 
 		<section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
 			<div class="slider-parallax-inner">
@@ -217,7 +217,7 @@
 
 				<div class="row clearfix align-items-stretch">
 
-					<div class="col-lg-6 center col-padding" style="background: url('images/services/main-bg.jpg') center center no-repeat; background-size: cover;">
+					<div class="col-lg-6 center col-padding" style="background: url('/hellscare/resources/images/services/main-bg.jpg') center center no-repeat; background-size: cover;">
 					</div>
 				</div>
 

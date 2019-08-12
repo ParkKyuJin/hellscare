@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="../include/h_sidebarMenu.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,135 +11,20 @@
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>Dashio - Bootstrap Admin Template</title>
 
-  <!-- Favicons -->
-  <link href="resources/img/favicon.png" rel="icon">
-  <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
-  <link rel="stylesheet" type="text/css" href="resources/lib/gritter/css/jquery.gritter.css" />
-  <!-- Custom styles for this template -->
-  <link href="resources/css2/style.css" rel="stylesheet">
-  <link href="resources/css2/style-responsive.css" rel="stylesheet">
-  <script src="resources/lib/chart-master/Chart.js"></script>
-
-  <!-- =======================================================
-    Template Name: Dashio
-    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
 </head>
 
 <body>
-  <section id="container">
-    <!-- **********************************************************************************************************************************************************
-        TOP BAR CONTENT & NOTIFICATIONS
-        *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-      <div class="sidebar-toggle-box">
-        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-      </div>
-      <!--logo start-->
-      <a href="index.html" class="logo"><b>HEALTH<span>CARE</span></b></a>
-      <!--logo end-->
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
-        </ul>
-      </div>
-    </header>
-    <!--header end-->
-    <!-- **********************************************************************************************************************************************************
-        MAIN SIDEBAR MENU
-        *********************************************************************************************************************************************************** -->
-    <!--sidebar start-->
-    <aside>
-      <div id="sidebar" class="nav-collapse ">
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="resources/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">쀼팀장</h5>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-dashboard"></i>
-              <span>정보관리</span>
-              </a>
-              <ul class="sub">
-              <li><a href="general.html">운동관리</a></li>
-              <li><a href="buttons.html">질병관리</a></li>
-              <li><a href="panels.html">약 관리</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-desktop"></i>
-              <span>회원관리</span>
-              </a>
-            <ul class="sub">
-              <li><a href="general.html">이용자관리</a></li>
-              <li><a href="buttons.html">이용자통계</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-cogs"></i>
-              <span>식단관리</span>
-              </a>
-            <ul class="sub">
-              <li><a href="grids.html">음식 조회</a></li>
-              <li><a href="calendar.html">음식 등록</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-book"></i>
-              <span>게시판 관리</span>
-              </a>
-            <ul class="sub">
-              <li><a href="blank.html">공지사항 관리</a></li>
-              <li><a href="login.html">게시글 관리</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class="fa fa-tasks"></i>
-              <span>동호회 관리</span>
-              </a>
-            <ul class="sub">
-              <li><a href="form_component.html">동호회 가입승인/거절</a></li>
-              <li><a href="advanced_form_components.html">동호회 해체승인</a></li>
-              <li><a href="form_validation.html">동호회 결산</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="main2">
-              <i class="fa fa-th"></i>
-              <span>QnA 관리</span>
-            </a>
-          </li>
-        </ul>
-        <!-- sidebar menu end-->
-      </div>
-    </aside>
-    <!--sidebar end-->
-    <!-- **********************************************************************************************************************************************************
-        MAIN CONTENT
-        *********************************************************************************************************************************************************** -->
+  
     <!--main content start-->
-    <section id="main-content">
-      <section class="wrapper">
+    <section id="main-content" >
+      <section class="wrapper" style="margin:0px 0px 0px 200px;">
         <div class="row">
           <div class="col-lg-9 main-chart">
             <!--CUSTOM CHART START -->
             <div class="border-head">
               <h3>USER VISITS</h3>
             </div>
-            <div class="custom-bar-chart">
+            <div class="custom-bar-chart" >
               <ul class="y-axis">
                 <li><span>10.000</span></li>
                 <li><span>8.000</span></li>
@@ -396,161 +282,7 @@
           <!-- **********************************************************************************************************************************************************
               RIGHT SIDEBAR CONTENT
               *********************************************************************************************************************************************************** -->
-          <div class="col-lg-3 ds">
-            <!--COMPLETED ACTIONS DONUTS CHART-->
-            <div class="donut-main">
-              <h4>COMPLETED ACTIONS & PROGRESS</h4>
-              <canvas id="newchart" height="130" width="130"></canvas>
-              <script>
-                var doughnutData = [{
-                    value: 70,
-                    color: "#4ECDC4"
-                  },
-                  {
-                    value: 30,
-                    color: "#fdfdfd"
-                  }
-                ];
-                var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
-              </script>
-            </div>
-            <!--NEW EARNING STATS -->
-            <div class="panel terques-chart">
-              <div class="panel-body">
-                <div class="chart">
-                  <div class="centered">
-                    <span>TODAY EARNINGS</span>
-                    <strong>$ 890,00 | 15%</strong>
-                  </div>
-                  <br>
-                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
-                </div>
-              </div>
-            </div>
-            <!--new earning end-->
-            <!-- RECENT ACTIVITIES SECTION -->
-            <h4 class="centered mt">RECENT ACTIVITY</h4>
-            <!-- First Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>Just Now</muted>
-                  <br/>
-                  <a href="#">Paul Rudd</a> purchased an item.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Second Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>2 Minutes Ago</muted>
-                  <br/>
-                  <a href="#">James Brown</a> subscribed to your newsletter.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Third Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>3 Hours Ago</muted>
-                  <br/>
-                  <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Fourth Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>7 Hours Ago</muted>
-                  <br/>
-                  <a href="#">Brando Page</a> purchased a year subscription.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- USERS ONLINE SECTION -->
-            <h4 class="centered mt">TEAM MEMBERS ONLINE</h4>
-            <!-- First Member -->
-            <div class="desc">
-              <div class="thumb">
-                <img class="img-circle" src="resources/img/ui-divya.jpg" width="35px" height="35px" align="">
-              </div>
-              <div class="details">
-                <p>
-                  <a href="#">DIVYA MANIAN</a><br/>
-                  <muted>Available</muted>
-                </p>
-              </div>
-            </div>
-            <!-- Second Member -->
-            <div class="desc">
-              <div class="thumb">
-                <img class="img-circle" src="resources/img/ui-sherman.jpg" width="35px" height="35px" align="">
-              </div>
-              <div class="details">
-                <p>
-                  <a href="#">DJ SHERMAN</a><br/>
-                  <muted>I am Busy</muted>
-                </p>
-              </div>
-            </div>
-            <!-- Third Member -->
-            <div class="desc">
-              <div class="thumb">
-                <img class="img-circle" src="resources/img/ui-danro.jpg" width="35px" height="35px" align="">
-              </div>
-              <div class="details">
-                <p>
-                  <a href="#">DAN ROGERS</a><br/>
-                  <muted>Available</muted>
-                </p>
-              </div>
-            </div>
-            <!-- Fourth Member -->
-            <div class="desc">
-              <div class="thumb">
-                <img class="img-circle" src="resources/img/ui-zac.jpg" width="35px" height="35px" align="">
-              </div>
-              <div class="details">
-                <p>
-                  <a href="#">Zac Sniders</a><br/>
-                  <muted>Available</muted>
-                </p>
-              </div>
-            </div>
-            <!-- CALENDAR-->
-            <div id="calendar" class="mb">
-              <div class="panel green-panel no-margin">
-                <div class="panel-body">
-                  <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-                    <div class="arrow"></div>
-                    <h3 class="popover-title" style="disadding: none;"></h3>
-                    <div id="date-popover-content" class="popover-content"></div>
-                  </div>
-                  <div id="my-calendar"></div>
-                </div>
-              </div>
-            </div>
-            <!-- / calendar -->
-          </div>
-          <!-- /col-lg-3 -->
-        </div>
-        <!-- /row -->
-      </section>
+         
     </section>
     <!--main content end-->
     <!--footer start-->
@@ -576,41 +308,8 @@
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
-  <script src="resources/lib/jquery/jquery.min.js"></script>
-
-  <script src="resources/lib/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="resources/lib/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="resources/lib/jquery.scrollTo.min.js"></script>
-  <script src="resources/lib/jquery.nicescroll.js" type="text/javascript"></script>
-  <script src="resources/lib/jquery.sparkline.js"></script>
-  <!--common script for all pages-->
-  <script src="resources/lib/common-scripts.js"></script>
-  <script type="text/javascript" src="resources/lib/gritter/js/jquery.gritter.js"></script>
-  <script type="text/javascript" src="resources/lib/gritter-conf.js"></script>
-  <!--script for this page-->
-  <script src="resources/lib/sparkline-chart.js"></script>
-  <script src="resources/lib/zabuto_calendar.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      var unique_id = $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: 'Welcome to Dashio!',
-        // (string | mandatory) the text inside the notification
-        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
-        // (string | optional) the image to display on the left
-        image: 'img/ui-sam.jpg',
-        // (bool | optional) if you want it to fade out on its own or just sit there
-        sticky: false,
-        // (int | optional) the time you want it to be alive for before fading out
-        time: 8000,
-        // (string | optional) the class name you want to apply to that specific message
-        class_name: 'my-sticky-class'
-      });
-
-      return false;
-    });
-  </script>
-  <script type="application/javascript">
+	<script type="application/javascript">
+		
     $(document).ready(function() {
       $("#date-popover").popover({
         html: true,
@@ -651,7 +350,8 @@
       var to = $("#" + id).data("to");
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
-  </script>
+  
+	</script>
 
 </body>
 </html>

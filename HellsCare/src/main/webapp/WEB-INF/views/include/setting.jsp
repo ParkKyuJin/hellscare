@@ -17,3 +17,13 @@
 <link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/responsive.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
+<link rel="stylesheet" href="/hellscare/resources/onepage.css" type="text/css" />
+
+
+<script src="resources/js/chart.js"></script>
+<script src="resources/js/chart-utils.js"></script>
+<script src="resources/js/components/moment.js"></script>
+<script src="resources/js/plugins.js"></script>
+<script src="resources/js/functions.js"></script>
+<script src="resources/js/jquery.js"></script>
