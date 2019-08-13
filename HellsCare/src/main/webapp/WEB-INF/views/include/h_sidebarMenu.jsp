@@ -131,6 +131,16 @@
               <li><a href="host_total">동호회 결산</a></li>
             </ul>
           </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-tasks"></i>
+              <span>이벤트 관리</span>
+              </a>
+            <ul class="sub">
+              <li><a href="host_clubManage">챌린지 관리</a></li>
+              <li><a href="advanced_form_components.html">도전과제 관리</a></li>
+            </ul>
+          </li>
           <li>
             <a href="host_qna">
               <i class="fa fa-th"></i>

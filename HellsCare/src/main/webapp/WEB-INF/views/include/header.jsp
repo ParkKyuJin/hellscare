@@ -78,7 +78,12 @@
 								<li><a href="makeClub"><div style="color:black;">동호회 개설</div></a></li>
 							</ul>
 						</li>
-						
+						<li><a href="#"><div>이벤트</div></a>
+							<ul style="background:white">
+								<li><a href="#"><div style="color:black;">챌린지</div></a></li>
+								<li><a href="#"><div style="color:black;">도전과제</div></a></li>
+							</ul>
+						</li>
 						<li class="mega-menu"><a href="boardList"><div>게시판</div></a>
 					</ul>
 					
