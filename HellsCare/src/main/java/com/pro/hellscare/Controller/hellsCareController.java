@@ -244,6 +244,7 @@ public class hellsCareController {
 	@RequestMapping("host_challenge")
 	public String host_challenge(HttpServletRequest req, Model model) {
 		// 로거 작성 필수!
+		service.challengeView(req, model);
 		logger.info("URL ==> host_challenge");
 		return "host/host_challenge";
 	}	
@@ -259,6 +260,7 @@ public class hellsCareController {
 	@RequestMapping("host_challengeRegpro")
 	public String host_challengeRegpro(MultipartHttpServletRequest req, Model model) {
 		// 로거 작성 필수!
+		service.challengeRegpro(req, model);
 		logger.info("URL ==> host_challengeRegpro");
 		return "host/host_challengeRegpro";
 	}
@@ -277,7 +279,7 @@ public class hellsCareController {
 	@RequestMapping("host_exercise")
 	public String host_exercise(HttpServletRequest req, Model model) {
 		// 로거 작성 필수!
-		logger.info("URL ==> host_exercise");	
+		logger.info("URL ==> host_exercise");
 		return "host/host_exercise";
 	}
 	// 관리자 동호회 결산

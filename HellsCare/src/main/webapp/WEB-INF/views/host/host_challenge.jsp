@@ -4,32 +4,83 @@
 <!DOCTYPE html>
  <section id="main-content">
 	<section class="wrapper">
-		<div class="row mt">
-			<div class="col-lg-6 col-md-6 col-sm-12">
-
-				<div class="showback">
-				
-				
-				
+		  <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 목록</b></h3>
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-8" style="margin:0px 0px 0px 300px;">
+       
+            <div class="form-panel">
+            
+            <table class="table table-hover">
+            <h4><i class="fa fa-angle-right"></i> 도전과제</h4>
+             <thead>
+                  <tr>
+                    <th>이미지</th>
+                    <th>도전과제 번호</th>
+                    <th>이벤트명</th>
+                    <th>내용</th>
+                    <th>포인트</th>
+                  </tr>
+                </thead>
+            <c:forEach var="dto" items="${dtos}"> 
+           
+				  <tbody>
+                  <tr>
+                    <th> <img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="width:100px; height:100px;"></th>
+                    <th>${dto.challenge_code}</th>
+                    <th>${dto.challenge_name}</th>
+                    <th>${dto.challenge_content}</th>
+                    <th>${dto.challenge_gift} Points</th>
+                    
+                  </tr>
+                </tbody>
+					
+			</c:forEach>
+            
+            
+              
+              </table>
+			<table style="width:100%; text-aling:center;">
+			<tr >
+			<th >
+				<!-- 게시글이 있는 경우 -->
+				<c:if test="${cnt>0}">
+					<!-- 처음[◀◀]과 이전[◀] 블럭 만들기 -->
+					<c:if test="${startPage>PageBlock}">
+						<a href="Board">[◀◀]</a>
+						<a href="Board?pageNum=${startPage-PageBlock}">[◀]</a>
+					</c:if>
+					<!-- 블록 내의 페이지 번호 -->
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<c:if test="${i==currentPage}">
+								<span ><b>[${i}]</b></span>
+							</c:if>
+							<c:if test="${i != currentPage}">
+								<span ><b><a href="Board.hi?pageNum=${i}">[${i}]</a></b></span>
+							</c:if>
+					</c:forEach>
+					<!-- 맨 끝[▶▶]과 다음[▶] -->
+					<c:if test="${pageCount>endPage}">
+						<a href="Board?pageNum=${startPage+PageBlock}">[▶]</a>
+						<a href="Board?pageNum=${pageCount}">[▶▶]</a>
+					</c:if>
+				</c:if>
+			</th>
+		</tr>
+	</table>		
+		
 				</div>
-
-
-			</div>
-
-			<div class="col-lg-6 col-md-6 col-sm-12">
-
-				<div class="showback">
-				
-				
-				</div>
-
-			</div>
-		</div>
-		<!--/ row -->
-		<div style="float:right">
-		<a href="host_challengeReg"><button type="button" class="btn btn-round btn-success">등록하기</button></a>
+            <div style="float:right">
+		<a href="host_challengeReg"><button type="button" class="btn btn-round btn-success">새로등록하기</button></a>
 		<button type="button" class="btn btn-round btn-danger">삭제하기</button>
 		</div>
+		
+          </div>
+          
+          <!-- col-lg-12-->
+        </div>
+		<!--/ row -->
+		
 	</section>
 	
 	<!-- /wrapper -->

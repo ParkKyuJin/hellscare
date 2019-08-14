@@ -11,8 +11,21 @@
     	select username,name from users where name = '박규진'
     </select>
     
+    <select id="challengePro2" resultType="int" parameterType="java.util.Map" >
+    	select count(*) from challenge_tbl where challenge_name = #{challenge_name} 
+    </select>
     
+    <insert id="challengePro" parameterType="java.util.Map" >
+    insert into challenge_tbl values(challenge_seq.nextval,#{challenge_name},#{challenge_content},#{challenge_gift},#{challenge_img},#{challange_date})
+    </insert>
     
+    <select id="challengecount" resultType="int">
+    	select count(*) from challenge_tbl
+    </select>
+    
+    <select id="challengecount2" resultType="com.pro.hellscare.VO.challengeVO" parameterType="java.util.Map">
+    	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date, rownum from challenge_tbl where <![CDATA[rownum >= #{start} and rownum <=#{end}]]>
+    </select>
     
     
     

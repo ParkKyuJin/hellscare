@@ -21,7 +21,7 @@
                 <div class="form-group" >
                   <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>도전과제 내용</b></label>
                  <div class="col-sm-4">
-                    <textarea name="" class="form-control"  style="height:150px;" name="c_content" required></textarea>
+                    <textarea  class="form-control"  style="height:150px;" name="c_content" required></textarea>
                      <span class="help-block"><b>도전과제 내용을 입력해주세요</b></span>
                   </div>
                 </div>
@@ -32,27 +32,42 @@
                      
                   </div>
                 </div>
-                <div class="form-group last">
-                  <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>도전과제 이미지</b></label>
-                  <div class="col-md-9">
-                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                      <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" alt="" />
-                      </div>
-                      <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                      <div>
-                        <span class="btn btn-theme02 btn-file">
-                          <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span><span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                        <input type="file" class="default" name="c_img" id="c_img" required/>
-                        </span>
-                        
-                      </div>
-                    </div>
-                    </div>
-                    </div>
-               
-              </form>
-              
+						<div class="form-group last">
+							<label class="col-sm-2 col-sm-2 control-label"
+								style="text-align: center;"><b>도전과제 이미지</b></label>
+							<div class="col-md-9">
+								<div class="fileupload fileupload-new"
+									data-provides="fileupload">
+									<div class="fileupload-new thumbnail"
+										style="width: 200px; height: 150px;">
+										<img
+											src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image"
+											alt="" />
+									</div>
+									<div class="fileupload-preview fileupload-exists thumbnail"
+										style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+									<div>
+										<span class="btn btn-theme02 btn-file"> <span
+											class="fileupload-new"><i class="fa fa-paperclip"></i>
+												Select image</span><span class="fileupload-exists"><i
+												class="fa fa-undo"></i> Change</span> <input type="file"
+											class="default" name="c_img" id="c_img" required />
+										</span>
+
+									</div>
+									<div style="float: right; margin: 0px 50px 0px 0px;">
+										<a href="host_challengeReg"><button type="submit"
+												class="btn btn-round btn-success">확인</button></a> <a
+											href="host_challenge"><button type="button"
+												class="btn btn-round btn-danger">돌아가기</button></a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+					</form>
             </div>
             
           </div>
@@ -62,10 +77,7 @@
         <!-- /row -->
         <!-- INLINE FORM ELELEMNTS -->
         
-        <div style="float:right; margin:0px 50px 0px 0px;">
-		<a href="host_challengeReg"><button type="submit" class="btn btn-round btn-success">확인</button></a>
-		<a href="host_challenge"><button type="button" class="btn btn-round btn-danger">돌아가기</button></a>
-		</div>
+       
        
       </section>
       <!-- /wrapper -->

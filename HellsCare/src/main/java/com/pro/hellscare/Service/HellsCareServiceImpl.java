@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +23,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.pro.hellscare.VO.HellsCareVO;
 import com.pro.hellscare.VO.NewsVO;
+import com.pro.hellscare.VO.challengeVO;
 import com.pro.hellscare.persistence.HellsCareDAO;
+
+
 
 //서비스인터페이스 오버라이딩해서 사용할것.
 
@@ -132,11 +135,11 @@ public class HellsCareServiceImpl implements HellsCareService {
 	//도전과제 등록 프로세스
 	@Override
 	public void challengeRegpro(MultipartHttpServletRequest req, Model model) {
-		MultipartFile file = req.getFile("Game_img");
+		MultipartFile file = req.getFile("c_img");
 		
 
 		String saveDir = req.getSession().getServletContext().getRealPath("/resources/eventimg/");
-		String realDir = "C:\\java prac\\workspace_spring\\spring_PJ_PKJ\\src\\main\\webapp\\resources\\saveimages";
+		String realDir = "C:\\workspace_git\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\eventimg\\";
 		
 		try {
 			file.transferTo(new File(saveDir +file.getOriginalFilename() ));
@@ -152,26 +155,87 @@ public class HellsCareServiceImpl implements HellsCareService {
 		fis.close();
 		fos.close();
 		
-		int Game_code = Integer.parseInt(req.getParameter("Game_code"));
-		int Game_count = Integer.parseInt(req.getParameter("Game_count"));
-		String Game_img =  file.getOriginalFilename();
-		System.out.println("게임이미지 테스트"+Game_img);
-		System.out.println(saveDir);
-		System.out.println(Game_code);
-		System.out.println(Game_count);
-		System.out.println();
+		String c_name = req.getParameter("c_name");
+		String c_content = req.getParameter("c_content");
+		int c_point = Integer.parseInt(req.getParameter("c_point"));
+		String c_img =  file.getOriginalFilename();
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("Game_code", Game_code);
-		map.put("Game_count", Game_count);
-		map.put("Game_img", Game_img);
-			/* int cnt = dao.orderpro(map); */
-			/* model.addAttribute("orderCnt", cnt); */
-		
-		
+		map.put("challenge_name", c_name);
+		map.put("challenge_content", c_content);
+		map.put("challenge_gift", c_point);
+		map.put("challenge_img", c_img);
+		map.put("challange_date", new Timestamp(System.currentTimeMillis()));
+	
+	    int cnt = dao.challengePro(map);
+		model.addAttribute("cnt", cnt); 
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void challengeView(HttpServletRequest req, Model model) {
+		int pageSize = 5; // 한페이지당 글 갯수
+		int PageBlock = 3; // 페이지 갯수는 3개씩 보여줄거임
+
+		int cnt = 0;// 글 갯수
+		int start = 0;// 현재 페이지의 시작되는 글 번호
+		int end = 0;// 현재 페이지의 마지막 글번호
+		int number = 0;// 출력용 글 번호
+		String pageNum = ""; // 페이지 번호
+		int currentPage = 0;
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		cnt = dao.challengecount();
+		System.out.println("도전과제 갯수 : " + cnt);
+		pageNum = req.getParameter("pageNum");
+		
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		currentPage = Integer.parseInt(pageNum);
+		System.out.println(currentPage);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		System.out.println("Start:" + start);
+		System.out.println("end : " + end);
+		if (end > cnt)
+			end = cnt;
+		number = cnt - (currentPage - 1) * pageSize;
+		System.out.println("number :" + number);
+		System.out.println("pageSize :" + number);
+
+		if (cnt > 0) {
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			List<challengeVO> list = dao.challengecount2(map);
+			model.addAttribute("dtos", list);
+		}
+		startPage = (currentPage / PageBlock) * PageBlock + 1;
+		if (currentPage % PageBlock == 0)
+			startPage -= PageBlock;
+		System.out.println("startPage : " + startPage);
+
+		// 마지막페이지
+		endPage = startPage + PageBlock - 1;
+		if (endPage > pageCount)
+			endPage = pageCount;
+		model.addAttribute("cnt", cnt); // 글갯수
+		model.addAttribute("number", number);// 출력용 글 번호
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage);// 시작페이지
+			model.addAttribute("endPage", endPage);// 마지막페이지
+			model.addAttribute("pageBlock", PageBlock);// 출력할 페이지 갯수
+			model.addAttribute("pageCount", pageCount); // 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
+		}
+
 	}
 	
 		

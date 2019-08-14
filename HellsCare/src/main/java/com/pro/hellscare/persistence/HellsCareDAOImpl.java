@@ -1,11 +1,15 @@
 package com.pro.hellscare.persistence;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.pro.hellscare.VO.HellsCareVO;
+import com.pro.hellscare.VO.challengeVO;
 
 //*********인터페이스에 작성한 기능 오버라이드 해서 구현하면됨.
 //*********DB접속시에 반드시 Mapper에도 어떤기능의 Mapper인지 작성할것
@@ -50,6 +54,37 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		
 	}
 
+	
+//=============호스트 DAO	
+	
+	
+	@Override
+	public int challengePro(Map<String, Object> map) {
+		int cnt = sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challengePro2", map);	
+		if(cnt==0) {
+			cnt = challengePro2(map);
+		}else {
+			cnt = 2;
+		}		
+		return cnt;
+	}
+	@Override
+	public int challengePro2(Map<String, Object> map) {		
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.challengePro", map);
+	}
+
+
+	@Override
+	public int challengecount() {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challengecount");
+	}
+
+
+	@Override
+	public List<challengeVO> challengecount2(Map<String, Object> map) {
+		
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.challengecount2",map);
+	}
 	
 	
 }

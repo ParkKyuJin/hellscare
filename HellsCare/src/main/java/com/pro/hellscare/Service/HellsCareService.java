@@ -25,6 +25,10 @@ public interface HellsCareService {
 	
 	//==============호스트 서비스
 	
+	
+	//이벤트 갯수 가져오고 내용 가져오기
+	public void challengeView(HttpServletRequest req, Model model);
 	//이벤트 등록 프로세스
 	public void challengeRegpro(MultipartHttpServletRequest req, Model model);
+	
 }
