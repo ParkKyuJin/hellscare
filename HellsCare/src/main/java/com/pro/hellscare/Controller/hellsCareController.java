@@ -1,5 +1,7 @@
 package com.pro.hellscare.Controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -8,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pro.hellscare.Service.HellsCareService;
 
@@ -18,6 +20,8 @@ import com.pro.hellscare.Service.HellsCareService;
 public class hellsCareController {
 	private static final Logger logger = LoggerFactory.getLogger(hellsCareController.class);
 
+
+	
 	//서비스 Autowired로 연경
 	 @Autowired HellsCareService service;
 	 
@@ -28,9 +32,10 @@ public class hellsCareController {
 	
 	//유저 메인페이지
 	@RequestMapping("main2")
-	public String main2(HttpServletRequest req, Model model){
+	public String main2(HttpServletRequest req, Model model)throws IOException{
 		//로거 작성 필수!
 		logger.info("URL ==> main");
+		service.crawlArticle(req, model);
 		return "Users/index";
 	}
 	
@@ -46,7 +51,17 @@ public class hellsCareController {
 		logger.info("URL ==> healthstateresult");
 		return "Users/healthstateresult";
 	}
-		
+	//이벤트 도전과제 페이지
+	@RequestMapping("challenge")
+	public String challenge(HttpServletRequest req, Model model) {
+		logger.info("URL ==> challenge");
+		return "Users/challenge";
+	}
+	@RequestMapping("Mychallenge")
+	public String Mychallenge(HttpServletRequest req, Model model) {
+		logger.info("URL ==> Mychallenge");
+		return "Users/Mychallenge";
+	}	
 	
 	
 //===재관 Part -Strart
@@ -223,6 +238,32 @@ public class hellsCareController {
 	
 	
 //======================이하 호스트부분==================
+	
+//규진 part Start
+	//관리자 챌린지 관리
+	@RequestMapping("host_challenge")
+	public String host_challenge(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_challenge");
+		return "host/host_challenge";
+	}	
+	//관리자 챌린지 등록
+	@RequestMapping("host_challengeReg")
+	public String host_challengeReg(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_challengeReg");
+		return "host/host_challengeReg";
+	}
+	
+	//관리자 챌린지 등록 프로세스
+	@RequestMapping("host_challengeRegpro")
+	public String host_challengeRegpro(MultipartHttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_challengeRegpro");
+		return "host/host_challengeRegpro";
+	}
+//규진 part End
+		
 	
 //==예찬 Part	 Start	
 		// 관리자 메인페이지

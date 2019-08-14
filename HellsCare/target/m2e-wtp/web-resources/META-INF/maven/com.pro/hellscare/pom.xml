@@ -196,6 +196,14 @@
 	
 	<!-- security 설정 끝 -->
 	
+	<!-- Crawling -->
+<dependency>
+	<groupId>org.jsoup</groupId>
+	<artifactId>jsoup</artifactId>
+	<version>1.12.1</version>
+</dependency>
+	
+	
 	<!-- 유틸리티 추가 종료 -->
 	
 		<!-- Test -->

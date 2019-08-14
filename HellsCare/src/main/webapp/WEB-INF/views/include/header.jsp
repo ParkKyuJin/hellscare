@@ -80,8 +80,8 @@
 						</li>
 						<li><a href="#"><div>이벤트</div></a>
 							<ul style="background:white">
-								<li><a href="#"><div style="color:black;">챌린지</div></a></li>
-								<li><a href="#"><div style="color:black;">도전과제</div></a></li>
+								<li><a href="challenge"><div style="color:black;">도전과제</div></a></li>
+								<li><a href="Mychallenge"><div style="color:black;">진행중인 도전과제</div></a></li>
 							</ul>
 						</li>
 						<li class="mega-menu"><a href="boardList"><div>게시판</div></a>

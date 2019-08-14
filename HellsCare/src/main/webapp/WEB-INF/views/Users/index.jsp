@@ -107,39 +107,36 @@
 
 				<div class="section nobottommargin">
 					<div class="container clear-bottommargin clearfix">
-
-						<div class="row topmargin-sm clearfix">
-
-							<div class="col-lg-4 bottommargin">
-								<i class="i-plain color i-large icon-line2-screen-desktop inline-block" style="margin-bottom: 15px;"></i>
-								<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-									<span class="before-heading">Scalable on Devices.</span>
-									<h4>Responsive &amp; Retina</h4>
-								</div>
-								<p>Employment respond committed meaningful fight against oppression social challenges rural legal aid governance. Meaningful work, implementation, process cooperation, campaign inspire.</p>
-							</div>
-
-							<div class="col-lg-4 bottommargin">
-								<i class="i-plain color i-large icon-line2-energy inline-block" style="margin-bottom: 15px;"></i>
-								<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-									<span class="before-heading">Smartly Coded &amp; Maintained.</span>
-									<h4>Powerful Performance</h4>
-								</div>
-								<p>Medecins du Monde Jane Addams reduce child mortality challenges Ford Foundation. Diversification shifting landscape advocate pathway to a better life rights international. Assessment.</p>
-							</div>
-
-							<div class="col-lg-4 bottommargin">
-								<i class="i-plain color i-large icon-line2-equalizer inline-block" style="margin-bottom: 15px;"></i>
-								<div class="heading-block nobottomborder" style="margin-bottom: 15px;">
-									<span class="before-heading">Flexible &amp; Customizable.</span>
-									<h4>Truly Multi-Purpose</h4>
-								</div>
-								<p>Democracy inspire breakthroughs, Rosa Parks; inspiration raise awareness natural resources. Governance impact; transformative donation philanthropy, respect reproductive.</p>
-							</div>
-
-						</div>
-
+	<div class="row">
+		<c:forEach var="news_dtos" items="${newsDtos}">
+						
+			<div class="col-lg-3 col-md-3 bottommargin">
+				<div class="ipost clearfix">
+					<div class="entry-image">
+						<a href="#">
+							<c:if test="${news_dtos.newsThumbnail != null}">
+								<img class="image_fade" src="${news_dtos.newsThumbnail}" alt="Image">
+							</c:if>
+							<c:if test="${news_dtos.newsThumbnail == null}">
+								<img class="image_fade" src="/hellscare/resources/white.JPG" alt="Image">
+							</c:if>
+						</a>
 					</div>
+					<div class="entry-title">
+						<h3><a href="blog-single.html">${news_dtos.newsTitle}</a></h3>
+					</div>
+					<ul class="entry-meta clearfix">
+						<li><i class="icon-calendar3"></i> ${news_dtos.newsDate}</li>
+						<li><i class="icon-comments"></i> ${news_dtos.newsAuthor}</li>
+					</ul>
+					<div class="entry-content">
+						<p>${news_dtos.newsSummary}</p>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+</div>
 				</div>
 
 				<div class="container clearfix">

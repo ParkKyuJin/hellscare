@@ -10,8 +10,8 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+<%@ include file="../include/setting.jsp" %>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
   <meta charset="utf-8">
@@ -21,6 +21,9 @@
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>Dashio - Bootstrap Admin Template</title>
 
+ <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
   <!-- Favicons -->
   <link href="resources/host_style/img/favicon.png" rel="icon">
   <link href="resources/host_style/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -37,6 +40,13 @@
   <link href="resources/host_style/css/style-responsive.css" rel="stylesheet">
   <script src="resources/host_style/lib/chart-master/Chart.js"></script>
 
+
+  <link href="resources/host_style/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-fileupload/bootstrap-fileupload.css" />
+  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-datetimepicker/datertimepicker.css" />
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -137,8 +147,7 @@
               <span>이벤트 관리</span>
               </a>
             <ul class="sub">
-              <li><a href="host_clubManage">챌린지 관리</a></li>
-              <li><a href="advanced_form_components.html">도전과제 관리</a></li>
+              <li><a href="host_challenge">도전과제 관리</a></li>
             </ul>
           </li>
           <li>
@@ -174,6 +183,15 @@
   <script src="resources/host_style/js/functions.js"></script>
  	
  	
+ 	 <script src="resources/host_style/lib/jquery-ui-1.9.2.custom.min.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-daterangepicker/date.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-daterangepicker/moment.min.js"></script>
+  <script type="text/javascript" src="resources/host_style/lib/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+  <script src="resources/host_style/lib/advanced-form-components.js"></script>
 
 </body>
 </html>

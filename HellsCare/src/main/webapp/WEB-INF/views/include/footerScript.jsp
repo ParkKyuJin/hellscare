@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="project" value="/hellscare/resources/"/>
-<link type="text/css" rel="stylesheet" href="${project}CommonStyle.css"/>
+
 <script type="text/javascript" src="${project}script.js"></script>
 
 
