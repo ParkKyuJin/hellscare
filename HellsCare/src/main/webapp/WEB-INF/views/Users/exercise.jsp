@@ -30,7 +30,7 @@
 			<div class="container clearfix">
 
 				<div class="fancy-title title-center title-dotted-border">
-					<h3>유산소 운동</h3>
+					<h3>스트레칭</h3>
 				</div>
 
 				<div id="oc-images"
@@ -74,7 +74,7 @@
 				<div class="line"></div>
 
 				<div class="fancy-title title-center title-dotted-border">
-					<h3>무산소 운동</h3>
+					<h3>다이어트 운동</h3>
 				</div>
 
 				<div id="oc-images"

@@ -13,24 +13,29 @@
             
             <table class="table table-hover">
             <h4><i class="fa fa-angle-right"></i> 도전과제</h4>
-             <thead>
-                  <tr>
-                    <th>이미지</th>
-                    <th>도전과제 번호</th>
-                    <th>이벤트명</th>
-                    <th>내용</th>
-                    <th>포인트</th>
-                  </tr>
+             <thead align="center">
+                  <tr >
+								<th>선택</th>
+								<th>도전과제 번호</th>
+								<th>이미지</th>
+								<th>이벤트명</th>
+								<th>내용</th>
+								<th>등록일</th>
+								<th>포인트</th>
+							</tr>
                 </thead>
+                <form class="form-horizontal style-form" method="post">
             <c:forEach var="dto" items="${dtos}"> 
            
 				  <tbody>
                   <tr>
+                  <th valign="middle"><input  type="checkbox" name="challenge_check" value="${dto.challenge_code}"></th>
+                   <th align="center">${dto.challenge_code}</th>
                     <th> <img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="width:100px; height:100px;"></th>
-                    <th>${dto.challenge_code}</th>
                     <th>${dto.challenge_name}</th>
                     <th>${dto.challenge_content}</th>
-                    <th>${dto.challenge_gift} Points</th>
+                     <th >${dto.challange_date}</th>
+                    <th >${dto.challenge_gift} Points</th>
                     
                   </tr>
                 </tbody>
@@ -72,9 +77,9 @@
 				</div>
             <div style="float:right">
 		<a href="host_challengeReg"><button type="button" class="btn btn-round btn-success">새로등록하기</button></a>
-		<button type="button" class="btn btn-round btn-danger">삭제하기</button>
+		<button type="submit" class="btn btn-round btn-danger" formaction="host_challengedelpro">삭제하기</button>
 		</div>
-		
+		</form>
           </div>
           
           <!-- col-lg-12-->

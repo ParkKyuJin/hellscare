@@ -65,12 +65,12 @@ public class challengeVO {
 	}
 
 
-	public Date getChallenge_date() {
+	public Date getchallange_date() {
 		return challange_date;
 	}
 
 
-	public void setChallenge_date(Date challenge_date) {
+	public void setchallange_date(Date challenge_date) {
 		this.challange_date = challenge_date;
 	}
 	

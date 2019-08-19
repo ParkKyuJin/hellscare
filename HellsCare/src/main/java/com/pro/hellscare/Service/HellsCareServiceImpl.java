@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,7 +26,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import com.pro.hellscare.VO.ExerciseVO;
 import com.pro.hellscare.VO.NewsVO;
 import com.pro.hellscare.VO.challengeVO;
 import com.pro.hellscare.persistence.HellsCareDAO;
@@ -237,9 +244,91 @@ public class HellsCareServiceImpl implements HellsCareService {
 		}
 
 	}
+
+//도전과제 삭제
+
+	@Override
+	public void challengedelpro(HttpServletRequest req, Model model) {
+		String[] arr = req.getParameterValues("challenge_check");
+		int cnt=0;
+		int lastcnt = 0;
+		for(String i : arr) {
+			dao.challengedel(Integer.parseInt(i));
+			cnt +=1;
+		}
+		if(arr.length==cnt) {
+			lastcnt = 1;
+		}else {
+			lastcnt = 0;
+		}
+		model.addAttribute("cnt", lastcnt);
+	}
+
+
+
+
+
+
+	@Override
+	public void exerciseAddPro(MultipartHttpServletRequest req, Model model) {
+String part = "";
+		
+		MultipartFile file = req.getFile("img");
+		
+		@SuppressWarnings("deprecation")
+		String saveDir = req.getRealPath("/resources/video/");
+		
+		String realDir = "C:\\Users\\park\\workspace_git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\video\\";
+		
+		try {
+			file.transferTo(new File(saveDir+file.getOriginalFilename()));
+			
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+			
+			int data = 0;
+			// 논리적인 경로에 저장된 임시 파일을 물리적인 경로로 복사함
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			
+			String name = req.getParameter("name");		// 운동명
+			String img = file.getOriginalFilename();	// 영상
+			int kind = Integer.parseInt(req.getParameter("kind"));		// 종류	-- 1. 스트레칭, 2. 다이어트 운동
+			// 스트레칭일때만 운동부위가 존재함.
+			if(kind == 1) {
+				part = req.getParameter("part");
+			}
+			String way = req.getParameter("way");		// 운동방법
+			String note = req.getParameter("note");		// 주의사항
+			int kcal = Integer.parseInt(req.getParameter("kcal"));	// 소모칼로리
+			
+			// 바구니 생성
+			ExerciseVO vo = new ExerciseVO();
+			
+			vo.setExercise_name(name);
+			vo.setExercise_img(img);
+			vo.setWay(way);
+			vo.setPart(part);
+			vo.setKcal(kcal);
+			vo.setNote(note);
+			vo.setKind(kind);;
+
+			int insertCnt = 0;
+
+			insertCnt = dao.insertExercise(vo);
+
+			model.addAttribute("insertCnt", insertCnt);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	
-		
-		
 			
 }
 

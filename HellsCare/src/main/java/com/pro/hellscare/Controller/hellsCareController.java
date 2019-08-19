@@ -54,6 +54,7 @@ public class hellsCareController {
 	//이벤트 도전과제 페이지
 	@RequestMapping("challenge")
 	public String challenge(HttpServletRequest req, Model model) {
+		service.challengeView(req, model);
 		logger.info("URL ==> challenge");
 		return "Users/challenge";
 	}
@@ -263,6 +264,14 @@ public class hellsCareController {
 		service.challengeRegpro(req, model);
 		logger.info("URL ==> host_challengeRegpro");
 		return "host/host_challengeRegpro";
+	}
+	//관리자 챌린지 삭제 프로세스
+	@RequestMapping("host_challengedelpro")
+	public String host_challengedelpro(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		System.out.println(req.getParameterValues("challenge_check"));
+		logger.info("URL ==> host_challengedelpro");
+		return "host/host_challengedelpro";
 	}
 //규진 part End
 		

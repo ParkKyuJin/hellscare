@@ -17,7 +17,8 @@ public interface HellsCareService {
 	//뉴스기사 크롤링 Service 담당자 : 동렬
 	public void crawlArticle(HttpServletRequest req, Model model) throws IOException;
 	
-	
+	//관리자 - 운동등록처리 / 파일업로드처리 담당자 : 예찬
+	public void exerciseAddPro(MultipartHttpServletRequest req, Model model);
 	
 	
 	
@@ -26,9 +27,10 @@ public interface HellsCareService {
 	//==============호스트 서비스
 	
 	
-	//이벤트 갯수 가져오고 내용 가져오기
+	//이벤트 갯수 가져오고 내용 가져오기 담당자 : 규진
 	public void challengeView(HttpServletRequest req, Model model);
-	//이벤트 등록 프로세스
+	//이벤트 등록 프로세스 담당자 : 규진
 	public void challengeRegpro(MultipartHttpServletRequest req, Model model);
-	
+	//이벤트 삭제 프로세스 담당자 : 규진
+	public void challengedelpro(HttpServletRequest req, Model model);
 }

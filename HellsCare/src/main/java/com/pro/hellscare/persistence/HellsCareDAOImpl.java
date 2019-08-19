@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.pro.hellscare.VO.ExerciseVO;
 import com.pro.hellscare.VO.HellsCareVO;
 import com.pro.hellscare.VO.challengeVO;
 
@@ -43,16 +44,7 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	// 로그인 등등 암호가 맞는지 확인 할 경우 : pass.matches(화면에서 사용자가입력한 암호, DB에 들어있는 암호화된 암호);
 	@Autowired
 	BCryptPasswordEncoder pass;
-	
-	//테스트용 DAO
-	@Override
-	public HellsCareVO testDAO() {
-		// TODO Auto-generated method stub
-		//테스트 DAO입니다 아무기능 없습니다. 지우고 사용해주시면돼요
-		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.testDAO");
-		
-		
-	}
+
 
 	
 //=============호스트 DAO	
@@ -84,6 +76,19 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	public List<challengeVO> challengecount2(Map<String, Object> map) {
 		
 		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.challengecount2",map);
+	}
+
+	@Override
+	public int challengedel(int challenge_check) {
+		
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.challengedel",challenge_check);
+	}
+
+
+	@Override
+	public int insertExercise(ExerciseVO vo) {
+		
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.insertExercise",vo);
 	}
 	
 	

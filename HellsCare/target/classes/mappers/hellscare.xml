@@ -27,8 +27,14 @@
     	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date, rownum from challenge_tbl where <![CDATA[rownum >= #{start} and rownum <=#{end}]]>
     </select>
     
+    <delete id="challengedel" parameterType="int">
+    	delete challenge_tbl where challenge_code = #{challenge_check}
+    </delete>
     
-    
-    
+    <!-- 관리자 - 운동등록 -->
+    <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
+       INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind)
+       VALUES(exercise_seq.nextval,#{exercise_name},#{exercise_img},#{way},#{part},#{kcal},#{note},#{kind})  
+    </insert>
     
 </mapper>
