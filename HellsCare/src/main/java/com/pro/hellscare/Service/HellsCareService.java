@@ -16,6 +16,10 @@ public interface HellsCareService {
 	
 	//뉴스기사 크롤링 Service 담당자 : 동렬
 	public void crawlArticle(HttpServletRequest req, Model model) throws IOException;
+	// 뉴스 기사 상세 페이지  담당자 : 동렬
+	public void crawlNewsDetail(HttpServletRequest req, Model model) throws IOException;
+	
+	
 	
 	//관리자 - 운동등록처리 / 파일업로드처리 담당자 : 예찬
 	public void exerciseAddPro(MultipartHttpServletRequest req, Model model);

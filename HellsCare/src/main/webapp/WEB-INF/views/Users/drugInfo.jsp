@@ -11,7 +11,6 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
 	
 	
 	
@@ -122,7 +121,7 @@ function idfySend() {
 				<input type="text" class="form-control form-control-lg mb-2"  id="drug_name" name="drug_name" placeholder="제품명/성분명을 입력하세요" value="" >
 				
 				<label for="entp_name">회사명 </label>
-				<input type="text" class="form-control form-control-lg mb-2" id="entp_name" name="entp_name" placeholder="회사명 입력하세요"  value="" >
+				<input type="text" class="form-control form-control-lg mb-2" id="entp_name" name="entp_name" placeholder="회사명을 입력하세요"  value="" >
 			
 				
 			</div>

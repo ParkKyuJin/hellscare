@@ -1,12 +1,15 @@
 package com.pro.hellscare.VO;
 
 public class NewsVO {
-	private String newsTitle;  //뉴스기사 타이틀
-	private String newsThumbnail; //뉴스 썸네일
-	private String newsContents; //뉴스 내용
-	private String newsSummary; //뉴스 요약
-	private String newsDate; //뉴스 일자
-	private String newsAuthor; //기자
+	private String newsTitle;
+	private String newsThumbnail;
+	private String newsContents;
+	private String newsSummary;
+	private String newsDate;
+	private String newsAuthor;
+	private String newsUrl;
+	private String newsImg;
+	private String newsCaption;
 	
 	public NewsVO() {}
 	
@@ -56,5 +59,29 @@ public class NewsVO {
 
 	public void setNewsAuthor(String newsAuthor) {
 		this.newsAuthor = newsAuthor;
+	}
+	
+	public String getNewsUrl() {
+		return newsUrl;
+	}
+	
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
+	}
+	
+	public String getNewsImg() {
+		return newsImg;
+	}
+	
+	public void setNewsImg(String newsImg) {
+		this.newsImg = newsImg;
+	}
+	
+	public String getNewsCaption() {
+		return newsCaption;
+	}
+	
+	public void setNewsCaption(String newsCaption) {
+		this.newsCaption = newsCaption;
 	}
 }

@@ -43,7 +43,7 @@ import com.pro.hellscare.persistence.HellsCareDAO;
 public class HellsCareServiceImpl implements HellsCareService {
 	
 	//크롤링 전역변수 기사 리스트
-	private static String URL = "http://health.chosun.com/list.html?";
+	private static String NEWSURL = "http://health.chosun.com/list.html?";
 	
 	
 	@Autowired
@@ -63,8 +63,9 @@ public class HellsCareServiceImpl implements HellsCareService {
 	//뉴스기사 크롤링 서비스 
 	@Override
 	public void crawlArticle(HttpServletRequest req, Model model) throws IOException {
+		
 		// 기사 사이트 1번 페이지(최신 기사) html 파일 가져옴
-		Document doc = Jsoup.connect(URL + "nowcode=1&pn=1").get();
+		Document doc = Jsoup.connect(NEWSURL + "nowcode=1&pn=1").get();
 			
 		// 이미지와 기사 요약내용을 따올 Elements
 		// 기사가 있는 태그는 dl 태그 중 list_item 클래스만 있음
@@ -73,62 +74,65 @@ public class HellsCareServiceImpl implements HellsCareService {
 		// 기사 목록을 담을 기사 바구니 생성
 		List<NewsVO> newsDtos = new ArrayList<>();
 		    
-		// 기사의 갯수만큼 for문을 돈다.
+	 	// 기사의 갯수만큼 for문을 돈다.
 		for (int i = 0; i < 8; i++) {
-				
+			
 			// NewsVO 생성
 			NewsVO news = new NewsVO();
 		    	
+			// 뉴스 제목 크롤링
+			Element newsATag = newsList.get(i).select("dt a").get(0);
+			news.setNewsTitle(newsATag.text());
+				
+			// 뉴스 일자 크롤링
+			Element newsDate = newsList.get(i).select("dl.list_item dd.date_author span.date").get(0);
+			news.setNewsDate(newsDate.text());
+				
+			// 뉴스 저자 크롤링
+			Element newsAuthor = newsList.get(i).select("dl.list_item dd.date_author span.author").get(0);
+			news.setNewsAuthor(newsAuthor.text());
+				
+			// 뉴스 기사 요약 내용 크롤링
+			Element newsSummary = newsList.get(i).select("dd.desc a").get(0);
+			news.setNewsSummary(newsSummary.text());
+				
+			// 뉴스 기사 상세 내용 페이지 크롤링
+			// 1. 뉴스 상세 내용 페이지 URL 대입
+			String newsUrl = "http://health.chosun.com" + newsATag.attr("href");
+				
+			news.setNewsUrl(newsUrl);
+				
+			// Jsoup으로 뉴스 상세 내용 페이지 URL html문서 get 
+			Document detailNews = Jsoup.connect(newsUrl).get();
+				
+			// 기사 상세 내용 페이지에서 실제 기사 내용이 담긴 <p> 태그를 크롤링 
+			Elements detailNewsContents = detailNews.select(".news_body .par > p");
+				
+			String newsContents = "";
+				
+			for (Element newsPTag : detailNewsContents) {
+				// <p> 태그의 문자 내용들을 newsContents에 담는다.
+				newsContents += newsPTag.text() + "  ";
+			}
+				
+			news.setNewsContents(newsContents);
+				
 			// 썸네일 이미지 주소를 받아와서 setter에 썸네일 이미지 넣기
-			if(newsList.get(i).select("dd.thumb") != null) {
+			if(detailNewsContents.select(".news_imgbox img") != null) {
 				try {
 					// 기사들 중 i번째의 thumb 클래스의 dd 태그의 img 태그에서 0번째의 src를 가져오는 이유는
 					// 어짜피 i번째의 기사는 하나이기 때문에
-					news.setNewsThumbnail(newsList.get(i).select("dd.thumb img").get(0).attr("src"));
+					news.setNewsThumbnail(detailNews.select(".news_imgbox img").attr("src"));
 				} catch (Exception e) {
 					// System.out.println("IndexOutOfBoundsException 발생");
 				}
-				}
-				
-				// 뉴스 제목 크롤링
-				Element newsATag = newsList.get(i).select("dt a").get(0);
-				news.setNewsTitle(newsATag.text());
-				
-				// 뉴스 일자 크롤링
-				Element newsDate = newsList.get(i).select("dl.list_item dd.date_author span.date").get(0);
-				news.setNewsDate(newsDate.text());
-				
-				// 뉴스 저자 크롤링
-				Element newsAuthor = newsList.get(i).select("dl.list_item dd.date_author span.author").get(0);
-				news.setNewsAuthor(newsAuthor.text());
-				
-				// 뉴스 기사 요약 내용 크롤링
-				Element newsSummary = newsList.get(i).select("dd.desc a").get(0);
-				news.setNewsSummary(newsSummary.text());
-				
-				// 뉴스 기사 상세 내용 페이지 크롤링
-				// 1. 뉴스 상세 내용 페이지 URL 대입
-				String newsUrl = "http://health.chosun.com" + newsATag.attr("href");
-				
-				// Jsoup으로 뉴스 상세 내용 페이지 URL html문서 get 
-				Document detailNews = Jsoup.connect(newsUrl).get();
-				
-				// 기사 상세 내용 페이지에서 실제 기사 내용이 담긴 <p> 태그를 크롤링 
-				Elements detailNesContents = detailNews.select(".news_body .par > p");
-				
-				String newsContents = "";
-				
-				for (Element newsPTag : detailNesContents) {
-					// <p> 태그의 문자 내용들을 newsContents에 담는다.
-					newsContents += newsPTag.text() + " ";
-				}
-				
-				news.setNewsContents(newsContents);
-				
-				newsDtos.add(news);
 			}
+				
+				
+			newsDtos.add(news);
+		}
 			
-			model.addAttribute("newsDtos", newsDtos);
+		model.addAttribute("newsDtos", newsDtos);
 		
 	}
 
@@ -325,6 +329,55 @@ String part = "";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+
+
+
+
+
+	@Override
+	public void crawlNewsDetail(HttpServletRequest req, Model model) throws IOException {
+		NewsVO news = new NewsVO();
+		
+		String newsUrl = req.getParameter("newsUrl");
+		Document detailNewsPage = Jsoup.connect(newsUrl).get();
+			
+		String newsTitle = detailNewsPage.select(".news_title_text h1").get(0).text();
+		news.setNewsTitle(newsTitle);
+			
+		if(detailNewsPage.select(".news_imgbox img") != null) {
+			try {
+				// 기사들 중 i번째의 thumb 클래스의 dd 태그의 img 태그에서 0번째의 src를 가져오는 이유는
+				// 어짜피 i번째의 기사는 하나이기 때문에
+				String newsImg = detailNewsPage.select(".news_imgbox img").get(0).attr("src");
+				news.setNewsImg(newsImg);
+					
+				String newsCaption = detailNewsPage.select(".news_imgbox img + figcaption").get(0).text();
+				news.setNewsCaption(newsCaption);
+			} catch (Exception e) {
+				// System.out.println("IndexOutOfBoundsException 발생");
+			}
+		}
+			
+		String newsContents = "";
+			
+		Elements detailNewsContents = detailNewsPage.select(".news_body .par > p");
+			
+		for(Element newsPTag : detailNewsContents) {
+			newsContents += newsPTag.text() + "<br/><br/>";
+		}
+			
+		news.setNewsContents(newsContents);
+			
+		String newsDate = detailNewsPage.select("#date_text").get(0).text();
+		news.setNewsDate(newsDate);
+			
+		String newsAuthor = detailNewsPage.select(".news_title_author ul li a").get(0).text();
+		news.setNewsAuthor(newsAuthor);
+		
+		model.addAttribute("news", news);
 		
 	}
 

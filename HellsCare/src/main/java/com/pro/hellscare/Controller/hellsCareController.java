@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pro.hellscare.Service.HellsCareService;
+import com.pro.hellscare.Service.ParseService;
 
 
 //전체 페이지를 관리하는 메인 컨트롤러
@@ -24,6 +25,8 @@ public class hellsCareController {
 	
 	//서비스 Autowired로 연경
 	 @Autowired HellsCareService service;
+	 @Autowired ParseService service2;
+	 
 	 
 	 
 	 //안드로이드 연동시에 Gson방식의 어노테이션 필요함! 
@@ -73,6 +76,16 @@ public class hellsCareController {
 		logger.info("URL ==> drugInfo");
 		return "Users/drugInfo";
 	}
+	
+	@RequestMapping("drugInfo_sub")
+	public String drugInfo_sub(HttpServletRequest req, Model model) {
+		service2.getDrugList(req, model);
+		logger.info("URL ==> drugInfo");
+		return "Users/drugInfo_sub";
+	}
+	
+	
+	
 	// 질병정보 페이지
 	@RequestMapping("disease")
 	public String disease(HttpServletRequest req, Model model) {
@@ -211,6 +224,18 @@ public class hellsCareController {
 		logger.info("URL ==> weather_info");
 		return "Users/weather_info";
 	}
+	// 뉴스 기사 상세 페이지
+	@RequestMapping("news_detail")
+	public String news_detail(HttpServletRequest req, Model model) throws IOException {
+		logger.info("URL ==> news_detail");
+		service.crawlNewsDetail(req, model);
+		service.crawlArticle(req, model);
+		
+		return "Users/news_detail";
+	}
+
+	
+	
 //===동렬 part - end		
 
 //===한결 part - start
