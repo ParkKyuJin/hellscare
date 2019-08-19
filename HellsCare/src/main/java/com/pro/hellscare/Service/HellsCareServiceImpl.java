@@ -278,7 +278,7 @@ String part = "";
 		@SuppressWarnings("deprecation")
 		String saveDir = req.getRealPath("/resources/video/");
 		
-		String realDir = "C:\\Users\\park\\workspace_git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\video\\";
+		String realDir = "C:\\workspace_git\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\video\\";
 		
 		try {
 			file.transferTo(new File(saveDir+file.getOriginalFilename()));
