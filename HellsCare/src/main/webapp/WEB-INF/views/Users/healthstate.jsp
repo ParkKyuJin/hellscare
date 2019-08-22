@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-	<%@ include file="../include/setting.jsp" %>
+	
 	<%@ include file="../include/header.jsp" %>
 	
 	<!-- 중간 lable -->
@@ -52,6 +52,9 @@
 								<canvas id="chart-0" style="display: block;"></canvas>
 
 							</div>
+							<div class="alert alert-warning" align="center">
+							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 섭취 칼로리에 비해 운동량이 낮습니다!
+							</div>
 						</div>
 						<div class="tab-content clearfix" id="tabs-2">
 							<div id="recent-post-list-sidebar">
@@ -61,21 +64,28 @@
 								혈압 그래프
 
 							</div>
+							<div class="alert alert-warning" align="center">
+							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 혈압이 너무 높아요!
+							</div>
 						</div>
 						<div class="tab-content clearfix" id="tabs-3">
 							<div id="recent-post-list-sidebar">자료넣기</div>
+							<div class="alert alert-warning" align="center">
+							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 뭘 주의할까요?
+							</div>
 						</div>
 						<div class="tab-content clearfix" id="tabs-4">
 							<div id="recent-post-list-sidebar">자료넣기2</div>
+							<div class="alert alert-warning" align="center">
+							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 뭘 주의해야할까요 2
+							</div>
 						</div>
 
 					</div>
-
-				</div>
-				<div class="alert alert-warning" align="center">
-					<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 섭취 칼로리에 비해 운동량이 낮습니다!
-				</div>
+				
 			
+				</div>
+				
 			
 
 

@@ -4,148 +4,121 @@
 <html>
 <body>
 	<%@ include file="../include/header.jsp"%>
-	<nav class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand" style="margin: 0 auto;">게시판</a>
-	</nav>
-	<br>
-	<br>
-	<br>
+	<section id="page-title">
+
+         <div class="container clearfix">
+            <h1>게시판 / QnA</h1>
+            <span>Board List</span>
+         </div>
+      </section><!-- #page-title end -->
+
+	<section id="content">
+	
+	<div class="content-wrap">
+	
+		<div class="container clearfix">
+	
+			<div class="form-widget">
+
+
 	<div class="row">
-		<div>
-			<div class="list-group" id="list-tab" role="tablist"
-				style="width: 250px; margin-left: 50px;">
-				<a class="list-group-item list-group-item-action active"
-					id="list-home-list" data-toggle="list" href="#list-home" role="tab"
-					aria-controls="home">자유 게시판</a> <a
-					class="list-group-item list-group-item-action"
-					id="list-profile-list" data-toggle="list" href="#list-profile"
-					role="tab" aria-controls="profile">QnA</a>
-			</div>
-		</div>
-		<div class="col-8">
-			<div class="tab-content" id="nav-tabContent">
-				<div class="tab-pane fade show active" id="list-home"
-					role="tabpanel" aria-labelledby="list-home-list">
+	<%-- 	<!-- 글쓰기 실패 -->
+		<c:if test="${insertCnt == 0}">
+			<script type="text/javascript">
+			 	alert("게시글 작성 실패");
+			</script>
+		</c:if>
+		
+		<!-- 글쓰기 성공 -->
+		<c:if test="${insertCnt == 1}">
+			<script type="text/javascript">
+				alert("게시글 작성 완료");
+			</script>
+		</c:if> --%>
+		
+		<div class="col-12">
+		
+		<ul id="myTab" class="nav nav-tabs boot-tabs">
+		  <li class="nav-item"><a class="nav-link active" href="#board" data-toggle="tab">게시판</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#qna" data-toggle="tab">QnA</a></li>
+		</ul>
+		
+		<br>
+			<div id="myTabContent" class="tab-content">
+				
+				<div class="tab-pane fade show active" id="board">
+
 					<table id="datatable1"
-										class="table table-striped table-bordered" cellspacing="0"
-										width="100%">
-										<thead>
-											<tr>
-												<th>No.</th>
-												<th>Date.</th>
-												<th>제목</th>
-												<th>작성자</th>
-												<th>조회수</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>No.</th>
-												<th>Date.</th>
-												<th>제목</th>
-												<th>작성자</th>
-												<th>조회수</th>
-											</tr>
-										</tfoot>
-										<tbody>
+						class="table table-striped table-bordered" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>No.</th>							
+								<th>제목</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>Date.</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>No.</th>							
+								<th>제목</th>
+								<th>작성자</th>
+								<th>조회수</th>
+								<th>Date.</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							
+							<!-- 게시글이 있으면 -->
+							<!-- 컬럼은 dto에서 꺼내고 계산한한것들은 일반변수..dto붙이면 안됨 -->
+								<c:forEach var="dto" items="${dtos}" >
+									<tr>
+										<td align="center" style="width:50px">
+										${dto.rNum}
+										</td>
 										
-											<tr>
-												<td>12</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>11</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>10</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>09</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>08</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>07</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>06</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>05</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>04</td>
-												<td>2014/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>124</td>
-											</tr>
-											<tr>
-												<td>03</td>
-												<td>2014/05/03</td>
-												<td>번역기는 파파고</td>
-												<td>네이버</td>
-												<td>345</td>
-											</tr>
-											<tr>
-												<td>02</td>
-												<td>2011/06/28</td>
-												<td>울트라파워</td>
-												<td>독수리</td>
-												<td>1</td>
-											</tr>
-											<tr>
-												<td>01</td>
-												<td>2011/06/27</td>
-												<td>키자루랑 원장쌤이랑 싸우면 누가 이기냐</td>
-												<td>짱구</td>
-												<td>3235235</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-				<div class="tab-pane fade" id="list-profile" role="tabpanel"
-					aria-labelledby="list-profile-list">
-					<!-- Content
-		============================================= -->
-					<section id="content">
-							<div class="container clearfix">
+										<td align="left">
+										<%-- <!-- hot 이미지 -->
+										<c:if test="${dto.readCnt > 18}">
+										<img src="${project}images/hot.gif" board="0" width="20" height="15">
+										</c:if> --%>
+
+											<!-- 상세페이지 -->
+											<!-- num은 where절의 키를비교하기 위해 가져옴 -->
+											<a href="board_detail?board_code=${dto.board_code}">${dto.title}
+												<c:if test="${board_image}"><li><i class="icon-camera-retro"></i></a></li></c:if>
+												<c:if test="${dto.commentCnt>0}"><i class="icon-chat-3">${dto.commentCnt}</i></c:if>
+											</a>
+										</td>
+										
+										<td align="left" style="width:150px">
+											${dto.username}
+										</td>
+										
+										<td align="center" style="width:70px">
+											${dto.readCnt}
+										</td>
+																				
+										<td align="left" style="width:200px">
+											${dto.write_date}
+										</td>
+
+									</tr>
+								</c:forEach>
+
+
+						</tbody>
+					</table>
+					<a href="writeForm" class="button button-black tright noleftmargin">글쓰기<i class="icon-angle-right"></i></a>
+					<br><br>
+				</div>
+								
+				<div class="tab-pane fade active" id="qna">
+
 								<div class="table-responsive">
 									<table id="datatable2"
-										class="table table-striped table-bordered" cellspacing="0"
-										width="100%">
+										class="table table-striped table-bordered" cellspacing="0" width="100%">
 										<thead>
 											<tr>
 												<th>No.</th>
@@ -165,84 +138,6 @@
 											</tr>
 										</tfoot>
 										<tbody>
-										
-											<tr>
-												<td>12</td>
-												<td>2011/06/27</td>
-												<td>질문이있슙닏다</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>11</td>
-												<td>2011/06/27</td>
-												<td>아이디 바꾸고 시튠데</td>
-												<td>철수</td>
-												<td>2</td>
-											</tr>
-											<tr>
-												<td>10</td>
-												<td>2011/06/27</td>
-												<td>원장쌤이 안보여유</td>
-												<td>영수</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>09</td>
-												<td>2011/06/27</td>
-												<td>걸음수가 안바뀜</td>
-												<td>짱구</td>
-												<td>7</td>
-											</tr>
-											<tr>
-												<td>08</td>
-												<td>2011/06/27</td>
-												<td>엉덩이로 걸어도 걸음수가 올라가나요</td>
-												<td>짱구</td>
-												<td>3521</td>
-											</tr>
-											<tr>
-												<td>07</td>
-												<td>2011/06/27</td>
-												<td>질문</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>06</td>
-												<td>2011/06/27</td>
-												<td>질문질문</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>05</td>
-												<td>2011/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>11</td>
-											</tr>
-											<tr>
-												<td>04</td>
-												<td>2014/06/27</td>
-												<td>울라울라</td>
-												<td>짱구</td>
-												<td>124</td>
-											</tr>
-											<tr>
-												<td>03</td>
-												<td>2014/05/03</td>
-												<td>다음은 별로</td>
-												<td>네이버</td>
-												<td>345</td>
-											</tr>
-											<tr>
-												<td>02</td>
-												<td>2011/06/28</td>
-												<td>개인정보 수정하려면 어디서</td>
-												<td>독수리</td>
-												<td>1</td>
-											</tr>
 											<tr>
 												<td>01</td>
 												<td>2011/06/27</td>
@@ -251,15 +146,20 @@
 												<td>345</td>
 											</tr>
 										</tbody>
-									</table>
+									</table>	
+									<a href="qna_write" class="button button-black tright noleftmargin" style="text-align: center;">질문하기<i class="icon-angle-right"></i></a>
+									<br><br>									
 								</div>
 							</div>
-					</section>
-					<!-- #content end -->
-				</div>
+					
 			</div>
 		</div>
+		<%-- </c:if> --%>
+		</div>
+		</div>
+		</div>
 	</div>
+
 	<%@ include file="../include/footer.jsp"%>
 	<%@ include file="../include/footerScript.jsp"%>
 	<!-- Go To Top
@@ -283,9 +183,9 @@
 			$('#datatable1').dataTable();
 		});
 		
-		$(document).ready(function() {
+ 		$(document).ready(function() {
 			$('#datatable2').dataTable();
-		});
+		}); 
 	</script>
 </body>
 </html>

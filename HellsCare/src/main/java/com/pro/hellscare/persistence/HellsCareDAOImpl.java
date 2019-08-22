@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.pro.hellscare.VO.BoardVO;
+import com.pro.hellscare.VO.CommentVO;
+import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
 import com.pro.hellscare.VO.HellsCareVO;
 import com.pro.hellscare.VO.challengeVO;
@@ -85,11 +88,180 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	}
 
 
-	@Override
-	public int insertExercise(ExerciseVO vo) {
+
+	
+	// host
+		// 질병정보갯수
+		@Override 
+		public int getDiseaseCount() {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getDiseaseCount");
+		}
+		// 질병코드중복체크
+		@Override
+		public int diseaseCodeCheck(String disease_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.diseaseCodeCheck", disease_code);
+		}
+		// 질병정보 목록 구하기
+		@Override
+		public List<DiseaseVO> getDiseaseList(Map<String, Object> map) {
+			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getDiseaseList", map);
+		}
+		// 질병정보 상세 페이지
+		@Override
+		public DiseaseVO getDisease(String disease_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getDisease", disease_code);
+		}
+		// 질병 정보 등록
+		@Override
+		public int insertDisease(DiseaseVO vo) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.insertDisease", vo);
+		}
+		// 질병 정보 수정
+		@Override
+		public int updateDisease(DiseaseVO vo) {
+			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updateDisease", vo);
+		}
+		// 질병 정보 삭제
+		@Override
+		public int deleteDisease(String disease_code) {
+			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.deleteDisease", disease_code);
+		}
+	
+		//==예찬 시작
+		//관리자 - 운동등록처리
+		@Override
+		public int insertExercise(ExerciseVO vo) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.insertExercise",vo);
+		}
 		
-		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.insertExercise",vo);
-	}
-	
-	
+		//관리자 - 운동목록 개수구하기
+		@Override
+		public int getexerciseArticleCnt() {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getexerciseArticleCnt");
+		}
+		
+		//운동 - 스트레칭 개수구하기
+		@Override
+		public int getArticleCntSt() {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getArticleCntSt");
+		}
+		
+		//운동 - 유산소운동 개수구하기
+		@Override
+		public int getArticleCntDi() {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getArticleCntDi");
+		}
+		
+		//관리자 - 운동목록
+		@Override
+		public List<ExerciseVO> getexerciseList(Map<String, Integer> map) {
+			List<ExerciseVO> dtos = sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getexerciseList",map);
+			return dtos;
+		}
+		
+		//운동목록 - 스트레칭
+		@Override
+		public List<ExerciseVO> getstretching(Map<String, Integer> map) {
+			List<ExerciseVO> dtosSt = sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getstretching",map);
+			return dtosSt;
+		}
+		
+		//운동목록 - 다이어트 (유산소운동)
+		@Override
+		public List<ExerciseVO> getdiet(Map<String, Integer> map) {
+			List<ExerciseVO> dtosDi = sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getdiet",map);
+			return dtosDi;
+		}
+		
+		//관리자 - 운동삭제
+		@Override
+		public int deleteExercise(String exercise_code) {
+			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.deleteExercise",exercise_code);
+		}
+		
+		//관리자 - 운동수정 뷰
+		@Override
+		public ExerciseVO getExercise(String exercise_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getExercise",exercise_code);
+		}
+		
+		//관리자 - 운동수정처리
+		@Override
+		public int modifyPro(ExerciseVO vo) {
+			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.modifyPro",vo);
+		}
+		
+		//운동 - 상세페이지
+		@Override
+		public ExerciseVO detailExercise(String exercise_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.detailExercise",exercise_code);
+		}
+		
+		//운동 - 즐겨찾기 추가
+		@Override
+		public int addFavorit(Map<String, Object> map) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.addFavorit",map);
+		}
+		
+		//운동 - 부위별 목록
+		@Override
+		public List<ExerciseVO> getPartList(String part) {
+			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getPartList",part);
+		}
+		//==예찬 종료
+		//==한결 시작
+		//게시글 갯수 조회
+		@Override
+		public int getBoardCnt() {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getBoardCnt");
+		}
+		
+		//게시글 당 댓글 수
+		@Override
+		public int getCommentCnt(int board_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getCommentCnt", board_code);
+		}
+
+		//게시글 목록 조회
+		@Override
+		public List<BoardVO> getArticleList() {
+			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getArticleList");
+		}
+
+		//조회수 증가 
+		@Override
+		public void addReadCnt(int board_code) {
+			HellsCareDAO dao = sqlsession.getMapper(HellsCareDAO.class);
+			dao.addReadCnt(board_code);
+		}
+
+		//게시글 상세 조회
+		@Override
+		public BoardVO getArticle(int board_code) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getArticle", board_code);
+		}
+
+		//게시글 저장
+		@Override
+		public int boardWrite(BoardVO vo) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.boardWrite", vo);
+		}
+
+		//댓글 불러움
+		@Override
+		public List<CommentVO> getCommentList(int board_code) {
+			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getCommentList", board_code);
+		}
+
+		//댓글 등록
+		@Override
+		public int commentWrite(CommentVO vo) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.commentWrite", vo);
+		}
+		
+		//==한결 종료
+		
+		
+		
+		
 }

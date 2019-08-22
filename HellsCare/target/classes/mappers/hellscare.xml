@@ -31,10 +31,208 @@
     	delete challenge_tbl where challenge_code = #{challenge_check}
     </delete>
     
-    <!-- 관리자 - 운동등록 -->
-    <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
-       INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind)
-       VALUES(exercise_seq.nextval,#{exercise_name},#{exercise_img},#{way},#{part},#{kcal},#{note},#{kind})  
+    
+    
+    <!-- 재관 시작 -->
+    
+   <!-- 관리자 - 질병정보 <== 재관     -->
+	<!-- 질병정보 갯수 -->
+	<select id="getDiseaseCount" resultType="int">
+		SELECT count(*) FROM disease_tbl
+	</select>
+
+    <!-- 질병정보 목록 -->
+    <select id="getDiseaseList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.DiseaseVO">
+		SELECT *  
+		  FROM ( SELECT disease_code, disease_name, d_category, definition, cause, symptom,
+						cure, rownum rNum   
+				  FROM ( 
+						SELECT * FROM disease_tbl
+						<where>
+							<if test="s_name != null and s_code != null">
+								disease_name like '%'||#{s_name}||'%'
+								AND disease_code like '%'||#{s_code}||'%'								 
+							</if>
+							<if test="s_name != null and s_code == null">
+								disease_name like '%'||#{s_name}||'%'						
+							</if>
+							<if test="s_name == null and s_code != null">
+								disease_code like '%'||#{s_code}||'%'
+							</if>				
+						</where>		 
+						ORDER BY disease_code 
+						) 
+				) 
+		<![CDATA[
+		WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 질병 상세 조회, 수정을 위한 상세페이지  -->
+	<select id="getDisease" resultType="com.pro.hellscare.VO.DiseaseVO">
+		SELECT * FROM disease_tbl WHERE disease_code=#{disease_code}
+	</select>
+	
+	<!-- 코드 중복 체크 -->
+	<select id="diseaseCodeCheck" resultType="int">
+		SELECT count(*) FROM disease_tbl WHERE disease_code=#{disease_code}	
+	</select>
+	    
+    <!-- 질병정보 등록 -->
+    <insert id="insertDisease" parameterType="com.pro.hellscare.VO.DiseaseVO">
+    	INSERT INTO disease_tbl (disease_code, disease_name, d_category, definition, cause, symptom, cure)
+    	VALUES(#{disease_code}, #{disease_name},#{d_category}, #{definition}, #{cause}, #{symptom}, #{cure})
     </insert>
     
+    <!-- 질병정보 수정 -->
+    <update id="updateDisease" parameterType="com.pro.hellscare.VO.DiseaseVO">
+    	UPDATE disease_tbl SET disease_name=#{disease_name}, d_category=#{d_category}, 
+    		definition=#{definition}, cause=#{cause}, symptom=#{symptom}, cure=#{cure}
+    	WHERE disease_code=#{disease_code}
+    </update>
+    
+    <!-- 질병정보 삭제 -->
+    <delete id="deleteDisease" parameterType="String">
+    	DELETE disease_tbl
+    	WHERE disease_code=#{disease_code}
+    </delete>
+
+    <!-- 재관 종료 -->
+    
+    
+    <!-- 예찬 시작 -->
+    <!-- 관리자 - 운동등록 -->
+ 	   <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
+   	 	INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind,exercise_video)
+   	 	VALUES(exercise_seq.nextval,#{exercise_name},#{exercise_img},#{way},#{part},#{kcal},#{note},#{kind},#{exercise_video})  
+   	 </insert>
+    
+   	 <!-- 관리자 - 운동목록개수 -->
+  	  <select id="getexerciseArticleCnt" resultType="int">
+   	 	select count(*) from exercise_tbl
+   	 </select>
+   	 
+  	  <!-- 운동 - 스트레칭 개수 -->
+   	 <select id="getArticleCntSt" resultType="int">
+   	 	select count(*) from exercise_tbl where kind = 1
+ 	   </select>
+    
+  	  <!-- 운동 - 유산소운동 개수 -->
+ 	   <select id="getArticleCntDi" resultType="int">
+    		select count(*) from exercise_tbl where kind = 2
+    	</select>
+    
+    	<!-- 관리자 - 운동목록 -->
+    	<select id="getexerciseList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
+		<![CDATA[
+		select * from (select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video, rownum rNum 
+			from (select * from exercise_tbl 
+					order by exercise_code)
+				) where rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 운동목록 - 스트레칭 -->
+    	<select id="getstretching" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
+		<![CDATA[
+		select * from (select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video, rownum rNum 
+			from (select * from exercise_tbl 
+					order by exercise_code)
+				) where rNum >= #{start} AND rNum <= #{end} AND kind = 1
+		]]>
+	</select>
+	
+	<!-- 운동목록 - 다이어트 (유산소운동) -->
+  	  <select id="getdiet" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
+		<![CDATA[
+		select * from (select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video, rownum rNum 
+			from (select * from exercise_tbl 
+					order by exercise_code)
+				) where rNum >= #{start} AND rNum <= #{end} AND kind = 2
+		]]>
+	</select>
+	
+	<!-- 관리자 - 운동삭제 -->
+	<delete id="deleteExercise" parameterType="String">
+		delete from exercise_tbl where exercise_code = #{exercise_code}
+	</delete>
+	
+	<!-- 관리자 - 운동수정 뷰 -->
+	<select id="getExercise" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
+		select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video
+		from exercise_tbl where exercise_code = #{exercise_code} 
+	</select>
+	
+	<!-- 관리자 - 운동수정 처리 -->
+	<update id="modifyPro" parameterType="com.pro.hellscare.VO.ExerciseVO">
+		update exercise_tbl set exercise_name=#{exercise_name},way=#{way},part=#{part},kcal=#{kcal},note=#{note},kind=#{kind}
+		where exercise_code=#{exercise_code}
+	</update>
+	
+	<!-- 운동 - 상세페이지  -->
+	<select id="detailExercise" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
+		select exercise_name, way, part, kcal, note, kind, exercise_video
+		  from exercise_tbl
+		 where exercise_code = #{exercise_code}
+	</select>
+	
+	<!-- 운동 - 즐겨찾기 추가 -->
+	<insert id="addFavorit" parameterType="java.util.Map">
+		insert into favorite_tbl(exercise_code,username)
+		values(#{exercise_code},#{username})
+	</insert>
+	
+	<!-- 운동 - 부위별 목록 -->
+	<select id="getPartList" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
+		select exercise_code,exercise_name,exercise_img,kcal,kind
+		from exercise_tbl where part=#{part}
+	</select>
+    
+    <!-- 예찬 종료 -->
+    
+    <!-- 한결 시작 -->
+    <select id="getBoardCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM board_tbl 
+    </select>
+    
+    <select id="getCommentCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM comment_board_tbl WHERE board_code=#{board_code}
+    </select>
+    
+    <select id="getArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardVO">
+		SELECT board_code, username, title, content, readCnt, write_date, rownum as rNum,
+			(SELECT COUNT(*) FROM comment_board_tbl WHERE board_code = b.board_code) as commentCnt
+			FROM board_tbl b
+	</select>
+	
+	<update id="addReadCnt" parameterType="int">
+		UPDATE board_tbl SET readCnt = readCnt + 1 WHERE board_code=#{board_code}
+	</update>
+	
+	<select id="getArticle" resultType="com.pro.hellscare.VO.BoardVO">
+		SELECT board_code, username, title, content, readCnt, to_char(write_date,'yyyy-mm-dd') write_date, rownum rNum
+			FROM board_tbl WHERE board_code=#{board_code}
+	</select>
+	
+	<!-- 댓글 -->
+	<select id="getCommentList" parameterType="int" resultType="com.pro.hellscare.VO.CommentVO">
+		SELECT username, content, comment_date
+			FROM comment_board_tbl
+				WHERE board_code = #{board_code}
+	</select>
+	
+	<!-- 게시글 저장 -->
+	<insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
+		INSERT INTO board_tbl (board_code, username, title, content, board_image)
+			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content}, #{board_image})
+	</insert>   
+	
+	<!-- 댓글 등록 -->
+	<insert id="commentWrite" parameterType="com.pro.hellscare.VO.CommentVO">
+		INSERT INTO comment_board_tbl (c_code, username, content, board_code)
+			VALUES (comment_seq.nextval, 'kimId', #{content}, #{board_code})
+	</insert> 
+    
+    
+    <!-- 한결 종료 -->
 </mapper>

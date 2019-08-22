@@ -10,6 +10,7 @@ public class ExerciseVO {
 	private int kcal;				// 소모되는 칼로리
 	private String note;			// 주의사항
 	private int kind;				// 운동종류
+	private String exercise_video;
 	
 	public ExerciseVO() {}
 
@@ -76,6 +77,16 @@ public class ExerciseVO {
 	public void setKind(int kind) {
 		this.kind = kind;
 	}
+
+	public String getExercise_video() {
+		return exercise_video;
+	}
+
+	public void setExercise_video(String exercise_video) {
+		this.exercise_video = exercise_video;
+	}
+	
+	
 	
 	
 }

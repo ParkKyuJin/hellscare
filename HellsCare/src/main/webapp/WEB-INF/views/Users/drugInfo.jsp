@@ -13,12 +13,11 @@
 	============================================= -->
 	
 	
-	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<!-- Document Title
 	============================================= -->
-	<title>Canvas | The Multi-Purpose HTML5 Template</title>
+	<title>Health | For Your Better Life</title>
 
 
 
@@ -26,26 +25,8 @@
 <script type="text/javascript">
 //초기화버튼 클릭시 ============================
 function refreshIdfy() {
-	//문자
-//		$("#drug_print_front").val("");
-//		$("#drug_print_back").val("");
-		$("#drug_name").val("");
-		$("#entp_name").val("");
-		
-//		$("ul.idty li").removeClass("selected");
-//		$("#shapeETC_selected").css("border","");
-
-//		$("ul.idty li").find("[type=checkbox]").prop("checked",false);
-
-//		$(".shapeETC [type=checkbox]").prop("checked",false);
-//		$("#shape_etc_text ul").empty();
-//		$("#selectMarkList").empty();
-
-//		$("#type_all").addClass("selected");
-//		$("#shape_all").addClass("selected");
-//		$("#color_all").addClass("selected");
-//		$("#line_all").addClass("selected");
-
+	$("#drug_name").val("");
+	$("#entp_name").val("");
 }
 
 function idfySend() {
@@ -70,6 +51,32 @@ function idfySend() {
 	
 }
 
+// 제품명 엔터로 검색
+function searchEnter1() {
+	if(event.keyCode == 13){  // enter 누르면
+		//alert($("#drug_name").val());
+
+		if($("#drug_name").val() == ""){
+			alert("제품명을 입력해주세요.");
+			return false;
+		}else{
+			idfySend();
+		}
+	}
+}
+
+//제품명 엔터로 검색
+function searchEnter2() {
+	if(event.keyCode == 13){  // enter 누르면
+
+		if($("#entp_name").val() == ""){
+			alert("회사명을 입력해주세요.");
+			return false;
+		}else{
+			idfySend();
+		}
+	}
+}
 
 </script>
 
@@ -108,88 +115,43 @@ function idfySend() {
 	   
 	   
 		<!-- 약품검색 -->
-			<h2>약품검색</h2>
+			<h2>의약품검색</h2>
 			
 			<div >
 				
-				<p>알약의 제품명/성분명, 회사명으로 상세정보를 검색할 수 있습니다.</p>  <!-- (의약품 식별검색이 안될 경우 식별표시 신고센터로 알려주시기 바랍니다.) -->
+				<p>알약의 제품명/성분명, 회사명으로 상세정보를 검색할 수 있습니다.</p> 
 			</div>
 
 			<form id="drugSearchForm" action="" method="post">
-			<div style="max-width: 30rem;">
-				<label for="drug_name">제품명 / 성분명  </label>
-				<input type="text" class="form-control form-control-lg mb-2"  id="drug_name" name="drug_name" placeholder="제품명/성분명을 입력하세요" value="" >
-				
-				<label for="entp_name">회사명 </label>
-				<input type="text" class="form-control form-control-lg mb-2" id="entp_name" name="entp_name" placeholder="회사명을 입력하세요"  value="" >
+			<div class="row">
+			<div class="col-lg-6">
 			
+				<div style="max-width: 30rem;">
+					<label for="drug_name">제품명 / 성분명  </label>
+					<input type="text" class="form-control form-control-lg mb-2"  id="drug_name" name="drug_name" placeholder="제품명/성분명을 입력하세요" value="" onkeydown="searchEnter1()">
+					
+					<label for="entp_name">회사명 </label>
+					<input type="text" class="form-control form-control-lg mb-2" id="entp_name" name="entp_name" placeholder="회사명을 입력하세요"  value="" onkeydown="searchEnter2()">
+								
+				</div>
 				
-			</div>
-			<br>
+				<br>
 			
-			<div id="btns">
-				<a onclick="refreshIdfy();" class="button button-border button-rounded button-blue"><i class="icon-repeat"></i>재작성</a>				
-				<a onclick="idfySend();" class="button button-border button-rounded button-blue" id="btn_idfysearch"><i class="icon-search1"></i>검  색</a>
+				<div id="btns">
+					<a onclick="refreshIdfy();" class="button button-border button-rounded button-blue"><i class="icon-repeat"></i>재작성</a>				
+					<a onclick="idfySend();" class="button button-border button-rounded button-blue" id="btn_idfysearch"><i class="icon-line-search"></i>검  색</a>
+				</div>
 			</div>
+			<div class="col-lg-6 pl-lg-4">
+				<img src="/hellscare/resources/images/drug/drug001.jpg">
+			</div>
+			</div>
+			
 			</form>
 			
 			<div class="line"></div>
 
-			<!-- 검색테이블 -->
-			<article class="search_table">
-				
-				<!-- 전체,생산Y,생산N 개수 -->
-				<!-- 전체 개수 -->
-				<input type="hidden" id="idfy_total_cnt" name="idfy_total_cnt">
-				<!-- 전체 단일제 개수 -->
-				<input type="hidden" id="idfy_total_cnt_item_ingr1" name="idfy_total_cnt_item_ingr1">
-				<!-- 전체 복합제 개수 -->
-				<input type="hidden" id="idfy_total_cnt_item_ingr2" name="idfy_total_cnt_item_ingr2">
-				<!-- 생산Y 개수 -->
-				<input type="hidden" id="idfy_produceY_cnt" name="idfy_produceY_cnt">
-				<!-- 생산Y 단일제 개수 -->
-				<input type="hidden" id="idfy_produceY_cnt_item_ingr1" name="idfy_produceY_cnt_item_ingr1">
-				<!-- 생산Y 복합제 개수 -->
-				<input type="hidden" id="idfy_produceY_cnt_item_ingr2" name="idfy_produceY_cnt_item_ingr2">
-				<!-- 생산N 개수 -->
-				<input type="hidden" id="idfy_produceN_cnt" name="idfy_produceN_cnt">
-				<!-- 생산N 단일제 개수 -->
-				<input type="hidden" id="idfy_produceN_cnt_item_ingr1" name="idfy_produceN_cnt_item_ingr1">
-				<!-- 생산N 복합제 개수 -->
-				<input type="hidden" id="idfy_produceN_cnt_item_ingr2" name="idfy_produceN_cnt_item_ingr2">
 
-				<form id="result_frm" name="result_frm" action="result.asp" method="post">
-					<!-- 식별 IDFY IDX -->
-					<input type="hidden" id="select_drug_idx" name="select_drug_idx"> 
-					<!-- 정보원 코드 -->
-					<input type="hidden" id="select_drug_code" name="select_drug_code"> 
-				</form>
-
-
-				<form id="frm" name="frm" action="searchDrug" method="post">
-					<input type="hidden" name="search_detail" value="Y">
-					<input type="hidden" id="TabState" name="TabState" value="">				
-					<input type="hidden" id="proYN" name="proYN" value=""/>
-					<input type="hidden" id="pageNo" name="pageNo" value=""/>	
-					<input type="hidden" id="rowLength" name="rowLength" value=""/>
-					<input type="hidden" id="printList" name="printList" value=""/>
-	
-					<!-- 전체,y,n 카운트 고정값 -->
-					
-					<input type="hidden"  id="fixvalue_all" name="fixvalue_all" value=""/>
-					<input type="hidden"  id="fixvalue_y" name="fixvalue_y" value=""/>
-					<input type="hidden"  id="fixvalue_n" name="fixvalue_n" value=""/>
-	
-					<!-- 	단일,복합 -->
-					<input type="hidden" id="item_ingr" name="item_ingr">
-					<!-- 	 ~줄보기 -->
-					<input type="hidden" id="pageSize" name="pageSize">
-					<!-- 	현재 페이지 숫자-->
-					<input type="hidden" id="pageNum" name="pageNum">
-
-			
-				</form>
-			</article><!-- //검색테이블 -->
 	
 </div>
 

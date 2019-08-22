@@ -253,157 +253,58 @@
 				</div>
 
 				<div class="section topmargin nobottommargin nobottomborder">
-					<div class="container clearfix">
-						<div class="heading-block center nomargin">
-							<h3>추천운동</h3>
-						</div>
+				<div class="container clearfix">
+					<div class="heading-block center nomargin">
+						<h3>운동목록</h3>
 					</div>
 				</div>
+			</div>
 
-				<div id="portfolio" class="portfolio portfolio-nomargin grid-container portfolio-notitle portfolio-full grid-container clearfix">
-
-					<article class="portfolio-item pf-media pf-icons">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/1.jpg" alt="Open Imagination">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="images/portfolio/full/1.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-								<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single.html">Open Imagination</a></h3>
-							<span><a href="#">Media</a>, <a href="#">Icons</a></span>
-						</div>
-					</article>
-
-					<article class="portfolio-item pf-illustrations">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/2.jpg" alt="Locked Steel Gate">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="images/portfolio/full/2.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-								<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single.html">Locked Steel Gate</a></h3>
-							<span><a href="#">Illustrations</a></span>
-						</div>
-					</article>
-
-					<article class="portfolio-item pf-graphics pf-uielements">
-						<div class="portfolio-image">
-							<a href="#">
-								<img src="/hellscare/resources/images/portfolio/4/3.jpg" alt="Mac Sunglasses">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="/hellscare/resources/video/videoplayback.mp4" class="left-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-								<a href="portfolio-single-video.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
-							<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
-						</div>
-					</article>
-
-					<article class="portfolio-item pf-icons pf-illustrations">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/4.jpg" alt="Open Imagination">
-							</a>
-							<div class="portfolio-overlay" data-lightbox="gallery">
-								<a href="images/portfolio/full/4.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-								<a href="images/portfolio/full/4-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-								<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single-gallery.html">Morning Dew</a></h3>
-							<span><a href="#">Icons</a>, <a href="#">Illustrations</a></span>
-						</div>
-					</article>
-
-					<article class="portfolio-item pf-uielements pf-media">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/5.jpg" alt="Console Activity">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="images/portfolio/full/5.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-								<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single.html">Console Activity</a></h3>
-							<span><a href="#">UI Elements</a>, <a href="#">Media</a></span>
-						</div>
-					</article>
-
-					<article class="portfolio-item pf-graphics pf-illustrations">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/6.jpg" alt="Open Imagination">
-							</a>
-							<div class="portfolio-overlay" data-lightbox="gallery">
-								<a href="images/portfolio/full/6.jpg" class="left-icon" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-								<a href="images/portfolio/full/6-1.jpg" class="hidden" data-lightbox="gallery-item"></a>
-								<a href="images/portfolio/full/6-2.jpg" class="hidden" data-lightbox="gallery-item"></a>
-								<a href="images/portfolio/full/6-3.jpg" class="hidden" data-lightbox="gallery-item"></a>
-								<a href="portfolio-single-gallery.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single-gallery.html">Shake It!</a></h3>
-							<span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
-						</div>
-					</article>
-
+			<div id="portfolio"
+				class="portfolio portfolio-nomargin grid-container portfolio-notitle portfolio-full grid-container clearfix">
+				<c:if test="${cnt == 0}">
 					<article class="portfolio-item pf-uielements pf-icons">
-						<div class="portfolio-image">
-							<a href="portfolio-single-video.html">
-								<img src="/hellscare/resources/images/portfolio/4/7.jpg" alt="Backpack Contents">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="http://www.youtube.com/watch?v=kuceVNBTJio" class="left-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-								<a href="portfolio-single-video.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single-video.html">Backpack Contents</a></h3>
-							<span><a href="#">UI Elements</a>, <a href="#">Icons</a></span>
-						</div>
-					</article>
+						현재 운동목록이 없습니다.</article>
+				</c:if>
 
-					<article class="portfolio-item pf-graphics">
-						<div class="portfolio-image">
-							<a href="portfolio-single.html">
-								<img src="/hellscare/resources/images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
-							</a>
-							<div class="portfolio-overlay">
-								<a href="images/portfolio/full/8.jpg" class="left-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-								<a href="portfolio-single.html" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+				<c:if test="${cnt > 0}">
+					<c:forEach var="exer" items="${dtos}">
+						<article class="portfolio-item pf-graphics pf-uielements">
+							<div class="portfolio-image">
+								<a href="#"> <img
+									src="/hellscare/resources/images/videos/${exer.exercise_img}"
+									alt="Mac Sunglasses"
+									style="width: 328px; height: 246px; margin: 0 auto;">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="/hellscare/resources/images/videos/${exer.exercise_video}"
+										class="center-icon" data-lightbox="iframe"><i
+										class="icon-line-play"></i></a>
+								</div>
 							</div>
-						</div>
-						<div class="portfolio-desc">
-							<h3><a href="portfolio-single.html">Sunset Bulb Glow</a></h3>
-							<span><a href="#">Graphics</a></span>
-						</div>
-					</article>
+							<div class="portfolio-desc">
+								<h3>
+									<a href="details_exercise?exercise_code=${exer.exercise_code}">${exer.exercise_name}</a>
+								</h3>
+								<span><a href="details_exercise?exercise_code=${exer.exercise_code}">종류 : <c:if test="${exer.kind == 1}">스트레칭</c:if>
+										<c:if test="${exer.kind == 2}">유산소운동</c:if>,칼로리
+										소모량 : ${exer.kcal}kcal(30분 기준)</a></span>
+							</div>
+						</article>
+					</c:forEach>
+				</c:if>
+			</div>
 
+
+			<div class="clear"></div>
+
+			<a href="exercise"
+				class="button button-full button-dark center tright bottommargin-lg">
+				<div class="container clearfix">
+					전체운동 <strong>More</strong> <i class="icon-caret-right"
+						style="top: 4px;"></i>
 				</div>
-
-
-				<div class="clear"></div>
-
-				<a href="exercise" class="button button-full button-dark center tright bottommargin-lg">
-					<div class="container clearfix">
-						전체운동 <strong>More</strong> <i class="icon-caret-right" style="top:4px;"></i>
-					</div>
-				</a>
+			</a>
 
 				
 

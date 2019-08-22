@@ -96,8 +96,7 @@
               </a>
               <ul class="sub">
               <li><a href="host_exercise">운동관리</a></li>
-              <li><a href="diseaseInfo">질병관리</a></li>
-              <li><a href="host_DrugInfo">의약품 관리</a></li>
+              <li><a href="host_disease">질병관리</a></li>
             </ul>
           </li>
           <li class="sub-menu">
