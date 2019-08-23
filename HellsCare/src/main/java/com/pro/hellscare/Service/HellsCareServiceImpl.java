@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
@@ -67,7 +68,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 	// 화면에서 사용자가 입력한 비밀번호를 암호화하여 DB에 저장할 경우 : pass.encode(화면에서 받아온 암호값);
 	// 로그인 등등 암호가 맞는지 확인 할 경우 : pass.matches(화면에서 사용자가입력한 암호, DB에 들어있는 암호화된 암호);
 	@Autowired
-	BCryptPasswordEncoder pass;
+	BCryptPasswordEncoder passwordEncoder;
 	
 	
 	
@@ -148,7 +149,111 @@ public class HellsCareServiceImpl implements HellsCareService {
 	}
 
 
+//==이나현 시작
+	//회원가입 시 아이디 중복확인 처리
+		@Override
+		public void confirmId(HttpServletRequest req, Model model) {
+			//3단계. commonSignUp.jsp에서 입력받은 ID값 받아오기 
+			String strId = req.getParameter("username");
+			System.out.println("username : " + strId);
 
+			//4단계. 다형성 적용, 싱글톤 방식으로 dao 객체 생성
+		
+			//5단계 중복된 id가 있는지 확인 
+			int cnt = dao.idCheck(strId);
+			System.out.println("아이디 중복확인 cnt" + cnt);
+			
+			//6단계 request나 session에 처리결과를 저장(jsp에 전달하기 위함) 
+			model.addAttribute("selectCnt", cnt);
+			model.addAttribute("username", strId);
+			System.out.println("중복확인cnt:" + cnt);
+			System.out.println("strId=> username:" + strId);
+		}
+		
+		@Override
+		public void regPro(HttpServletRequest req, Model model) {
+
+			String username = req.getParameter("username");
+			String password = req.getParameter("password");
+			String name = req.getParameter("name");
+			
+			String address1 = req.getParameter("address_1");
+			String address2 = req.getParameter("address_2");
+			String address3 = req.getParameter("address_3");
+			String address = address1+address2+address3;
+			
+			
+			String phone_number = req.getParameter("phone_number");
+			String gender = req.getParameter("gender");
+			String birth = req.getParameter("birth");
+			String email = req.getParameter("email");
+			String authority = req.getParameter("authority");
+			System.out.println("gender: " +gender);
+			//map으로 매개변수에 써준 정보를 다 전달하자  BUT 비밀번호는 암호화한 후 전달 
+			Map<String, String> map = new HashMap<String, String>(); 
+			map.put("username",username); 
+			System.out.println("암호화 전의 비밀번호:" + password);
+			
+			// 비밀번호 암호화 
+			String encryptPassword = passwordEncoder.encode(password); 
+			System.out.println("암호화 후의 비밀번호:" + encryptPassword);
+		
+			map.put("password",encryptPassword); 
+			map.put("name",name); 
+			map.put("address",address); 
+			map.put("phone_number",phone_number); 
+			map.put("gender",gender); 
+			map.put("birth",birth); 
+			map.put("email",email); 
+			map.put("authority",authority); 
+			
+			System.out.println("authority ==> " + authority);
+			System.out.println(map);
+			int cnt = dao.regUser(map);
+			System.out.println("cnt ==>" + cnt);
+		}
+		
+		//회원가입_이메일인증
+		@Override
+	    public void emailChk(HttpServletRequest req, Model model) {
+	        String email = req.getParameter("email");
+	        req.getSession().setAttribute("email", email);
+	        
+	        System.out.println("email : " + email);
+	        
+	        StringBuffer temp = new StringBuffer();
+	        Random rnd = new Random();
+	        
+	        for(int i = 0; i < 6; i++) {
+	            int rIndex = rnd.nextInt(2);
+	            switch(rIndex) {
+	            case 0:
+	                // A-Z
+	                temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+	                break;
+	            case 1:
+	                // 0-9
+	                temp.append((rnd.nextInt(10)));
+	                break;
+	            }
+	        }
+	        
+	        String key = temp.toString();// StringBuffer 형식인 Key를 String으로 변환
+	        System.out.println("key : " + key);
+	        req.getSession().setAttribute("key", key);
+	        model.addAttribute("cnt", 1);
+	        
+	        dao.sendmail(email, key);
+	        
+	}
+	
+	
+	
+//== 이나현 끝
+	
+	
+	
+	
 	
 	
 	

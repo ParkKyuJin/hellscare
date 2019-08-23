@@ -13,14 +13,25 @@ import com.pro.hellscare.VO.challengeVO;
 // 인터페이스 작성양식
 // 함수명() 위에 어떤기능인지 반드시 적을것
 public interface HellsCareDAO {
+
+	// ====================2019.08.20_이나현===============================
+	//회원가입 시 아이디 중복확인 처리
+	public int idCheck(String strId);
 	
+	//회원가입처리_INSERT INTO USERS
+	public int regUser(Map<String, String>  map); 
 	
-		
-		
-		
-		
-		
-		
+	//회원가입처리_INSERT INTO AUTHORITIES
+	public int regUser1(Map<String, Object> Amap);
+
+	//회원가입 시 이메일인증  
+    public void sendmail(String email, String key); 
+    
+    // 권한 핸들러_  회원 상세 정보 
+ 	public Map<String, String> selectUser(String username); 
+ 		
+
+	// ====================2019.08.20_이나현===============================
 		
 		
 //==============host DAO부분

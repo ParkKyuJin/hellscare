@@ -1,10 +1,16 @@
 package com.pro.hellscare.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -261,7 +267,87 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		
 		//==한결 종료
 		
+		// ====================2019.08.20_이나현===============================
+		 @Autowired
+		 private JavaMailSender mailSender; // xml에 등록한 bean autowired
+		   
+		// 회원가입 시 아이디 중복확인 처리
+		@Override
+		public int idCheck(String strId) {
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.idCheck", strId);
+		}
 		
+		//회원가입처리_INSERT INTO USERS
+		@Override
+		public int regUser(Map<String, String> map) {
+			
+		  String authority = (String)map.get("authority");
+		  String username = (String)map.get("username");
+		  
+		  System.out.println("authority :: "+authority);
+		  System.out.println("username :: " +username);
+		  
+		  Map<String, Object> Amap = new HashMap<String, Object>(); 
+		  Amap.put("username",username);
+		  Amap.put("authority", authority);
+		  
+		 
+		  int insertCnt =  sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser",map); 
+		  System.out.println("insertCnt =========="+insertCnt); 
+		  
+		  int insertUACnt = regUser1(Amap);
+		  System.out.println("insertUACnt =========="+insertUACnt); 
+		 
+		  
+		  return insertCnt;
+		}
+		
+		//회원가입처리_INSERT INTO AUTHORITIES
+		@Override
+		public int regUser1(Map<String, Object> Amap) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser1", Amap);
+		}
+		
+		//회원가입 시 이메일인증  
+	    @Override
+	    public void sendmail(String email, String key) {
+	    
+	        try{
+	      
+
+	              MimeMessage message = mailSender.createMimeMessage();
+
+	            
+
+	            String txt = "MS쇼핑몰 회원가입 인증 메일입니다. 링크를 눌러 회원가입을 완료하세요." 
+
+	  + "<a href='http://localhost:8081/hellscare/emailChk?key=" + key + "'>Please click to the membership verification</a>";
+
+	            message.setSubject("회원가입 인증 메일입니다.");
+
+	            message.setText(txt, "UTF-8", "html");
+
+	            message.setFrom(new InternetAddress("admin@mss.com"));
+
+	            message.addRecipient(RecipientType.TO, new InternetAddress(email));
+
+	            mailSender.send(message);
+
+	        
+
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }   
+	    }
+	    
+	    // 권한 핸들러_  회원 상세 정보
+	    @Override
+		public Map<String, String> selectUser(String username) {
+	    	System.out.println("HellscareDAO_selectUser_username:==>" + username);
+			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.selectUser", username); 
+		}
+	    
+		// ====================2019.08.20_이나현===============================
 		
 		
 }

@@ -27,7 +27,7 @@
 
 	<!-- Document Wrapper
 	============================================= -->
-		<%@ include file="../include/header.jsp"%>
+		<%@ include file="include/header.jsp"%>
 
 		<section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
 			<div class="slider-parallax-inner">
@@ -113,37 +113,39 @@
 					</div>
 				<div class="section nobottommargin">
 				
-					<div class="container clear-bottommargin clearfix">
-	<div class="row">
-		<c:forEach var="news_dtos" items="${newsDtos}">
-						
-			<div class="col-lg-3 col-md-3 bottommargin">
-				<div class="ipost clearfix">
-					<div class="entry-image">
-						<a href="#">
-							<c:if test="${news_dtos.newsThumbnail != null}">
-								<img class="image_fade" src="${news_dtos.newsThumbnail}" alt="Image" style="height:200px;">
-							</c:if>
-							<c:if test="${news_dtos.newsThumbnail == null}">
-								<img class="image_fade" src="/hellscare/resources/white.JPG" alt="Image">
-							</c:if>
-						</a>
-					</div>
-					<div class="entry-title">
-						<h3><a href="blog-single.html">${news_dtos.newsTitle}</a></h3>
-					</div>
-					<ul class="entry-meta clearfix">
-						<li><i class="icon-calendar3"></i> ${news_dtos.newsDate}</li>
-						<li><i class="icon-comments"></i> ${news_dtos.newsAuthor}</li>
-					</ul>
-					<div class="entry-content">
-						<p>${news_dtos.newsSummary}</p>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-</div>
+					<!-- 기사 내용 크롤링 후 뿌릴 페이지 -->
+            <div class="container clear-bottommargin clearfix">
+               <div class="row">
+                  <c:set var="cnt" value="0"/>
+                  
+                  <c:forEach var="news_dtos" items="${newsDtos}">
+                     <c:if test="${cnt < 8 }">
+                        <div class="col-lg-3 col-md-6 bottommargin">
+                           <div class="ipost clearfix">
+                              <div class="entry-image">
+                                 <a href="news_detail?newsUrl=${news_dtos.newsUrl}">
+                                    <img style="height:200px;" class="image_fade" src="${news_dtos.newsThumbnail}" alt="Image" onerror="this.src='/hellscare/resources/white.jpg'">
+                                 </a>
+                              </div>
+                              <div class="entry-title">
+                                 <h3><a href="news_detail?newsUrl=${news_dtos.newsUrl}">${news_dtos.newsTitle}</a></h3>
+                              </div>
+                              <ul class="entry-meta clearfix">
+                                 <li><i class="icon-calendar3"></i> ${news_dtos.newsDate}</li>
+                                 <li><i class="icon-comments"></i> ${news_dtos.newsAuthor}</li>
+                              </ul>
+                              <div class="entry-content">
+                                 <p>${news_dtos.newsSummary}</p>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <c:set var="cnt" value="${cnt + 1}"  />
+                        
+                     </c:if>
+                  </c:forEach>
+               </div>
+            </div>
 				</div>
 
 				<div class="container clearfix">
@@ -337,7 +339,7 @@
 
 		<!-- Footer
 		============================================= -->
-		<%@ include file="../include/footer.jsp" %>
+		<%@ include file="include/footer.jsp" %>
 
 	</div><!-- #wrapper end -->
 
@@ -346,7 +348,7 @@
 	<div id="gotoTop" class="icon-angle-up"></div>
 	<div id="gotoTop" class="icon-angle-up"></div>
 
-	<%@ include file="../include/footerScript.jsp" %>
+	<%@ include file="include/footerScript.jsp" %>
 
 </body>
 </html>

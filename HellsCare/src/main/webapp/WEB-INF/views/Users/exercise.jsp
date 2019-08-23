@@ -27,7 +27,7 @@
 					<c:if test="${cntSt == 0}">
 						<div class="oc-item">
 						<img
-							src="/hellscare/resources/exercise/wait.jpg" alt="Image 1">
+							src="/hellscare/resources/images/exercise/wait.jpg" alt="Image 1">
 						</div>
 					</c:if>
 					
@@ -35,7 +35,7 @@
 						<c:forEach var="dtosSt" items="${dtosSt}">
 							<div class="oc-item">
 								<a href="details_exercise?exercise_code=${dtosSt.exercise_code}"><img
-									src="/hellscare/resources/video/${dtosSt.exercise_img}" alt="Image 1" style="width:200px; height:160px;" ></a>
+									src="/hellscare/resources/images/videos/${dtosSt.exercise_img}" alt="Image 1" style="width:200px; height:160px;" ></a>
 							</div>
 						</c:forEach>
 					</c:if>
@@ -55,14 +55,14 @@
 					<c:if test="${cntDi == 0}">
 						<div class="oc-item">
 						<img
-							src="/hellscare/resources/exercise/wait.jpg" alt="Image 1">
+							src="/hellscare/resources/images/exercise/wait.jpg" alt="Image 1">
 						</div>
 					</c:if>
 					<c:if test="${cntDi != 0}">
 						<c:forEach var="dtosDi" items="${dtosDi}">
 							<div class="oc-item">
 								<a href="details_exercise?exercise_code=${dtosDi.exercise_code}">
-								<img src="/hellscare/resources/video/${dtosDi.exercise_img}"
+								<img src="/hellscare/resources/videos/${dtosDi.exercise_img}"
 									alt="Image 1"  style="width:200px; height:160px;"></a>
 							</div>
 						</c:forEach>

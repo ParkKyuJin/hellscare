@@ -1,29 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/setting.jsp" %>
+
 
 <html>
 
 <head>
-	<!-- Stylesheets
-	============================================= -->
-	<!-- <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700|Roboto:300,400,700" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/style.css" type="text/css" />
 
-	One Page Module Specific Stylesheet
-	<link rel="stylesheet" href="onepage.css" type="text/css" />
-	/
-
-	<link rel="stylesheet" href="/hellscare/resources/css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/css/et-line.css" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="/hellscare/resources/css/magnific-popup.css" type="text/css" />
-
-	<link rel="stylesheet" href="/hellscare/resources/css/fonts.css" type="text/css" />
-
-	<link rel="stylesheet" href="/hellscare/resources/css/responsive.css" type="text/css" /> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 </head>
@@ -60,11 +42,16 @@
 						<div class="vertical-middle ignore-header">
 							<div class="row">
 
-								<div class="col-lg-7 center">
-									<img alt="" src="/hellscare/resources/images/exercise/steps.png" style="width:100%; height:100%;">
+								<div class="col-lg-4 col-last">
+									<div class="col_half center nobottommargin">
+										<div class="rounded-skill nobottommargin" data-color="#3F729B" data-size="300" data-percent="85" data-width="3" data-speed="6000">
+											<div class="counter counter-inherit"><span data-from="0" data-to="8500" data-refresh-interval="50" data-speed="6000"></span>걸음 수</div>
+										</div>
+									</div>
+
 								</div>
 
-								<div class="col-lg-5">
+								<div class="col-lg-8 center">
 									<div class="heading-block nobottomborder bottommargin-sm">
 										<h1 class="capitalize">오늘의 걸음 수</h1>
 									</div>
@@ -125,6 +112,12 @@
    <div id="gotoTop" class="icon-angle-up"></div>
 
    <%@ include file="../include/footerScript.jsp"%>
+   
+   	<!-- External JavaScripts
+	============================================= -->
+	<script src="/hellscare/resources/js/jquery.js"></script>
+	<script src="/hellscare/resources/js/plugins.js"></script>
+   
    
    <!-- Charts JS
 	============================================= -->
@@ -203,10 +196,6 @@
 			var ctx = document.getElementById("chart-0").getContext("2d");
 			window.myLine = new Chart(ctx, config);
 		};
-
-	
-		
-
 
 	</script>
    

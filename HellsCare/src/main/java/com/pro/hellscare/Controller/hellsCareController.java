@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,14 +42,16 @@ public class hellsCareController {
 	 //return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
 	
 	//유저 메인페이지
-	@RequestMapping("main2")
+	@RequestMapping("/main2")
 	public String main2(HttpServletRequest req, Model model)throws IOException{
 		//로거 작성 필수!
 		logger.info("URL ==> main");
 		service.exerciseList(req,model);
 		service.crawlArticle(req, model);
-		return "Users/index";
+		return "index";
 	}
+	
+	
 	
 	// 건강진단 목록페이지
 	@RequestMapping("nextpage")
@@ -164,25 +169,69 @@ public class hellsCareController {
 //===예찬 Part -End
 
 //===나현 Part - Start
-	/*
-	 * // 로그인 메인
-	 * 
-	 * @RequestMapping("loginMain") public String loginMain(HttpServletRequest req,
-	 * Model model) { logger.info("URL ==> loginMain"); return "Users/loginMain"; }
-	 */
-	// 운동 즐겨찾기 상세정보
-	@RequestMapping("login_reg")
-	public String login_reg(HttpServletRequest req, Model model) {
-		logger.info("URL ==> login_reg");
-		return "Users/login_reg";
-	}
-	
-	// 운동 즐겨찾기 상세정보
-		@RequestMapping("myPage")
-		public String myPage(HttpServletRequest req, Model model) {
-			logger.info("URL ==> myPage");
-			return "Users/myPage";
+		// 로그인_회원가입
+		   @RequestMapping("/login_reg")
+		   public String login_reg(HttpServletRequest req, Model model) {
+		      logger.info("URL ==> login_reg");
+		      
+		      return "login_reg";
+		   }
+		   
+		
+		
+		//중복확인 서브페이지(자바스크립트 호출,아이디가 중복된 경우)
+		
+		@RequestMapping("confirmId")
+		public String confirmId(HttpServletRequest req,Model model) {
+			logger.info("url => Users/confirmId");
+			
+			service.confirmId(req, model); 
+			
+			return "Users/confirmId";
 		}
+		//회원가입처리 
+		//String userid =req.getParameter(userid) ===> 이거 대신 @RequestParam String userid이렇게 
+		@RequestMapping("regPro")
+		public String regPro(HttpServletRequest req,Model model) {
+			logger.info("url => Users/regPro");
+
+			service.regPro(req, model); 
+
+			return "login_reg"; // 나중에 회원가입이랑 로그인 나누면 로그인하는 화면으로 이동시켜주기 
+		}
+			
+		 // 아이디찾기 이메일 코드 보내기
+	    @RequestMapping(value="findId", method=RequestMethod.GET)
+	    public String findId(HttpServletRequest req, Model model) {
+	        System.out.println("findId");
+	        
+	        service.emailChk(req, model);
+	        
+	        return "Users/find_id";
+	    }
+	 
+	    // 권한이 없는 사용자에게 안내 페이지 출력 - 403 ERROR
+	 	@RequestMapping("/Users/denied")
+	 	public String denied(HttpServletRequest req, Model model, Authentication auth) {
+	 		
+	 		logger.info("경로 : denied");
+	 		AccessDeniedException ade = (AccessDeniedException) req.getAttribute(WebAttributes.ACCESS_DENIED_403);
+	 		
+	 		model.addAttribute("errMsg", ade); 
+	 		
+	 		return "Users/denied";
+	 	}
+		
+		
+		
+	// 마이페이지
+			@RequestMapping("myPage")
+			public String myPage(HttpServletRequest req, Model model, Authentication auth) {
+				auth.getAuthorities(); 
+				
+				logger.info("URL ==> myPage");
+				return "Users/myPage";
+			}
 //===나현 Part -End
 		
 //===동렬 part - start
@@ -481,6 +530,14 @@ public class hellsCareController {
 	}
 
 //==나현 Part	 End	
+	// 약정보검색 
+	   @RequestMapping("drugInfo_sub")
+	   public String drugInfo_sub(HttpServletRequest req, Model model) {
+	      logger.info("URL ==> drugInfo_sub");
+	      service2.getDrugList(req, model);
+	      return "Users/drugInfo_sub";
+	   }
+	
 	
 	//==재관 Part	 Start
 	// 질병 정보 관리

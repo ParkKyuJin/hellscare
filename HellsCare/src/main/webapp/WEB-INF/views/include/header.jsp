@@ -84,7 +84,12 @@
 								<li><a href="Mychallenge"><div style="color:black;">진행중인 도전과제</div></a></li>
 							</ul>
 						</li>
-						<li class="mega-menu"><a href="boardList"><div>게시판</div></a>
+						<li><a href="#"><div>게시판</div></a>
+                     <ul style="background:white">
+                        <li><a href="boardList"><div style="color:black;">자유게시판</div></a></li>
+                        <li><a href="boardList"><div style="color:black;">Q&A</div></a></li>
+                     </ul>
+                  </li>
 					</ul>
 					
 					<div id="top-account" class="dropdown">

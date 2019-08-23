@@ -16,6 +16,20 @@ public interface HellsCareService {
 	// 질병상세정보보기 : 재관
 	public void diseaseView(HttpServletRequest req, Model model);
 	
+	//이나현 시작
+	
+	//회원가입 시 아이디 중복확인 처리
+	public void confirmId(HttpServletRequest req, Model	model);
+
+	//회원가입처리
+	public void regPro(HttpServletRequest req, Model model);
+		
+	// 이메일인증
+    public void emailChk(HttpServletRequest req, Model model);
+	
+	//이나현 끝
+	
+	
 	
 	
 	//한결
