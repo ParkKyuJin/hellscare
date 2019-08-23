@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/setting.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,7 +160,6 @@
 
 	<%@ include file="../include/footerScript.jsp"%>
 	
-	<script src="resources/js/chart.js"></script>
-	<script src="resources/js/chart-utils.js"></script>
+	
 </body>
 </html>

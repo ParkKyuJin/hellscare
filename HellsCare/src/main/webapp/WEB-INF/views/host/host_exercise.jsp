@@ -90,10 +90,10 @@ td {
 													type="checkbox" name="remove2" class="remove"
 													value="${dto.exercise_code}"></td>
 												<td style="vertical-align: middle">
-													<img src="/hellscare/resources/video/${dto.exercise_img}" width="200px" height="150px">
+													<img src="/hellscare/resources/images/videos/${dto.exercise_img}" width="200px" height="150px">
 												</td>
 												<td style="vertical-align: middle">
-												<video controls	src="/hellscare/resources/video/${dto.exercise_video}"
+												<video controls	src="/hellscare/resources/images/videos/${dto.exercise_video}"
 														width="200px" height="150px">
 													</video></td>
 												<td style="vertical-align: middle">${dto.exercise_name}</td>

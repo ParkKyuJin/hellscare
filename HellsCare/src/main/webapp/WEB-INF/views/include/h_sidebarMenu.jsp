@@ -136,7 +136,6 @@
               </a>
             <ul class="sub">
               <li><a href="host_clubManage">동호회 가입승인/거절</a></li>
-              <li><a href="advanced_form_components.html">동호회 해체승인</a></li>
               <li><a href="host_total">동호회 결산</a></li>
             </ul>
           </li>

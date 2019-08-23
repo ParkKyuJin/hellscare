@@ -63,8 +63,7 @@
 							
 						<li><a href="#"><div>정보</div></a>
 							<ul style="background:white">
-								<li><a href="hospital_location"><div style="color:black;">병원 정보</div></a></li>
-								<li><a href="pharmacy_location"><div style="color:black;">약국 정보</div></a></li>
+								<li><a href="hospital_location"><div style="color:black;">병원/약국 정보</div></a></li>
 								<li><a href="drugInfo"><div style="color:black;">의약품 정보</div></a></li>
 								<li><a href="disease"><div style="color:black;">질병 정보</div></a></li>
 								<li><a href="weather_info"><div style="color:black;">날씨 정보</div></a></li>

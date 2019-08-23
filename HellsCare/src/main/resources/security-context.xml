@@ -10,7 +10,7 @@
    <sec:http auto-config="true" use-expressions="true" create-session="never">
    
    <!-- 관리자 영역 설정 -->
-   <sec:intercept-url pattern="/host_**" access="hasRole('ADMIN')" />
+ <!--   <sec:intercept-url pattern="/host_**" access="hasRole('ADMIN')" /> -->
    
    <!-- 로그인한 사용자의 영역 -->
    <sec:intercept-url pattern="/user**" access="hasAnyRole('USER', 'ADMIN')" />

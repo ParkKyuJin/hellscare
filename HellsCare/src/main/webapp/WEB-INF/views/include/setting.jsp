@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="/hellscare/resources/onepage.css" type="text/css" />
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+
 <script src="resources/js/chart.js"></script>
 <script src="resources/js/chart-utils.js"></script>
 <script src="resources/js/components/moment.js"></script>
