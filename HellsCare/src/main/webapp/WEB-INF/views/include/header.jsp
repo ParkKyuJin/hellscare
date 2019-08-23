@@ -21,7 +21,7 @@
 				<!-- Logo
 				============================================= -->
 				<div id="logo">
-					<a href="index.html" class="standard-logo" data-dark-logo="/hellscare/resources/images/logo-dark.png"><img src="/hellscare/resources/images/logo.png" alt="Canvas Logo"></a>
+					<a href="main2" class="standard-logo" data-dark-logo="/hellscare/resources/images/logo-dark.png"><img src="/hellscare/resources/images/logo.png" alt="Canvas Logo"></a>
 				</div><!-- #logo end -->
 
 				<!-- Primary Navigation

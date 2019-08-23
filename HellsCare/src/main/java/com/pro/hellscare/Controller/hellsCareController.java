@@ -166,6 +166,20 @@ public class hellsCareController {
 			logger.info("URL ==> exercise_favorite");
 			return "Users/exercise_favorite";
 		}
+		
+	// 운동 즐겨찾기 상세정보
+	@RequestMapping("club")
+	public String club(HttpServletRequest req, Model model) {
+		logger.info("URL ==> club");
+		return "Users/club";
+	}
+	
+	// 운동 즐겨찾기 상세정보
+		@RequestMapping("makeClub")
+		public String makeClub(HttpServletRequest req, Model model) {
+			logger.info("URL ==> club");
+			return "Users/makeClub";
+		}
 //===예찬 Part -End
 
 //===나현 Part - Start
