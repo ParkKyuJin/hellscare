@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-
 
 <!DOCTYPE html>
 
@@ -14,6 +12,7 @@
 
 	<!-- Stylesheets
 	============================================= -->
+	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- Range Slider CSS -->
@@ -421,46 +420,127 @@
 
 										</div>
 
-
 									</div>
+									
+									<!-- 1:1문의 사항은 QnA에서 내가 질문한거 모음 으로 알고있기 떄문에 바꾸겠음 -->
 										<div class="tab-content clearfix" id="tab-replies">
 											<div class="clear topmargin-sm"></div>
-								<form class="row mb-0" id="website-cost" action="include/form.php" method="post" enctype="multipart/form-data">
-								<div class="form-process"></div>
-
-								<div class="col-md-6 form-group mb-4">
-									<label for="website-cost-name">Name:</label>
-									<input type="text" name="website-cost-name" id="website-cost-name" class="form-control required" value="" placeholder="Enter your Full Name">
-								</div>
-								<div class="col-md-6 form-group mb-4">
-									<label for="website-cost-contact">Contact:</label>
-									<input type="text" name="website-cost-contact" id="website-cost-contact" class="form-control required" value="" placeholder="Enter your Contact Number">
-								</div>
-								<div class="col-12 form-group mb-4">
-									<label for="website-cost-email">Email:</label>
-									<input type="email" name="website-cost-email" id="website-cost-email" class="form-control required" value="" placeholder="Enter your Email">
-								</div>
-
-								<div class="col-12 form-group mb-4">
-									<label for="website-cost-message">Additional Message (Optional):</label>
-									<textarea name="website-cost-message" id="website-cost-message" class="form-control" cols="30" rows="10"></textarea>
-								</div>
-
-								<div class="col-12 hidden">
-									<input type="text" id="website-cost-botcheck" name="website-cost-botcheck" value="" />
-								</div>
-								<div class="col-12">
-									<button type="submit" name="website-cost-submit" class="btn btn-success btn-lg">Confirm</button>
-								</div>
-
-								<input type="hidden" name="prefix" value="website-cost-">
-								<input type="hidden" name="subject" value="Website Cost Estimate Request">
-								<input type="hidden" name="html_title" value="Website Cost Estimation">
-								<input type="hidden" id="website-cost-price" name="website-cost-total-price" value="">
-							</form>
+							
+											<table class="table">
+										  <thead>
+											<tr>
+											  <th>#</th>
+											  <th>질문</th>
+											  <th>제목</th>
+											  <th>답변여부</th>
+											</tr>
+										  </thead>
+										  <tbody>
+										  
+										  <c:if test="${cnt > 0}">
+										  <c:forEach var="dto" items="${dtos}">
+											<tr>
+											  <td>${number}</td>
+											  <td>${dto.kind}</td>
+											  <td><a href="qna_pwdconfirm?qna_code=${dto.qna_code}">${dto.title}</a></td>
+											  <td>
+											  	<c:if test="${dto.state == 0}">답변없음</c:if>
+											  	<c:if test="${dto.state > 0}">답변있음</c:if>
+											  </td>
+											  
+											</tr>
+											</c:forEach>
+											</c:if>
+										  </tbody>
+										</table>	
 										
-
+										<table style="width: 1000px; text-align: left;" >
+											<tr>
+												<th >
+													<!-- 게시글이 있는 경우 -->
+													<c:if test="${cnt > 0}">
+														<!-- 처음[◀◀] / 이전[◀]  -->
+														<c:if test="${startPage > pageBlock}">
+															<a href="boardList">[◀◀ ] </a>
+															<a href="boardList?pageNum=${startPage - pageBlock}">[◀ ] </a>
+														</c:if>
+														
+														<!-- 블록내의 페이지 번호 -->
+														<c:forEach var="i" begin="${startPage}" end="${endPage}">
+															<c:if test="${i == currentPage}">
+																<span><b>[${i}]</b></span>
+															</c:if>
+															<c:if test="${i != currentPage}">
+																<span><b><a href="boardList?pageNum=${i}">[${i}]</a></b></span>
+															</c:if>
+														
+														</c:forEach>
+														
+														<!-- 다음[▶] / 끝[▶▶]   -->
+														<c:if test="${pageCount > endPage}">
+															<a href="boardList?pageNum=${startPage + pageBlock}">[▶]  </a>
+															<a href="boardList?pageNum=${pageCount}">[▶▶]</a>
+														</c:if>
+													</c:if>
+												</th>
+											</tr>
+										</table>
+											
+											<!-- <a href="qnaWriteForm" class="button button-black tright noleftmargin" style="text-align: center;">문의하기<i class="icon-angle-right"></i></a>					 -->
+								
+											<hr>
+		
+											
+										<div class="tab-content clearfix" id="tab-replies">
+											<div class="clear topmargin-sm"></div>
+												<form class="row mb-0" id="website-cost" action="include/form.php" method="post" enctype="multipart/form-data">
+												<h4>문의사항 작성</h4>
+												<div class="form-process"></div>
+												
+												<div class="col-12 form-group mb-4">
+													<label for="website-cost-email">제목:</label>
+													<input type="email" name="website-cost-email" id="website-cost-email" class="form-control required" value="" placeholder="제목 입력" required="required">
+												</div>
+				
+												<div class="col-md-6 form-group mb-4">
+													<label for="website-cost-name">비밀번호:</label>
+													<input type="password" name="website-cost-name" id="website-cost-name" class="form-control required" value="" placeholder="비밀번호 입력" required="required">
+												</div>
+												<div class="col-md-6 form-group mb-4">
+													<label for="website-cost-contact">문의사항:</label>
+													<!-- <input type="text" name="website-cost-contact" id="website-cost-contact" class="form-control required" value="" placeholder="Enter your Contact Number"> -->
+													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control valid">
+														<option value="" disabled="" selected="" >문의 유형</option>
+														<option value="개인정보">개인정보 문의</option>
+														<option value="건강정보">건강정보 문의</option>
+														<option value="운동정보">운동정보 문의</option>
+														<option value="식단정보">식단정보 문의</option>
+														<option value="기타">기타 문의</option>
+													</select>
+												</div>
+												
+				
+												<div class="col-12 form-group mb-4">
+													<label for="website-cost-message">문의내용:</label>
+													<textarea name="website-cost-message" id="website-cost-message" class="form-control" cols="30" rows="10"></textarea>
+												</div>
+				
+												<div class="col-12 hidden">
+													<input type="text" id="website-cost-botcheck" name="website-cost-botcheck" value="" />
+												</div>
+												<div class="col-12">
+													<a href="#" class="button button-rounded button-reveal button-large button-dirtygreen"><span>등록</span><i class="icon-angle-right"></i></a>
+												</div>
+				
+												<input type="hidden" name="prefix" value="website-cost-">
+												<input type="hidden" name="subject" value="Website Cost Estimate Request">
+												<input type="hidden" name="html_title" value="Website Cost Estimation">
+												<input type="hidden" id="website-cost-price" name="website-cost-total-price" value="">
+											</form>
+							
+											</div>
 										</div>
+										
 									</div>
 
 								</div>
@@ -554,6 +634,9 @@
 <!-- Footer Scripts
 ============================================= -->
 <%@ include file="../include/footerScript.jsp" %>
+
+
+
 
 </body>
 </html>

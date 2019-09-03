@@ -16,7 +16,8 @@
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
+  <!-- 여기 고치ㅡㅁㄴ 됨!! -->
+  <link href="resources/host_style/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
@@ -133,21 +134,28 @@
    <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> 공지사항 작성</h3>
+        <h3><i class="fa fa-angle-right"></i> 공지사항 </h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
           <div class="col-lg-12 col-md-12 col-sm-12">
-            <h4 class="title">공지사항 작성</h4>
+            <h4 class="title">공지사항</h4>
+            <br>
             <div id="message"></div>
-            <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
-
+            
+            <form class="contact-form php-mail-form" role="form" action="notice_modify" method="POST">
               <div class="form-group">
-                <input type="text" name="subject" class="form-control" id="contact-subject" value="공지사항입니다." data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                제목<input type="text" name="subject" class="form-control" id="contact-subject" value="${dto.title}" data-rule="minlen:4" disabled="disabled">
                 <div class="validate"></div>
+              </div>
+              
+              <div class="form-group">
+              	 등록일<input type="text" value="${dto.write_date}" disabled="disabled"  class="form-control">
+              	<br>
+                                     조회수<input type="text"  value="${dto.readCnt}" disabled="disabled"  class="form-control">
               </div>
 
               <div class="form-group">
-                <textarea class="form-control" name="message" id="contact-message"  rows="5" data-rule="required" data-msg="Please write something for us">안녕하세오 집에 가고 싶어오 집에 보내달라 그만둘까보다</textarea>
+                내용<textarea class="form-control" name="message" id="contact-message"  rows="5" data-rule="required" data-msg="Please write something for us" disabled="disabled">${dto.content}</textarea>
                 <div class="validate"></div>
               </div>
 
@@ -156,9 +164,9 @@
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <div class="form-send">
-                <button type="submit" class="btn btn-large btn-primary">수정</button>
-                <button type="submit" class="btn btn-large btn-primary">삭제</button>
-               <button type="submit" class="btn btn-large btn-primary"><a href="host_notice">취소</a></button>
+                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='notice_modify?board_code=${dto.board_code}'">수정</button>
+                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='board_delete?board_code=${dto.board_code}'">삭제</button>
+                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='host_notice'">취소</a></button>
               </div>
 
             </form>

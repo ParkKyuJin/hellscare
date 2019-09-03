@@ -133,6 +133,7 @@ td {
 							</table>
 
 							<table class="table table-hover" style="text-align: center;">
+								<tr>
 								<td style="margin-left: 0px;"><button type="submit"
 									class="button button-large button-dark button-rounded" style="float:left">삭제하기</button>
 								</td>
@@ -162,6 +163,7 @@ td {
 										</c:if>
 									</c:if>
 								</th>
+								</tr>
 							</table>
 							</form>
 						</div>
@@ -211,9 +213,10 @@ td {
 													<option value="0">운동 부위를 선택해주세요.</option>
 													<option value="1">목</option>
 													<option value="2">어깨</option>
-													<option value="3">골반</option>
-													<option value="4">다리</option>
-													<option value="5">손목,발목</option>
+													<option value="3">허리</option>
+													<option value="4">골반</option>
+													<option value="5">다리</option>
+													<option value="6">손목,발목</option>
 												</select>
 											</div>
 										</div>
@@ -310,7 +313,6 @@ td {
 				}
 			} else{
 				for(var i=0; i<document.deleteform.remove2.length; i++){
-					alert("temp : " + temp)
 					temp = document.deleteform.remove2[i].checked;
 					if(temp){
 						var yn = confirm("선택하신 운동을 삭제하시겠습니까?");

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
-<section id="page-title">
 
+
+<section id="page-title">
 			<div class="container clearfix">
 				<h1>나의 도전과제</h1>
 				<span>진행중인 도전과제를 확인해보세요!</span>
@@ -14,212 +16,62 @@
 
 </section><!-- #page-title end -->
 <section id="content">
+<c:if test="${cnt == 0}">
+	<div class="style-msg2 successmsg" style="text-decoration:none;"  align="center">
+		<div class="msgtitle">도전등록을 하신 운동이 없습니다!</div>
+		<div class="sb-msg">
+			<ul>
+				<li>1. 마우스를 상단메뉴의 이벤트 탭으로 가져간다.</li>
+				<li> 2. 아래 내려온 메뉴에서 도전과제 메뉴를 클릭한다.</li>
+				<li> 3. 도전해보고 싶은 과제를 살펴본 뒤 당차게 도전하기 버튼을 클릭한다!</li>
+				<li> 4. 도전과제를 달성하기 위해 열심히 노력한다!</li>
+			</ul>
+		</div>
+	</div>
+</c:if>
+<c:if test="${cnt != 0}">
+		<div class="content-wrap">
 
-			<div class="content-wrap">
+			<div class="container clearfix">
 
-				<!-- Posts
-				============================================= -->
-				<div id="posts" class="post-grid grid-container post-masonry post-masonry-full grid-3 clearfix">
-
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<a href="images/blog/full/17.jpg" data-lightbox="image"><img class="image_fade" src="/hellscare/resources/images/blog/small/17.jpg" alt="Standard Post with Image"></a>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single.html">This is a Standard post with a Preview Image</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 10th Feb 2014</li>
-							<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>
-							<li><a href="#"><i class="icon-camera-retro"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, asperiores quod est tenetur in. Eligendi, deserunt, blanditiis est quisquam doloribus.</p>
-							<a href="blog-single.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-				   <div class="entry clearfix">
-						<div class="entry-image">
-							<iframe src="http://player.vimeo.com/video/87701971" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single-full.html">This is a Standard post with an Embedded Video</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 16th Feb 2014</li>
-							<li><a href="blog-single-full.html#comments"><i class="icon-comments"></i> 19</a></li>
-							<li><a href="#"><i class="icon-film"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis velit deserunt!</p>
-							<a href="blog-single-full.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<div class="fslider" data-arrows="false" data-lightbox="gallery">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><a href="images/blog/full/10.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/10.jpg" alt="Standard Post with Gallery"></a></div>
-										<div class="slide"><a href="images/blog/full/20.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/20.jpg" alt="Standard Post with Gallery"></a></div>
-										<div class="slide"><a href="images/blog/full/21.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/21.jpg" alt="Standard Post with Gallery"></a></div>
-									</div>
-								</div>
+					<!-- Portfolio Filter
+					============================================= -->
+				
+					<!-- Portfolio Items
+					============================================= -->
+					<div id="portfolio" class="portfolio grid-container portfolio-1 clearfix">
+					<c:forEach var="dto" items="${list}">
+						<article class="portfolio-item pf-media pf-icons clearfix">
+							<div class="portfolio-image">
+									<img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="height:500px;" alt="Open Imagination">		
 							</div>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single-small.html">This is a Standard post with a Slider Gallery</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 24th Feb 2014</li>
-							<li><a href="blog-single-small.html#comments"><i class="icon-comments"></i> 21</a></li>
-							<li><a href="#"><i class="icon-picture"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem blanditiis enim culpa reiciendis et explicabo tenetur!</p>
-							<a href="blog-single-small.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<blockquote>
-								<p>"When you are courting a nice girl an hour seems like a second. When you sit on a red-hot cinder a second seems like an hour. That's relativity."</p>
-								<footer>Albert Einstein</footer>
-							</blockquote>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 3rd Mar 2014</li>
-							<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 23</a></li>
-							<li><a href="#"><i class="icon-quote-left"></i></a></li>
-						</ul>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image clearfix">
-							<div class="portfolio-single-image masonry-thumbs grid-5" data-big="3" data-lightbox="gallery">
-								<a href="images/blog/full/2.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/2.jpg" alt=""></a>
-								<a href="images/blog/full/3.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/3.jpg" alt=""></a>
-								<a href="images/blog/full/6-1.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/6-1.jpg" alt=""></a>
-								<a href="images/blog/full/6-2.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/6-2.jpg" alt=""></a>
-								<a href="images/blog/full/12.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/12.jpg" alt=""></a>
-								<a href="images/blog/full/12-1.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/12-1.jpg" alt=""></a>
-								<a href="images/blog/full/13.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/small/13.jpg" alt=""></a>
+							<div class="portfolio-desc">
+								<h3><a href="challengedetail?code=${dto.challenge_code}">${dto.challenge_name}</a></h3>
+								<p>${dto.challenge_content}</p>
+								<ul class="iconlist">
+									<li><i class="icon-ok"></i> <strong>보상포인트:</strong><p><b>${dto.challenge_gift} Points</b></p></li>
+									<li><i class="icon-ok"></i> <strong>완료여부:</strong> <c:if test="${dto.done == 1}"><p style=:color:green;>완료</p></c:if>
+										<c:if test="${dto.done != 1}"><p style=color:red;>미완료</p></c:if>
+									</li>
+									<li><i class="icon-ok"></i> <strong>시작일:</strong><p style=:color:green;>${dto.challenge_start}</p></li>
+									<li><i class="icon-ok"></i> <strong>완료일:</strong> <c:if test="${dto.challenge_end == null}"><p style=color:red;>-</p></c:if>
+																					<c:if test="${dto.challenge_end != null}"><p style=:color:green;>${dto.challenge_end}</p></c:if>
+									</li>
+								</ul>
+								<a href="delchall?code=${dto.challenge_code}" class="button button-3d noleftmargin">도전 포기</a>
 							</div>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single-thumbs.html">This is a Standard post with Masonry Thumbs Gallery</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 3rd Mar 2014</li>
-							<li><a href="blog-single-thumbs.html#comments"><i class="icon-comments"></i> 21</a></li>
-							<li><a href="#"><i class="icon-picture"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem blanditiis enim culpa reiciendis et explicabo!</p>
-							<a href="blog-single-thumbs.html"class="more-link">Read More</a>
-						</div>
-					</div>
+						</article>
+						<hr>
+					</c:forEach>
+						
+					</div><!-- #portfolio end -->
 
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<a href="http://themeforest.net" class="entry-link" target="_blank">
-								Themeforest.net
-								<span>- http://themeforest.net</span>
-							</a>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 17th Mar 2014</li>
-							<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 26</a></li>
-							<li><a href="#"><i class="icon-link"></i></a></li>
-						</ul>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<div class="card">
-								<div class="card-body">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, fuga optio voluptatibus saepe tenetur aliquam debitis eos accusantium!
-								</div>
-							</div>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 21st Mar 2014</li>
-							<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 11</a></li>
-							<li><a href="#"><i class="icon-align-justify2"></i></a></li>
-						</ul>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image clearfix">
-							<div class="fslider" data-animation="fade" data-pagi="false" data-pause="6000" data-lightbox="gallery">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><a href="images/blog/full/6-1.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/6-1.jpg" alt="Standard Post with Gallery"></a></div>
-										<div class="slide"><a href="images/blog/full/6-2.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/6-2.jpg" alt="Standard Post with Gallery"></a></div>
-										<div class="slide"><a href="images/blog/full/12-1.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/12-1.jpg" alt="Standard Post with Gallery"></a></div>
-										<div class="slide"><a href="images/blog/full/22.jpg" data-lightbox="gallery-item"><img class="image_fade" src="/hellscare/resources/images/blog/masonry/22.jpg" alt="Standard Post with Gallery"></a></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single-thumbs.html">This is a Standard post with Fade Gallery</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 3rd Apr 2014</li>
-							<li><a href="blog-single-thumbs.html#comments"><i class="icon-comments"></i> 21</a></li>
-							<li><a href="#"><i class="icon-picture"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem blanditiis enim culpa reiciendis et explicabo!</p>
-							<a href="blog-single-thumbs.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image clearfix">
-							<iframe width="100%" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/115823769&amp;auto_play=false&amp;hide_related=true&amp;visual=true"></iframe>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single.html">This is an Embedded Audio Post</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 28th April 2014</li>
-							<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 16</a></li>
-							<li><a href="#"><i class="icon-music2"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, voluptatem, dolorem animi nisi autem blanditiis enim culpa reiciendis et explicabo tenetur voluptate rerum.</p>
-							<a href="blog-single.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-					<div class="entry clearfix">
-						<div class="entry-image">
-							<iframe width="560" height="315" src="http://www.youtube.com/embed/SZEflIVnhH8" frameborder="0" allowfullscreen></iframe>
-						</div>
-						<div class="entry-title">
-							<h2><a href="blog-single-full.html">This is a Standard post with a Youtube Video</a></h2>
-						</div>
-						<ul class="entry-meta clearfix">
-							<li><i class="icon-calendar3"></i> 30th Apr 2014</li>
-							<li><a href="blog-single-full.html#comments"><i class="icon-comments"></i> 34</a></li>
-							<li><a href="#"><i class="icon-film"></i></a></li>
-						</ul>
-						<div class="entry-content">
-							<p>Asperiores, tenetur, blanditiis, quaerat odit ex exercitationem pariatur quibusdam veritatis quisquam laboriosam esse beatae hic perferendis velit deserunt!</p>
-							<a href="blog-single-full.html"class="more-link">Read More</a>
-						</div>
-					</div>
-
-				</div><!-- #posts end -->
+				</div>
 
 			</div>
-
+</c:if>
 		</section><!-- #content end -->
+<!-- #content end -->
 
 
 

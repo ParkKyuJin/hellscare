@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
@@ -69,7 +69,9 @@
           <div class="col-md-12">
             <div class="content-panel">
             <form action=""  method="post" name="diseaseform">
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<input type="hidden" name="pageNum" value="${pageNum}">
+				
               <table class="table table-striped table-advance table-hover">
                 <h4><i class="fa fa-angle-right"></i> 질병 정보   </h4>
               
@@ -101,11 +103,11 @@
 			</td>
 			<td>${dto.d_category }
             <td>
-              <a href="host_diseaseModify?pageNum=${pageNum}&disease_code=${dto.disease_code }'">${dto.disease_name }</a>
+              <a href="host_diseaseModify?pageNum=${pageNum}&disease_code=${dto.disease_code}">${dto.disease_name }</a>
             </td>
             <td>${dto.disease_code }</td>
             <td>                     
-              <button type="button" class="btn btn-warning btn-xs" onclick="location.href='host_diseaseModify?pageNum=${pageNum}&disease_code=${dto.disease_code }' ">수정</button>
+              <button type="button" class="btn btn-warning btn-xs" onclick="location.href='host_diseaseModify?pageNum=${pageNum}&disease_code=${dto.disease_code }">수정</button>
               <!-- <button class="btn btn-light btn-xs" onclick="diseaseDelete()">삭제</button> -->
             </td>    
 		</tr>

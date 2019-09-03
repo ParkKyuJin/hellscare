@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
+
 	<!-- Header
 	============================================= -->
 	<header id="header" class="transparent-header full-header" data-sticky-class="not-dark">
@@ -64,20 +59,26 @@
 						<li><a href="#"><div>정보</div></a>
 							<ul style="background:white">
 								<li><a href="hospital_location"><div style="color:black;">병원/약국 정보</div></a></li>
+								<!-- <li><a href="pharmacy_location"><div style="color:black;">약국 정보</div></a></li> -->
 								<li><a href="drugInfo"><div style="color:black;">의약품 정보</div></a></li>
 								<li><a href="disease"><div style="color:black;">질병 정보</div></a></li>
 								<li><a href="weather_info"><div style="color:black;">날씨 정보</div></a></li>
 								<!-- <li><a href="shop.html"><div style="color:black;">식중독 지수</div></a></li> -->
 							</ul>
 						</li>
-						
-						<li><a href="#"><div>동호회</div></a>
-							<ul style="background:white">
-								<li><a href="club"><div style="color:black;">동호회 목록</div></a></li>
-								<li><a href="makeClub"><div style="color:black;">동호회 개설</div></a></li>
-							</ul>
-						</li>
-						<li><a href="#"><div>이벤트</div></a>
+
+					<li><a href="#"><div>동호회</div></a>
+						<ul style="background: white">
+							<li><a href="club"><div style="color: black;">동호회
+										목록</div></a></li>
+							<li><a href="makeClub"><div style="color: black;">동호회
+										개설</div></a></li>
+							<c:if test="${admin != null}">
+								<li><a href="user_applyList"><div style="color: black;">동호회
+											신청목록</div></a></li>
+							</c:if>
+						</ul></li>
+					<li><a href="#"><div>이벤트</div></a>
 							<ul style="background:white">
 								<li><a href="challenge"><div style="color:black;">도전과제</div></a></li>
 								<li><a href="Mychallenge"><div style="color:black;">진행중인 도전과제</div></a></li>
@@ -94,11 +95,18 @@
 					<div id="top-account" class="dropdown">
 						<a href="#" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i></a>
 						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-							<a class="dropdown-item tleft" href="login_reg">Login</a>
-							<!-- <a class="dropdown-item tleft" href="#">MyPage <span class="badge badge-pill badge-secondary fright" style="margin-top: 3px;">5</span></a> -->
-							<a class="dropdown-item tleft" href="myPage">MyPage</a>
-<!-- 							<div class="dropdown-divider"></div> -->
-							<a class="dropdown-item tleft" href="#">Logout <i class="icon-signout"></i></a>
+							<c:if test="${sessionScope.memId == null }">
+								<a class="dropdown-item tleft" href="login_reg">Login</a>
+							
+							</c:if>
+							<c:if test="${sessionScope.memId != null}">
+								<a class="dropdown-item tleft" href="#">${sessionScope.memId }</a>
+								<!-- <a class="dropdown-item tleft" href="#">MyPage <span class="badge badge-pill badge-secondary fright" style="margin-top: 3px;">5</span></a> -->
+								<a class="dropdown-item tleft" href="myPage">MyPage</a>
+								
+								<!-- <div class="dropdown-divider"></div> -->
+								<a class="dropdown-item tleft" href="logout">Logout <i class="icon-signout"></i></a>
+							</c:if>
 						</ul>
 					</div>
 
@@ -123,5 +131,3 @@
 		});
 	</script>
 	</header><!-- #header end -->
-</body>
-</html>

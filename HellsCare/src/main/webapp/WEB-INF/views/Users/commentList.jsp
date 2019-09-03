@@ -30,12 +30,12 @@
 
 					<a class='comment-reply-link' href='#'><i class="icon-reply"></i></a>
 					
-					<c:if test="${sessionScope.username == com.username}">
+					<%-- <c:if test="${sessionScope.username == com.username}"> --%>
 						<div style="float: right;">
 						<button type="button" class="btn btn-secondary btn-sm" id="cUpdate">수정</button>
 						<button type="button" class="btn btn-secondary btn-sm" id="cDelete">삭제</button>
 						</div>
-					</c:if>
+					<%-- </c:if> --%>
 					
 				</div>
 				<div class="clear"></div>

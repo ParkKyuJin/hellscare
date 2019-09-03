@@ -50,14 +50,10 @@
 	</beans:bean>
 	
 	<!-- 파일업로드context 종료 -->
-	 <!-- 시큐리티 추가 2 -->
-   <!-- @Secured 어노테이션 활성화, 사용권한 제한 -->
-   <!-- Namespaces 탭에서 먼저 security 체크후 작성, 
-      단 spring-security.xsd로 변경
-      xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
-   -->
-   <security:global-method-security secured-annotations="enabled" />
-   <!-- 시큐리티 추가 2 -->
+
+<security:global-method-security secured-annotations="enabled" />
+   
+   
 	
 	
 	

@@ -113,12 +113,6 @@
 
    <%@ include file="../include/footerScript.jsp"%>
    
-   	<!-- External JavaScripts
-	============================================= -->
-	<script src="/hellscare/resources/js/jquery.js"></script>
-	<script src="/hellscare/resources/js/plugins.js"></script>
-   
-   
    <!-- Charts JS
 	============================================= -->
 	<script src="/hellscare/resources/js/chart.js"></script>

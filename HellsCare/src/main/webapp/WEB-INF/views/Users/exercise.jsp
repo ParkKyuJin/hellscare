@@ -27,7 +27,7 @@
 					<c:if test="${cntSt == 0}">
 						<div class="oc-item">
 						<img
-							src="/hellscare/resources/images/exercise/wait.jpg" alt="Image 1">
+							src="/hellscare/resources/exercise/wait.jpg" alt="Image 1">
 						</div>
 					</c:if>
 					
@@ -62,7 +62,7 @@
 						<c:forEach var="dtosDi" items="${dtosDi}">
 							<div class="oc-item">
 								<a href="details_exercise?exercise_code=${dtosDi.exercise_code}">
-								<img src="/hellscare/resources/videos/${dtosDi.exercise_img}"
+								<img src="/hellscare/resources/images/videos/${dtosDi.exercise_img}"
 									alt="Image 1"  style="width:200px; height:160px;"></a>
 							</div>
 						</c:forEach>

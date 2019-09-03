@@ -5,7 +5,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
 <meta name="author" content="Dashboard">
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
@@ -29,7 +28,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-	
 	<div class="content-wrap">
 		<center><h2>운동 수정</h2></center>
 		<div class="row clearfix">
@@ -49,11 +47,11 @@
 					<div class="clear"></div>
 					<div class="col_half">
 						<label for="image2">대표 이미지</label>
-						<img src="/hellscare/resources/video/${vo.exercise_img}" width="500" height="250">
+						<img src="/hellscare/resources/images/videos/${vo.exercise_img}" width="500" height="250">
 					</div>
 					<div class="col_half">
 						<label for="video2">영상</label>
-						<video controls	src="/hellscare/resources/video/${vo.exercise_video}"
+						<video controls	src="/hellscare/resources/images/videos/${vo.exercise_video}"
 							width="500px" height="350px">
 						</video>
 					</div>
@@ -116,17 +114,7 @@
 		</div>
 	</div>
 </body>
-<!-- Go To Top
-============================================= -->
-<div id="gotoTop" class="icon-angle-up"></div>
 
-<!-- External JavaScripts
-============================================= -->
-<script src="resources/js/plugins.js"></script>
-
-<!-- Footer Scripts
-============================================= -->
-<script src="resources/js/functions.js"></script>
 <script type="text/javascript">
 	function chg_kind() {
 		var kind = document.getElementById('selectbox').value;

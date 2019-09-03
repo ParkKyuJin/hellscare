@@ -1,9 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -32,6 +29,11 @@ function refreshIdfy() {
 function idfySend() {
 	var drug_name = $('#drug_name').val();
 	var entp_name = $('#entp_name').val();
+	
+	if(drug_name.length == 0 && entp_name.length == 0) {
+		alert('검색어를 입력하세요');
+		return false;
+	}
 	
 	//alert(drug_name+entp_name);
 	

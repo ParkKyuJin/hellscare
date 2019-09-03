@@ -40,6 +40,17 @@
 
 				<div class="container clearfix">
 				
+					<c:if test="${sessionScope.memId == null}">
+						<script type="text/javascript">
+							alert("로그인 후 이용해주세요!");
+							window.location = 'login_reg';
+						</script>
+					</c:if>
+					
+					<c:if test="${sessionScope.memId != null}">
+						
+					</c:if>
+				
 					<h3>월별 섭취 칼로리</h1>
 					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
 						<div class="chartjs-size-monitor" style="position: absolute; 

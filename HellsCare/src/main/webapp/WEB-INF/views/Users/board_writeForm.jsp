@@ -14,6 +14,7 @@
 
 	<!-- Stylesheets
 	============================================= -->
+	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- DatePicker CSS -->
@@ -77,7 +78,8 @@
 										<div class="row">
 											<div class="col-md-6 form-group">
 												<label>작성자:</label>
-												<input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder="보라돌이">
+												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
+												<input type="text" name="username" id="username" class="form-control required" value="" placeholder="">
 											</div>
 											
 											<div class="col-md-6 form-group">
@@ -92,10 +94,10 @@
 											<label>내용:</label>
 											<textarea name="jobs-application-message" id="jobs-application-message" class="form-control required" cols="30" rows="10"></textarea>
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
 											<label>파일 업로드:</label>
 											<input type="file" id="jobs-application-resume" name="jobs-application-resume" class="file-loading" data-show-preview="false" />
-										</div>
+										</div> -->
 									</div>
 									<div class="col-12 hidden">
 										<input type="text" id="jobs-application-botcheck" name="jobs-application-botcheck" value="" />

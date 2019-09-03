@@ -3,6 +3,27 @@
 <!DOCTYPE html>
 	
 	<%@ include file="../include/header.jsp" %>
+<script type="text/javascript">
+function perse1() {
+	$.ajax({
+		url : '${pageContext.request.contextPath}/perse', // 컨트롤러/drugInfo_sub
+		success : function(result) { // 콜백함수 - 정상적으로 처리되었을 때의 결과가 result에 들어간다.
+			// 변수명이 반드시 .html(result)일 필요는 없으나 위 콜백함수와의 변수명과 일치해야 한다.
+			$('#result').html(result);
+		},
+		error : function() {
+			alert("오류");	
+		}		
+	});
+	
+}
+
+<!--
+
+//-->
+</script>	
+	
+	
 	
 	<!-- 중간 lable -->
 	<section id="page-title">
@@ -36,8 +57,8 @@
 				<div class="tabs nobottommargin clearfix" id="sidebar-tabs">
 
 					<ul class="tab-nav clearfix">
-						<li><a href="#tabs-1">칼로리</a></li>
-						<li><a href="#tabs-2">혈압</a></li>
+						<li ><a onclick="perse1();">칼로리</a></li>
+						<li><a href="perse2">혈압</a></li>
 						<li><a href="#tabs-3">걸음수</a></li>
 						<li><a href="#tabs-4">체중</a></li>
 					</ul>
@@ -49,38 +70,14 @@
 						<div class="tab-content clearfix" id="tabs-1">
 							<div id="popular-post-list-sidebar">
 
-								<canvas id="chart-0" style="display: block;"></canvas>
+								 <div id="result"></div>
 
 							</div>
 							<div class="alert alert-warning" align="center">
 							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 섭취 칼로리에 비해 운동량이 낮습니다!
 							</div>
 						</div>
-						<div class="tab-content clearfix" id="tabs-2">
-							<div id="recent-post-list-sidebar">
-								<!-- <div class="bottommargin divcenter" style=" max-width: 70%; min-height: 350px;">
-						<canvas id="chart-1"></canvas>
-					</div> -->
-								혈압 그래프
-
-							</div>
-							<div class="alert alert-warning" align="center">
-							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 혈압이 너무 높아요!
-							</div>
-						</div>
-						<div class="tab-content clearfix" id="tabs-3">
-							<div id="recent-post-list-sidebar">자료넣기</div>
-							<div class="alert alert-warning" align="center">
-							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 뭘 주의할까요?
-							</div>
-						</div>
-						<div class="tab-content clearfix" id="tabs-4">
-							<div id="recent-post-list-sidebar">자료넣기2</div>
-							<div class="alert alert-warning" align="center">
-							<i class="icon-warning-sign"></i><strong>Warning!</strong> 주의하세요! 뭘 주의해야할까요 2
-							</div>
-						</div>
-
+						
 					</div>
 				
 			
@@ -145,188 +142,13 @@
 
 
 
-<script>
-	var eat1 = 10;
-	var eat2 = 20;
-	var eat3 = 30;
-	var eat4 = 40;
-	var eat5 = 50;
-	var eat6 = 60;
-	var eat7 = 70;
 
-	var burn1 = 70;
-	var burn2 = 60;
-	var burn3 = 50;
-	var burn4 = 40;
-	var burn5 = 30;
-	var burn6 = 20;
-	var burn7 = 10;
 
-	var color = Chart.helpers.color;
-	var barChartData = {
-		labels : [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-				"Friday", "Saturday" ],
-		datasets : [
-				{
-					type : 'bar',
-					label : '섭취 열량',
-					backgroundColor : color(window.chartColors.red).alpha(0.2)
-							.rgbString(),
-					borderColor : window.chartColors.red,
-					data : [ eat1, eat2, eat3, eat4, eat5, eat6, eat7 ]
-				},
-				{
-					type : 'line',
-					label : '잉여 열량',
-					backgroundColor : color(window.chartColors.blue).alpha(0.2)
-							.rgbString(),
-					borderColor : window.chartColors.blue,
-					data : [ (eat1 - burn1), (eat2 - burn2), (eat3 - burn3),
-							(eat4 - burn4), (eat5 - burn5), (eat6 - burn6),
-							(eat7 - burn7) ]
-				},
-				{
-					type : 'bar',
-					label : '소비열량',
-					backgroundColor : color(window.chartColors.green)
-							.alpha(0.2).rgbString(),
-					borderColor : window.chartColors.green,
-					data : [ burn1, burn2, burn3, burn4, burn5, burn6, burn7 ]
-				} ]
-	};
 
-	// Define a plugin to provide data labels
-	Chart.plugins.register({
-		afterDatasetsDraw : function(chart, easing) {
-			// To only draw at the end of animation, check for easing === 1
-			var ctx = document.getElementById("chart-0").getContext("2d");
 
-			chart.data.datasets.forEach(function(dataset, i) {
-				var meta = chart.getDatasetMeta(i);
-				if (!meta.hidden) {
-					meta.data.forEach(function(element, index) {
-						// Draw the text in black, with the specified font
-						ctx.fillStyle = 'rgb(0, 0, 0)';
-
-						var fontSize = 16;
-						var fontStyle = 'normal';
-						var fontFamily = 'Helvetica Neue';
-						ctx.font = Chart.helpers.fontString(fontSize,
-								fontStyle, fontFamily);
-
-						// Just naively convert to string for now
-						var dataString = dataset.data[index].toString();
-
-						// Make sure alignment settings are correct
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'middle';
-
-						var padding = 5;
-						var position = element.tooltipPosition();
-						ctx.fillText(dataString, position.x, position.y
-								- (fontSize / 2) - padding);
-					});
-				}
-			});
-		}
-	});
-
-	window.onload = function() {
-		var ctx = document.getElementById("chart-0").getContext("2d");
-		window.myBar = new Chart(ctx, {
-			type : 'bar',
-			data : barChartData,
-			options : {
-				responsive : true,
-				title : {
-					display : true,
-					text : 'Combo Bar Line Chart'
-				},
-			}
-		});
-	};
-
-</script>
-<script>
-/* 
-		var randomScalingFactor = function() {
-			return Math.round(Math.random() * 100);
-		};
-
-		var config = {
-			type: 'pie',
-			data: {
-				datasets: [{
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-					],
-					backgroundColor: [
-						window.chartColors.red,
-						window.chartColors.orange,
-						window.chartColors.yellow,
-						window.chartColors.green,
-						window.chartColors.blue,
-					],
-					label: 'Dataset 1'
-				}],
-				labels: [
-					"Red",
-					"Orange",
-					"Yellow",
-					"Green",
-					"Blue"
-				]
-			},
-			options: {
-				responsive: true
-			}
-		};
-
-		window.onload = function() {
-			var ctx2 = document.getElementById("chart-1").getContext("2d");
-			window.myPie = new Chart(ctx2, config);
-		};
-
-		document.getElementById('randomizeData').addEventListener('click', function() {
-			config.data.datasets.forEach(function(dataset) {
-				dataset.data = dataset.data.map(function() {
-					return randomScalingFactor();
-				});
-			});
-
-			window.myPie.update();
-		});
-
-		var colorNames = Object.keys(window.chartColors);
-		document.getElementById('addDataset').addEventListener('click', function() {
-			var newDataset = {
-				backgroundColor: [],
-				data: [],
-				label: 'New dataset ' + config.data.datasets.length,
-			};
-
-			for (var index = 0; index < config.data.labels.length; ++index) {
-				newDataset.data.push(randomScalingFactor());
-
-				var colorName = colorNames[index % colorNames.length];;
-				var newColor = window.chartColors[colorName];
-				newDataset.backgroundColor.push(newColor);
-			}
-
-			config.data.datasets.push(newDataset);
-			window.myPie.update();
-		});
-
-	
- */
-	</script>
 <script src="resources/js/functions.js"></script>
 
-	<script>
+<!-- 	<script>
 		jQuery(window).on( 'load',  function(){
 			var filters = {};
 
@@ -367,7 +189,7 @@
 		});
 
 	</script>
-
+ -->
 	
 	<%@ include file="../include/footer.jsp" %>
 	<%@ include file="../include/footerScript.jsp" %>

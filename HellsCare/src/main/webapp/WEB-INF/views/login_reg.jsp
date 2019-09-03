@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 
-<%@ page session="false"%>
-<!DOCTYPE html>
 <html>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<!-- <script type="text/javascript" src="/hellscare/resources/script.js"></script> -->
 
 <!-- <script type="text/javascript">
 function confirmId(){
@@ -16,6 +13,83 @@ function confirmId(){
 	      return false; 
 	  }
 </script> -->
+<script type="text/javascript">
+/*id 정규식  */
+function idChk(){
+
+	var idReg = /^[A-Za-z0-9]{5,19}/;
+
+	if(!idReg.test($("input[name=username]").val())) {
+        alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+        document.signupform.username.value =""; 
+        return;
+    }
+}
+	
+	// resultTypeb ==> boolean 형 
+	/* var result = idReg.test(document.signupform.username.value); 
+	
+	if(!result){
+        alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+        document.signupform.username.value =""; 
+	}
+*/
+
+/* 비밀번호 정규식 */
+function checkPassword(){
+	
+	var pwReg = /^[A-Za-z0-9]{6,12}/;  //숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
+
+	if(!pwReg.test($("input[name=password]").val())){
+		alert('숫자와 영문 대소문자 포함 형태의 7~13자리 이내의 비밀번호를 사용해야 합니다.');
+		document.signupform.password.value ="";
+		document.signupform.password.focus();
+		return;
+	}
+	
+}
+
+/* 비밀번호 일치여부  */
+function checkRePw(){
+	
+	if(document.signupform.password.value != document.signupform.repassword.value){
+		alert('비밀번호가 일치하지 않습니다. 다시입력해주세요');
+		document.signupform.password.focus();
+		return;
+	}
+}  
+	/*
+	var checkNumber = password.search(/[0-9]/g);
+	var checkEnglish = password.search(/[a-z]/ig);
+
+	if(checkNumber <0 || checkEnglish <0){
+		alert("숫자와 영문자를 혼용하여야 합니다.");
+		return false;
+	}
+	if(/(\w)\1\1\1/.test(password)){
+		alert('444같은 문자를 4번 이상 사용하실 수 없습니다.');
+		return false;
+	}
+	if(password.search(username) > -1){
+		alert("비밀번호에 아이디가 포함되었습니다.");
+		return false;
+	}
+	return true;
+}
+var msg_confirmId="아이디 중복확인을 해주세요.";
+	*/
+function inputCheck(){
+	if(document.signupform.hidden_id.value ==0){
+		alert(msg_confirmId);
+	 	document.signupform.dupChk.focus();
+	 	return false;
+	}
+}
+
+	
+
+</script>
+
 <head>
 
 
@@ -79,7 +153,7 @@ function confirmId(){
 						<div class="tab-content clearfix" id="tab-login">
 							<div class="card nobottommargin">
 								<div class="card-body" style="padding: 40px;">
-									<form id="login-form" name="login-form" class="nobottommargin" action="${path}/login_check" method="post">
+									<form id="login-form" name="login-form" class="nobottommargin" action="login_check" method="post">
 									<!-- 이거는 페이지마다 추가해야함 -->
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		
@@ -109,7 +183,7 @@ function confirmId(){
 						<div class="card-body" style="padding: 40px;">
 						<!-- id="register-form"  class="nobottommargin"  -->
 						<form action="regPro" name="signupform"
-						 method="post">
+						 method="post"  onsubmit="return inputCheck();">
 						<h3>회원가입을 환영합니다.</h3>
 						<!-- hiddenId : 중복확인 버튼 클릭여부 체크(0:클릭 안함,1:클릭함) -->
 						<input type="hidden" name="hidden_id" value="0">
@@ -121,7 +195,7 @@ function confirmId(){
 							<label for="register-form-username">*아이디:</label>
 							</div>
 							<div class="col-sm-9">
-							<input type="text" id="register-form-username" name="username"  placeholder="아이디 입력" class="form-control" required autofocus/><!--  onchange="idChk();" -->
+							<input type="text" id="register-form-username" name="username"  placeholder="아이디 입력" class="form-control" onchange="idChk();" required autofocus/><!--  onchange="idChk();" -->
 							</div> 
 						</div>
 						<div class="row">
@@ -144,7 +218,7 @@ function confirmId(){
 							</div>
 							<div class="col-sm-9">
 							<input class="form-control" type="password" id="register-form-password" name="password" size="23"
-							 value="" maxlength="10" placeholder="비밀번호 입력" required autofocus />
+							 value="" maxlength="10" placeholder="비밀번호 입력"  onchange ="checkPassword();" required autofocus />
 							 </div>
 						</div>
 		
@@ -154,7 +228,7 @@ function confirmId(){
 							</div>
 							<div class="col-sm-9">
 							<input type="password" id="register-form-repassword" name="repassword" 
-								placeholder="비밀번호 확인" value="" class="form-control" required autofocus/>
+								placeholder="비밀번호 확인"  class="form-control" onchange = "checkRePw();" required autofocus/>
 							</div>
 						</div>
 						
@@ -301,7 +375,7 @@ function confirmId(){
 						
 
 						<div class="col_full nobottommargin">
-							<button class="button button-3d button-black nomargin" type="submit"  name="signupform" >가입하기</button>
+							<button class="button button-3d button-black nomargin" type="submit">가입하기</button>
 					
 						<!--  id="register-form-submit"-->
 						</div>

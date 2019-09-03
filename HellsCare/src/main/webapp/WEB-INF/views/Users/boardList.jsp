@@ -138,16 +138,43 @@
 											</tr>
 										</tfoot>
 										<tbody>
+											<c:forEach var="qto" items="${qtos}" >
 											<tr>
-												<td>01</td>
-												<td>2011/06/27</td>
-												<td>질문이 있슙니다</td>
-												<td>짱구</td>
-												<td>345</td>
+												<td align="center" style="width:50px">
+												${qto.rNum}
+												</td>
+												
+												<td align="left">
+												<%-- <!-- hot 이미지 -->
+												<c:if test="${dto.readCnt > 18}">
+												<img src="${project}images/hot.gif" board="0" width="20" height="15">
+												</c:if> --%>
+		
+													<!-- 상세페이지 -->
+													<!-- num은 where절의 키를비교하기 위해 가져옴 -->
+													<a href="qna_pwdconfirm?qna_code=${qto.qna_code}">${qto.title}
+														<c:if test="${board_image}"><li><i class="icon-camera-retro"></i></a></li></c:if>
+														<c:if test="${qto.commentCnt>0}"><i class="icon-chat-3">${qto.commentCnt}</i></c:if>
+													</a>
+												</td>
+												
+												<td align="left" style="width:150px">
+													${qto.username}
+												</td>
+												
+												<td align="center" style="width:70px">
+													${qto.readCnt}
+												</td>
+																						
+												<td align="left" style="width:200px">
+													${qto.qna_write_date}
+												</td>
+		
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>	
-									<a href="qna_write" class="button button-black tright noleftmargin" style="text-align: center;">질문하기<i class="icon-angle-right"></i></a>
+									<a href="qnaWriteForm" class="button button-black tright noleftmargin" style="text-align: center;">질문하기<i class="icon-angle-right"></i></a>
 									<br><br>									
 								</div>
 							</div>

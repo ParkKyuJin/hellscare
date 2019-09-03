@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,73 +68,144 @@
             <div class="form-panel">
              <h4 class="mb"><i class="fa fa-angle-right"></i> 음식 등록 </h4>
               <div class="form">
-                <form class="cmxform form-horizontal style-form" id="signupForm" method="get" action="host_foodRegPro">
+                <form class="cmxform form-horizontal style-form" id="food_register" name="food_register" 
+                	method="post" action="host_foodRegPro?${_csrf.parameterName}=${_csrf.token}" onsubmit="return foodRegCheck();" enctype="multipart/form-data">
+                  
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                  
                   <div class="form-group ">
-                    <label for="firstname" class="control-label col-lg-2">음식 이름</label>
-                    <div class="col-lg-10">
-                      <!-- <input class=" form-control" id="firstname" name="firstname" type="text" /> -->
-                      <input class="form-control" id="food_name" name="food_name" type="text">
+                    <label for="food_name" class="control-label col-lg-2">음식 이름</label>
+                    <div class="col-lg-4">
+                      <input type="hidden" id="food_name_chk" name="food_name_chk" value="0">
+                      
+                      <input class="form-control" id="food_name" name="food_name" type="text" required>
+                    </div>
+                    <div class="col-lg-2">
+                    	<button class="btn btn-theme" type="button" onclick="checkFoodDup();">중복확인</button>
+                    </div>
+                  </div>
+                  
+                   <script>
+						function checkFoodDup() {
+							var food_name = document.getElementById("food_name").value;
+							document.getElementById("food_name_chk").value = 0;
+							
+							if(!document.food_register.food_name.value) {
+								alert("음식명을 입력해주세요!");
+								document.food_register.food_name.focus();
+								return false;
+							}
+							
+							window.open('host_foodDupCheck?food_name=' + food_name, 'width=300, height=150', true);
+						}
+                  </script>
+                  
+                  <div class="form-group ">
+                    <label for="food_img" class="control-label col-lg-2">음식 이미지</label>
+                    <div class="col-lg-4">
+                      <input type="file" class="form-control" id="food_img" name="food_img" required>
                     </div>
                   </div>
                   
                   <div class="form-group ">
-                    <label for="lastname" class="control-label col-lg-2">음식 이미지</label>
-                    <div class="col-lg-10">
-                      <!-- <input class=" form-control" id="lastname" name="lastname" type="text" /> -->
-                      <input type="file" class="form-control" id="food_img" name="food_img">
+                    <label for="quantity" class="control-label col-lg-2">권장 섭취량(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="quantity" name="quantity" type="number" min="0" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                  	<label for="food_kind" class="control-label col-lg-2">음식 종류</label>
+                  	<div class="col-lg-2">
+                  		<select class="form-control" id="food_kind" name="food_kind" onchange="inPersonInput();">
+							<option value="0">선택 안함</option>
+							<option value="1">밥류</option>
+							<option value="2">면류</option>
+							<option value="3">국/찌개류</option>
+							<option value="4">탕/전골류</option>
+							<option value="5">고기류</option>
+							<option value="6">해산물류</option>
+							<option value="7">채소류</option>
+							<option value="8">과일류</option>
+							<option value="9">스낵류</option>
+							<option value="10">빙과류</option>
+							<option value="11">직접입력</option>
+                  		</select>
+                  	</div>
+                  	
+                  	<div class="col-lg-2" id="inPersonInput" style="display:none;">
+                  		<input class="form-control" id="inputInPerson" name="inputInPerson" type="text">
+                  	</div>
+                  	
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label for="kcal" class="control-label col-lg-2">칼로리(단위:kcal)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="kcal" name="kcal" type="number" min="0">
                     </div>
                   </div>
                   
                   <div class="form-group ">
-                    <label for="username" class="control-label col-lg-2">일일 권장 칼로리</label>
-                    <div class="col-lg-10">
-                      <!-- <input class="form-control " id="username" name="username" type="text" /> -->
-                      <input class="form-control" id="onedaykcal" name="onedaykcal" type="number">
+                    <label for="carbohydrate" class="control-label col-lg-2">탄수화물(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="carbohydrate" name="carbohydrate" type="number" min="0">
                     </div>
                   </div>
                   
                   <div class="form-group ">
-                    <label for="username" class="control-label col-lg-2">권장 섭취량</label>
-                    <div class="col-lg-10">
-                      <!-- <input class="form-control " id="username" name="username" type="text" /> -->
-                      <input class="form-control" id="quantity" name="quantity" type="number">
+                    <label for="protein" class="control-label col-lg-2">단백질(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="protein" name="protein" type="number" min="0">
                     </div>
                   </div>
                   
-                  <!-- <div class="form-group ">
-                    <label for="password" class="control-label col-lg-2">전문/일반</label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="password" name="password" type="password" />
+                  <div class="form-group ">
+                    <label for="fat" class="control-label col-lg-2">지방(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="fat" name="fat" type="number" min="0">
                     </div>
                   </div>
+                  
                   <div class="form-group ">
-                    <label for="confirm_password" class="control-label col-lg-2">허가일자</label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
+                    <label for="saccharides" class="control-label col-lg-2">당류(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="saccharides" name="saccharides" type="number" min="0">
                     </div>
                   </div>
+                  
                   <div class="form-group ">
-                    <label for="email" class="control-label col-lg-2">etc</label>
-                    <div class="col-lg-10">
-                      <input class="form-control " id="email" name="email" type="email" />
-                    </div>
-                  </div> -->
-                 <!--  <div class="form-group ">
-                    <label for="agree" class="control-label col-lg-2 col-sm-3">Agree to Our Policy</label>
-                    <div class="col-lg-10 col-sm-9">
-                      <input type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" />
+                    <label for="salt" class="control-label col-lg-2">나트륨(단위:mg)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="salt" name="salt" type="number" min="0">
                     </div>
                   </div>
+                  
                   <div class="form-group ">
-                    <label for="newsletter" class="control-label col-lg-2 col-sm-3">Receive the Newsletter</label>
-                    <div class="col-lg-10 col-sm-9">
-                      <input type="checkbox" style="width: 20px" class="checkbox form-control" id="newsletter" name="newsletter" />
+                    <label for="cholesterol" class="control-label col-lg-2">콜레스테롤(단위:mg)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="cholesterol" name="cholesterol" type="number" min="0">
                     </div>
-                  </div> -->
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label for="saturation" class="control-label col-lg-2">포화지방산(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="saturation" name="saturation" type="number" min="0">
+                    </div>
+                  </div>
+                  
+                  <div class="form-group ">
+                    <label for="trans" class="control-label col-lg-2">트랜스지방산(단위:g)</label>
+                    <div class="col-lg-4">
+                      <input class="form-control" id="trans" name="trans" type="number" min="0">
+                    </div>
+                  </div>
+                  
                   <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
                       <button class="btn btn-theme" type="submit">Save</button>
-                      <button class="btn btn-theme04" type="button">Cancel</button>
+                      <button class="btn btn-theme04" type="button" onclick="window.location='host_foodList'">Cancel</button>
                     </div>
                   </div>
                 </form>
@@ -235,6 +305,32 @@
     
   </div><!-- #wrapper end -->
 
+	<script>
+		function inPersonInput() {
+			var inPersonInput = document.food_register.food_kind.value;
+			
+			if(inPersonInput == 11) {
+				$("#inPersonInput").css("display", "");
+			} else {
+				$("#inPersonInput").css("display", "none");
+			}
+		}
+		
+		function foodRegCheck() {
+			if(document.food_register.food_kind.value == 0) {
+				alert("음식 종류를 선택해주세요!");
+				return false;
+			} else if(document.food_register.food_kind.value == 11 && 
+						document.food_register.inputInPerson.value == null) {
+				alert("음식 종류를 입력해주세요!");
+			}
+			
+			if(document.getElemntById("food_name_chk").value != 1) {
+				alert("음식 이름 중복 여부를 확인해주세요!")
+				return false;
+			}
+		}
+	</script>
 
 </body>
 </html>

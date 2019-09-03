@@ -1,120 +1,189 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-      <%@ include file="../include/h_sidebarMenu.jsp"%>
-<!DOCTYPE html>
+<%@ include file="../include/h_sidebarMenu.jsp"%>
 <html lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="author" content="SemiColonWeb" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword"
+	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <!-- Stylesheets
 	============================================= -->
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="resources/css/bootstrap.css"
+	type="text/css" />
+<link rel="stylesheet" href="resources/style.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/dark.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/font-icons.css"
+	type="text/css" />
+<link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/magnific-popup.css"
+	type="text/css" />
 
+<link rel="stylesheet" href="resources/css/responsive.css"
+	type="text/css" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- Document Title
-	============================================= -->
-<title>Canvas | The Multi-Purpose HTML5 Template</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
-
-  
 </head>
-
+<style>
+	th {
+		font-size: 15px;
+	}
+	
+	td {
+		vertical-align: middle;
+		font-size: 16px;
+		font-weight: bold;
+	}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$("#all_check").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".remove").prop("checked", is_check);
+		});
+	});
+</script>
+<html>
 <body>
-  <section id="container">
-    <!-- **********************************************************************************************************************************************************
-        TOP BAR CONTENT & NOTIFICATIONS
-        *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-      <div class="sidebar-toggle-box">
-        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-      </div>
-      <!--logo start-->
-      <a href="index.html" class="logo"><b>HEALTH<span>CARE</span></b></a>
-      <!--logo end-->
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
-        </ul>
-      </div>
-    </header>
-    <!--header end-->
-    <!-- **********************************************************************************************************************************************************
-        MAIN SIDEBAR MENU
-        *********************************************************************************************************************************************************** -->
-    <!--sidebar start-->
+ <section id="main-content">
+	<section class="wrapper">
+		<div class="tabs tabs-alt tabs-justify clearfix" id="tab-10">
+		<nav class="navbar navbar-light bg-light justify-content-between" style="text-align:center;">
+			<h2 style="padding-top:30px;">동호회 개설승인 / 거절</h2>
+		</nav>
+		<br><br>
+			<form action="host_deleteApplyClub" class="nobottommargin" onsubmit="return checkReview();" name="deleteform">
+				<table class="table table-hover" style="text-align: center;">
+					<thead>
+ 						<tr>
+							<th><input type="checkbox" name="all_remove"
+								id="all_check"></th>
+							<th>동호회명</th>
+							<th>대표자</th>
+							<th>종류</th>
+							<th>지역</th>
+							<th>최대인원</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${cnt == 0}">
+							<tr>
+								<th colspan="7">현재 신청한 동호회목록이 없습니다.</th>
+							</tr>
+						</c:if>
+						<c:if test="${cnt != 0}">
+							<c:forEach var="dto" items="${dtos}">
+								<tr>
+									<td style="vertical-align: middle">
+									<input type="checkbox" name="remove2" class="remove" value="${dto.club_name}"></td>
+									<td style="vertical-align: middle">${dto.club_name}</td>
+									<td style="vertical-align: middle">${dto.club_master}</td>
+									<td style="vertical-align: middle">${dto.club_kind}</td>
+									<td style="vertical-align: middle">${dto.area}</td>
+									<td style="vertical-align: middle">${dto.club_max}</td>
+									<td style="vertical-align: middle; width: 350px;">
+										<a href="host_ClubDetail?club_name=${dto.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>&emsp;&emsp;
+										<a href="host_PermitClub?club_name=${dto.club_name}&pageNum=${pageNum}" onclick="return permitClub();"><button type="button" class="button button-large button-dark button-rounded">승인</button></a>
+									</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				
+				<input type="hidden" name="pageNum" value="${pageNum}">
+				
+				<table class="table table-hover" style="text-align: center;">
+					<tr>
+					<td style="margin-left: 0px;"><button type="submit"
+						class="button button-large button-dark button-rounded" style="float:left">삭제하기</button>
+					</td>
+					<th style="padding-right:320px; vertical-align:middle">
+						<!-- 게시글이 있으면  --> <c:if test="${cnt > 0}">
+							<!-- 처음[◀◀] / 이전블록[◀] -->
+							<c:if test="${startPage > pageBlock}">
+								<a href="host_clubManage">[◀◀]</a>
+								<a href="host_clubManage?pageNum=${startPage - pageBlock}">[◀]</a>
+							</c:if>
 
-	<nav class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand" style="margin:0 auto;">동호회 목록</a>
-	</nav>
-	<br><br>
-		<div class="container clearfix">
-			
-			<table class="table table-hover" style="text-align:center;">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>동호회명</th>
-						<th>대표자</th>
-						<th>인원</th>
-						<th></th>
+							<!-- 블록내의 페이지 번호  -->
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<span><b style="background: rigthgreen">[${i}]</b></span>
+								</c:if>
+
+								<c:if test="${i != currentPage}">
+									<span><b><a href="host_clubManage?pageNum=${i}">[${i}]</a></b></span>
+								</c:if>
+							</c:forEach>
+
+							<!-- 다음블록[▶] / 마지막[▶▶]  -->
+							<c:if test="${pageCount > endPage}">
+								<a href="host_clubManage?pageNum=${startPage + pageBlock}">▶</a>
+								<a href="host_clubManage?pageNum=${pageCount}">▶▶</a>
+							</c:if>
+						</c:if>
+					</th>
 					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>11</td>
-						<td><i class="i-rounded i-bordered icon-check"></i><i class="i-rounded i-bordered icon-remove"></i></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>22</td>
-						<td><i class="i-rounded i-bordered icon-check"></i><i class="i-rounded i-bordered icon-remove"></i></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>sfd</td>
-						<td>sdf</td>
-						<td>33</td>
-						<td><i class="i-rounded i-bordered icon-check"></i><i class="i-rounded i-bordered icon-remove"></i></td>
-					</tr>
-				</tbody>
-			</table>
-	</div>
-    <!--footer start-->
-    <footer class="site-footer">
-      <div class="text-center">
-        <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
-        </p>
-        <div class="credits">
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
-        </div>
-        <a href="index.html#" class="go-top">
-          <i class="fa fa-angle-up"></i>
-          </a>
-      </div>
-    </footer>
-    <!--footer end-->
+				</table>
+				</form>
+			</div>
   </section>
-  <!-- js placed at the end of the document so the pages load faster -->
-  
+  </section>
+
+	<script type="text/javascript">
+	// 삭제버튼 눌렀을시 운동선택했는지 여부
+	function checkReview(){
+		var temp = false;
+		if(${cnt} == 0){
+			alert("현재 삭제하실 동호회가 없습니다.");
+			return false;
+		}
+		if(!document.deleteform.remove2.length){
+			temp = document.deleteform.remove2.checked;
+			if(temp){
+				var yn = confirm("선택하신 동호회를 삭제하시겠습니까?");
+				if(yn){
+					return true;
+				} else{
+					return false;	
+				}
+			}
+		} else{
+			for(var i=0; i<document.deleteform.remove2.length; i++){
+				temp = document.deleteform.remove2[i].checked;
+				if(temp){
+					var yn = confirm("선택하신 동호회를 삭제하시겠습니까?");
+					if(yn){
+						return true;
+					} else{
+						return false;	
+					}
+				}
+			}
+		}
+		if(!temp){
+			alert("동호회를 하나이상 선택해주세요.");
+			return false;
+		}
+		return false;
+	}
+</script>
+
+<script type="text/javascript">
+	function permitClub(){
+		if(confirm("선택하신 동호회를 승인하시겠습니까?")){
+			return true;
+		} else{
+			return false;
+		};
+	}
+</script>
 
 </body>
 </html>

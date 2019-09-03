@@ -34,6 +34,15 @@
   ======================================================= -->
 </head>
 
+<script type="text/javascript">
+	$(function() {
+		$("#all_check").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".remove").prop("checked", is_check);
+		});
+	});
+</script>
+
 <body>
   <section id="container">
   
@@ -55,34 +64,30 @@
                 <hr>
                 <thead>
                   <tr>
+                  	<th><input type="checkbox" name="all_remove" id="all_check"></th>
                     <th>#</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>조회수</th>
+                    <th>작성일</th>
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="dto" items="${dtos}" >
+                	<input type="hidden" name="board_code" class=""board_code"" value="${dto.board_code}">
                   <tr>
-                    <td>1</td>
-                    <td><a href="host_noticeContent">공지사항입니다.</a></td>
-                    <td>관리자</td>
-                    <td>234234</td>
+                  	<td style="vertical-align: middle"><input type="checkbox" name="remove2" class="remove" value="${dto.rNum}"></td>
+                    <td>${dto.rNum}</td>
+                    <td><a href="host_noticeContent?board_code=${dto.board_code}">${dto.title}</a></td>
+                    <td>${dto.username}</td>
+                    <td>${dto.readCnt}</td>
+                    <td>${dto.write_date}</td>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>공지사항2</td>
-                    <td>관리자</td>
-                    <td>3453</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>공지사항3</td>
-                    <td>관리자</td>
-                    <td>36467</td>
-                  </tr>
+                 </c:forEach>
                 </tbody>
               </table>
               &nbsp;&nbsp;&nbsp;<a href="notice_write"><button type="button" class="btn btn-primary">공지사항 작성</button></a>
+              &nbsp;<a href="notice_write"><button type="button" class="btn btn-primary">삭제</button></a>
             </div>
           </div>
           <!-- /col-md-12 -->

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +71,7 @@
               <div class="form">
               
                 <form class="cmxform form-horizontal style-form" id="diseaseModifyForm" method="post" action="host_diseaseModifyPro">
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
                 	<input class="form-control" type="hidden" name="pageNum" value="${pageNum }">
                  
                   <div class="form-group ">

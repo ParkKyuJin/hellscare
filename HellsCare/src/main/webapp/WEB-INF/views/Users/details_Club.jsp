@@ -1,19 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../include/setting.jsp"%>
 <html>
 <body>
 	<%@ include file="../include/header.jsp"%>
 	<nav class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand" style="margin: 0 auto;">KOSMO 동호회</a>
+		<a class="navbar-brand" style="margin: 0 auto;">${vo.club_name} 동호회</a>
 	</nav>
 	<br>
 	<br>
 	<br>
+	<c:if test="${memCnt == 0}">
+		<section id="content">
+			<div class="container clearfix">
+				<div class="col_one_fourth">
+					<br>
+						<h3>동호회 정보</h3>
+							<div class="toggle">
+								<div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>동호회명</div>
+								<div class="togglec">${vo.club_name}</div>
+							</div>
+							
+							<div class="toggle">
+								<div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>대표자</div>
+								<div class="togglec">${vo.club_master}</div>
+							</div>
+	
+							<div class="toggle">
+								<div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>동호회 종류</div>
+								<div class="togglec">${vo.club_kind}</div>
+							</div>
+	
+							<div class="toggle">
+								<div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>지역</div>
+								<div class="togglec">${vo.area}</div>
+							</div>
+							
+							<div class="toggle">
+								<div class="togglet"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>소개</div>
+								<div class="togglec">${vo.club_pr}</div>
+							</div>
+							
+							<br><br>
+							<button type="button" class="button button-3d button-rounded" onclick="history.back();">목록으로</button>
+						</div>
+					
+						<div class="col_three_fourth col_last">
+							<div class="sidebar-widgets-wrap">
+								<div class="widget widget_links clearfix">
+									<form name="applyClubForm" class="nobottommargin" action="clubApply"
+										method="post" onsubmit="return applyChk();" style="text-align:center; border:2px solid; width:700px;">
+										<br><br>
+										<center><h3><font style="color:green; size:50px;">${vo.club_name}</font>&emsp;동호회 가입신청<small>(최대 3곳만 가입가능)</small></h3></center>
+										
+										<input type="hidden" name="username" value="${admin}">
+										<input type="hidden" name="club_name" value="${vo.club_name}">
+										
+										<div style="text-align:center">
+											<label for="billing-form-name">아이디</label>
+											<h3><font color=red>${admin}</font></h3>
+										</div>
+				
+										<div class="clear"></div>
+										
+										<div style="text-align:center">
+											<label for="billing-form-name">동호회명</label>
+											<h3><font color=green>${vo.club_name}</font></h3>
+										</div>
+										
+										<br>
+										<button type="submit" class="button button-3d button-rounded">가입 신청하기</button>
+										<br><br><br>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+	</c:if>
+	<c:if test="${memCnt != 0}">
 	<div class="row">
 		<div>
 			<div class="list-group" id="list-tab" role="tablist"
 				style="width: 250px; margin-left: 50px;">
-				<a class="list-group-item list-group-item-action active"
+				<a class="list-group-item list-group-item-action active" 
 					id="list-home-list" data-toggle="list" href="#list-home" role="tab"
 					aria-controls="home">동호회 회원</a> <a
 					class="list-group-item list-group-item-action"
@@ -591,6 +661,8 @@
 			</div>
 		</div>
 	</div>
+</c:if>
+	<div class="line"></div>
 	<%@ include file="../include/footer.jsp"%>
 	<%@ include file="../include/footerScript.jsp"%>
 	<!-- Go To Top
@@ -613,6 +685,16 @@
 		$(document).ready(function() {
 			$('#datatable1').dataTable();
 		});
+	</script>
+	
+	<script type="text/javascript">
+		function applyChk(){
+			if(confirm("해당 동호회에 가입신청하시겠습니까?")){
+				return true;
+			} else {
+				return false;
+			}
+		}
 	</script>
 </body>
 </html>

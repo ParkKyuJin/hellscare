@@ -7,6 +7,7 @@
     
 <mapper namespace="com.pro.hellscare.persistence.HellsCareDAO">
     
+    <!-- 규진 시작 -->
     <select id="testDAO" resultType="com.pro.hellscare.VO.HellsCareVO">
     	select username,name from users where name = '박규진'
     </select>
@@ -31,10 +32,42 @@
     	delete challenge_tbl where challenge_code = #{challenge_check}
     </delete>
     
+      <select id="challengedetail" resultType="com.pro.hellscare.VO.challengeVO" parameterType="int">
+    	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date from challenge_tbl where challenge_code = #{code}
+    </select>
+
+    <select id="challengesearch" resultType="com.pro.hellscare.VO.challengeVO" parameterType="String">
+    	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date from challenge_tbl where challenge_name like '%'||#{content}||'%'
+    </select>
     
+    <insert id="addchall" parameterType="java.util.Map">
+    	insert into Mychallenge_tbl(challenge_code,username,done,challenge_start) values(#{code},#{id},#{done},#{start})
+    </insert>
+    
+    <select id="Mychallenge" resultType="com.pro.hellscare.VO.MychalleangeVO" parameterType="String">
+    	select c.challenge_code as challenge_code, c.challenge_name as challenge_name, c.challenge_content as challenge_content
+    	,c.challenge_gift as challenge_gift, c.challenge_img as challenge_img, m.done as done, m.challenge_start as challenge_start, m.challenge_end as challenge_end
+    	from Mychallenge_tbl m, challenge_tbl c
+    	where m.challenge_code = c.challenge_code
+    	and m.username = #{id}
+    </select>
+    <select id="challchek" resultType="int" parameterType="java.util.Map">
+    	select count(*) from Mychallenge_tbl where challenge_code = #{code} and username = #{id}
+    </select>
+    
+    <delete id="delchall" parameterType="java.util.Map">
+    	delete from Mychallenge_tbl where challenge_code = #{code} and username = #{id}
+    </delete>
+    
+    <select id="challcheck2" resultType="int" parameterType="String">
+    	select count(*) from Mychallenge_tbl where username = #{id}
+    </select>
+    
+    <!-- 규진 종료 -->
     
     <!-- 재관 시작 -->
-    
+   <!-- 관리자 - 질병정보 <== 재관     -->
+	<!-- 재관 시작 -->
    <!-- 관리자 - 질병정보 <== 재관     -->
 	<!-- 질병정보 갯수 -->
 	<select id="getDiseaseCount" resultType="int">
@@ -96,12 +129,76 @@
     	DELETE disease_tbl
     	WHERE disease_code=#{disease_code}
     </delete>
+    
+    <!-- 회원수 구하기 -->
+    <select id="getUserCnt" resultType="int">
+		SELECT count(*) FROM users WHERE not username='host'
+	</select>
+    
+    <!-- 회원리스트 -->
+    <select id="getUserList"  parameterType="java.util.Map" resultType="com.pro.hellscare.VO.UsersVO">
+		SELECT *  
+		  FROM ( SELECT username, name, address, phone_number, email,
+						birth, reg_date, enabled,  rownum rNum   
+				  FROM ( 
+						SELECT * FROM users	
+						WHERE not username='host'						 
+						ORDER BY reg_date desc
+						) 
+				) 
+		<![CDATA[
+		WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+    
+    </select>
+    
+    <!-- 회원 삭제 -->
+    <delete id="deleteUser" parameterType="String">
+    	DELETE users
+    	 WHERE username=#{username}
+    </delete>
+    
+    <!-- 성별 차트 구하기 -->
+	<select id="getGenderChart" resultType="com.pro.hellscare.VO.GenderChartVO">
+		SELECT nvl(gender,'total') gender, count(gender) genderCnt
+		  FROM users
+		 WHERE not username='host'
+		 GROUP BY rollup(gender) 
+	</select>
+	
+	<!-- 건강정보가 있는지 확인 -->
+	<select id="checkUserInfo" resultType="int">
+		SELECT count(*) FROM users_info_tbl where username=#{username}
+	</select>
+	
+	<!-- 건강정보 불러오기 -->
+	<select id="getUserInfo" resultType="com.pro.hellscare.VO.UserInfoVO">
+		SELECT * FROM users_info_tbl where username=#{username}
+	</select>
+	
+	<!-- 건강정보 입력 -->
+	<insert id="insertUserInfo" parameterType="com.pro.hellscare.VO.UserInfoVO">
+		INSERT INTO users_info_tbl (username, height, weight, bmi, sightR, sightL, glucose,
+			pressure, pressure2, smokeAmount, drinkAmount)
+		VALUES ( #{username}, #{height}, #{weight}, #{bmi}, #{sightL}, #{sightR}, #{glucose},
+		    #{pressure}, #{pressure2}, #{smokeAmount}, #{drinkAmount})
+	</insert>
+
+	<!-- 건강정보 수정 -->
+	<update id="updateUserInfo" parameterType="com.pro.hellscare.VO.UserInfoVO">
+		UPDATE users_info_tbl SET height=#{height}, weight=#{weight}, heart_rate=#{heart_rate}, bmi=#{bmi}, 
+			sightR=#{sightR}, sightL=#{sightR}, glucose=#{glucose}, pressure=#{pressure}, pressure2=#{pressure2},
+			smokeAmount=#{smokeAmount}, drinkAmount=#{drinkAmount}, check_date=sysdate
+		WHERE username=#{username}
+	</update>
+	
+<!-- 재관 종료 -->    
 
     <!-- 재관 종료 -->
     
     
     <!-- 예찬 시작 -->
-    <!-- 관리자 - 운동등록 -->
+   <!-- 관리자 - 운동등록 -->
  	   <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
    	 	INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind,exercise_video)
    	 	VALUES(exercise_seq.nextval,#{exercise_name},#{exercise_img},#{way},#{part},#{kcal},#{note},#{kind},#{exercise_video})  
@@ -171,15 +268,15 @@
 	
 	<!-- 운동 - 상세페이지  -->
 	<select id="detailExercise" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
-		select exercise_name, way, part, kcal, note, kind, exercise_video
+		select exercise_code, exercise_name, way, part, kcal, note, kind, exercise_video
 		  from exercise_tbl
 		 where exercise_code = #{exercise_code}
 	</select>
 	
 	<!-- 운동 - 즐겨찾기 추가 -->
 	<insert id="addFavorit" parameterType="java.util.Map">
-		insert into favorite_tbl(exercise_code,username)
-		values(#{exercise_code},#{username})
+		insert into favorite_tbl(favorite_code,exercise_code,username)
+		values(favorite_seq.nextval,#{exercise_code},#{username})
 	</insert>
 	
 	<!-- 운동 - 부위별 목록 -->
@@ -188,9 +285,209 @@
 		from exercise_tbl where part=#{part}
 	</select>
     
+    <!-- 운동 - 부위별 목록 여부 -->
+    <select id="getPartCnt" parameterType="String" resultType="int">
+    	select count(*)
+		from exercise_tbl where part=#{part}
+    </select>
+    
+    <!-- 운동 - 즐겨찾기 여부 -->
+    <select id="getFavoriteCnt" parameterType="String" resultType="int">
+    	select count(*) from favorite_tbl
+    </select>
+    
+    <!-- 동호회명 중복확인 -->
+    <select id="clubNameCheck" parameterType="String" resultType="int">
+    	select count(*) from club_tbl where club_name = #{club_id}
+    </select>
+    
+    <!-- 즐겨찾기 여부 -->
+    <select id="favoritCnt" parameterType="java.util.Map" resultType="int">
+    	select count(*) from favorite_tbl where username = #{username} and exercise_code = #{exercise_code}
+    </select>
+    
+    <!-- 즐겨찾기 코드값리턴 -->
+    <select id="favoritCode" parameterType="java.util.Map" resultType="String" >
+    	select favorite_code from favorite_tbl where username = #{username} and exercise_code = #{exercise_code}
+    </select>
+    
+    <!-- 즐겨찾기 제거  - 버튼 -->
+    <delete id="removeFavorit" parameterType="String">
+    	delete from favorite_tbl where favorite_code = #{favorite_code}
+    </delete>
+    
+    <!-- 즐겨찾기 목록  -->
+	<select id="getFavoriteList" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
+		select favorite_code,exercise_code,username
+		  from favorite_tbl
+		 where username = #{username}
+	</select>
+	
+	<!-- 즐겨찾기 - 해당 운동코드에 맞는 운동정보 -->
+	<select id="getExerciseInfo" parameterType="String" resultType="com.pro.hellscare.VO.ExerciseVO">
+		select f.favorite_code, e.exercise_code, e.exercise_name, e.way, e.part, e.kcal, e.note, e.kind, e.exercise_img
+		  from exercise_tbl e, favorite_tbl f
+		 where e.exercise_code = #{exercise_code}
+		   and e.exercise_code = f.exercise_code
+	</select>
+    
+    <!-- 즐겨찾기 제거 - 사용자 -->
+    <delete id="deletefavorite" parameterType="String">
+    	delete from favorite_tbl where favorite_code = #{favorite_code}
+    </delete>
+    
+    <!-- 동호회 - 개설신청  -->
+    <insert id="addClubApply" parameterType="com.pro.hellscare.VO.ClubVO">
+    	insert into club_tbl(club_name,club_kind,club_max,area,club_master,club_pr)
+    	values(#{club_name},#{club_kind},#{club_max},#{area},#{club_master},#{club_pr})
+    </insert>
+    
+    <!-- 동호회 - 신청 목록  -->
+    <select id="getClubList" resultType="com.pro.hellscare.VO.ClubVO" parameterType="java.util.Map">
+    	<![CDATA[
+		select * from (select club_name,club_kind,club_max,area,club_master,club_pr,club_whether, rownum rNum 
+			from (select * from club_tbl 
+					where club_whether = 0)
+				) where rNum >= #{start} AND rNum <= #{end}
+		]]>
+    </select>
+    
+    <!-- 동호회 - 신청목록개수구하기 -->
+    <select id="getClubCnt" resultType="int">
+    	select count(*) from club_tbl where club_whether=0
+    </select>
+    
+    <!-- 관리자 - 동호회 상세페이지 -->
+    <select id="clubDetail" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
+    	select club_name,club_kind,club_max,area,club_date,club_master,club_pr
+    	from club_tbl
+    	where club_name=#{club_name}
+    </select>
+    
+    <!-- 관리자 - 동호회 신청 삭제  -->
+    <delete id="deleteApplyClub" parameterType="String">
+    	delete from club_tbl where club_name = #{club_name}
+    </delete>
+    
+    <!-- 관리자 - 동호회 신청 승인 -->
+    <update id="clubPermit" parameterType="String">
+    	update club_tbl set club_whether=1, club_date=sysdate where club_name=#{club_name}
+    </update>
+    
+    <!-- 고객 - 동호회목록 -->
+    <select id="getClub_List" resultType="com.pro.hellscare.VO.ClubVO" parameterType="java.util.Map">
+   		<![CDATA[
+		select * from (select club_name,club_kind,club_max,area,club_date,club_master,club_pr,club_whether, rownum rNum 
+			from (select * from club_tbl
+					where club_whether = 1
+                    and club_name not in (#{club1},#{club2},#{club3})
+                    and club_master != #{username}
+					order by club_date)
+				) where rNum >= #{start} AND rNum <= #{end}
+		]]>
+    </select>
+    
+    <!-- 동호회 - 개수구하기 -->
+    <select id="getClub_Cnt" resultType="int">
+    	select count(*) from club_tbl where club_whether = 1
+    </select>
+    
+    <!-- 동호회 - 상세페이지 -->
+    <select id="getClub" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
+    	select club_name,club_kind,club_max,area,club_date,club_master,club_pr
+    	 from club_tbl
+    	 where club_name = #{club_name}
+    </select>
+    
+    <!-- 동호회 - 로그인한 회원이 동호회원인지 여부 -->
+    <select id="getMember" parameterType="java.util.Map" resultType="int">
+    	select count(*) from clubs where username=#{username} and #{club_name} in(club1,club2,club3)
+    </select>
+    
+    <!-- 관리자 - 개설된 동호회 개수  -->
+    <select id="getExistenceClubCnt" resultType="int">
+    	select count(*) from club_tbl where club_whether=1
+    </select>
+    
+    <!-- 관리자 - 개설된 동호회 목록 -->
+    <select id="getExistenceClubList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ClubVO">
+    	<![CDATA[
+		select * from (select club_name,club_kind,club_max,area,club_master,club_pr,club_whether, rownum rNum 
+			from (select * from club_tbl 
+					where club_whether = 1)
+				) where rNum >= #{start} AND rNum <= #{end}
+		]]>
+    </select>
+    
+    <!-- 동호회 - 내가 가입한 동호회 개수 구하기 -->
+    <select id="getMyClubCnt" parameterType="String" resultType="int">
+		select count(*) from clubs where username=#{username}
+    </select>
+    
+    <!-- 동호회 - 내가 가입한 동호회 목록 -->
+    <select id="getMyClubList" parameterType="String" resultType="com.pro.hellscare.VO.MyClubVO">
+    	select club1,club2,club3 from clubs where username=#{username}
+    </select>
+    
+    <!-- 동호회 - 내가 가입한 동호회 목록 정보 -->
+    <select id="getMy_ClubList" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
+    	select club_name,club_kind,club_max,area,club_master,club_pr
+    	  from club_tbl
+    	 where club_name = #{club_name}
+    </select>
+    
+    <!-- 동호회 - 동호회 가입신청  -->
+    <insert id="applyClub" parameterType="java.util.Map">
+    	insert into apply_tbl(apply_code,username,club_name)
+    	values(apply_seq.nextval,#{username},#{club_name})
+    </insert>
+    
+    <!-- 동호회 - 중복지원 방지 -->
+    <select id="clubWhether" parameterType="java.util.Map" resultType="int">
+    	select count(*) from apply_tbl where username=#{username} and club_name=#{club_name}
+    </select>
+    
+    <!-- 동호회 - 최대 3곳만 가입가능하도록 설정  -->
+    <select id="getJoinClubCnt" parameterType="String" resultType="int">
+    	select count(*) from clubs where club1 is not null and club2 is not null and club3 is not null and username = #{username}
+    </select>
+    
+    <!-- 동호회 - 대표자 클럽개수 확인 -->
+    <select id="getClubMaster" parameterType="String" resultType="String">
+    	select club_master from club_tbl where club_name = #{club_name}
+    </select>
+    
+    <!-- 동호회 - 가입신청 목록 -->
+    <select id="getApplyList" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
+    	select club_name,club_kind,club_max,area,club_master,club_pr
+    	  from club_tbl where club_name in(
+       	select club_name from apply_tbl where username=#{username})
+    </select>
+    
+    <!-- 첫번째 동호회 없을시 첫번째 동호회에 추가 -->
+    <insert id="addClub1" parameterType="java.util.Map">
+    	insert into clubs(username,club1)
+    	values(#{username},#{club_name})
+    </insert>
+    
+    <!-- 첫번째 동호회있고, 두번째 동호회 없을시 두번째 동호회에 추가 -->
+    <update id="addClub2" parameterType="java.util.Map">
+    	update clubs set club2=#{club_name} where username=#{username}
+    </update>
+    
+    <!-- 세번째만 없을때 추가 -->
+    <update id="addClub3" parameterType="java.util.Map">
+    	update clubs set club3=#{club_name} where username=#{username}
+    </update>
+    
+    <!-- 내가 신청한 동호회 개수 -->
+    <select id="applyCnt" parameterType="String" resultType="int">
+    	select count(*) from apply_tbl where username=#{username}
+    </select>
     <!-- 예찬 종료 -->
     
     <!-- 한결 시작 -->
+   <!-- 게시글 수 -->
     <select id="getBoardCnt" resultType="int">
     	SELECT COUNT(*) as cnt FROM board_tbl 
     </select>
@@ -198,7 +495,11 @@
     <select id="getCommentCnt" resultType="int">
     	SELECT COUNT(*) as cnt FROM comment_board_tbl WHERE board_code=#{board_code}
     </select>
+    <select id="getQnaCommentCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM comment_qna_tbl WHERE qna_code=#{qna_code}
+    </select>
     
+    <!-- 게시글 목록 -->
     <select id="getArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardVO">
 		SELECT board_code, username, title, content, readCnt, write_date, rownum as rNum,
 			(SELECT COUNT(*) FROM comment_board_tbl WHERE board_code = b.board_code) as commentCnt
@@ -207,6 +508,10 @@
 	
 	<update id="addReadCnt" parameterType="int">
 		UPDATE board_tbl SET readCnt = readCnt + 1 WHERE board_code=#{board_code}
+	</update>
+	
+	<update id="addQnAReadCnt" parameterType="int">
+		UPDATE board_qna_tbl SET readCnt = readCnt + 1 WHERE qna_code=#{qna_code}
 	</update>
 	
 	<select id="getArticle" resultType="com.pro.hellscare.VO.BoardVO">
@@ -222,30 +527,123 @@
 	</select>
 	
 	<!-- 게시글 저장 -->
-	<insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
+	<!-- <insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
 		INSERT INTO board_tbl (board_code, username, title, content, board_image)
 			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content}, #{board_image})
+	</insert>  -->
+	<insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
+		INSERT INTO board_tbl (board_code, username, title, content)
+			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content})
 	</insert>   
 	
 	<!-- 댓글 등록 -->
 	<insert id="commentWrite" parameterType="com.pro.hellscare.VO.CommentVO">
 		INSERT INTO comment_board_tbl (c_code, username, content, board_code)
-			VALUES (comment_seq.nextval, 'kimId', #{content}, #{board_code})
-	</insert> 
+			VALUES (comment_seq.nextval, 'parkId', #{content}, #{board_code})
+	</insert>
+	
+	<!-- 게시글 삭제 --> 
+    <delete id="b_delete" parameterType="int">
+    	DELETE board_tbl WHERE board_code=#{board_code}
+    </delete>
+    
+    <!-- 게시글삭제 -> 댓글삭제 -->
+    <delete id="c_delete" parameterType="int">
+    	DELETE comment_board_tbl WHERE board_code=#{board_code}
+    </delete>
+    
+    <!-- 게사글 수정 처리 -->
+	<update id="boardUpdate" parameterType="com.pro.hellscare.VO.BoardVO">
+		UPDATE board_tbl SET title=#{title}, content=#{content} WHERE board_code=#{board_code}
+	</update>
+	
+	<!-- QnA 글 수 -->
+    <select id="getQnaCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM board_qna_tbl 
+    </select>
+    
+    <!-- QnA 목록 -->
+    <select id="getQnaArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
+		SELECT qna_code, username, title, content, readCnt, qna_password, kind, qna_write_date, rownum as rNum,
+			(SELECT COUNT(*) FROM comment_qna_tbl WHERE qna_code = q.qna_code) as commentCnt
+			FROM board_qna_tbl q
+	</select>
+	
+	<!-- QnA 저장 -->
+	<insert id="qnaWrite" parameterType="com.pro.hellscare.VO.BoardQnaVO">
+		INSERT INTO board_qna_tbl (qna_code, username, title, content,kind ,qna_password)
+			VALUES (com_qna_seq.nextval, #{username}, #{title}, #{content},#{kind}, #{qna_password})
+	</insert>
+	
+	<!-- 비밀번호 확인 -->
+    <select id="getPwdConfirm" resultType="int" parameterType="java.util.Map">
+    	SELECT count(*) FROM board_qna_tbl WHERE qna_code=#{qna_code} AND qna_password=#{qna_password}  
+    </select>
+    <!--  	SELECT (*) FROM board_qna_tbl WHERE qna_code=#{qna_code} AND qna_password=#{qna_password} AND username=#{username} -->
+    
+    <!-- QnA 내용가져와 -->
+    <select id="getQnaArticle" resultType="com.pro.hellscare.VO.BoardQnaVO">
+		SELECT qna_code, username, title, content, readCnt, kind, to_char(qna_write_date,'yyyy-mm-dd') qna_write_date, rownum rNum
+			FROM board_qna_tbl WHERE qna_code=#{qna_code}
+	</select>
+    
+    <!-- QnA 삭제 --> 
+    <delete id="q_delete" parameterType="int">
+    	DELETE board_qna_tbl WHERE qna_code=#{qna_code}
+    </delete>
+    
+     <!-- QnA삭제 -> 답변댓글삭제 -->
+    <delete id="qc_delete" parameterType="int">
+    	DELETE comment_qna_tbl WHERE qna_code=#{qna_code}
+    </delete>
+    
+    <!-- QnA글 수정 처리 -->
+	<update id="qnaUpdate" parameterType="com.pro.hellscare.VO.BoardQnaVO">
+		UPDATE board_tbl SET title=#{title}, content=#{content}, kind=#{kind}, qna_password=#{qna_password} WHERE qna_code=#{qna_code}
+	</update>
+	
+	<!-- 공지사항 수 -->
+    <select id="getnoticeCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM board_tbl WHERE notice=1
+    </select>
+    
+    <!-- 공지사항 목록 -->
+    <select id="getNoticeArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardVO">
+		SELECT board_code, username, title, content, readCnt, write_date, rownum as rNum
+			FROM board_tbl WHERE notice=1
+	</select>
+	
+	<!-- 공지사항 가졍ㅎㅁ -->
+	<select id="getNoticeArticle" resultType="com.pro.hellscare.VO.BoardVO">
+		SELECT board_code, username, title, content, readCnt, to_char(write_date,'yyyy-mm-dd') write_date, rownum rNum
+			FROM board_tbl WHERE board_code=#{board_code} AND notice=1
+	</select>
+    
+<!-- 게시글 목록 조회 -->
+	<select id="getmyArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
+		<![CDATA[
+			SELECT * FROM 
+			    (SELECT qna_code, username, title, content, readCnt, qna_write_date, kind, state, rownum rNum
+			        FROM (SELECT * FROM board_qna_tbl )
+				) 
+			WHERE rNum >= #{start} AND rNum <= ${end} AND username=#{username}
+		 ]]>
+	</select> 
+	
+	<!-- 내 질문글 수 -->
+    <select id="getmyArticleCnt" resultType="int">
+    	SELECT COUNT(*) as cnt FROM board_qna_tbl WHERE username=#{username}
+    </select>     
+
+
+
     
     
     <!-- 한결 종료 -->
-    <!-- UserAuthenticationService의 loadUserByUsername()메서드 에서 체크 
-	스프링 시큐리티에서 체크하는 필드로 별칭을 줌, 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리  
-	-->
-	<select id ="selectUser" resultType="java.util.Map"><!-- #{map의 key} -->
-		SELECT u.username, u.password, u.name, u.address, u.phone_number, u.gender
-			,u.birth, u.email, u.reg_date, u.enabled, a.username, a.authority
-		 FROM users u, authorities a WHERE u.username = #{username}
-		  AND u.username = a.username
-	</select>
     
-    <!-- 2019.08.20_이나현 --> 
+    
+    
+    <!-- 이나현 -->
     <!-- 회원가입 시 아이디 중복 확인 작업,정보 수정, 정보 삭제 -->
 	<select id="idCheck" resultType="int" >
 		SELECT COUNT(*) FROM users WHERE username=#{strId}
@@ -262,7 +660,97 @@
 		INSERT INTO authorities(username,  authority)
 		VALUES (#{username},#{authority})
 	</insert>
-	 <!-- 2019.08.20_이나현 -->
+	
+    <select id="pwCheckCnt" parameterType="java.util.Map" resultType="int">
+    	SELECT COUNT(*) FROM users where username=#{username} and password = #{pwdDB}   	
+    </select>
+    
+    <!-- 사용자 정보 수정 -->
+    <select id="userModiView" parameterType="String" resultType="com.pro.hellscare.VO.UsersVO">
+    	SELECT username, password, name, address, phone_number, gender, birth, email, reg_date 
+    	FROM users where username = #{username}  
+    </select>
+    
+    <!-- DB사용자 암호화 비밀번호 리턴 -->
+    <select id="returnPassword" parameterType="String" resultType="String">
+    	select password from users where username=#{username}
+    </select>
+    
+    <!-- 회원정보 수정처리  -->
+    <update id="userModifyPro" parameterType="com.pro.hellscare.VO.UsersVO">
+    	update users set password=#{password},name=#{name},address=#{address},phone_number=#{phone_number}
+    </update>
+    
+    <!--  회원탈퇴 처리 -->
+    <delete id="deleteMember" parameterType="String">
+    	delete users where username=#{username}
+    </delete>
+    <!-- 이나현 끝 -->
+    
+    <!-- 동렬 시작 -->
+	<!-- 관리자 - 음식 등록 -->
+	<insert id="insertFood" parameterType="com.pro.hellscare.VO.FoodVO">
+		INSERT INTO food_tbl(food_code, food_name, food_img, quantity, food_kind, kcal, carbohydrate,
+							 protein, fat, saccharides, salt, cholesterol, saturation, trans)
+		VALUES(food_seq.nextval, #{food_name}, #{food_img}, #{quantity}, #{food_kind}, #{kcal}, #{carbohydrate},
+				#{protein}, #{fat}, #{saccharides}, #{salt}, #{cholesterol}, #{saturation}, #{trans})
+	</insert>
+	
+	<!-- 관리자 - 등록된 음식 개수 -->
+	<select id="getFoodCount" resultType="int">
+		SELECT COUNT(*) FROM food_tbl
+	</select>
+	
+	<!-- 관리자 - 음식 목록 -->
+	<select id="getFoodList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.FoodVO">
+		<![CDATA[
+			SELECT * 
+				FROM (
+					SELECT food_code, food_name, food_img, quantity, food_kind, kcal, carbohydrate,
+							protein, fat, saccharides, salt, cholesterol, saturation, trans, rownum rNum
+						FROM (
+							SELECT * FROM food_tbl ORDER BY food_code
+						)
+				) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 관리자 - 음식 상세 정보 가져오기 -->
+	<select id="getFoodInfo" parameterType="String" resultType="com.pro.hellscare.VO.FoodVO">
+		SELECT * FROM food_tbl WHERE food_code = #{food_code}
+	</select>
+	
+	<!-- 관리자 - 음식 정보 수정하기 -->
+	<update id="updateFood" parameterType="com.pro.hellscare.VO.FoodVO">
+		UPDATE food_tbl
+			SET food_name = #{food_name}, food_img = #{food_img}, quantity = #{quantity}, food_kind = #{food_kind}, kcal = #{kcal},
+				carbohydrate = #{carbohydrate}, protein = #{protein}, fat = #{fat}, saccharides = #{saccharides}, salt = #{salt}, 
+				cholesterol = #{cholesterol}, saturation = #{saturation}, trans = #{trans} 
+			WHERE food_code = #{food_code}
+	</update>
+	
+	<!-- 관리자 - 음식 삭제하기 -->
+	<delete id="deleteFood" parameterType="String">
+		DELETE FROM food_tbl
+		WHERE food_code = #{food_code}
+	</delete>
+	
+	<!-- 관리자 - 음식 중복확인 -->
+	<select id="foodDupCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM food_tbl WHERE food_name = #{food_name}
+	</select>
+	
+	<!-- 사용자 - 섭취한 음식 정보 확인 -->
+	<select id="getFoodInfoByUsingFoodNameAndFoodKind" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.FoodVO">
+		SELECT * FROM food_tbl WHERE food_name = #{food_name} AND food_kind = #{food_kind}
+	</select>
+	
+	<!-- 사용자 - 음식 종류에 해당하는 음식명들 찾기 -->
+	<select id="getFoodNamesByUsingFoodKind" parameterType="String" resultType="com.pro.hellscare.VO.FoodVO">
+		SELECT * FROM food_tbl WHERE food_kind = #{food_kind}
+	</select>
+	
+	<!-- 동렬 끝 -->
     
     
 </mapper>

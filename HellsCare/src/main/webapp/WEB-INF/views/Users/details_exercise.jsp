@@ -15,7 +15,13 @@
 				<!-- Post Content
 					============================================= -->
 				<div class="postcontent nobottommargin clearfix">
-					<h3><a href="#" onclick="return favorit();"><i class="icon-star-empty"></i></a>&emsp;&emsp;${vo.exercise_name}</h3>
+					<h3>
+					<c:if test="${cnt != 1}">
+						<a href="#" onclick="return favorit();"><i class="icon-star-empty"></i></a>
+					</c:if>
+					<c:if test="${cnt == 1}">
+						<a href="#" onclick="return defavorit();"><i class="icon-star3"></i></a>
+					</c:if>&emsp;&emsp;${vo.exercise_name}</h3>
 				<iframe width="800" height="500" src="/hellscare/resources/images/videos/${vo.exercise_video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					<div class="divider">
 						<i class="icon-circle"></i>
@@ -83,11 +89,20 @@
 	<!-- #content end -->
 	<%@ include file="../include/footer.jsp"%>
 	<%@ include file="../include/footerScript.jsp"%>
-	
 	<script type="text/javascript">
 		function favorit(){
 			if(confirm("즐겨찾기에 추가하시겠습니까?")){
-				window.location="addFavorit?exercise_code=${vo.exercise_code}";
+				window.location="addFavorit?exercise_code="+${vo.exercise_code};
+			} else{
+				return false;
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function defavorit(){
+			if(confirm("즐겨찾기에서 삭제하시겠습니까?")){
+				window.location="removeFavorit?favorite_code="+${favorite_code}+"&exercise_code="+${vo.exercise_code};
 			} else{
 				return false;
 			}

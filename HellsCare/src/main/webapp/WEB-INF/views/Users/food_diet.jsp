@@ -56,32 +56,6 @@
 						  	<div class="table-responsive">
 						  		<div id="datatable1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 						  			<div class="row">
-						  				<div class="col-sm-12 col-md-3">
-						  					<div class="dataTable_length" id="datatable1_length">
-						  						<label>Show
-							  						<select name="datatable1_length" aria-controls="datatable1" 
-							  							class="custom-select custom-select-sm form-control form-control-sm">
-							  							<option value="10">10</option>
-							  							<option value="10">25</option>
-							  							<option value="10">50</option>
-							  							<option value="10">100</option>
-							  						</select>
-							  						entries
-						  						</label>
-						  					</div>
-						  				</div>
-						  				
-						  				<div class="col-sm-12 col-md-3">
-						  					<div id="datatable1_filter" class="dataTables_filter">
-						  						<label>
-						  							Search :
-						  							<input type="search" class="form-control form-control-sm" placeholder aria-controls="datatable1">
-						  						</label>
-						  					</div>
-						  				</div>
-						  			</div>
-						  			
-						  			<div class="row">
 						  				<div class="col-sm-12">
 						  					<table id="datatable1" class="table table-striped table-bordered" cellspacing="0" width="100%">
 												<thead>
@@ -205,14 +179,6 @@
 						  				</div>
 						  			</div>
 						  			
-						  			<div class="row">
-						  				<div class="col-sm-12 col-md-5">
-						  					<div class="dataTables_info" id="datatable1_info" role="status" aria-live="polite">
-						  						Showing 1 to 10 of 17 entries
-						  					</div>
-						  				</div>
-						  			</div>
-						  			
 						  		</div>
 								
 							</div>
@@ -329,6 +295,7 @@
 		<!-- Footer
 		============================================= -->
 		<%@ include file="../include/footer.jsp"%>
+		<%@ include file="../include/footerScript.jsp"%>
 		<!-- #footer end -->
 
 	</div><!-- #wrapper end -->
@@ -339,8 +306,6 @@
 	
 	<!-- Bootstrap Data Table Plugin -->
 	<script src="resources/js/components/bs-datatable.js"></script>
-
-	<%@ include file="../include/footerScript.jsp"%>
 	
 	<script>
 

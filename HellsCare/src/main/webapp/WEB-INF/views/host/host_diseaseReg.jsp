@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +70,8 @@
              <h4 class="mb"><i class="fa fa-angle-right"></i> 질병 정보 등록 </h4>
               <div class="form">
               
-                <form class="cmxform form-horizontal style-form" id="diseaseRegForm" method="post" action="host_diseaseRegPro"> 
+                <form class="cmxform form-horizontal style-form" id="diseaseRegForm" method="post" action="host_diseaseRegPro">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
                   <div class="form-group ">
                     <label for="disease_code" class="control-label col-lg-2">질병코드</label>
                     <div class="col-lg-7">
@@ -156,7 +157,7 @@ function refresh() {
 function checkCode(){
     var disease_code = $('#disease_code').val();
     $.ajax({
-        url:'host_codeDuplChk',
+        url:'codeDuplChk',
         type:'post',
         data:{disease_code:disease_code},
         success:function(data){
