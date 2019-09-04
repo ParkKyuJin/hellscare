@@ -644,6 +644,16 @@
     
     
     <!-- 이나현 -->
+    <!-- UserAuthenticationService의 loadUserByUsername()메서드 에서 체크 
+	스프링 시큐리티에서 체크하는 필드로 별칭을 줌, 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리  
+	-->
+	<select id ="selectUser" resultType="java.util.Map"><!-- #{map의 key} -->
+		SELECT u.username, u.password, u.name, u.address, u.phone_number, u.gender
+			,u.birth, u.email, u.reg_date, u.enabled, a.authority 
+		  FROM users u, authorities a 
+		 WHERE u.username = #{username}
+		   AND u.username = a.username
+	</select>
     <!-- 회원가입 시 아이디 중복 확인 작업,정보 수정, 정보 삭제 -->
 	<select id="idCheck" resultType="int" >
 		SELECT COUNT(*) FROM users WHERE username=#{strId}

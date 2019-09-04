@@ -70,7 +70,7 @@
       <!--logo end-->
       <div class="top-menu" >
         <ul class="nav pull-right top-menu" >
-          <li style="margin:0px 0px 10px 0px;"><a class="logout" href="login.html">Logout</a></li>
+          <li style="margin:0px 0px 10px 0px;"><a class="logout" href="logout">Logout</a></li>
         </ul>
       </div>
      
@@ -86,7 +86,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="resources/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><a href="#"><img src="resources/img/ui-sam.jpg" class="img-circle" width="80"></a></p>
           <h5 class="centered">쀼팀장</h5>
           <li class="sub-menu">
             <a href="javascript:;">
@@ -105,8 +105,8 @@
               <span>회원관리</span>
               </a>
             <ul class="sub">
-              <li><a href="memList">이용자관리</a></li>
-              <li><a href="memChart">이용자통계</a></li>
+              <li><a href="host_userList">회원목록</a></li>
+              <li><a href="host_userChart">회원통계</a></li>
             </ul>
           </li>
           <li class="sub-menu">

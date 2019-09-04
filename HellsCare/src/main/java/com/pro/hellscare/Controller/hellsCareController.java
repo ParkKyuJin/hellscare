@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pro.hellscare.Service.HellsCareService;
 import com.pro.hellscare.Service.ParseService;
-//변경전
+
 
 //전체 페이지를 관리하는 메인 컨트롤러
 @Controller
@@ -47,10 +46,10 @@ public class hellsCareController {
 		public String main2(HttpServletRequest req, Model model)throws IOException{
 			//로거 작성 필수!
 			logger.info("URL ==> main");
-			req.getSession().setAttribute("user_id", "test1");
+			
 			service.exerciseList(req,model);
 			service.crawlArticle(req, model);
-			return "Users/index";
+			return "index";
 		}
 		// 건강진단 목록페이지
 		@RequestMapping("nextpage")

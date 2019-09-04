@@ -193,10 +193,7 @@
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
 
-	<!-- External JavaScripts
-	============================================= -->
-	<script src="resources/js/jquery.js"></script>
-	<script src="resources/js/plugins.js"></script>
+
 
 	<!-- Bootstrap Data Table Plugin -->
 	<script src="resources/js/components/bs-datatable.js"></script>

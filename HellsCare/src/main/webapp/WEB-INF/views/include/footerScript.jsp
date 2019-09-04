@@ -8,10 +8,10 @@
 <script type="text/javascript" src="${project}script.js"></script>
 
 
-<!-- External JavaScripts
+<!-- <!-- External JavaScripts
 ============================================= -->
 <script src="resources/js/jquery.js"></script>
-<script src="resources/js/plugins.js"></script>
+<script src="resources/js/plugins.js"></script> -->
 
 <!-- Footer Scripts
 ============================================= -->

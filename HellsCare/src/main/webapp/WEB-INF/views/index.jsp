@@ -1,9 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-
 
 <!DOCTYPE html>
 
@@ -19,7 +16,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Canvas | The Multi-Purpose HTML5 Template</title>
+	<title>HealthCare | papahana</title>
 
 </head>
 
@@ -27,7 +24,7 @@
 
 	<!-- Document Wrapper
 	============================================= -->
-		<%@ include file="include/header.jsp"%>
+	<%@ include file="include/header.jsp"%>
 
 		<section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
 			<div class="slider-parallax-inner">
@@ -346,8 +343,7 @@
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
-	<div id="gotoTop" class="icon-angle-up"></div>
-
+	
 	<%@ include file="include/footerScript.jsp" %>
 
 </body>

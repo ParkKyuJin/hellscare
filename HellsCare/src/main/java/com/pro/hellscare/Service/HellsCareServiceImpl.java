@@ -1263,14 +1263,6 @@ public class HellsCareServiceImpl implements HellsCareService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 //=============호스트 서비스	
 	
 	
@@ -3239,8 +3231,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 				
 				// 있으면 vo에 담아서 전달
 				if(selectCnt == 1) {
-					UserInfoVO vo = dao.getUserInfo(username);
-					model.addAttribute("vo", vo);
+					UserInfoVO ivo = dao.getUserInfo(username);
+					model.addAttribute("ivo", ivo);
 				}
 				
 				// model에 처리결과를 저장(jsp에 전달하기 위함)

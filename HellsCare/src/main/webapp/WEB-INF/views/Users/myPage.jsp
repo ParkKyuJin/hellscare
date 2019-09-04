@@ -43,7 +43,7 @@
 		<div class="container clearfix">
 			<h1>My Page</h1>
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="main2">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">My Page</li>
 			</ol>
 		</div>
@@ -131,117 +131,30 @@
 										</div>
 										</div>
 										</div>
-										<div class="col-lg-12 col-md-6 bottommargin">
-									<div class="promo promo-border promo-mini  promo-right">
-
-									<div class="toggle">
-										<div class="togglet"><h3 align="left"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>건강 정보 입력/수정</h3></div>
+										
+										
+	<!-- 건강정보 시작 : 재관 -->									
+						<div class="col-lg-12 col-md-6 bottommargin">
+							<div class="promo promo-border promo-mini  promo-right">
+								<div class="toggle">
+									<div class="togglet"><h3 align="left"><i class="toggle-closed icon-ok-circle"></i><i class="toggle-open icon-remove-circle"></i>건강 정보 입력/수정</h3></div>
 										<div class="togglec">
 									
 							<div class="card-body" style="padding: 40px;">
 							<div class="fancy-title title-border"></div>
-							<form class="row mb-0" id="fitness-form" action="include/form.php" method="post" enctype="multipart/form-data">
+							<form class="row mb-0" id="userinfoform" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								<input type="hidden" name="username" value="${sessionScope.memId}">
 								<div class="form-process"></div>
+								
 								<div class="col-12 form-group">
 									<div class="row">
 										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-name">Name:</label>
-										</div>
-										<div class="col-sm-10">
-											<input type="text" name="fitness-form-name" id="fitness-form-name" class="form-control required" value="" placeholder="Enter your Full Name">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-email">Email:</label>
-										</div>
-										<div class="col-sm-10">
-											<input type="email" name="fitness-form-email" id="fitness-form-email" class="form-control required" value="" placeholder="Enter your Email">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-phone">Phone:</label>
-										</div>
-										<div class="col-sm-10">
-											<input type="text" name="fitness-form-phone" id="fitness-form-phone" class="form-control required" value="" placeholder="Your Contact Number">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-phone">You Goals:</label>
-										</div>
-										<div class="col-sm-10">
-											<div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-												<label class="btn btn-outline-dark font-body ls0 nott">
-													<input type="radio" class="required form-control" name="fitness-form-goal" id="fitness-form-weight-loss" value="Weight Loss">Weight Loss
-												</label>
-												<label class="btn btn-outline-dark font-body ls0 nott">
-													<input type="radio" class="required form-control" name="fitness-form-goal" id="fitness-form-mass-gain" value="Mass Gain">Mass Gain
-												</label>
-												<label class="btn btn-outline-dark font-body ls0 nott">
-													<input type="radio" class="required form-control" name="fitness-form-goal" id="fitness-form-athletic-body" value="Athletic Body">Athletic Body
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-sex">Gender:</label>
-										</div>
-										<div class="col-sm-6">
-											<div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-												<label class="btn btn-outline-dark font-body ls0 nott">
-													<input type="radio" class="required form-control" name="fitness-form-sex" id="fitness-form-male" value="Male">Male
-												</label>
-												<label class="btn btn-outline-dark font-body ls0 nott">
-													<input type="radio" class="required form-control" name="fitness-form-sex" id="fitness-form-male" value="Female">Female
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-age">Age:</label>
-										</div>
-										<div class="col-sm-5">
-											<input type="number" min="10" max="50" name="fitness-form-age" id="fitness-form-age" class="form-control required" value="" placeholder="Enter your Age">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-weight">Weight:</label>
+											<label for="height">신장(Height):</label>
 										</div>
 										<div class="col-sm-5">
 											<div class="input-group">
-												<input type="number" max="140" name="fitness-form-weight" id="fitness-form-weight" class="form-control required" value="" placeholder="Enter your Weight">
-												<div class="input-group-append">
-													<span class="input-group-text bg-white">kgs</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 form-group">
-									<div class="row">
-										<div class="col-sm-2 col-form-label">
-											<label for="fitness-form-height">Height:</label>
-										</div>
-										<div class="col-sm-5">
-											<div class="input-group">
-												<input type="number" maxlength="3" name="fitness-form-height" id="fitness-form-height" class="form-control required" value="" placeholder="Enter your height">
+												<input type="number" min="0" max="250" step="0.1" maxlength="3" name="height" id="height" class="form-control" required value="${ivo.height }" placeholder="키를 입력하세요">
 												<div class="input-group-append">
 													<span class="input-group-text bg-white">cm</span>
 												</div>
@@ -249,6 +162,141 @@
 										</div>
 									</div>
 								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="weight">체중(Weight):</label>
+										</div>
+										<div class="col-sm-5">
+											<div class="input-group">
+												<input type="number" min="0" max="140" step="0.1" name="weight" id="weight" class="form-control" required value="${ivo.weight }" placeholder="몸무게를 입력하세요">
+												<div class="input-group-append">
+													<span class="input-group-text bg-white">kgs</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- bmi:몸무게(kg) / 신장(m) x 신장(m) -->
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="bmi">BMI지수:</label>
+										</div>
+										<div class="col-sm-5">
+											<input type="text" name="bmi" id="bmi" class="form-control required" readonly value="${ivo.bmi }" >
+										</div>
+										<div class="col-sm-2">
+											<button type="button" id="calories-trigger" class="btn btn-secondary" onclick="calbmi();">계산</button>
+										</div>
+									</div>
+								</div> 
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="sightL">시력(좌):</label>
+										</div>
+										<div class="col-sm-4">
+											<input type="text" name="sightL" id="sightL" class="form-control" value="${ivo.sightL }" placeholder="왼쪽 시력을 입력하세요">
+										</div>	
+									
+										<div class="col-sm-2 col-form-label">
+											<label for="sightR">시력(우):</label>
+										</div>
+										<div class="col-sm-4">
+											<input type="text" name="sightR" id="sightR" class="form-control" value="${ivo.sightR }" placeholder="오른쪽 시력을 입력하세요">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="glucose">혈당:</label>
+										</div>
+										<div class="col-sm-10">
+											<input type="text" name="glucose" id="glucose" class="form-control" value="${ivo.glucose }" placeholder="평균 혈당을 입력하세요">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="pressure">혈압(수축기):</label>
+										</div>
+										<div class="col-sm-10">
+											<input type="text" name="pressure" id="pressure" class="form-control" value="${ivo.pressure }" placeholder="수축기 혈압을 입력하세요">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="pressure2">혈압(이완기):</label>
+										</div>
+										<div class="col-sm-10">
+											<input type="text" name="pressure2" id="pressure2" class="form-control" value="${ivo.pressure2 }" placeholder="이완기 혈압을 입력하세요">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="smokeAmount">흡연량(하루):</label>
+										</div>
+										<div class="col-sm-5">
+											<div class="input-group">
+												<input type="text" maxlength="3" name="smokeAmount" id="smokeAmount" class="form-control" value="${ivo.smokeAmount }" placeholder="흡연량을 입력하세요">
+												<div class="input-group-append">
+													<span class="input-group-text bg-white">개비</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="drinkAmount">음주량(소주/일주일):</label>
+										</div>
+										<div class="col-sm-5">
+											<div class="input-group">
+												<input type="text" maxlength="3" name="drinkAmount" id="drinkAmount" class="form-control" value="${ivo.drinkAmount }" placeholder="음주량을 입력하세요">
+												<div class="input-group-append">
+													<span class="input-group-text bg-white">&nbsp;&nbsp;&nbsp;잔</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+								
+							<!-- <div class="col-12 form-group">
+									<div class="row">
+										<div class="col-sm-2 col-form-label">
+											<label for="fitness-form-sex">성별:</label>
+										</div>
+										<div class="col-sm-6">
+											<div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+												<label class="btn btn-outline-dark font-body ls0 nott">
+													<input type="radio" class="required form-control" name="gender" id="male" value="Male">Male
+												</label>
+												<label class="btn btn-outline-dark font-body ls0 nott">
+													<input type="radio" class="required form-control" name="gender" id="female" value="Female">Female
+												</label>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								
+								
 								<div class="col-12 form-group mt-3">
 									
 								</div>
@@ -256,27 +304,33 @@
 									<input type="text" id="fitness-form-botcheck" name="fitness-form-botcheck" value="" />
 								</div>
 								<div class="col-12 d-flex justify-content-end align-items-center">
-									<button type="button" id="calories-trigger" class="btn btn-secondary">Calculate</button>
-									<button type="submit" name="fitness-form-submit" class="btn btn-success ml-2">Submit Quote</button>
+									<button type="button" name="refresh" class="btn btn-secondary ml-2" onclick="refreshInfo();">재작성</button>
+									<c:if test="${selectCnt==0 }">
+									<button type="submit" name="btninforeg" class="btn btn-success ml-2" onclick="javascript: form.action='userInfoRegPro';">등록하기</button>
+									</c:if>
+									<c:if test="${selectCnt!=0 }">
+									<button type="submit" name="btninfomodify" class="btn btn-success ml-2" onclick="javascript: form.action='userInfoModifyPro';">수정하기</button>
+									</c:if>
 								</div>
 
 								<input type="hidden" name="prefix" value="fitness-form-">
 								<input type="hidden" name="subject" value="New Fitness Received">
-								<input type="hidden" id="fitness-form-calories" name="fitness-form-calories" value="">
+								<input type="hidden" id="calories" name="calories" value="">
 							</form>
 
 								</div>
 							
-									
-											</div>
-										</div>
-										</div>
-										</div>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+					
+					
 										
-										</div>
+					</div>
 
-
-										</div>
+					</div>
 										
 										
 						<!-- 나의 건강  클릭시 내용 -->			
@@ -297,50 +351,62 @@
 												<div class="card-body" style="padding: 40px;">
 													<div class="fancy-title title-border"></div>
 													<ul class="skills">
-														<li data-percent="80"><span>심박수</span>
+														<li data-percent="${ivo.heart_rate}"><span>심박수</span>
 															<div class="progress skills-animated"
 																style="width: 80%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="80"
-																			data-refresh-interval="30" data-speed="1100">80</span>%
+																		<span data-from="0" data-to="${ivo.heart_rate}"
+																			data-refresh-interval="30" data-speed="1100">${ivo.heart_rate}</span>
 																	</div>
 																</div>
 															</div></li>
-														<li data-percent="60"><span>비만도</span>
+														<li data-percent="50"><span>비만도</span>
 															<div class="progress skills-animated"
 																style="width: 60%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="60"
-																			data-refresh-interval="30" data-speed="1100">60</span>%
+																		<span data-from="0" data-to="${ivo.bmi}"
+																			data-refresh-interval="30" data-speed="1100">${ivo.bmi}</span>
 																	</div>
 																</div>
 															</div></li>
-														<li data-percent="90"><span>혈당</span>
+														<li data-percent="50"><span>혈당</span>
 															<div class="progress skills-animated"
 																style="width: 90%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="90"
-																			data-refresh-interval="30" data-speed="1100">90</span>%
+																		<span data-from="0" data-to="${ivo.glucose }"
+																			data-refresh-interval="30" data-speed="1100">${ivo.glucose }</span>
 																	</div>
 																</div>
 															</div></li>
-														<li data-percent="70"><span>흠연량</span>
+														<li data-percent="0"><span>흡연량(하루)</span>
+															<div class="progress skills-animated"
+																style="width: 100%;">
+																<div class="progress-percent">
+																	<div
+																		class="counter counter-inherit counter-instant">
+																		<span data-from="0" data-to="${ivo.smokeAmount }"
+																			data-refresh-interval="30" data-speed="1100">${ivo.smokeAmount}</span>개비
+																	</div>
+																</div>
+															</div></li>
+														<li data-percent="20"><span>음주량(소주/일주일)</span>
 															<div class="progress skills-animated"
 																style="width: 70%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="70"
-																			data-refresh-interval="30" data-speed="1100">70</span>%
+																		<span data-from="0" data-to="${ivo.drinkAmount }"
+																			data-refresh-interval="30" data-speed="1100">${ivo.drinkAmount }</span>잔
 																	</div>
 																</div>
-															</div></li>
+															</div></li>	
+														
 														<li data-percent="30"><span>주간활동량</span>
 															<div class="progress skills-animated"
 																style="width: 70%;">
@@ -348,40 +414,30 @@
 																	<div
 																		class="counter counter-inherit counter-instant">
 																		<span data-from="0" data-to="70"
-																			data-refresh-interval="30" data-speed="1100">70</span>%
+																			data-refresh-interval="30" data-speed="1100">20</span>%
 																	</div>
 																</div>
 															</div></li>
-														<li data-percent="70"><span>섭취 칼로리</span>
+														
+														<li data-percent="30"><span>섭취 칼로리</span>
 															<div class="progress skills-animated"
 																style="width: 70%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="70"
-																			data-refresh-interval="30" data-speed="1100">70</span>%
+																		<span data-from="0" data-to="3000"
+																			data-refresh-interval="30" data-speed="1100">3000</span>kcal
 																	</div>
 																</div>
 															</div></li>
-														<li data-percent="70"><span>섭취 칼로리</span>
+														<li data-percent="25"><span>소모 칼로리</span>
 															<div class="progress skills-animated"
 																style="width: 70%;">
 																<div class="progress-percent">
 																	<div
 																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="70"
-																			data-refresh-interval="30" data-speed="1100">70</span>%
-																	</div>
-																</div>
-															</div></li>
-														<li data-percent="30"><span>소모 칼로리</span>
-															<div class="progress skills-animated"
-																style="width: 70%;">
-																<div class="progress-percent">
-																	<div
-																		class="counter counter-inherit counter-instant">
-																		<span data-from="0" data-to="70"
-																			data-refresh-interval="30" data-speed="1100">70</span>%
+																		<span data-from="0" data-to="2500"
+																			data-refresh-interval="30" data-speed="1100">2500</span>kcal
 																	</div>
 																</div>
 															</div></li>
@@ -394,33 +450,11 @@
 										</div>
 									</div>
 								</div>
-									<div class="col-lg-12 col-md-6 bottommargin">
-									<div class="promo promo-border promo-mini  promo-right">
 
-										<div class="toggle">
-											<div class="togglet">
-												<h3 align="left">
-													<i class="toggle-closed icon-ok-circle"></i><i
-														class="toggle-open icon-remove-circle"></i>건강 설문조사 
-												</h3>
-											</div>
-											<div class="togglec">
-
-												<div class="card-body" style="padding: 40px;">
-													<div class="fancy-title title-border"></div>
-													??
-												</div>
-
-
-
-											</div>
-										</div>
-									</div>
-								</div>
-
-										</div>
-
-									</div>
+							
+							</div>
+					</div>
+		<!-- 건강정보 끝 : 재관 -->
 									
 									<!-- 1:1문의 사항은 QnA에서 내가 질문한거 모음 으로 알고있기 떄문에 바꾸겠음 -->
 										<div class="tab-content clearfix" id="tab-replies">
@@ -557,7 +591,7 @@
 
 						<div class="list-group">
 							<a href="#" class="list-group-item list-group-item-action clearfix">탈퇴하기<i class="icon-line-trash float-right"></i></a>
-							<a href="#" class="list-group-item list-group-item-action clearfix">로그아웃 <i class="icon-line2-logout float-right"></i></a>
+							<a href="logout" class="list-group-item list-group-item-action clearfix">로그아웃 <i class="icon-line2-logout float-right"></i></a>
 						</div>
 
 						<div class="fancy-title topmargin title-border">
@@ -635,7 +669,30 @@
 ============================================= -->
 <%@ include file="../include/footerScript.jsp" %>
 
+<script type="text/javascript">
+/* bmi 계산 */
+function calbmi() {
+	var height = Number($("#height").val());	
+	var weight = Number($("#weight").val());
+	var bmi = weight / ((height/100) * (height/100));
+	
+	$("#bmi").val(bmi.toFixed(2));
+}
 
+// 유저건강정보 재작성 버튼클릭시
+function refreshInfo() {
+	$("#height").val("");
+	$("#weight").val("");
+	$("#bmi").val("");
+	$("#sightL").val("");
+	$("#sightR").val("");
+	$("#glucose").val("");
+	$("#pressure").val("");
+	$("#pressure2").val("");
+	$("#smokeAmount").val("");
+	$("#drinkAmount").val("");
+}
+</script>
 
 
 </body>

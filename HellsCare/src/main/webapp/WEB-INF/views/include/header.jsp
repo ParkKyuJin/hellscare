@@ -66,19 +66,14 @@
 								<!-- <li><a href="shop.html"><div style="color:black;">식중독 지수</div></a></li> -->
 							</ul>
 						</li>
-
-					<li><a href="#"><div>동호회</div></a>
-						<ul style="background: white">
-							<li><a href="club"><div style="color: black;">동호회
-										목록</div></a></li>
-							<li><a href="makeClub"><div style="color: black;">동호회
-										개설</div></a></li>
-							<c:if test="${admin != null}">
-								<li><a href="user_applyList"><div style="color: black;">동호회
-											신청목록</div></a></li>
-							</c:if>
-						</ul></li>
-					<li><a href="#"><div>이벤트</div></a>
+						
+						<li><a href="#"><div>동호회</div></a>
+							<ul style="background:white">
+								<li><a href="club"><div style="color:black;">동호회 목록</div></a></li>
+								<li><a href="makeClub"><div style="color:black;">동호회 개설</div></a></li>
+							</ul>
+						</li>
+						<li><a href="#"><div>이벤트</div></a>
 							<ul style="background:white">
 								<li><a href="challenge"><div style="color:black;">도전과제</div></a></li>
 								<li><a href="Mychallenge"><div style="color:black;">진행중인 도전과제</div></a></li>
@@ -100,7 +95,7 @@
 							
 							</c:if>
 							<c:if test="${sessionScope.memId != null}">
-								<a class="dropdown-item tleft" href="#">${sessionScope.memId }</a>
+								<a class="dropdown-item tleft" href="javascript:void(0)">${sessionScope.memId }</a>
 								<!-- <a class="dropdown-item tleft" href="#">MyPage <span class="badge badge-pill badge-secondary fright" style="margin-top: 3px;">5</span></a> -->
 								<a class="dropdown-item tleft" href="myPage">MyPage</a>
 								
