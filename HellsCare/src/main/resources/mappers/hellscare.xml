@@ -688,7 +688,7 @@
     
     <!-- 회원정보 수정처리  -->
     <update id="userModifyPro" parameterType="com.pro.hellscare.VO.UsersVO">
-    	update users set password=#{password},name=#{name},address=#{address},phone_number=#{phone_number}
+    	update users set password=#{password},name=#{name},address=#{address},phone_number=#{phone_number} where username = #{username}
     </update>
     
     <!--  회원탈퇴 처리 -->

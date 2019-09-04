@@ -14,18 +14,7 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	
-	<!-- DatePicker CSS -->
-	<link rel="stylesheet" href="resources/css/components/datepicker.css" type="text/css" />
 
-	<!-- Bootstrap File Upload CSS -->
-	<link rel="stylesheet" href="resources/css/components/bs-filestyle.css" type="text/css" />
-
-	<link rel="stylesheet" href="resources/css/responsive.css" type="text/css" />
-
-	<link rel="stylesheet" href="resources/css/custom.css" type="text/css" />
 
 	<!-- Document Title
 	============================================= -->
@@ -66,7 +55,8 @@
 
 						<div class="row">
 							<div class="col-lg-12">
-								<form class="row" action="writePro" method="post" enctype="multipart/form-data">
+								<form class="row" action="writePro" method="post" >
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="form-process"></div>
 									
 									<div class="col-12 form-group">
@@ -141,17 +131,7 @@
 
 	<!-- External JavaScripts
 	============================================= -->
-	<script src="resources/js/jquery.js"></script>
-	<script src="resources/js/plugins.js"></script>
-
-	<!-- DatePicker JS -->
-	<script src="resources/js/components/datepicker.js"></script>
-
-	<!-- Bootstrap File Upload Plugin -->
-	<script src="resources/js/components/bs-filestyle.js"></script>
-
-	<!-- TinyMCE Plugin -->
-	<script src="resources/js/components/tinymce/tinymce.min.js"></script>
+	
 
 	<!-- Footer Scripts
 	============================================= -->

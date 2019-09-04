@@ -12,7 +12,7 @@
    
 	   <!-- 관리자 영역 설정 -->
 	   <sec:intercept-url pattern="/host**" access="hasRole('ROLE_ADMIN')" />
-	   
+	   <sec:intercept-url pattern="/android**" access="none"/>
 	   <!-- 로그인한 사용자의 영역 -->
 	   <!-- <sec:intercept-url pattern="/user" access="hasAnyRole('USER', 'ADMIN')" /> -->
 	  

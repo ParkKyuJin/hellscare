@@ -200,6 +200,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 		//회원정보 수정처리
 		@Override
 		public void modifyPro(HttpServletRequest req, Model model) {
+			String username = (String)req.getSession().getAttribute("memId");
 			String password = req.getParameter("scrit");
 			String name = req.getParameter("name");
 			String address = req.getParameter("address");
@@ -207,22 +208,21 @@ public class HellsCareServiceImpl implements HellsCareService {
 			String encryptPassword = pass.encode(password);
 			
 			UsersVO vo = new UsersVO();
+			vo.setUsername(username);
 			vo.setPassword(encryptPassword);
 			vo.setName(name);
 			vo.setAddress(address);
 			vo.setPhone_number(phone_number);
 			
 			int updateCnt = dao.userModifyPro(vo);
-			
 			model.addAttribute("updateCnt",updateCnt);
 		}
 		
 		// 회원탈퇴처리
 		@Override
 		public void delMember(HttpServletRequest req, Model model) {
-			String username = req.getParameter("username");
+			String username = (String)req.getSession().getAttribute("memId");
 			int deleteCnt = dao.deleteMember(username);
-			
 			req.getSession().removeAttribute("memId");
 			model.addAttribute("deleteCnt",deleteCnt);
 		}
@@ -785,8 +785,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 						
 					weather.setDayWeather(dayWeatherList);
 						
-					Elements raindrops = weatherPage.select(".cs_weather .main_info .info_data .info_list li .indicator");
-						
+					Elements raindrops = weatherPage.select(".cs_weather .main_info .info_data .info_list li .rainfall");
+					
 					String[] raindropArr = raindrops.text().split(" ");
 					String check = raindropArr[0].trim();
 					weather.setCheckWeather(check);
@@ -1224,7 +1224,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 //도전과제 상세보기 페이지	
 	@Override
 	public void challengedetail(HttpServletRequest req, Model model) {
-		String ids = (String)req.getSession().getAttribute("user_id");
+		String ids = (String)req.getSession().getAttribute("memId");
 		int id = Integer.parseInt(req.getParameter("code"));
 		challengeVO vo = dao.challengedetail(id);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -1238,7 +1238,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 //나의 도전과제
 	@Override
 	public void Mychallenge(HttpServletRequest req, Model model) {
-		String id = (String)req.getSession().getAttribute("user_id");
+		String id = (String)req.getSession().getAttribute("memId");
 		List<MychalleangeVO> list = dao.Mychallenge(id);
 		int cnt = dao.challcheck2(id);
 		model.addAttribute("list",list);
@@ -1247,7 +1247,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 //내 도전과제 삭제
 	@Override
 	public void delchall(HttpServletRequest req, Model model) {
-		String id = (String)req.getSession().getAttribute("user_id");
+		String id = (String)req.getSession().getAttribute("memId");
 		String code = req.getParameter("code");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
@@ -1334,7 +1334,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 	@Override
 	public void addchall(HttpServletRequest req, Model model) {
 		String code=(String) req.getParameter("code");
-		String id = (String)req.getSession().getAttribute("user_id");
+		String id = (String)req.getSession().getAttribute("memId");
 		int done = 0;
 		Date start = new Timestamp(System.currentTimeMillis());
 		Map<String, Object> map =  new HashMap<String, Object>();
@@ -1724,7 +1724,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			// 즐겨찾기 목록
 			@Override
 			public void favoriteList(HttpServletRequest req, Model model) {
-				String username = (String)req.getSession().getAttribute("user_id");
+				String username = (String)req.getSession().getAttribute("memId");
 				
 				int cnt = dao.getFavoriteCnt(username);
 				List<ExerciseVO> dtos = new ArrayList<ExerciseVO>();
@@ -2265,7 +2265,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			// 동호회 - 내가 가입한 동호회 개수 구하기
 			@Override
 			public void myClub(HttpServletRequest req, Model model) {
-				String username = (String)req.getSession().getAttribute("admin");
+				String username = (String)req.getSession().getAttribute("memId");
 				int cnt = 0;
 				String club1 = null;
 				String club2 = null;

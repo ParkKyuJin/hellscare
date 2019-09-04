@@ -46,7 +46,6 @@ public class hellsCareController {
 		public String main2(HttpServletRequest req, Model model)throws IOException{
 			//로거 작성 필수!
 			logger.info("URL ==> main");
-			
 			service.exerciseList(req,model);
 			service.crawlArticle(req, model);
 			return "index";
@@ -559,7 +558,6 @@ public class hellsCareController {
 		public String modifyPro(HttpServletRequest req, Model model, Authentication auth) {
 			auth.getAuthorities(); 
 			logger.info("URL ==> modifyPro");
-			
 			service.modifyPro(req, model);
 			return "Users/modifyPro";
 		}
@@ -569,7 +567,6 @@ public class hellsCareController {
 		public String delMember(HttpServletRequest req, Model model, Authentication auth) {
 			auth.getAuthorities(); 
 			logger.info("URL ==> delMember");
-			
 			service.delMember(req, model);
 			return "Users/delMember";
 		}
