@@ -11,32 +11,32 @@ import org.springframework.security.core.userdetails.User;
 //User 클래스는 추상클래스이므로 상속받아 추상메서드를 오버라이드해서 구현한다.  
 public class UserVO extends User {
 	
-	private String userid; 
+	private String username; 
 	// 두생성자 중 첫번째 선택,  마지막 매개변수에 String userid 추가 
 	// super는 부모 User클래스 
-	public UserVO(String username, String password, boolean enabled, boolean accountNonExpired,
+	public UserVO(String username1, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
-			Collection<? extends GrantedAuthority> authorities, String userid) {
-		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+			Collection<? extends GrantedAuthority> authorities, String username) {
+		super(username1, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		
-		this.userid = userid; //추가 
+		this.username = username; //추가 
 	
 	}
 	
-	//getter, setter, toString 추가 
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	
+	public String getUsername() {
+		return username;
 	}
 
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 
 	@Override
 	public String toString() {
-		return "UserVO [userid=" + userid + "]";
-	} 
+		return "UserVO [username=" + username + "]";
+	}
 	
-
 }

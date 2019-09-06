@@ -174,7 +174,7 @@ td {
 							<div class="row clearfix">
 								<div class="col-lg-6" style="margin: 0 auto;">
 									<form name="exerciseAddForm" class="nobottommargin"
-										action="host_exerciseAddPro" method="post"
+										action="host_exerciseAddPro?${_csrf.parameterName}=${_csrf.token}" method="post"
 										onsubmit="return addCheck();" enctype="multipart/form-data">
 
 										<div class="col_full">

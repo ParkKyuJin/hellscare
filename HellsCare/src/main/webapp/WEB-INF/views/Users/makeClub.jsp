@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/setting.jsp"%>
 <html>
 <body class="stretched">
 	<%@ include file="../include/header.jsp"%>
@@ -11,7 +10,7 @@
 		<div class="content-wrap">
 			<div class="row clearfix">
 				<div class="col-lg-6" style="margin: 0 auto;">
-					<form name="makeClubForm" class="nobottommargin" action="makeClubApply"
+					<form name="makeClubForm" class="nobottommargin" action="makeClubApply?${_csrf.parameterName}=${_csrf.token}"
 						method="post" onsubmit="return subCheck();">
 						<div id="checkCnt"></div>
 
@@ -25,7 +24,7 @@
 						
 						<div class="col_half">
 							<label for="billing-form-name">대표자 아이디</label> <input type="text"
-								id="billing-form-name" name="club_master" value="${admin}"
+								id="billing-form-name" name="club_master" value="${memId}"
 								class="sm-form-control" readonly>
 						</div>
 
@@ -127,10 +126,10 @@
 			} else if(document.makeClubForm.cnt.value == 1){
 				alert("현재 존재하는 동호회입니다. \n새로운 동호회명을 입력해주세요.");
 				return false;
-			} else if(document.makeClubForm.club_max.value < 0){
+			} else if(document.makeClubForm.club_max.value < 0 || document.makeClubForm.club_max.value > 100){
 				alert("인원수를 다시 작성해주세요.");
 				return false;
-			}
+			} 
 			
 			if(confirm("개설신청하시겠습니까?")){
 				return true;

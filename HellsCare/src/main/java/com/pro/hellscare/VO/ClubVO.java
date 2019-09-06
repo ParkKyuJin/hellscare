@@ -3,9 +3,11 @@ package com.pro.hellscare.VO;
 import java.sql.Date;
 
 public class ClubVO {
+	private String apply_code;
 	private String club_name;
 	private String club_kind;
 	private int club_max;
+	private int current_personnel;
 	private String area;
 	private String club_master;
 	private String club_pr;
@@ -52,6 +54,18 @@ public class ClubVO {
 	}
 	public void setClub_date(Date club_date) {
 		this.club_date = club_date;
+	}
+	public int getCurrent_personnel() {
+		return current_personnel;
+	}
+	public void setCurrent_personnel(int current_personnel) {
+		this.current_personnel = current_personnel;
+	}
+	public String getApply_code() {
+		return apply_code;
+	}
+	public void setApply_code(String apply_code) {
+		this.apply_code = apply_code;
 	}
 	
 	

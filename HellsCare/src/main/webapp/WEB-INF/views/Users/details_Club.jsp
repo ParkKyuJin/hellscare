@@ -3,6 +3,30 @@
 <%@ include file="../include/setting.jsp"%>
 <html>
 <body>
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("로그인을 하셔야 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
+<script type="text/javascript">
+	$(function() {
+		$("#all_check").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".remove").prop("checked", is_check);
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#all_check2").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".board_remove").prop("checked", is_check);
+		});
+	});
+</script>
+
 	<%@ include file="../include/header.jsp"%>
 	<nav class="navbar navbar-light bg-light justify-content-between">
 		<a class="navbar-brand" style="margin: 0 auto;">${vo.club_name} 동호회</a>
@@ -42,23 +66,23 @@
 							</div>
 							
 							<br><br>
-							<button type="button" class="button button-3d button-rounded" onclick="history.back();">목록으로</button>
+							<button type="button" class="button button-3d button-rounded" onclick="history.back();">이전페이지로 이동</button>
 						</div>
 					
 						<div class="col_three_fourth col_last">
 							<div class="sidebar-widgets-wrap">
 								<div class="widget widget_links clearfix">
-									<form name="applyClubForm" class="nobottommargin" action="clubApply"
+									<form name="applyClubForm" class="nobottommargin" action="clubApply?${_csrf.parameterName}=${_csrf.token}"
 										method="post" onsubmit="return applyChk();" style="text-align:center; border:2px solid; width:700px;">
 										<br><br>
 										<center><h3><font style="color:green; size:50px;">${vo.club_name}</font>&emsp;동호회 가입신청<small>(최대 3곳만 가입가능)</small></h3></center>
 										
-										<input type="hidden" name="username" value="${admin}">
+										<input type="hidden" name="username" value="${memId}">
 										<input type="hidden" name="club_name" value="${vo.club_name}">
 										
 										<div style="text-align:center">
 											<label for="billing-form-name">아이디</label>
-											<h3><font color=red>${admin}</font></h3>
+											<h3><font color=red>${memId}</font></h3>
 										</div>
 				
 										<div class="clear"></div>
@@ -82,580 +106,230 @@
 	<div class="row">
 		<div>
 			<div class="list-group" id="list-tab" role="tablist"
-				style="width: 250px; margin-left: 50px;">
+				style="width: 190px; margin-left: 50px;">
 				<a class="list-group-item list-group-item-action active" 
 					id="list-home-list" data-toggle="list" href="#list-home" role="tab"
 					aria-controls="home">동호회 회원</a> <a
 					class="list-group-item list-group-item-action"
 					id="list-profile-list" data-toggle="list" href="#list-profile"
-					role="tab" aria-controls="profile">동호회 게시판</a> <a
-					class="list-group-item list-group-item-action"
-					id="list-messages-list" data-toggle="list" href="#list-messages"
-					role="tab" aria-controls="messages">가입신청목록</a>
+					role="tab" aria-controls="profile">동호회 게시판</a> 
+					<c:if test="${vo.club_master == memId}">
+						<a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages"
+						role="tab" aria-controls="messages">가입신청목록</a>
+					</c:if>
+					<br><br>
+					<a href="exit_Club?club_name=${vo.club_name}" onclick="return exitChk();"><button type="button" class="button button-3d button-large button-rounded button-red">탈퇴하기</button></a>
 			</div>
 		</div>
-		<div class="col-8">
+		<div class="col-9">
 			<div class="tab-content" id="nav-tabContent">
 				<div class="tab-pane fade show active" id="list-home"
 					role="tabpanel" aria-labelledby="list-home-list">
 					<table class="table table-hover" style="text-align: center;">
 						<thead>
-							<tr>
-								<th>번호</th>
+	 						<tr>
 								<th>아이디</th>
+								<th>이름</th>
+								<th>연락처</th>
+								<c:if test="${vo.club_master == memId}"><th>추방</th></c:if>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Mark</td>
+						<c:forEach var="dto" items="${dtos}">
+							<tr> 
+								<td style="vertical-align: middle">
+									<c:if test="${vo.club_master == dto.username}">${dto.username}
+										<font style="color:red; font-weight:bold">  [클럽대표]</font></c:if>
+									<c:if test="${vo.club_master != dto.username}">${dto.username}</c:if>
+								<td style="vertical-align: middle">${dto.name}</td>
+								<td style="vertical-align: middle">${dto.phone_number}</td>
+								<td><c:if test="${vo.club_master == memId}">
+									<c:if test="${vo.club_master != dto.username}">
+										<a href="deleteClubMember?username=${dto.username}&club_name=${vo.club_name}&pageNum=${pageNum}" onclick="return kickMember();"><button type="button" class="button button-large button-dark button-rounded">강제탈퇴</button></a>
+									</c:if>
+								</c:if>
+								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Jacob</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>sfd</td>
-							</tr>
-						</tbody>
-					</table>
+						</c:forEach>
+					</tbody>
+				</table>
+				
+				<table class="table table-hover" style="text-align: center;">
+					<tr>
+						<th style="vertical-align:middle; text-align:center;">
+							<!-- 처음[◀◀] / 이전블록[◀] -->
+							<c:if test="${startPage > pageBlock}">
+								<a href="details_Club">[◀◀]</a>
+								<a href="details_Club?pageNum=${startPage - pageBlock}">[◀]</a>
+							</c:if>
+	
+							<!-- 블록내의 페이지 번호  -->
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i == currentPage}">
+									<span><b style="background: rigthgreen">[${i}]</b></span>
+								</c:if>
+	
+								<c:if test="${i != currentPage}">
+									<span><b><a href="details_Club?pageNum=${i}">[${i}]</a></b></span>
+								</c:if>
+							</c:forEach>
+	
+							<!-- 다음블록[▶] / 마지막[▶▶]  -->
+							<c:if test="${pageCount > endPage}">
+								<a href="details_Club?pageNum=${startPage + pageBlock}">▶</a>
+								<a href="details_Club?pageNum=${pageCount}">▶▶</a>
+							</c:if>
+						</th>
+					</tr>
+				</table>
 				</div>
 				<div class="tab-pane fade" id="list-profile" role="tabpanel"
 					aria-labelledby="list-profile-list">
 					<!-- Content
 		============================================= -->
-					<section id="content">
+					<section id="content" >
 						<div class="container clearfix">
 							<div class="table-responsive">
+							<form name="clubBoardForm" action="club_BoardRemove" method="get" onsubmit="return boadChk();">
+								<input type="hidden" name="club_name2" value="${vo.club_name}">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								
 								<table id="datatable1"
 									class="table table-striped table-bordered" cellspacing="0"
-									width="100%">
+									style="width: 100%; text-align:center;">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<c:if test="${memId == vo.club_master}">
+												<th style="vertical-align:middle"><input type="checkbox" id="all_check2"></th>
+											</c:if>
+											<th style="vertical-align:middle">작성자</th>
+											<th style="vertical-align:middle">제목</th>
+											<th style="vertical-align:middle">조회수</th>
+											<th style="vertical-align:middle">작성일</th>
+											<th style="vertical-align:middle">상세보기</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Name</th>
-											<th>Position</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>Start date</th>
-											<th>Salary</th>
+											<c:if test="${memId == vo.club_master}">
+												<th style="vertical-align:middle; width:100px;"><button class="button button-large button-dark button-rounded" style="height:50px;">삭제하기</button></th>
+											</c:if>
+											<th style="vertical-align:middle">작성자</th>
+											<th style="vertical-align:middle">제목</th>
+											<th style="vertical-align:middle">조회수</th>
+											<th style="vertical-align:middle">작성일</th>
+											<th style="vertical-align:middle">상세보기</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<tr>
-											<td>Tiger Nixon</td>
-											<td>System Architect</td>
-											<td>Edinburgh</td>
-											<td>61</td>
-											<td>2011/04/25</td>
-											<td>$320,800</td>
-										</tr>
-										<tr>
-											<td>Garrett Winters</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>63</td>
-											<td>2011/07/25</td>
-											<td>$170,750</td>
-										</tr>
-										<tr>
-											<td>Ashton Cox</td>
-											<td>Junior Technical Author</td>
-											<td>San Francisco</td>
-											<td>66</td>
-											<td>2009/01/12</td>
-											<td>$86,000</td>
-										</tr>
-										<tr>
-											<td>Cedric Kelly</td>
-											<td>Senior Javascript Developer</td>
-											<td>Edinburgh</td>
-											<td>22</td>
-											<td>2012/03/29</td>
-											<td>$433,060</td>
-										</tr>
-										<tr>
-											<td>Airi Satou</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>33</td>
-											<td>2008/11/28</td>
-											<td>$162,700</td>
-										</tr>
-										<tr>
-											<td>Brielle Williamson</td>
-											<td>Integration Specialist</td>
-											<td>New York</td>
-											<td>61</td>
-											<td>2012/12/02</td>
-											<td>$372,000</td>
-										</tr>
-										<tr>
-											<td>Herrod Chandler</td>
-											<td>Sales Assistant</td>
-											<td>San Francisco</td>
-											<td>59</td>
-											<td>2012/08/06</td>
-											<td>$137,500</td>
-										</tr>
-										<tr>
-											<td>Rhona Davidson</td>
-											<td>Integration Specialist</td>
-											<td>Tokyo</td>
-											<td>55</td>
-											<td>2010/10/14</td>
-											<td>$327,900</td>
-										</tr>
-										<tr>
-											<td>Colleen Hurst</td>
-											<td>Javascript Developer</td>
-											<td>San Francisco</td>
-											<td>39</td>
-											<td>2009/09/15</td>
-											<td>$205,500</td>
-										</tr>
-										<tr>
-											<td>Sonya Frost</td>
-											<td>Software Engineer</td>
-											<td>Edinburgh</td>
-											<td>23</td>
-											<td>2008/12/13</td>
-											<td>$103,600</td>
-										</tr>
-										<tr>
-											<td>Jena Gaines</td>
-											<td>Office Manager</td>
-											<td>London</td>
-											<td>30</td>
-											<td>2008/12/19</td>
-											<td>$90,560</td>
-										</tr>
-										<tr>
-											<td>Quinn Flynn</td>
-											<td>Support Lead</td>
-											<td>Edinburgh</td>
-											<td>22</td>
-											<td>2013/03/03</td>
-											<td>$342,000</td>
-										</tr>
-										<tr>
-											<td>Charde Marshall</td>
-											<td>Regional Director</td>
-											<td>San Francisco</td>
-											<td>36</td>
-											<td>2008/10/16</td>
-											<td>$470,600</td>
-										</tr>
-										<tr>
-											<td>Haley Kennedy</td>
-											<td>Senior Marketing Designer</td>
-											<td>London</td>
-											<td>43</td>
-											<td>2012/12/18</td>
-											<td>$313,500</td>
-										</tr>
-										<tr>
-											<td>Tatyana Fitzpatrick</td>
-											<td>Regional Director</td>
-											<td>London</td>
-											<td>19</td>
-											<td>2010/03/17</td>
-											<td>$385,750</td>
-										</tr>
-										<tr>
-											<td>Michael Silva</td>
-											<td>Marketing Designer</td>
-											<td>London</td>
-											<td>66</td>
-											<td>2012/11/27</td>
-											<td>$198,500</td>
-										</tr>
-										<tr>
-											<td>Paul Byrd</td>
-											<td>Chief Financial Officer (CFO)</td>
-											<td>New York</td>
-											<td>64</td>
-											<td>2010/06/09</td>
-											<td>$725,000</td>
-										</tr>
-										<tr>
-											<td>Gloria Little</td>
-											<td>Systems Administrator</td>
-											<td>New York</td>
-											<td>59</td>
-											<td>2009/04/10</td>
-											<td>$237,500</td>
-										</tr>
-										<tr>
-											<td>Bradley Greer</td>
-											<td>Software Engineer</td>
-											<td>London</td>
-											<td>41</td>
-											<td>2012/10/13</td>
-											<td>$132,000</td>
-										</tr>
-										<tr>
-											<td>Dai Rios</td>
-											<td>Personnel Lead</td>
-											<td>Edinburgh</td>
-											<td>35</td>
-											<td>2012/09/26</td>
-											<td>$217,500</td>
-										</tr>
-										<tr>
-											<td>Jenette Caldwell</td>
-											<td>Development Lead</td>
-											<td>New York</td>
-											<td>30</td>
-											<td>2011/09/03</td>
-											<td>$345,000</td>
-										</tr>
-										<tr>
-											<td>Yuri Berry</td>
-											<td>Chief Marketing Officer (CMO)</td>
-											<td>New York</td>
-											<td>40</td>
-											<td>2009/06/25</td>
-											<td>$675,000</td>
-										</tr>
-										<tr>
-											<td>Caesar Vance</td>
-											<td>Pre-Sales Support</td>
-											<td>New York</td>
-											<td>21</td>
-											<td>2011/12/12</td>
-											<td>$106,450</td>
-										</tr>
-										<tr>
-											<td>Doris Wilder</td>
-											<td>Sales Assistant</td>
-											<td>Sidney</td>
-											<td>23</td>
-											<td>2010/09/20</td>
-											<td>$85,600</td>
-										</tr>
-										<tr>
-											<td>Angelica Ramos</td>
-											<td>Chief Executive Officer (CEO)</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2009/10/09</td>
-											<td>$1,200,000</td>
-										</tr>
-										<tr>
-											<td>Gavin Joyce</td>
-											<td>Developer</td>
-											<td>Edinburgh</td>
-											<td>42</td>
-											<td>2010/12/22</td>
-											<td>$92,575</td>
-										</tr>
-										<tr>
-											<td>Jennifer Chang</td>
-											<td>Regional Director</td>
-											<td>Singapore</td>
-											<td>28</td>
-											<td>2010/11/14</td>
-											<td>$357,650</td>
-										</tr>
-										<tr>
-											<td>Brenden Wagner</td>
-											<td>Software Engineer</td>
-											<td>San Francisco</td>
-											<td>28</td>
-											<td>2011/06/07</td>
-											<td>$206,850</td>
-										</tr>
-										<tr>
-											<td>Fiona Green</td>
-											<td>Chief Operating Officer (COO)</td>
-											<td>San Francisco</td>
-											<td>48</td>
-											<td>2010/03/11</td>
-											<td>$850,000</td>
-										</tr>
-										<tr>
-											<td>Shou Itou</td>
-											<td>Regional Marketing</td>
-											<td>Tokyo</td>
-											<td>20</td>
-											<td>2011/08/14</td>
-											<td>$163,000</td>
-										</tr>
-										<tr>
-											<td>Michelle House</td>
-											<td>Integration Specialist</td>
-											<td>Sidney</td>
-											<td>37</td>
-											<td>2011/06/02</td>
-											<td>$95,400</td>
-										</tr>
-										<tr>
-											<td>Suki Burks</td>
-											<td>Developer</td>
-											<td>London</td>
-											<td>53</td>
-											<td>2009/10/22</td>
-											<td>$114,500</td>
-										</tr>
-										<tr>
-											<td>Prescott Bartlett</td>
-											<td>Technical Author</td>
-											<td>London</td>
-											<td>27</td>
-											<td>2011/05/07</td>
-											<td>$145,000</td>
-										</tr>
-										<tr>
-											<td>Gavin Cortez</td>
-											<td>Team Leader</td>
-											<td>San Francisco</td>
-											<td>22</td>
-											<td>2008/10/26</td>
-											<td>$235,500</td>
-										</tr>
-										<tr>
-											<td>Martena Mccray</td>
-											<td>Post-Sales support</td>
-											<td>Edinburgh</td>
-											<td>46</td>
-											<td>2011/03/09</td>
-											<td>$324,050</td>
-										</tr>
-										<tr>
-											<td>Unity Butler</td>
-											<td>Marketing Designer</td>
-											<td>San Francisco</td>
-											<td>47</td>
-											<td>2009/12/09</td>
-											<td>$85,675</td>
-										</tr>
-										<tr>
-											<td>Howard Hatfield</td>
-											<td>Office Manager</td>
-											<td>San Francisco</td>
-											<td>51</td>
-											<td>2008/12/16</td>
-											<td>$164,500</td>
-										</tr>
-										<tr>
-											<td>Hope Fuentes</td>
-											<td>Secretary</td>
-											<td>San Francisco</td>
-											<td>41</td>
-											<td>2010/02/12</td>
-											<td>$109,850</td>
-										</tr>
-										<tr>
-											<td>Vivian Harrell</td>
-											<td>Financial Controller</td>
-											<td>San Francisco</td>
-											<td>62</td>
-											<td>2009/02/14</td>
-											<td>$452,500</td>
-										</tr>
-										<tr>
-											<td>Timothy Mooney</td>
-											<td>Office Manager</td>
-											<td>London</td>
-											<td>37</td>
-											<td>2008/12/11</td>
-											<td>$136,200</td>
-										</tr>
-										<tr>
-											<td>Jackson Bradshaw</td>
-											<td>Director</td>
-											<td>New York</td>
-											<td>65</td>
-											<td>2008/09/26</td>
-											<td>$645,750</td>
-										</tr>
-										<tr>
-											<td>Olivia Liang</td>
-											<td>Support Engineer</td>
-											<td>Singapore</td>
-											<td>64</td>
-											<td>2011/02/03</td>
-											<td>$234,500</td>
-										</tr>
-										<tr>
-											<td>Bruno Nash</td>
-											<td>Software Engineer</td>
-											<td>London</td>
-											<td>38</td>
-											<td>2011/05/03</td>
-											<td>$163,500</td>
-										</tr>
-										<tr>
-											<td>Sakura Yamamoto</td>
-											<td>Support Engineer</td>
-											<td>Tokyo</td>
-											<td>37</td>
-											<td>2009/08/19</td>
-											<td>$139,575</td>
-										</tr>
-										<tr>
-											<td>Thor Walton</td>
-											<td>Developer</td>
-											<td>New York</td>
-											<td>61</td>
-											<td>2013/08/11</td>
-											<td>$98,540</td>
-										</tr>
-										<tr>
-											<td>Finn Camacho</td>
-											<td>Support Engineer</td>
-											<td>San Francisco</td>
-											<td>47</td>
-											<td>2009/07/07</td>
-											<td>$87,500</td>
-										</tr>
-										<tr>
-											<td>Serge Baldwin</td>
-											<td>Data Coordinator</td>
-											<td>Singapore</td>
-											<td>64</td>
-											<td>2012/04/09</td>
-											<td>$138,575</td>
-										</tr>
-										<tr>
-											<td>Zenaida Frank</td>
-											<td>Software Engineer</td>
-											<td>New York</td>
-											<td>63</td>
-											<td>2010/01/04</td>
-											<td>$125,250</td>
-										</tr>
-										<tr>
-											<td>Zorita Serrano</td>
-											<td>Software Engineer</td>
-											<td>San Francisco</td>
-											<td>56</td>
-											<td>2012/06/01</td>
-											<td>$115,000</td>
-										</tr>
-										<tr>
-											<td>Jennifer Acosta</td>
-											<td>Junior Javascript Developer</td>
-											<td>Edinburgh</td>
-											<td>43</td>
-											<td>2013/02/01</td>
-											<td>$75,650</td>
-										</tr>
-										<tr>
-											<td>Cara Stevens</td>
-											<td>Sales Assistant</td>
-											<td>New York</td>
-											<td>46</td>
-											<td>2011/12/06</td>
-											<td>$145,600</td>
-										</tr>
-										<tr>
-											<td>Hermione Butler</td>
-											<td>Regional Director</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2011/03/21</td>
-											<td>$356,250</td>
-										</tr>
-										<tr>
-											<td>Lael Greer</td>
-											<td>Systems Administrator</td>
-											<td>London</td>
-											<td>21</td>
-											<td>2009/02/27</td>
-											<td>$103,500</td>
-										</tr>
-										<tr>
-											<td>Jonas Alexander</td>
-											<td>Developer</td>
-											<td>San Francisco</td>
-											<td>30</td>
-											<td>2010/07/14</td>
-											<td>$86,500</td>
-										</tr>
-										<tr>
-											<td>Shad Decker</td>
-											<td>Regional Director</td>
-											<td>Edinburgh</td>
-											<td>51</td>
-											<td>2008/11/13</td>
-											<td>$183,000</td>
-										</tr>
-										<tr>
-											<td>Michael Bruce</td>
-											<td>Javascript Developer</td>
-											<td>Singapore</td>
-											<td>29</td>
-											<td>2011/06/27</td>
-											<td>$183,000</td>
-										</tr>
-										<tr>
-											<td>Donna Snider</td>
-											<td>Customer Support</td>
-											<td>New York</td>
-											<td>27</td>
-											<td>2011/01/25</td>
-											<td>$112,000</td>
-										</tr>
+										<c:if test="${boardCnt <= 0}">
+											<tr>
+												<td colspan="6">현재 게시글이 없습니다. 글을 작성해주세요.</td>
+											</tr>
+										</c:if>
+										
+										<c:if test="${boardCnt > 0}">
+											<c:forEach var="club_dtos" items="${board_dtos}">
+												<tr>
+													<c:if test="${memId == vo.club_master}">
+														<th style="vertical-align:middle"><input type="checkbox" name="remove" class="board_remove" value="${club_dtos.club_board_code}"></th>												
+													</c:if>
+													<th style="vertical-align:middle">${club_dtos.username}</th>
+													<th style="vertical-align:middle">${club_dtos.title}</th>
+													<th style="vertical-align:middle">${club_dtos.readCnt}</th>
+													<th style="vertical-align:middle">${club_dtos.write_date}</th>
+													<th style="vertical-align:middle">
+														<a href="detail_clubBoard?club_board_code=${club_dtos.club_board_code}&club_name=${vo.club_name}"><button class="button button-large button-dark button-rounded" type="button">상세보기</button></a>
+													</th>
+												</tr>
+											</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
-							</div>
+							</form>
+							<br>
+							<a style="float:right;" href="club_BoardWriteForm?club_name=${vo.club_name}" class="button button-black tright noleftmargin">글쓰기<i class="icon-angle-right"></i></a>
+							<br><br><br>
+						</div>
 						</div>
 					</section>
 					<!-- #content end -->
+					
 				</div>
 				<div class="tab-pane fade" id="list-messages" role="tabpanel"
 					aria-labelledby="list-messages-list">
 					<div class="container clearfix">
+						<form name="clubapplyForm" class="nobottommargin" action="removeClubApply?${_csrf.parameterName}=${_csrf.token}&club_name=${vo.club_name}"
+								method="get" onsubmit="return deleteChk();">
 						<table class="table table-hover" style="text-align: center;">
-							<thead>
-								<tr>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>나이</th>
-									<th>지역</th>
-									<th></th>
+						<thead>
+	 						<tr>
+	 							<th style="vertical-align: middle"><input type="checkbox" name="all_remove" id="all_check"></th>
+								<th style="vertical-align: middle">아이디</th>
+	 							<th style="vertical-align: middle">이름</th>
+								<th style="vertical-align: middle">성별</th>
+								<th style="vertical-align: middle">주소</th>
+								<th style="vertical-align: middle">연락처</th>
+								<th style="vertical-align: middle">승인</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:if test="${applyCnt == 0}">
+							<tr>
+								<td colspan="7">현재 해당 동호회에 가입신청한 목록이 없습니다.</td>
+							</tr>
+						</c:if>
+						
+					
+						<c:if test="${applyCnt != 0}">
+							<c:forEach var="userdtos" items="${userdtos}">
+								<tr> 
+									<td style="vertical-align: middle"><input type="checkbox" class="remove" name="remove2" value="${userdtos.apply_code}"></td>
+									<td style="vertical-align: middle">${userdtos.username}</td>
+									<td style="vertical-align: middle">${userdtos.name}</td>
+									<td style="vertical-align: middle">${userdtos.gender}</td>
+									<td style="vertical-align: middle">${userdtos.address}</td>
+									<td style="vertical-align: middle">${userdtos.phone_number}</td>
+									<td style="vertical-align: middle">
+										<a href="confirmMember?username=${userdtos.username}&club_name=${vo.club_name}&apply_code=${userdtos.apply_code}" onclick="return confirmChk();"><button type="button" class="button button-large button-dark button-rounded">승인</button></a>
+									</td>
 								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>park</td>
-									<td>박림밈</td>
-									<td>50</td>
-									<td>강서구</td>
-									<td><i class="i-rounded i-bordered icon-check"></i>
-									<i class="i-rounded i-bordered icon-remove" ></i></td>
-
-								</tr>
-								<tr>
-									<td>pang</td>
-									<td>팡림믐</td>
-									<td>30</td>
-									<td>구로</td>
-									<td><i class="i-rounded i-bordered icon-check"></i><i
-										class="i-rounded i-bordered icon-remove"></i></td>
-								</tr>
-								<tr>
-									<td>kim</td>
-									<td>김림밈</td>
-									<td>20</td>
-									<td>강남구</td>
-									<td><i class="i-rounded i-bordered icon-check"></i><i
-										class="i-rounded i-bordered icon-remove"></i></td>
-								</tr>
-							</tbody>
-						</table>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+				
+				<table class="table table-hover" style="text-align: center;">
+					<tr>
+						<th width="250px;"><button type="submit" class="button button-large button-dark button-rounded" style="float:left">삭제하기</button></th>
+						<th colspan="2" style="vertical-align:middle; text-align:center;">
+							<!-- 처음[◀◀] / 이전블록[◀] -->
+							<c:if test="${startPage > pageBlock}">
+								<a href="details_Club">[◀◀]</a>
+								<a href="details_Club?a_pageNum=${a_startPage - a_pageBlock}">[◀]</a>
+							</c:if>
+	
+							<!-- 블록내의 페이지 번호  -->
+							<c:forEach var="j" begin="${a_startPage}" end="${a_endPage}">
+								<c:if test="${j == a_currentPage}">
+									<span><b style="background: rigthgreen">[${j}]</b></span>
+								</c:if>
+	
+								<c:if test="${j != a_currentPage}">
+									<span><b><a href="details_Club?pageNum=${j}">[${j}]</a></b></span>
+								</c:if>
+							</c:forEach>
+	
+							<!-- 다음블록[▶] / 마지막[▶▶]  -->
+							<c:if test="${a_pageCount > a_endPage}">
+								<a href="details_Club?pageNum=${a_startPage + a_pageBlock}">▶</a>
+								<a href="details_Club?pageNum=${a_pageCount}">▶▶</a>
+							</c:if>
+						</th>
+						<th></th>
+					</tr>
+				</table>
+					</form>
 					</div>
 				</div>
 			</div>
@@ -674,9 +348,6 @@
 	<script src="resources/js/jquery.js"></script>
 	<script src="resources/js/plugins.js"></script>
 
-	<!-- Bootstrap Data Table Plugin -->
-	<script src="resources/js/components/bs-datatable.js"></script>
-
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="resources/js/functions.js"></script>
@@ -694,6 +365,113 @@
 			} else {
 				return false;
 			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function kickMember(){
+			if(confirm("해당 회원을 탈퇴시키겠습니까?")){
+				return true;
+			} else{
+				return false;
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function exitChk(){
+			if(confirm("해당 동호회를 탈퇴하시겠습니까?")){
+				return true;
+			} else{
+				return false;
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function confirmChk(){
+			if(confirm("해당 회원을 가입승인하시겠습니까?")){
+				return true;
+			} else{
+				return false;
+			}
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function deleteChk(){
+			var temp = false;
+			if(${applyCnt} == 0){
+				alert("현재 삭제하실 회원목록이 없습니다.");
+				return false;
+			}
+			if(!document.clubapplyForm.remove2.length){
+				temp = document.clubapplyForm.remove2.checked;
+				if(temp){
+					var yn = confirm("선택하신 회원의 가입을 취소하시겠습니까?");
+					if(yn){
+						return true;
+					} else{
+						return false;	
+					}
+				}
+			} else{
+				for(var i=0; i<document.clubapplyForm.remove2.length; i++){
+					temp = document.clubapplyForm.remove2[i].checked;
+					if(temp){
+						var yn = confirm("선택하신 회원의 가입을 취소하시겠습니까?");
+						if(yn){
+							return true;
+						} else{
+							return false;	
+						}
+					}
+				}
+			}
+			if(!temp){
+				alert("회원을 한명이상 선택해주세요.");
+				return false;
+			}
+			return false;
+		}
+	</script>
+	
+	<script type="text/javascript">
+	// 삭제버튼 눌렀을시 즐겨찾기 목록 선택했는지 여부
+		function boadChk(){
+			var temp = false;
+			if(${boardCnt} == 0){
+				alert("현재 삭제하실 게시글이없습니다.");
+				return false;
+			}
+			if(!document.clubBoardForm.remove.length){
+				temp = document.clubBoardForm.remove.checked;
+				if(temp){
+					var yn = confirm("선택하신 게시글을 삭제하시겠습니까?");
+					if(yn){
+						return true;
+					} else{
+						return false;	
+					}
+				}
+			} else{
+				for(var i=0; i<document.clubBoardForm.remove.length; i++){
+					temp = document.clubBoardForm.remove[i].checked;
+					if(temp){
+						var yn = confirm("선택하신 게시글을 삭제하시겠습니까?");
+						if(yn){
+							return true;
+						} else{
+							return false;	
+						}
+					}
+				}
+			}
+			if(!temp){
+				alert("게시글을 하나이상 선택해주세요.");
+				return false;
+			}
+			return false;
 		}
 	</script>
 </body>

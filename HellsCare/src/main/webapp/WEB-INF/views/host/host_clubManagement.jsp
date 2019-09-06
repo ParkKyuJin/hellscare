@@ -66,7 +66,7 @@
 							<th>대표자</th>
 							<th>종류</th>
 							<th>지역</th>
-							<th>최대인원</th>
+							<th>인원</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -85,7 +85,7 @@
 									<td style="vertical-align: middle">${dto.club_master}</td>
 									<td style="vertical-align: middle">${dto.club_kind}</td>
 									<td style="vertical-align: middle">${dto.area}</td>
-									<td style="vertical-align: middle">${dto.club_max}</td>
+									<td style="vertical-align: middle">${dto.current_personnel}/${dto.club_max}</td>
 									<td style="vertical-align: middle; width: 350px;">
 										<a href="host_ClubDetail?club_name=${dto.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>&emsp;&emsp;
 									</td>

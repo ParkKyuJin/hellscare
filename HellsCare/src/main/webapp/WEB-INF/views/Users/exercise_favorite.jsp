@@ -11,6 +11,13 @@
 	});
 </script>
 <body>
+
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("로그인을 하셔야 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
 	<%@ include file="../include/header.jsp"%>
 
 	<!-- Content
@@ -21,7 +28,7 @@
 	<section id="content">
 		<div class="content-wrap">
 			<div class="container clearfix">
-				<form action="deletefavorite" onsubmit="return check();" class="nobottommargin" name="fa_deleteForm">
+				<form action="deletefavorite?${_csrf.parameterName}=${_csrf.token}" onsubmit="return check();" class="nobottommargin" name="fa_deleteForm">
 					<table class="table table-hover"
 						style="text-align: center; width: 1000px; margin:0 auto">
 						<thead>

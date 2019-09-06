@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/setting.jsp" %>
+<%@ include file="../include/header.jsp"%>
 <html>
 <script type="text/javascript">
 	$(function() {
@@ -11,17 +11,21 @@
 	});
 </script>
 <body>
-	<%@ include file="../include/header.jsp"%>
-
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("로그인을 하셔야 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
 	<!-- Content
 		============================================= -->
 	<nav class="navbar navbar-light bg-light justify-content-between">
-		<a class="navbar-brand" style="margin: 0 auto;">즐겨찾기한 운동</a>
+		<a class="navbar-brand" style="margin: 0 auto;">동호회 신청목록</a>
 	</nav>
 	<section id="content">
 		<div class="content-wrap">
 			<div class="container clearfix">
-				<form action="deletefavorite" onsubmit="return check();" class="nobottommargin" name="fa_deleteForm">
+				<form action="deleteApply?${_csrf.parameterName}=${_csrf.token}" onsubmit="return check();" class="nobottommargin" name="fa_deleteForm">
 					<table class="table table-hover"
 						style="text-align: center; width: 1000px; margin:0 auto">
 						<thead>
@@ -44,13 +48,13 @@
 								<c:forEach var="dto" items="${dtos}">
 									<tr>
 										<td style="vertical-align: middle">
-											<input type="checkbox" name="remove2" class="remove" value="${dto.club_name}">
+											<input type="checkbox" name="remove2" class="remove" value="${dto.apply_code}">
 										</td>
 										<td style="vertical-align: middle">${dto.club_name}</td>
 										<td style="vertical-align: middle">${dto.club_master}</td>
 										<td style="vertical-align: middle">${dto.club_kind}</td>
 										<td style="vertical-align: middle">${dto.area}</td>
-										<td style="vertical-align: middle"><font style="font-weight:bold;">/</font>${dto.club_max}</td>
+										<td style="vertical-align: middle">${dto.current_personnel}<font style="font-weight:bold;">/${dto.club_max}</font></td>
 										<td style="vertical-align: middle">
 											<a href="details_Club?club_name=${dto.club_name}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>
 										</td>

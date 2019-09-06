@@ -1,25 +1,156 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="../include/h_sidebarMenu.jsp"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>HealthCare Admin Page</title>
 
 </head>
 
 <body>
+    <%@ include file="../include/h_sidebarMenu.jsp"%>
     <!--main content start-->
-    <section id="main-content" >
-      <section class="wrapper" style="margin:0px 0px 0px 200px;">
-        <div class="row">
+    <section id="main-content">
+      <section class="wrapper">
+      
+      <div class="row">
           <div class="col-lg-9 main-chart">
-            <!--CUSTOM CHART START -->
+            
+            <div class="border-head">
+              <h2>관리자 메인 페이지</h2>
+            </div>
+        <div class="row">
+        
+              <!-- WEATHER PANEL -->
+              <div class="col-md-4 mb">
+                <div class="weather pn">
+                  <i class="fa fa-cloud fa-4x"></i>
+                  <h2>25º C</h2>
+                  <h4>금천구</h4>
+                </div>
+              </div>
+              <!-- /col-md-4 -->
+               <!--   SERVER STATUS PANELS -->
+              <div class="col-md-4 col-sm-4 mb">
+                <div class="grey-panel pn donut-chart">
+                  <div class="grey-header">
+                    <h5>SERVER LOAD</h5>
+                  </div>
+                  <canvas id="serverstatus01" height="120" width="120"></canvas>
+                  <script>
+                    var doughnutData = [{
+                        value: 70,
+                        color: "#FF6B6B"
+                      },
+                      {
+                        value: 30,
+                        color: "#fdfdfd"
+                      }
+                    ];
+                    var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
+                  </script>
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-6 goleft">
+                      <p>Usage<br/>Increase:</p>
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                      <h2>21%</h2>
+                    </div>
+                  </div>
+                </div>
+                <!-- /grey-panel -->
+              </div>
+              <!-- /col-md-4 -->
+              <div class="col-md-4 col-sm-4 mb">
+                <div class="green-panel pn">
+                  <div class="green-header">
+                    <h5>DISK SPACE</h5>
+                  </div>
+                  <canvas id="serverstatus03" height="120" width="120"></canvas>
+                  <script>
+                    var doughnutData = [{
+                        value: 60,
+                        color: "#2b2b2b"
+                      },
+                      {
+                        value: 40,
+                        color: "#fffffd"
+                      }
+                    ];
+                    var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
+                  </script>
+                  <h3>60% USED</h3>
+                </div>
+              </div>
+              <!-- /col-md-4 -->
+            </div>
+              
+              
+              
+              <div class="row">
+              <!-- DIRECT MESSAGE PANEL -->
+              <div class="col-md-12 mb">
+              <div class="content-panel">
+				
+              <table class="table table-striped table-advance table-hover">
+                <h4><i class="fa fa-angle-right"></i> 최근 가입 회원 목록  </h4>
+              
+                <thead>
+                 <tr>
+					<td colspan="4" align="left" style="height:25px"> 
+					 	총회원수 : ${cnt}		
+					</td>				
+				</tr>
+                  <tr>
+                  	<th>아이디</th>
+                    <th>회원명 </th>
+                    <th>가입일</th>
+                    <th>활동여부</th>
+                  </tr>
+                </thead>
+                <tbody>
+           <!-- 가입회면이 있으면 -->
+	<c:if test="${cnt > 0}">
+		<c:forEach var="dto" items="${dtos}" begin="0" end="4" varStatus="status">
+		
+		<tr>
+			<td>${dto.username }</td>
+            <td>${dto.name } </td>
+            <td>${dto.reg_date }</td>
+            <td>${dto.enabled }</td>  
+		</tr>
+			
+		</c:forEach>
+	</c:if>
+	
+	<!-- 상품이 없으면 -->
+	<c:if test="${cnt == 0}">
+		<tr>
+			<td colspan="4" align="center">
+				가입된 회원정보가 없습니다..!!
+			</td>			
+		</tr>
+	</c:if> 
+
+    </tbody>
+  </table>
+    
+            </div>
+            <!-- /content-panel -->
+              
+              </div>
+        	<!-- /col-md-8 -->
+        	</div> 
+            </div>
+      </div>
+  <!-- <!--       <div class="row">
+          <div class="col-lg-9 main-chart">
+            CUSTOM CHART START
             <div class="border-head">
               <h3>USER VISITS</h3>
             </div>
@@ -61,39 +192,9 @@
                 <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
               </div>
             </div>
-            <!--custom chart end-->
+            custom chart end
             <div class="row mt">
-              <!-- SERVER STATUS PANELS -->
-              <div class="col-md-4 col-sm-4 mb">
-                <div class="grey-panel pn donut-chart">
-                  <div class="grey-header">
-                    <h5>SERVER LOAD</h5>
-                  </div>
-                  <canvas id="serverstatus01" height="120" width="120"></canvas>
-                  <script>
-                    var doughnutData = [{
-                        value: 70,
-                        color: "#FF6B6B"
-                      },
-                      {
-                        value: 30,
-                        color: "#fdfdfd"
-                      }
-                    ];
-                    var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-                  </script>
-                  <div class="row">
-                    <div class="col-sm-6 col-xs-6 goleft">
-                      <p>Usage<br/>Increase:</p>
-                    </div>
-                    <div class="col-sm-6 col-xs-6">
-                      <h2>21%</h2>
-                    </div>
-                  </div>
-                </div>
-                <!-- /grey-panel -->
-              </div>
-              <!-- /col-md-4-->
+           
               <div class="col-md-4 col-sm-4 mb">
                 <div class="darkblue-panel pn">
                   <div class="darkblue-header">
@@ -122,11 +223,11 @@
                     </div>
                   </footer>
                 </div>
-                <!--  /darkblue panel -->
+                 /darkblue panel
               </div>
-              <!-- /col-md-4 -->
+              /col-md-4
               <div class="col-md-4 col-sm-4 mb">
-                <!-- REVENUE PANEL -->
+                REVENUE PANEL
                 <div class="green-panel pn">
                   <div class="green-header">
                     <h5>REVENUE</h5>
@@ -137,51 +238,13 @@
                   <p class="mt"><b>$ 17,980</b><br/>Month Income</p>
                 </div>
               </div>
-              <!-- /col-md-4 -->
+              /col-md-4
             </div>
-            <!-- /row -->
+            /row
+           
+            
             <div class="row">
-              <!-- WEATHER PANEL -->
-              <div class="col-md-4 mb">
-                <div class="weather pn">
-                  <i class="fa fa-cloud fa-4x"></i>
-                  <h2>11º C</h2>
-                  <h4>BUDAPEST</h4>
-                </div>
-              </div>
-              <!-- /col-md-4-->
-              <!-- DIRECT MESSAGE PANEL -->
-              <div class="col-md-8 mb">
-                <div class="message-p pn">
-                  <div class="message-header">
-                    <h5>DIRECT MESSAGE</h5>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3 centered hidden-sm hidden-xs">
-                      <img src="resources/img/ui-danro.jpg" class="img-circle" width="65">
-                    </div>
-                    <div class="col-md-9">
-                      <p>
-                        <name>Dan Rogers</name>
-                        sent you a message.
-                      </p>
-                      <p class="small">3 hours ago</p>
-                      <p class="message">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                      <form class="form-inline" role="form">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="exampleInputText" placeholder="Reply Dan">
-                        </div>
-                        <button type="submit" class="btn btn-default">Send</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!-- /Message Panel-->
-              </div>
-              <!-- /col-md-8  -->
-            </div>
-            <div class="row">
-              <!-- TWITTER PANEL -->
+              TWITTER PANEL
               <div class="col-md-4 mb">
                 <div class="twitter-panel pn">
                   <i class="fa fa-twitter fa-4x"></i>
@@ -189,9 +252,9 @@
                   <p class="user">@Alvrz_is</p>
                 </div>
               </div>
-              <!-- /col-md-4 -->
+              /col-md-4
               <div class="col-md-4 mb">
-                <!-- WHITE PANEL - TOP USER -->
+                WHITE PANEL - TOP USER
                 <div class="white-panel pn">
                   <div class="white-header">
                     <h5>TOP USER</h5>
@@ -210,9 +273,9 @@
                   </div>
                 </div>
               </div>
-              <!-- /col-md-4 -->
+              /col-md-4
               <div class="col-md-4 mb">
-                <!-- INSTAGRAM PANEL -->
+                INSTAGRAM PANEL
                 <div class="instagram-panel pn">
                   <i class="fa fa-instagram fa-4x"></i>
                   <p>@THISISYOU<br/> 5 min. ago
@@ -220,21 +283,21 @@
                   <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
                 </div>
               </div>
-              <!-- /col-md-4 -->
+              /col-md-4
             </div>
-            <!-- /row -->
+            /row
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-4 mb">
                 <div class="product-panel-2 pn">
-                  <!-- <div class="badge badge-hot">HOT</div> -->
+                  <div class="badge badge-hot">HOT</div>
                   <img src="resources/img/product.jpg" width="200" alt="">
                   <h5 class="mt">Flat Pack Heritage</h5>
                   <h6>TOTAL SALES: 1388</h6>
                   <button class="btn btn-small btn-theme04">FULL REPORT</button>
                 </div>
               </div>
-              <!-- /col-md-4 -->
-              <!--  PROFILE 02 PANEL -->
+              /col-md-4
+               PROFILE 02 PANEL
               <div class="col-lg-4 col-md-4 col-sm-4 mb">
                 <div class="content-panel pn">
                   <div id="profile-02">
@@ -249,38 +312,14 @@
                     <a href="#"><i class="fa fa-dribbble"></i></a>
                   </div>
                 </div>
-                <!-- /panel -->
+                /panel
               </div>
-              <!--/ col-md-4 -->
-              <div class="col-md-4 col-sm-4 mb">
-                <div class="green-panel pn">
-                  <div class="green-header">
-                    <h5>DISK SPACE</h5>
-                  </div>
-                  <canvas id="serverstatus03" height="120" width="120"></canvas>
-                  <script>
-                    var doughnutData = [{
-                        value: 60,
-                        color: "#2b2b2b"
-                      },
-                      {
-                        value: 40,
-                        color: "#fffffd"
-                      }
-                    ];
-                    var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
-                  </script>
-                  <h3>60% USED</h3>
-                </div>
-              </div>
-              <!-- /col-md-4 -->
-            </div>
-            <!-- /row -->
-          </div>
+              / col-md-4
+              
+            /row
+          </div> --> 
           <!-- /col-lg-9 END SECTION MIDDLE -->
-          <!-- **********************************************************************************************************************************************************
-              RIGHT SIDEBAR CONTENT
-              *********************************************************************************************************************************************************** -->
+  
          
     </section>
     <!--main content end-->
@@ -299,7 +338,7 @@
           -->
           Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
         </div>
-        <a href="index.html#" class="go-top">
+        <a href="host_main#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
@@ -307,6 +346,11 @@
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
+  
+ 
+
+  
+  
 	<script type="application/javascript">
 		
     $(document).ready(function() {

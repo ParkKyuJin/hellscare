@@ -66,8 +66,7 @@
     <!-- 규진 종료 -->
     
     <!-- 재관 시작 -->
-   <!-- 관리자 - 질병정보 <== 재관     -->
-	<!-- 재관 시작 -->
+  <!-- 재관 시작 -->
    <!-- 관리자 - 질병정보 <== 재관     -->
 	<!-- 질병정보 갯수 -->
 	<select id="getDiseaseCount" resultType="int">
@@ -93,7 +92,7 @@
 								disease_code like '%'||#{s_code}||'%'
 							</if>				
 						</where>		 
-						ORDER BY disease_code 
+						ORDER BY disease_name 
 						) 
 				) 
 		<![CDATA[
@@ -143,20 +142,26 @@
 				  FROM ( 
 						SELECT * FROM users	
 						WHERE not username='host'						 
-						ORDER BY reg_date desc
+						ORDER BY name
 						) 
 				) 
 		<![CDATA[
 		WHERE rNum >= #{start} AND rNum <= #{end}
-		]]>
-    
+		]]>    
     </select>
     
-    <!-- 회원 삭제 -->
-    <delete id="deleteUser" parameterType="String">
-    	DELETE users
-    	 WHERE username=#{username}
-    </delete>
+    <!-- 최근 가입 회원 -->
+    <select id="recentJoinUser"  resultType="com.pro.hellscare.VO.UsersVO">
+		SELECT *  
+		  FROM ( SELECT username, name, reg_date, enabled,  rownum rNum   
+				  FROM ( 
+						SELECT * FROM users	
+						WHERE not username='host'						 
+						ORDER BY reg_date desc
+						) 
+				)    
+    </select>
+    
     
     <!-- 성별 차트 구하기 -->
 	<select id="getGenderChart" resultType="com.pro.hellscare.VO.GenderChartVO">
@@ -192,13 +197,27 @@
 		WHERE username=#{username}
 	</update>
 	
-<!-- 재관 종료 -->    
+	<!-- ********* 안드로이드 *********** -->
+	<!-- 안드로이드 로그인체크 -->	
+	<select id="confirmId"  resultType="String">
+		SELECT enabled FROM users 
+		WHERE username=#{username}		
+	</select>
+	<select id="getPwd" resultType="String">
+		select password from users where username=#{username}
+	</select>
+	<select id="getMemberInfo" resultType="com.pro.hellscare.VO.UsersVO">
+		SELECT * FROM users WHERE username=#{username}
+	</select>
+
+<!-- 재관 종료 --> 
 
     <!-- 재관 종료 -->
     
     
     <!-- 예찬 시작 -->
-   <!-- 관리자 - 운동등록 -->
+  <!-- 예찬 시작 -->
+    <!-- 관리자 - 운동등록 -->
  	   <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
    	 	INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind,exercise_video)
    	 	VALUES(exercise_seq.nextval,#{exercise_name},#{exercise_img},#{way},#{part},#{kcal},#{note},#{kind},#{exercise_video})  
@@ -293,7 +312,7 @@
     
     <!-- 운동 - 즐겨찾기 여부 -->
     <select id="getFavoriteCnt" parameterType="String" resultType="int">
-    	select count(*) from favorite_tbl
+    	select count(*) from favorite_tbl where username=#{username}
     </select>
     
     <!-- 동호회명 중복확인 -->
@@ -328,6 +347,7 @@
 		select f.favorite_code, e.exercise_code, e.exercise_name, e.way, e.part, e.kcal, e.note, e.kind, e.exercise_img
 		  from exercise_tbl e, favorite_tbl f
 		 where e.exercise_code = #{exercise_code}
+		   and f.username = #{username}
 		   and e.exercise_code = f.exercise_code
 	</select>
     
@@ -364,20 +384,20 @@
     	where club_name=#{club_name}
     </select>
     
-    <!-- 관리자 - 동호회 신청 삭제  -->
+    <!-- 관리자 - 동호회 신청 삭제   / 개설된 동호회 삭제 -->
     <delete id="deleteApplyClub" parameterType="String">
     	delete from club_tbl where club_name = #{club_name}
     </delete>
     
     <!-- 관리자 - 동호회 신청 승인 -->
     <update id="clubPermit" parameterType="String">
-    	update club_tbl set club_whether=1, club_date=sysdate where club_name=#{club_name}
+    	update club_tbl set club_whether=1, current_personnel=1, club_date=sysdate where club_name=#{club_name}
     </update>
-    
+
     <!-- 고객 - 동호회목록 -->
     <select id="getClub_List" resultType="com.pro.hellscare.VO.ClubVO" parameterType="java.util.Map">
    		<![CDATA[
-		select * from (select club_name,club_kind,club_max,area,club_date,club_master,club_pr,club_whether, rownum rNum 
+		select * from (select club_name,club_kind,current_personnel,club_max,area,club_date,club_master,club_pr,club_whether, rownum rNum 
 			from (select * from club_tbl
 					where club_whether = 1
                     and club_name not in (#{club1},#{club2},#{club3})
@@ -388,8 +408,8 @@
     </select>
     
     <!-- 동호회 - 개수구하기 -->
-    <select id="getClub_Cnt" resultType="int">
-    	select count(*) from club_tbl where club_whether = 1
+    <select id="getClub_Cnt" resultType="int" parameterType="String">
+    	select count(*) from club_tbl where club_whether = 1 and club_master != #{username}
     </select>
     
     <!-- 동호회 - 상세페이지 -->
@@ -412,7 +432,7 @@
     <!-- 관리자 - 개설된 동호회 목록 -->
     <select id="getExistenceClubList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ClubVO">
     	<![CDATA[
-		select * from (select club_name,club_kind,club_max,area,club_master,club_pr,club_whether, rownum rNum 
+		select * from (select club_name,club_kind,club_max,area,club_master,club_pr,club_whether,current_personnel, rownum rNum 
 			from (select * from club_tbl 
 					where club_whether = 1)
 				) where rNum >= #{start} AND rNum <= #{end}
@@ -426,12 +446,12 @@
     
     <!-- 동호회 - 내가 가입한 동호회 목록 -->
     <select id="getMyClubList" parameterType="String" resultType="com.pro.hellscare.VO.MyClubVO">
-    	select club1,club2,club3 from clubs where username=#{username}
+    	select username,club1,club2,club3 from clubs where username=#{username}
     </select>
     
     <!-- 동호회 - 내가 가입한 동호회 목록 정보 -->
     <select id="getMy_ClubList" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
-    	select club_name,club_kind,club_max,area,club_master,club_pr
+    	select club_name,club_kind,club_max,area,club_master,club_pr,current_personnel
     	  from club_tbl
     	 where club_name = #{club_name}
     </select>
@@ -459,16 +479,21 @@
     
     <!-- 동호회 - 가입신청 목록 -->
     <select id="getApplyList" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
-    	select club_name,club_kind,club_max,area,club_master,club_pr
-    	  from club_tbl where club_name in(
-       	select club_name from apply_tbl where username=#{username})
+    	select * from(select a.apply_code, c.club_name,c.club_kind,c.club_max,c.area,c.club_master,c.club_pr,c.current_personnel
+    	                from apply_tbl a join club_tbl c on a.club_name = c.club_name 
+    	                where a.username = #{username})
     </select>
     
-    <!-- 첫번째 동호회 없을시 첫번째 동호회에 추가 -->
+    <!-- 처음 동호회 가입시 첫번째 동호회에 추가 -->
     <insert id="addClub1" parameterType="java.util.Map">
     	insert into clubs(username,club1)
     	values(#{username},#{club_name})
     </insert>
+    
+    <!-- 첫번째 동호회 없을시 첫번째 동호회에 추가 -->
+     <update id="add_Club1" parameterType="java.util.Map">
+    	update clubs set club1=#{club_name} where username=#{username}
+    </update>
     
     <!-- 첫번째 동호회있고, 두번째 동호회 없을시 두번째 동호회에 추가 -->
     <update id="addClub2" parameterType="java.util.Map">
@@ -484,6 +509,127 @@
     <select id="applyCnt" parameterType="String" resultType="int">
     	select count(*) from apply_tbl where username=#{username}
     </select>
+    
+    <!-- 동호회 - 신청목록 삭제 -->
+	<delete id="deleteApply" parameterType="String">
+		delete from apply_tbl where apply_code = #{apply_code}
+	</delete>
+
+	<!-- 동호회 - 현재인원 -->
+	<select resultType="int" id="getCurrentMember" parameterType="String">
+		select current_personnel from club_tbl where club_name=#{club_name} 
+	</select>
+
+	<!-- 동호회 - 현재인원 정보 목록 -->
+	<select resultType="com.pro.hellscare.VO.UsersVO" id="getMemberList" parameterType="java.util.Map">
+		<![CDATA[
+			select * from (
+				select username,name,phone_number,rownum rNum from users
+	  				 where username in(select username from clubs where #{club_name} in(club1,club2,club3))) 
+	  				 where rNum >= #{start} AND rNum <= #{end}
+	   	]]>
+	</select>
+
+	<!-- 동호회 - 동호회 회원탈퇴 1번째 경우 -->
+	<update id="removeClub1" parameterType="String">
+		update clubs set club1=null where username=#{username} 
+	</update>
+
+	<!-- 동호회 - 동호회 회원탈퇴 2번째 경우 -->
+	<update id="removeClub2" parameterType="String">
+		update clubs set club2=null where username=#{username} 
+	</update>
+
+	<!-- 동호회 - 동호회 회원탈퇴 3번째 경우 -->
+	<update id="removeClub3" parameterType="String">
+		update clubs set club3=null where username=#{username} 
+	</update>
+
+	<!-- 관리자 - 개설된 동호회 삭제 -->
+	<delete id="deleteClub" parameterType="String">
+		delete club_tbl where club_name=#{club_name} 
+	</delete>
+
+	<!-- 동호회 - 삭제시 필요한 아이디 -->
+	<select resultType="com.pro.hellscare.VO.UsersVO" id="getUserName" parameterType="String">
+		select username from users where username in(select username from clubs where #{club_name} in(club1,club2,club3)) 
+	</select>
+	
+	<!-- 동호회 - 해당동호회 가입신청 목록  -->
+	<select id="getClubApply" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.UsersVO">
+	<![CDATA[
+		select * from (
+			select a.apply_code,u.username,u.name,u.address,u.gender,u.phone_number,rownum rNum 
+			  from users u, apply_tbl a 
+              where u.username in(select username from apply_tbl where club_name=#{club_name})
+              and u.username = a.username)
+              where rNum>=#{start} and rNum<=#{end}       
+    ]]>
+	</select>
+	
+	<!-- 동호회 - 해당동호회 가입신청 개수 -->
+	<select id="clubApplyCnt" parameterType="String" resultType="int">
+		select count(*) from apply_tbl where club_name = #{club_name}
+	</select>
+	
+	<!-- 동호회 - 가입승인시 현재인원 증가 -->
+	<update id="plusMember" parameterType="String">
+		update club_tbl set current_personnel = current_personnel+1 where club_name=#{club_name}
+	</update>
+	
+	<!-- 동호회 - 최대인원수 -->
+	<select id="getMax" parameterType="String" resultType="int">
+		select club_max from club_tbl where club_name=#{club_name}
+	</select>
+	
+	<!-- 동호회 - 현재인원수 -->
+	<select id="getCurrent" parameterType="String" resultType="int">
+		select current_personnel from club_tbl where club_name=#{club_name}
+	</select>
+	
+	<!-- 동호회 - 탈퇴시 회원감소 -->
+	<update id="minusMember" parameterType="String">
+		update club_tbl set current_personnel = current_personnel-1 where club_name=#{club_name}
+	</update>
+	
+	<!-- 동호회 - 동호회 게시판개수 -->
+	<select id="getClubBoardCnt" parameterType="String" resultType="int">
+		select count(*) from club_board_tbl where club_name=#{club_name}
+	</select>
+	
+	<!-- 동호회 - 동호회 게시판 목록 -->
+	<select id="getClubBoardList" parameterType="String" resultType="com.pro.hellscare.VO.ClubBoardVO">
+		select * from club_board_tbl where club_name = #{club_name}
+	</select>
+	
+	<!-- 동호회 - 동호회 게시판 글쓰기 처리  -->
+	<insert id="insertClubBoard" parameterType="com.pro.hellscare.VO.ClubBoardVO">
+		insert into club_board_tbl(club_board_code,username,club_name,title,content,readCnt,write_date)
+		values(clubBoard_seq.nextval,#{username},#{club_name},#{title},#{content},0,sysdate)
+	</insert>
+	
+	<!-- 동호회 게시판 글삭제 처리 -->
+	<delete id="deleteClubBoard" parameterType="String">
+		delete club_board_tbl where club_board_code=#{club_board_code}
+	</delete>
+	
+	<!-- 동호회 - 동호회 게시판 상세페이지 -->
+	<select id="getBoardDetail" parameterType="String" resultType="com.pro.hellscare.VO.ClubBoardVO">
+		select club_board_code,username,club_name,title,content,readCnt,write_date
+		  from club_board_tbl
+		 where club_board_code=#{club_board_code}
+	</select>
+	
+	<!-- 동호회 게시글 클릭시 조회수 증가 -->
+	<update id="plusReadCnt" parameterType="String">
+		update club_board_tbl set readCnt=readCnt+1 where club_board_code=#{club_board_code}
+	</update>
+	
+	<!-- 동호회 - 동호회 게시글 수정처리 -->
+	<update id="updateClubCnt" parameterType="com.pro.hellscare.VO.ClubBoardVO">
+		update club_board_tbl set title=#{title}, content=#{content} where club_board_code=#{club_board_code}
+	</update>
+	
     <!-- 예찬 종료 -->
     
     <!-- 한결 시작 -->
@@ -698,6 +844,7 @@
     <!-- 이나현 끝 -->
     
     <!-- 동렬 시작 -->
+	<!-- 동렬 시작 -->
 	<!-- 관리자 - 음식 등록 -->
 	<insert id="insertFood" parameterType="com.pro.hellscare.VO.FoodVO">
 		INSERT INTO food_tbl(food_code, food_name, food_img, quantity, food_kind, kcal, carbohydrate,
@@ -759,6 +906,36 @@
 	<select id="getFoodNamesByUsingFoodKind" parameterType="String" resultType="com.pro.hellscare.VO.FoodVO">
 		SELECT * FROM food_tbl WHERE food_kind = #{food_kind}
 	</select>
+	
+	<!-- 사용자 - 세션값에 기록되어있는 사용자 정보 가져오기 -->
+	<select id="getUserInfoByUsingId" parameterType="String" resultType="com.pro.hellscare.VO.UsersVO">
+		SELECT * FROM users WHERE username = #{username}
+	</select>
+	
+	<!-- 사용자 - 사용자가 입력했던 음식 칼로리 값들 가져오기 -->
+	<select id="getKcalInfo" parameterType="java.util.Map" resultType="String">
+		SELECT SUM(kcal) FROM kcal_tbl WHERE username = #{username} AND kcal_date = #{kcal_date}
+	</select>
+	
+	<!-- 사용자 - 사용자가 입력한 음식 입력하기 -->
+	<insert id="insertUserFood" parameterType="java.util.Map">
+		INSERT INTO kcal_tbl(username, food_code, kcal, kcal_date)
+		VALUES(#{username}, #{food_code}, #{kcal}, #{kcal_date})
+	</insert>
+	
+	<!-- 사용자 - 칼로리 테이블에 입력된 회원의 일주일 간 칼로리 정보 가져오기 -->
+	<select id="getUserKcalInfo" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.KcalVO">
+		<![CDATA[
+			SELECT * 
+				FROM kcal_tbl 
+				WHERE username = #{username} 
+				AND kcal_date >= #{kcal_date} 
+				AND kcal_date < sysdate 
+				ORDER BY kcal_date ASC
+		]]>
+	</select>
+	
+	<!-- 동렬 끝 -->
 	
 	<!-- 동렬 끝 -->
     

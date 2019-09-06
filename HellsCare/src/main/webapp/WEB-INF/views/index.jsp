@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%> 
 <!DOCTYPE html>
 
+
+
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -73,7 +75,7 @@
 		<!-- Content
 		============================================= -->
 		<section id="content">
-
+	
 			<div class="content-wrap">
 
 				<div class="container clearfix">
@@ -82,6 +84,7 @@
 						<div class="col-xl-5">
 							<div class="heading-block topmargin">
 								<h1><b>건강진단</b></h1>
+								<h1><a href="perse">pserse</a></h1>
 								<h2>CREATING NEW VALUE FOR ADVANCING<br>Human Life</h2><br>
 								<a href="nextpage" class="button button-border button-dark button-rounded button-large noleftmargin topmargin-sm">알아보기</a>
 							</div>
@@ -275,7 +278,7 @@
 								</a>
 								<div class="portfolio-overlay">
 									<a href="/hellscare/resources/images/videos/${exer.exercise_video}"
-										class="center-icon" data-lightbox="iframe"><i
+										class="center-icon" ><i
 										class="icon-line-play"></i></a>
 								</div>
 							</div>

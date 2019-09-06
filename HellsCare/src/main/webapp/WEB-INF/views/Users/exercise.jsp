@@ -34,7 +34,7 @@
 					<c:if test="${cntSt != 0}">
 						<c:forEach var="dtosSt" items="${dtosSt}">
 							<div class="oc-item">
-								<a href="details_exercise?exercise_code=${dtosSt.exercise_code}"><img
+								<a href="details_exercise?exercise_code=${dtosSt.exercise_code}&${_csrf.parameterName}=${_csrf.token}"><img
 									src="/hellscare/resources/images/videos/${dtosSt.exercise_img}" alt="Image 1" style="width:200px; height:160px;" ></a>
 							</div>
 						</c:forEach>

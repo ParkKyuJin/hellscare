@@ -66,14 +66,19 @@
 								<!-- <li><a href="shop.html"><div style="color:black;">식중독 지수</div></a></li> -->
 							</ul>
 						</li>
-						
-						<li><a href="#"><div>동호회</div></a>
-							<ul style="background:white">
-								<li><a href="club"><div style="color:black;">동호회 목록</div></a></li>
-								<li><a href="makeClub"><div style="color:black;">동호회 개설</div></a></li>
-							</ul>
-						</li>
-						<li><a href="#"><div>이벤트</div></a>
+
+					<li><a href="#"><div>동호회</div></a>
+						<ul style="background: white">
+							<li><a href="#" onclick="return clubSessionChk();"><div
+										style="color: black;">동호회 목록</div></a></li>
+							<li><a href="makeClub"><div style="color: black;">동호회
+										개설</div></a></li>
+							<c:if test="${memId != null}">
+								<li><a href="user_applyList"><div style="color: black;">동호회
+											신청목록</div></a></li>
+							</c:if>
+						</ul></li>
+					<li><a href="#"><div>이벤트</div></a>
 							<ul style="background:white">
 								<li><a href="challenge"><div style="color:black;">도전과제</div></a></li>
 								<li><a href="Mychallenge"><div style="color:black;">진행중인 도전과제</div></a></li>
@@ -92,6 +97,7 @@
 						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1"  >
 							<c:if test="${sessionScope.memId == null }">
 								<a class="dropdown-item tleft" href="login_reg">Login</a>
+								<a class="dropdown-item tleft" href="signUp">Sign Up</a>
 							
 							</c:if>
 							<c:if test="${sessionScope.memId != null}">
@@ -120,6 +126,61 @@
 			</div>
 
 		</div>
+		<script type="text/javascript">
+		function sessionChk(){
+			if("${memId}" == ""){
+				alert("로그인 후 이용해주세요.");
+				window.location = "login_reg";
+				return false;
+			} else{
+				window.location="exercise_favorite";
+				return false;
+			}
+		} 
+	</script>
+	
+	<script type="text/javascript">
+		function clubSessionChk(){
+			if("${memId}" == ""){
+				alert("로그인 후 이용해주세요.");
+				window.location = "login_reg";
+				return false;
+			} else{
+				window.location="club";
+				return false;
+			}
+		}
+		
+		
+	       function goFoodRecommendation() {
+	            if("${sessionScope.memId}" == "") {
+	               alert("로그인 후 이용하십시오.");
+	               window.location = "login_reg";
+	            } else {
+	               window.location = "food_recommendation";
+	            }
+	         }
+	         
+	         function goTodayCalory() {
+	            if("${sessionScope.memId}" == "") {
+	               alert("로그인 후 이용하십시오.");
+	               window.location = "login_reg";
+	            } else {
+	               window.location = "food_today_cal";
+	            }
+	         }
+	   /*       
+	         function Mychallenge(){
+	        	 if("${sessionScope.memId}" == "") {
+		               alert("로그인 후 이용하십시오.");
+		               window.location = "login_reg";
+	         }else{
+	        	 window.location = "Mychallenge";
+	         }
+		 */
+	</script>
+		
+		
 <script>
 		jQuery( "#tabs-profile" ).on( "tabsactivate", function( event, ui ) {
 			jQuery( '.flexslider .slide' ).resize();

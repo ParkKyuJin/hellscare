@@ -3,6 +3,14 @@
 <%@ include file="../include/setting.jsp" %>
 <html>
 <body>
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("로그인을 하셔야 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
+
+<c:if test="${memId != null}">
 	<c:if test="${insertCnt == 0}">
 		<script type="text/javascript">
 			alert("이미 가입신청한 동호회입니다.");
@@ -23,5 +31,6 @@
 			window.location="club";
 		</script>
 	</c:if>
+</c:if>
 </body>
 </html>

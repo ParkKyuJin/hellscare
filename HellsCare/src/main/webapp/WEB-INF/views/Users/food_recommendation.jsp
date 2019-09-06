@@ -47,200 +47,206 @@
 						</script>
 					</c:if>
 					
-					<c:if test="${sessionScope.memId != null}">
-						
+					<c:if test="${standard.separation =='man'}">
+						<c:set var="gender" value="남성" />
 					</c:if>
-				
-					<h3>월별 섭취 칼로리</h1>
-					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
-						<div class="chartjs-size-monitor" style="position: absolute; 
-							left: 0px; top: 0px; right : 0px; bottom : 0px; overflow : hidden; 
-							pointer-events : none; visibility : hidden; z-index: -1;">
-							
-							<div class="chartjs-size-monitor-expand" 
-								style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
-										pointer-events:none;visibility:hidden;z-index:-1;">
-								<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-							</div>
-						</div>
-						
-						<div class="chartjs-size-monitor-shrink" 
-							style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
-								pointer-events:none;visibility:hidden;z-index:-1;">
-							<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-						</div>
-						
-						<canvas id="chart-0" width="720" height="360" class="chartjs-render-monitor"
-							style="display: block; width: 720px; height : 360px;" />
-					</div>
-					<!-- <h1> 선 그래프 끝 </h1> -->
 					
-					<!-- <h1> 막대 그래프 </h1>
-					<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
-						<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; 
-							right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: 
-							hidden; z-index: -1;">
-							<div class="chartjs-size-monitor-expand" 
-							style="position:absolute;left:0; top:0;right:0;bottom:0;overflow:hidden;
-								pointer-events:none; visibility:hidden;z-index:-1;">
-								<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+					<c:if test="${standard.separation =='woman'}">
+						<c:set var="gender" value="여성" />
+					</c:if>
+					
+					<c:if test="${sessionScope.memId != null}">
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
+							<h3>주간 섭취 칼로리</h1>
+							<div class="chartjs-size-monitor" style="position: absolute; 
+								left: 0px; top: 0px; right : 0px; bottom : 0px; overflow : hidden; 
+								pointer-events : none; visibility : hidden; z-index: -1;">
+								
+								<div class="chartjs-size-monitor-expand" 
+									style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
+											pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+								</div>
 							</div>
 							
-							<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;
-								bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+							<div class="chartjs-size-monitor-shrink" 
+								style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;
+									pointer-events:none;visibility:hidden;z-index:-1;">
 								<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 							</div>
+							
+							<canvas id="chart-0" width="720" height="360" class="chartjs-render-monitor"
+								style="display: block; width: 720px; height : 360px;" />
 						</div>
 						
-						<canvas id="chart-1" width="720" height="360" class="chartjs-render-monitor" 
-							style="display: block; width: 720px; height: 360px;"></canvas>
-					</div>
-					<h1> 막대 그래프 끝 </h1> -->
-
-					
-					<!-- Post Content
-					============================================= -->
-					<div class="postcontent nobottommargin clearfix">
-			
-						<h3>추천 식단</h3>
-			
-						<ul id="myTab" class="nav nav-tabs boot-tabs">
-						  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">이상적인 식단</a></li>
-						  <!-- <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li> -->
-						</ul>
-						<div id="myTabContent" class="tab-content">
-						  <div class="tab-pane fade show active" id="reasonable_food">
-						  	<p>2000kcal</p>
-						  	<table class="table table-bordered">
-							  <thead style="align:center;">
-								<tr>
-								  <th colspan="2">아침</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">점심</th>
-								  <th colspan="2">간식</th>
-								  <th colspan="2">저녁</th>
-								</tr>
-								<tr style="font-size: 14px;">
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-									<td>음식명(g)</td>
-									<td>칼로리(kcal)</td>
-								</tr>
-							  </thead>
-							  <tbody style="font-size:12px;" >
-								<tr>
-								  <td>식빵 2장</td>
-								  <td>200</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>비빔밥(410)</td>
-								  <td>600</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>보리밥(300)</td>
-								  <td>600</td>
-								</tr>
+						<!-- <h1> 선 그래프 끝 </h1> -->
+						
+						<!-- <h1> 막대 그래프 </h1>
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+							<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; 
+								right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: 
+								hidden; z-index: -1;">
+								<div class="chartjs-size-monitor-expand" 
+								style="position:absolute;left:0; top:0;right:0;bottom:0;overflow:hidden;
+									pointer-events:none; visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+								</div>
 								
-								<tr>
-								  <td>우유</td>
-								  <td>125</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>아욱된장국(250)</td>
-								  <td>80</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>순두부찌개(300)</td>
-								  <td>180</td>
-								</tr>
-								
-								<tr>
-								  <td>달걀프라이(50)</td>
-								  <td>100</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>김무침(10)</td>
-								  <td>20</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>코다리찜(80)</td>
-								  <td>100</td>
-								</tr>
-								
-								<tr>
-								  <td>양배추샐러드(50)</td>
-								  <td>70</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>동치미(100)</td>
-								  <td>10</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>도토리무침(80)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>바나나 1개</td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>콩나물무침(70)</td>
-								  <td>50</td>
-								</tr>
-								
-								<tr>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>   </td>
-								  <td>배추김치(50)</td>
-								  <td>15</td>
-								</tr>
-							  </tbody>
-							  
-							  <tfoot>
-							  	<tr style="font-size:14px; align:center;">
-							  		<td colspan="2">595 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">710 kcal</td>
-							  		<td colspan="2"></td>
-							  		<td colspan="2">695 kcal</td>
-							  	</tr>
-							  </tfoot>
-							</table>
-						  	
-						  </div>
-						  
+								<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;
+									bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+								</div>
+							</div>
+							
+							<canvas id="chart-1" width="720" height="360" class="chartjs-render-monitor" 
+								style="display: block; width: 720px; height: 360px;"></canvas>
 						</div>
+						<h1> 막대 그래프 끝 </h1> -->
+						
+						<!-- Post Content
+						============================================= -->
+						<div class="postcontent nobottommargin clearfix">
 			
-					</div><!-- .postcontent end -->
+							<h3>추천 식단</h3>
+				
+							<ul id="myTab" class="nav nav-tabs boot-tabs">
+							  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">이상적인 식단</a></li>
+							  <!-- <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li> -->
+							</ul>
+							<div id="myTabContent" class="tab-content">
+							  <div class="tab-pane fade show active" id="reasonable_food">
+							  	<p>2000kcal</p>
+							  	<table class="table table-bordered">
+								  <thead style="align:center;">
+									<tr>
+									  <th colspan="2">아침</th>
+									  <th colspan="2">간식</th>
+									  <th colspan="2">점심</th>
+									  <th colspan="2">간식</th>
+									  <th colspan="2">저녁</th>
+									</tr>
+									<tr style="font-size: 14px;">
+										<td>음식명(g)</td>
+										<td>칼로리(kcal)</td>
+										<td>음식명(g)</td>
+										<td>칼로리(kcal)</td>
+										<td>음식명(g)</td>
+										<td>칼로리(kcal)</td>
+										<td>음식명(g)</td>
+										<td>칼로리(kcal)</td>
+										<td>음식명(g)</td>
+										<td>칼로리(kcal)</td>
+									</tr>
+								  </thead>
+								  <tbody style="font-size:12px;" >
+									<tr>
+									  <td>식빵 2장</td>
+									  <td>200</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>비빔밥(410)</td>
+									  <td>600</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>보리밥(300)</td>
+									  <td>600</td>
+									</tr>
+									
+									<tr>
+									  <td>우유</td>
+									  <td>125</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>아욱된장국(250)</td>
+									  <td>80</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>순두부찌개(300)</td>
+									  <td>180</td>
+									</tr>
+									
+									<tr>
+									  <td>달걀프라이(50)</td>
+									  <td>100</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>김무침(10)</td>
+									  <td>20</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>코다리찜(80)</td>
+									  <td>100</td>
+									</tr>
+									
+									<tr>
+									  <td>양배추샐러드(50)</td>
+									  <td>70</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>동치미(100)</td>
+									  <td>10</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>도토리무침(80)</td>
+									  <td>50</td>
+									</tr>
+									
+									<tr>
+									  <td>바나나 1개</td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>콩나물무침(70)</td>
+									  <td>50</td>
+									</tr>
+									
+									<tr>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>   </td>
+									  <td>배추김치(50)</td>
+									  <td>15</td>
+									</tr>
+								  </tbody>
+								  
+								  <tfoot>
+								  	<tr style="font-size:14px; align:center;">
+								  		<td colspan="2">595 kcal</td>
+								  		<td colspan="2"></td>
+								  		<td colspan="2">710 kcal</td>
+								  		<td colspan="2"></td>
+								  		<td colspan="2">695 kcal</td>
+								  	</tr>
+								  </tfoot>
+								</table>
+							  	
+							  </div>
+							  
+							</div>
+			
+						</div><!-- .postcontent end -->
+					</c:if>
 
-				</div>
-
+						</div>
+		
+					</div>
+					
+					
+		
+				</section><!-- #content end -->
+		
 			</div>
-			
-			
-
-		</section><!-- #content end -->
-
-	</div>
-
-</div>
+		
+		</div>
 
 		</section>
 		<!-- #content end -->
@@ -263,38 +269,50 @@
 	
 	<script>
 
-		var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var MONTHS = ["${userWeeklyKcalList.get(0).kcal_date}", 
+						"${userWeeklyKcalList.get(1).kcal_date}", 
+						"${userWeeklyKcalList.get(2).kcal_date}", 
+						"${userWeeklyKcalList.get(3).kcal_date}", 
+						"${userWeeklyKcalList.get(4).kcal_date}", 
+						"${userWeeklyKcalList.get(5).kcal_date}", 
+						"${userWeeklyKcalList.get(6).kcal_date}"];
 		var config = {
 			type: 'line',
 			data: {
-				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				labels: ["${userWeeklyKcalList.get(0).kcal_date}", 
+						"${userWeeklyKcalList.get(1).kcal_date}", 
+						"${userWeeklyKcalList.get(2).kcal_date}", 
+						"${userWeeklyKcalList.get(3).kcal_date}", 
+						"${userWeeklyKcalList.get(4).kcal_date}", 
+						"${userWeeklyKcalList.get(5).kcal_date}", 
+						"${userWeeklyKcalList.get(6).kcal_date}"],
 				datasets: [{
-					label: "내가 섭취한 월별 칼로리",
+					label: "내가 섭취한 칼로리",
 					backgroundColor: window.chartColors.red,
 					borderColor: window.chartColors.red,
 					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
+						${userWeeklyKcalList.get(0).total_kcal},
+						${userWeeklyKcalList.get(1).total_kcal},
+						${userWeeklyKcalList.get(2).total_kcal},
+						${userWeeklyKcalList.get(3).total_kcal},
+						${userWeeklyKcalList.get(4).total_kcal},
+						${userWeeklyKcalList.get(5).total_kcal},
+						${userWeeklyKcalList.get(6).total_kcal}
 					],
 					fill: false,
 				}, {
-					label: "평균 칼로리 기준치",
+					label: "${standard.age}세 ${gender} 칼로리 기준치",
 					fill: false,
 					backgroundColor: window.chartColors.blue,
 					borderColor: window.chartColors.blue,
 					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
+						${standard.calory},
+						${standard.calory},
+						${standard.calory},
+						${standard.calory},
+						${standard.calory},
+						${standard.calory},
+						${standard.calory}
 					],
 				}]
 			},
@@ -302,7 +320,7 @@
 				responsive: true,
 				title:{
 					display:true,
-					text:'월별 섭취한 칼로리'
+					text:'주간 섭취 칼로리'
 				},
 				tooltips: {
 					mode: 'index',
@@ -317,14 +335,14 @@
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: '월'
+							labelString: 'Week'
 						}
 					}],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: '칼로리'
+							labelString: 'Kcal'
 						}
 					}]
 				}

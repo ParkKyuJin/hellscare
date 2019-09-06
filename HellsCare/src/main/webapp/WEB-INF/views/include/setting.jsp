@@ -33,30 +33,7 @@
 <script src="resources/host_style/lib/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="resources/host_style/lib/common-scripts.js"></script>
 <!--script for this page-->
-<script src="resources/host_style/lib/morris-conf.js"></script>
+<!-- <script src="resources/host_style/lib/morris-conf.js"></script> -->
 
  <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-  <!-- Favicons -->
-  <link href="resources/host_style/img/favicon.png" rel="icon">
-  <link href="resources/host_style/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="resources/host_style/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="resources/host_style/css/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/host_style/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/css/zabuto_calendar.css">
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/gritter/css/jquery.gritter.css" />
-  <!-- Custom styles for this template -->
-  <link href="resources/host_style/css/style.css" rel="stylesheet">
-  <link href="resources/host_style/css/style-responsive.css" rel="stylesheet">
-  <script src="resources/host_style/lib/chart-master/Chart.js"></script>
-
-
-  <link href="resources/host_style/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-fileupload/bootstrap-fileupload.css" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-daterangepicker/daterangepicker.css" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-timepicker/compiled/timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="resources/host_style/lib/bootstrap-datetimepicker/datertimepicker.css" />

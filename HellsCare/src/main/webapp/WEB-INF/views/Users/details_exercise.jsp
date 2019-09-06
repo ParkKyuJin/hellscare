@@ -16,13 +16,20 @@
 					============================================= -->
 				<div class="postcontent nobottommargin clearfix">
 					<h3>
-					<c:if test="${cnt != 1}">
-						<a href="#" onclick="return favorit();"><i class="icon-star-empty"></i></a>
+					<c:if test="${memId != null}">
+						<c:if test="${cnt != 1}">
+							<a href="#" onclick="return favorit();"><i class="icon-star-empty"></i></a>
+						</c:if>
+						<c:if test="${cnt == 1}">
+							<a href="#" onclick="return defavorit();"><i class="icon-star3"></i></a>
+						</c:if>	
+						&emsp;&emsp;
 					</c:if>
-					<c:if test="${cnt == 1}">
-						<a href="#" onclick="return defavorit();"><i class="icon-star3"></i></a>
-					</c:if>&emsp;&emsp;${vo.exercise_name}</h3>
-				<iframe width="800" height="500" src="/hellscare/resources/images/videos/${vo.exercise_video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					${vo.exercise_name}</h3>
+					<div> 
+						<video src="/hellscare/resources/images/videos/${vo.exercise_video}"controls autoplay></video>
+					</div>
+				<%-- <iframe width="800" height="500" src="/hellscare/resources/images/videos/${vo.exercise_video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --%>
 					<div class="divider">
 						<i class="icon-circle"></i>
 						<h4>&emsp;&emsp;&emsp;30분당 소모되는칼로리는 <font style="color:red">${vo.kcal}</font>입니다.</h4>

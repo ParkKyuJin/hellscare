@@ -155,16 +155,16 @@ function refresh() {
 }
 
 function checkCode(){
-    var disease_code = $('#disease_code').val();
+    var disease_code = $('#disease_code').val().toUpperCase();
     $.ajax({
         url:'codeDuplChk',
         type:'post',
         data:{disease_code:disease_code},
         success:function(data){
-            if($.trim(data)==0){
+        	if(data==0){
                 $('#chkMsg').html("<span style='color:blue;'>사용가능</span>");
                 $('#btnSubmit').prop("disabled", false);
-            }else{
+            }else if(data==1){
                 $('#chkMsg').html("<span style='color:red;'>사용불가</span>");
                 $('#btnSubmit').prop("disabled", true);
             }

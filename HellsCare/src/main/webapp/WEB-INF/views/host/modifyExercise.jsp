@@ -3,11 +3,6 @@
 <%@ include file="../include/h_sidebarMenu.jsp"%>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="Dashboard">
-<meta name="keyword"
-	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 <!-- Stylesheets
 	============================================= -->
 <link
@@ -33,7 +28,7 @@
 		<div class="row clearfix">
 			<div class="col-lg-6" style="margin: 0 auto;">
 				<form name="exerciseAddForm" class="nobottommargin"
-					action="modifyExercisePro" method="post"
+					action="modifyExercisePro?${_csrf.parameterName}=${_csrf.token}" method="post"
 					onsubmit="return modifyCheck();">
 					
 					<input type="hidden" name="exercise_code" value="${vo.exercise_code}">

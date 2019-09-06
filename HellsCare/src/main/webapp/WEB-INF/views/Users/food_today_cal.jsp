@@ -3,129 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript">
-	var oTbl = document.getElementById("addTable");
-	var cellCount = document.getElementById("count").value;
-	
-	// Row추가
-	function insRow() {
-		oTbl = document.getElementById("addTable");
-		cellCount++;
-		
-		var oRow = oTbl.insertRow();
-		oRow.onmouseover = function(){ 
-			oTbl.clickedRowIndex = this.rowIndex
-		};	// clickedRowIndex - 클릭한 Row의 위치를 확인;
-		
-		var oCell = oRow.insertCell();
-		
-		// 삽입될 Form Tag
-		var frmTag = "<lable for=template-contactform-name>분류<small class=text-danger>*</small></label>" 
-					+ "<select name=food_kind class=form-control id=food_kind" + oTbl.clickedRowIndex +" required>" 
-						+ "<option value=0>선택 안함</option>"
-						+ "<option value=1>밥류</option>"
-						+ "<option value=2>면류</option>"
-						+ "<option value=3>국/찌개류</option>"
-						+ "<option value=4>탕/전골류</option>"
-						+ "<option value=5>고기류</option>"
-						+ "<option value=6>해산물류</option>"
-						+ "<option value=7>채소류</option>"
-						+ "<option value=8>과일류</option>"
-						+ "<option value=9>스낵류</option>"
-						+ "<option value=10>빙과류</option>"
-						+ "<option value=11>기타</option>"
-					+ "</select>"
-					+ "<br>"
-					+ "<lable for=template-contactform-name>음식명<small class=text-danger>*</small></label>"
-					+ "<input type=text class=form-control name=food_name id=food_name required>"
-					+ "<div id=find_food_name></div>"
-					+ "<br>"
-					+ "<lable for=template-contactform-number>인분<small class=text-danger>*</small></label>"
-					+ "<input type=number class=form-control name=food_count min=1 id=food_count" + oTbl.clickedRowIndex +" required>"
-					+ "<br>";
-		frmTag += "<input type=button class=form-control value='삭제' onclick='removeRow()' style='cursor:hand'>";
-		oCell.innerHTML = frmTag;
-		
-		document.getElementById("count").value = cellCount;
-	}
-	
-	// Row 삭제
-	function removeRow() {
-		document.getElementById("count").value = cellCount - 1;
-		oTbl.deleteRow(oTbl.clickedRowIndex);
-	}
-	
-	/* $(document).ready(function() {
-		$("#food_kind" + oTbl.clickedRowIndex).onchange(function() {
-			
-			alert("음식 종류 : " + $("#food_kind" + oTbl.clickedRowIndex).val());
-			
-			var food_kind = $("#food_kind" + oTbl.clickedRowIndex).val();
-			
-			$.ajax({
-				url : '${pageContext.request.contextPath}/food_find_equal_kind?food_kind='+ food_kind,
-				type : 'get',
-				success : function(data) {
-					if (!$('#food_kind' + oTbl.clickedRowIndex).val()) {
-						$("#find_food_name" + oTbl.clickedRowIndex).css('display', 'none');
-					} else {
-						$("#find_food_name" + oTbl.clickedRowIndex).css('display', '');
-					}
-					
-					if (data != null) {
-						// 1. 아이디가 중복되는 문구
-						// $("#id_check").text("사용중인 동호회명입니다.");
-						// $("#id_check").css("color","red");
-						$("#find_food_name" + oTbl.clickedRowIndex).html(data);
-					} else {
-						// $("#id_check").text("사용가능한 동호회명입니다.");
-						// $("#id_check").css("color","green");
-						$("#find_food_name" + oTbl.clickedRowIndex).html(data);
-					}
-				},
-				error : function() {
-					alert("오류");
-				}
-			});
-		});
-	}); */
-</script>
-
 <script src="/hellscare/resources/ajax/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-	function getKcalResult() {
-		$.ajax({
-			url : '${pageContext.request.contextPath}/food_today_cal_sub',
-			type : 'get',
-			data : $("#today_cal_form").serialize(),
-			success : function(data) {
-				$('#kcalResult').html(data);
-			},
-			error : function() {
-				alert("오류");
-			}
-		});
-	}
-	
-	$(document).ready(function() {
-		$('select').change(function() {
-			var food_kind = $(this).val();
-			
-			$.ajax({
-				url : '${pageContext.request.contextPath}/food_find_equal_kind',
-				type : 'get',
-				data : 'food_kind=' + food_kind,
-				success : function(data) {
-					$('#food_find_name1').html(data);
-				},
-				error : function() {
-					alert("오류");
-				}
-			});
-		});
-	}); 
-</script>
-
 <meta charset="UTF-8">
 <title>오늘의 칼로리</title>
 </head>
@@ -166,8 +44,8 @@
 				
 					<c:if test="${sessionScope.memId == null}">
 						<script type="text/javascript">
-							alert("로그인 후 이용해주세요!");
-							window.location = 'login_reg';
+							alert("로그인 후 이용하십시오.");
+							window.location = "login_reg";
 						</script>
 					</c:if>
 					
@@ -190,20 +68,21 @@
 											</div>
 	
 											<form class="nobottommargin" id="today_cal_form" 
-												name="today_cal_form" action="food_today_cal_sub?${_csrf.parameterName}=${_csrf.token}" 
-												method="post" onsubmit="return getKcalResult();">
+												name="today_cal_form"
+												method="post">
 	
 												<div class="row">
 													<div class="col-12 bottommargin-sm">
 														
-														<h5>입력하신 음식들은 기록되어 사용자 건강관리를 위한 데이터 제공에 활용됩니다.</h5>
+														<h5>입력하신 음식들은 기록되어 <br>사용자 건강관리를 위한 데이터 제공에 활용됩니다.</h5>
 													
-														<input type="hidden" id="count" value="1">
+														<input type="hidden" id="count" value="0">
 														<table class="table" id="addTable">
 															<tr>
 																<td>
+																	<input type="hidden" id="hidden0" value="0">
 																	<label for="template-contactform-name">분류<small class="text-danger">*</small></label>
-																	<select id="food_kind1" name="food_kind" class="form-control">
+																	<select id="food_kind" name="food_kind" class="form-control">
 																		<option value="0">선택 안함</option>
 																		<option value="1">밥류</option>
 																		<option value="2">면류</option>
@@ -220,23 +99,224 @@
 																	
 																	<br>
 																	<label for="template-contactform-name">음식명<small class="text-danger">*</small></label>
-																	<input type="text" class="form-control" name="food_name" id="food_name1">
+																	<input type="text" class="form-control" autocomplete="on" name="food_name" id="food_name">
 																	
-																	<div id="find_food_name1"></div>
+																	<div id="food_name_list" style="overflow:scroll; height:1%; display:none;"></div>
 																	
 																	<br>
 																	<label for="template-contactform-number">인분<small class="text-danger">*</small></label>
-																	<input type="number" class="form-control" name="food_count" id="food_count1" min="1">
+																	<input type="number" class="form-control" name="food_count" id="food_count" min="1">
 																</td>
 															</tr>
 														</table>
 														
+														<script src="//code.jquery.com/jquery.min.js"></script>
+														<script src='//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js'></script>
+														
+														<script type="text/javascript">
+															var oTbl;
+															var cellCount = document.getElementById("count").value;
+															
+															// Row추가
+															function insRow() {
+																oTbl = document.getElementById("addTable");
+																cellCount++;
+																
+																var oRow = oTbl.insertRow();
+																oRow.onmouseover = function(){ 
+																	oTbl.clickedRowIndex = this.rowIndex
+																};	// clickedRowIndex - 클릭한 Row의 위치를 확인;
+																
+																var oCell = oRow.insertCell();
+																
+																// 삽입될 Form Tag
+																var frmTag = "<label for=template-contactform-name>분류<small class=text-danger>*</small></label>"
+																			+ "<input type=hidden id=hidden" + cellCount + " value="+ cellCount + "> "
+																			+ "<select name=food_kind class=form-control id=food_kind" +cellCount+" required>" 
+																				+ "<option value=0>선택 안함</option>"
+																				+ "<option value=1>밥류</option>"
+																				+ "<option value=2>면류</option>"
+																				+ "<option value=3>국/찌개류</option>"
+																				+ "<option value=4>탕/전골류</option>"
+																				+ "<option value=5>고기류</option>"
+																				+ "<option value=6>해산물류</option>"
+																				+ "<option value=7>채소류</option>"
+																				+ "<option value=8>과일류</option>"
+																				+ "<option value=9>스낵류</option>"
+																				+ "<option value=10>빙과류</option>"
+																				+ "<option value=11>기타</option>"
+																			+ "</select>"
+																			+ "<br>"
+																			+ "<label for=template-contactform-name>음식명<small class=text-danger>*</small></label>"
+																			+ "<input type=text class=form-control name=food_name id=food_name" +cellCount+" autocomplete=off required>"
+																			+ "<div id=food_name_list" + cellCount +" style='overflow:scroll;height:1%;display:none;'></div>"
+																			+ "<br>"
+																			+ "<label for=template-contactform-number>인분<small class=text-danger>*</small></label>"
+																			+ "<input type=number class=form-control name=food_count min=1 id=food_count" +cellCount+" required>"
+																			+ "<br>";
+																frmTag += "<input type=button class=form-control value='삭제' onclick='removeRow()' style='cursor:hand'>";
+																oCell.innerHTML = frmTag;
+																
+																$("#addTable tr").focusin(function() {
+																	var row = $(this).index();
+																	// console.log("row : " + row);
+																	
+																	$(document.today_cal_form.food_kind[row]).change(function() {
+																		var food_kind = $(this).val();
+																		
+																		$.ajax({
+																			url : '${pageContext.request.contextPath}/food_find_equal_kind',
+																			type : 'get',
+																			data : 'food_kind=' + food_kind,
+																			dataType : 'json',
+																			success : function(data) {
+																				var food_list = [];
+																				
+																				$.each(data, function(i, v){
+																					food_list.push(v.food_name);
+																				});
+																				
+																				var html = "<ul>";
+																				$.each(data, function(i, v){
+																					//console.log(i);
+																					//console.log(v);
+																					html += "<li><a href=javascript:setText(" + v.food_name +"); id=text"+i+">"+v.food_name+"</a></li>";
+																				});
+																				html += "</ul>";
+																				
+																				$("#food_name_list" + cellCount).html(html);
+																				
+																				if($("#food_kind" + cellCount).val() != 0) {
+																					$("#food_name_list" + cellCount).css("display", "block");
+																				} else {
+																					$("#food_name_list" + cellCount).css("display", "none");
+																				}
+																				
+																				$("#food_name_list" + cellCount + " ul li a").click(function() {
+																					var index = $(this).parent().index();
+																					
+																					/* console.log("index : " + index);
+																					console.log("selected food_name : " + $("#text" + index).text()); */
+																					
+																					$("#food_name" + cellCount).val($("#text" + index).text());
+																					
+																					$("#food_name_list" + cellCount).css("display", "none");
+																				});
+																				
+																			},
+																			error : function() {
+																				alert("오류");
+																			}
+																		});
+																	});
+																});
+																
+																document.getElementById("count").value = cellCount;
+															}
+															
+															// Row 삭제
+															function removeRow() {
+																oTbl.deleteRow(oTbl.clickedRowIndex);
+															}
+														</script>
+														
+														<script type="text/javascript">
+															var cnt = document.getElementById("count").value;
+															
+															$(document).ready(function() {
+																$("#food_kind").change(function() {
+																	var food_kind = $(this).val();
+																	
+																	$.ajax({
+																		url : '${pageContext.request.contextPath}/food_find_equal_kind',
+																		type : 'get',
+																		data : 'food_kind=' + food_kind,
+																		dataType : 'json',
+																		success : function(data) {
+																			var food_list = [];
+																			
+																			$.each(data, function(i, v){
+																				food_list.push(v.food_name);
+																			});
+																			
+																			var html = "<ul>";
+																			$.each(data, function(i, v){
+																				//console.log(i);
+																				//console.log(v);
+																				html += "<li><a href=# name=food"+i+" id=text"+i+" value="+v.food_name+ ">"+v.food_name+"</a></li>";
+																			});
+																			html += "</ul>";
+																			
+																			$("#food_name_list").html(html);
+																			
+																			if($("#food_kind").val() != 0) {
+																				$("#food_name_list").css("display", "block");
+																			} else {
+																				$("#food_name_list").css("display", "none");
+																			}
+																			
+																			$("#food_name_list ul li a").click(function() {
+																				var index = $(this).parent().index();
+																				
+																				/* console.log("index : " + index);
+																				console.log("selected food_name : " + $("#text" + index).text()); */
+																				
+																				$("#food_name").val($("#text" + index).text());
+																				
+																				$("#food_name_list").css("display", "none");
+																			});
+																			
+																		},
+																		error : function() {
+																			alert("오류");
+																		}
+																	});
+																});
+															});
+														</script>
+														
+														<script type="text/javascript">
+															$(document).ready(function() {
+																$("#submit").click(function() {
+																	$.ajax({
+																		url : '${pageContext.request.contextPath}/food_today_cal_sub',
+																		type : 'get',
+																		data : $("#today_cal_form").serialize(),
+																		success : function(data) {
+																			$('#kcalResult').html(data);
+																		},
+																		error : function() {
+																			alert("오류");
+																		}
+																	});
+																});
+															});
+														</script>
+														
+														<script type="text/javascript">
+															$(document).ready(function() {
+																$("#showNoInput").click(function() {
+																	$.ajax({
+																		url : '${pageContext.request.contextPath}/food_today_cal_no_input',
+																		type : 'get',
+																		success : function(data) {
+																			$('#kcalResult').html(data);
+																		},
+																		error : function() {
+																			alert("오류");
+																		}
+																	});
+																});
+															});
+														</script>
+														
 													</div>
 													
-													<button type="button" id="add" name="template-contactform" class="btn btn-secondary btn-block btn-lg" onclick="insRow();">입력 추가</button>
+													<button type="button" id="add" name="add" class="btn btn-secondary btn-block btn-lg" onclick="insRow();">입력 추가</button>
 													
-													<button type="submit" name="template-contactform-submit" class="btn btn-secondary btn-block btn-lg">입력 완료</button>
-	
+													<button type="submit" id="submit" name="template-contactform-submit" class="btn btn-secondary btn-block btn-lg">입력 완료</button>
+													
+													<button type="button" id="showNoInput" name="showNoInput" class="btn btn-secondary btn-block btn-lg" onclick="showNoInput();">결과 보기</button>
 												</div>
 	
 											</form>
@@ -245,11 +325,11 @@
 								</div>
 							</div>
 						</div>
-						
-						<br><br><br>
-						
-						<div id="kcalResult"></div>
 					</c:if>
+						
+					<br><br><br>
+					
+					<div id="kcalResult"></div>
 
 				</div>
 

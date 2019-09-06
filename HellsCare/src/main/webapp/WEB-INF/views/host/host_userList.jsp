@@ -21,27 +21,6 @@
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>HealthCare Admin Page</title>
 
-  <!-- Favicons -->
-  <link href="resources/img/favicon.png" rel="icon">
-  <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
-  <link rel="stylesheet" type="text/css" href="resources/lib/gritter/css/jquery.gritter.css" />
-  <!-- Custom styles for this template -->
-  <link href="resources/css2/style.css" rel="stylesheet">
-  <link href="resources/css2/style-responsive.css" rel="stylesheet">
-  <script src="resources/lib/chart-master/Chart.js"></script>
-
-  <!-- =======================================================
-    Template Name: Dashio
-    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
 </head>
 
 <body>
@@ -52,10 +31,7 @@
         & MAIN SIDEBAR MENU
         *********************************************************************************************************************************************************** -->
   	<%@ include file="../include/h_sidebarMenu.jsp" %>
-    <!-- **********************************************************************************************************************************************************
-        MAIN CONTENT
-        *********************************************************************************************************************************************************** -->
-  
+   
 
     <!-- **********************************************************************************************************************************************************
         MAIN CONTENT
@@ -95,7 +71,7 @@
                   </tr>
                 </thead>
                 <tbody>
-           <!-- 재고 있으면 -->
+           <!-- 회원이 있으면 -->
 	<c:if test="${cnt > 0}">
 		<c:forEach var="dto" items="${dtos}">
 		

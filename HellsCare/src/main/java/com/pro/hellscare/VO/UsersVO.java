@@ -18,6 +18,8 @@ public class UsersVO {
    private String email;
    private Timestamp reg_date;
    private char enabled; //로그인 되게할때 :'1' 로그인 안되게할때:  '0'
+   private String apply_code;
+   
    //생성자
    public UsersVO() {}
    public String getUsername() {
@@ -80,6 +82,12 @@ public class UsersVO {
    public void setEnabled(char enabled) {
       this.enabled = enabled;
    }
+public String getApply_code() {
+	return apply_code;
+}
+public void setApply_code(String apply_code) {
+	this.apply_code = apply_code;
+}
 
 
    

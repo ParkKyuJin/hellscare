@@ -14,6 +14,12 @@
 </head>
 <meta charset="UTF-8">
 <body class="stretched">
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("로그인을 하셔야 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
 	<%@ include file="../include/header.jsp"%>
 	<nav class="navbar navbar-light bg-light justify-content-between">
 		<a class="navbar-brand" style="margin:0 auto;">동호회 목록</a>
@@ -34,7 +40,7 @@
 							<th>대표자</th>
 							<th>종류</th>
 							<th>지역</th>
-							<th>최대인원</th>
+							<th>인원</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -51,7 +57,7 @@
 									<td style="vertical-align: middle">${vo1.club_master}</td>
 									<td style="vertical-align: middle">${vo1.club_kind}</td>
 									<td style="vertical-align: middle">${vo1.area}</td>
-									<td style="vertical-align: middle">${vo1.club_max}</td>
+									<td style="vertical-align: middle">${vo1.current_personnel}/${vo1.club_max}</td>
 									<td style="vertical-align: middle; width: 350px;">
 										<a href="details_Club?club_name=${vo1.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>&emsp;&emsp;
 									</td>
@@ -64,7 +70,7 @@
 									<td style="vertical-align: middle">${vo2.club_master}</td>
 									<td style="vertical-align: middle">${vo2.club_kind}</td>
 									<td style="vertical-align: middle">${vo2.area}</td>
-									<td style="vertical-align: middle">${vo2.club_max}</td>
+									<td style="vertical-align: middle">${vo2.current_personnel}/${vo2.club_max}</td>
 									<td style="vertical-align: middle; width: 350px;">
 										<a href="details_Club?club_name=${vo2.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>&emsp;&emsp;
 									</td>
@@ -77,7 +83,7 @@
 									<td style="vertical-align: middle">${vo3.club_master}</td>
 									<td style="vertical-align: middle">${vo3.club_kind}</td>
 									<td style="vertical-align: middle">${vo3.area}</td>
-									<td style="vertical-align: middle">${vo3.club_max}</td>
+									<td style="vertical-align: middle">${vo3.current_personnel}/${vo3.club_max}</td>
 									<td style="vertical-align: middle; width: 350px;">
 										<a href="details_Club?club_name=${vo3.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>&emsp;&emsp;
 									</td>
@@ -122,16 +128,18 @@
 							</c:if>
 							<c:if test="${cnt != 0}">
 								<c:forEach var="dto" items="${dtos}">
-									<tr>
-										<td style="vertical-align: middle">${dto.club_name}</td>
-										<td style="vertical-align: middle">${dto.club_master}</td>
-										<td style="vertical-align: middle">${dto.club_kind}</td>
-										<td style="vertical-align: middle">${dto.area}</td>
-										<td style="vertical-align: middle">${dto.club_max}</td>
-										<td style="vertical-align: middle; width: 200px;">
-											<a href="details_Club?club_name=${dto.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>
-										</td>
-									</tr>
+									<c:if test="${dto.current_personnel != dto.club_max}">
+										<tr>
+											<td style="vertical-align: middle">${dto.club_name}</td>
+											<td style="vertical-align: middle">${dto.club_master}</td>
+											<td style="vertical-align: middle">${dto.club_kind}</td>
+											<td style="vertical-align: middle">${dto.area}</td>
+											<td style="vertical-align: middle">${dto.current_personnel} / ${dto.club_max}</td>
+											<td style="vertical-align: middle; width: 200px;">
+												<a href="details_Club?club_name=${dto.club_name}&pageNum=${pageNum}"><button type="button" class="button button-large button-dark button-rounded">자세히</button></a>
+											</td>
+										</tr>
+									</c:if>
 								</c:forEach>
 							</c:if>
 							</tbody>
