@@ -30,7 +30,7 @@ public class NutritionCSV {
 						"Number", "Separation", "Age", "Calory", 
 						"avgCarbohydrate", "recoCarbohydrate", 
 						"avgProtein", "recoProtein", 
-						"avgFat", "recoFat"
+						"avgFat", "recoFat", "saccharide"
 					};
 			
 			start.setColumnMapping(columns);

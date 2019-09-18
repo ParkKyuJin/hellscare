@@ -79,15 +79,15 @@
                  <tr>
 					<td colspan="6" align="left" style="height:25px"> 
 					 	등록된 질병수 : ${cnt}		
-					</td>				
+					</td>
 				</tr>
                   <tr>
-                  	<th><input type="checkbox" id="selectAll" name="selelctAll"></th>
-                  	<th>순번</th>
-                  	<th>분류</th>
-                    <th>질병명 </th>
-                    <th>질병코드</th>
-                    <th></th>
+                  	<th style="width:5%"><input type="checkbox" id="selectAll" name="selelctAll"></th>
+                  	<th style="width:10%">순번</th>
+                  	<th style="width:25%">분류</th>
+                    <th style="width:30%">질병명 </th>
+                    <th style="width:10%">질병코드</th>
+                    <th style="width:10%"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -153,8 +153,8 @@
 				
 				<!-- 다음블록[▶] / 끝[▶▶] -->
 				<c:if test="${pageCount > endPage}">
-					<a href="host_disease?kind=all&pageNum=${startPage + pageBlock}">[▶]</a>
-					<a href="host_disease?kind=all&pageNum=${pageCount}">[▶▶]</a>
+					<a href="host_disease?pageNum=${startPage + pageBlock}">[▶]</a>
+					<a href="host_disease?pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 			</c:if>
 			

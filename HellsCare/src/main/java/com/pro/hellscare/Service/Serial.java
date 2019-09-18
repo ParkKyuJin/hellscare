@@ -3,6 +3,7 @@ package com.pro.hellscare.Service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.io.InputStream;
@@ -12,115 +13,131 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import java.util.Enumeration;
+import gnu.io.CommPort;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
 
-@SuppressWarnings("restriction")
-public class Serial implements SerialPortEventListener {
-	HttpServletRequest req;
-	Model model;
-	SerialPort serialPort;
-        /** 당신의 아두이노와 연결된 시리얼 포트로 변경해야 한다. */
-    private static final String PORT_NAMES[] = {
-            "COM4", // Windows
-            };
-    /** 포트에서 데이터를 읽기 위한 버퍼를 가진 input stream */
-    private InputStream input;
-    /** 포트를 통해 아두이노에 데이터를 전송하기 위한 output stream */
-    private OutputStream output;
-    /** 포트가 오픈되기 까지 기다리기 위한 대략적인 시간(2초) */
-    private static final int TIME_OUT = 2000;
-    /** 포트에 대한 기본 통신 속도, 아두이노의 Serial.begin의 속도와 일치 */
-    private static final int DATA_RATE = 115200;
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-    
-    //보통은 9600 심박수는  115200
-    public void initialize() {
-        CommPortIdentifier portId = null;
-        @SuppressWarnings("rawtypes")
-		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
-
-        // 당신의 컴퓨터에서 지원하는 시리얼 포트들 중 아두이노와 연결된
-                // 포트에 대한 식별자를 찾는다.
-        while (portEnum.hasMoreElements()) {
-            CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-            for (String portName : PORT_NAMES) {
-                if (currPortId.getName().equals(portName)) {
-                    portId = currPortId;
-                    break;
-                }
-            }
-        }
-
-        // 식별자를 찾지 못했을 경우 종료
-        if (portId == null) {
-            System.out.println("아두이노가 연결되지 않았습니다. 아두이노를 연결해주세요");
-            return ;
-        }
-
-        try {
-            // 시리얼 포트 오픈, 클래스 이름을 애플리케이션을 위한 포트 식별 이름으로 사용
-            serialPort = (SerialPort) portId.open(this.getClass().getName(),
-                    TIME_OUT);
-
-            // 속도등 포트의 파라메터 설정
-            serialPort.setSerialPortParams(DATA_RATE,
-                    SerialPort.DATABITS_8,
-                    SerialPort.STOPBITS_1,
-                    SerialPort.PARITY_NONE);
-
-            // 포트를 통해 읽고 쓰기 위한 스트림 오픈
-            input = serialPort.getInputStream();
-            output = serialPort.getOutputStream();
-
-            // 아두이노로 부터 전송된 데이터를 수신하는 리스너를 등록
-            serialPort.addEventListener(this);
-            serialPort.notifyOnDataAvailable(true);
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
-        return;
-    }
-
-    /**
-     * 이 메서드는 포트 사용을 중지할 때 반드시 호출해야 한다.
-     * 리눅스와 같은 플랫폼에서는 포트 잠금을 방지한다.
-     */
-    public synchronized void close() {
-        if (serialPort != null) {
-            serialPort.removeEventListener();
-            serialPort.close();
-        }
-    }
-
-    /**
-     * 시리얼 통신에 대한 이벤트를 처리. 데이터를 읽고 출력한다..
-     */
-    public synchronized void serialEvent(SerialPortEvent oEvent) {
-        if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
-            try {
-                int available = input.available();
-                byte chunk[] = new byte[available];
-                input.read(chunk, 0, available);
-                
-                // 바로 출력
-                String aa = new String(chunk);
-                String rr[] = aa.split(",");
-                String bb = rr[0];
-                System.out.print(bb+"\n");
-				/* req.getSession().setAttribute("perse", bb); */
-				 
-                
-            } catch (Exception e) {
-                System.err.println(e.toString());
-            }
-        }
-        // 다른 이벤트 유형은 무시한다. 만약 당신이 필요한 이벤트가 있으면 추가하면된다.
-        // 다른 이벤트에 대한 것은 SerialPortEvent 소스를 참조
-    }
-
-	/*
-	 * public static void main(String[] args) throws Exception { Serial main = new
-	 * Serial(); main.initialize(); System.out.println("Started"); }
-	 */
-
+@Service
+public class Serial
+{
 	
+    public Serial()
+    {
+        super();
+    }
+    
+    @SuppressWarnings("restriction")
+	void connect ( String portName ) throws Exception
+    {
+        CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
+        if ( portIdentifier.isCurrentlyOwned() )
+        {
+            System.out.println("Error: Port is currently in use");
+        }
+        else
+        {
+            //클래스 이름을 식별자로 사용하여 포트 오픈
+            CommPort commPort = portIdentifier.open(this.getClass().getName(),2000);
+            
+            if ( commPort instanceof SerialPort )
+            {
+                //포트 설정(통신속도 설정. 기본 9600으로 사용)
+                SerialPort serialPort = (SerialPort) commPort;
+                serialPort.setSerialPortParams(9600,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
+                
+                //Input,OutputStream 버퍼 생성 후 오픈
+                InputStream in = serialPort.getInputStream();
+                OutputStream out = serialPort.getOutputStream();
+                
+                 //읽기, 쓰기 쓰레드 작동
+                (new Thread(new SerialReader(in))).start();
+                (new Thread(new SerialWriter(out))).start();
+
+            }
+            else
+            {
+                System.out.println("Error: Only serial ports are handled by this example.");
+            }
+        }     
+    }
+    
+    /** */
+    //데이터 수신
+    public static class SerialReader implements Runnable 
+    
+    {
+    	HttpServletRequest req;
+        InputStream in;
+        
+        public SerialReader ( InputStream in )
+        {
+            this.in = in;
+        }
+        
+        public void run ()
+        {
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            try
+            {
+                while ( ( len = this.in.read(buffer)) > -1 )
+                {
+                    System.out.print(new String(buffer,0,len));
+                  
+                    
+                }
+                req.setAttribute("pserse", new String(buffer,0,len));
+            }
+            catch ( IOException e )
+            {
+                e.printStackTrace();
+            }            
+        }
+    }
+
+    /** */
+    //데이터 송신
+    public static class SerialWriter implements Runnable 
+    {
+        OutputStream out;
+        
+        public SerialWriter ( OutputStream out )
+        {
+            this.out = out;
+        }
+        
+        public void run ()
+        {
+            try
+            {
+                int c = 0;
+                while ( ( c = System.in.read()) > -1 )
+                {
+                    this.out.write(c);
+                }                
+            }
+            catch ( IOException e )
+            {
+                e.printStackTrace();
+            }            
+        }
+    }
+    
+    public static void main ( String[] args )
+    {
+        try
+        {
+            (new Serial()).connect("COM4"); //입력한 포트로 연결
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

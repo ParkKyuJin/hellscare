@@ -53,7 +53,7 @@
               
                 <thead>
                  <tr>
-					<td colspan="6" align="left" style="height:25px"> 
+					<td colspan="11" align="left" style="height:25px"> 
 					 	가입회원수 : ${cnt}		
 					</td>				
 				</tr>
@@ -62,6 +62,7 @@
                   	<th>순번</th>
                   	<th>아이디</th>
                     <th>회원명 </th>
+                    <th>성별</th>
                     <th>주소</th>
                     <th>전화번호</th>
                     <th>생년월일</th>
@@ -81,16 +82,29 @@
 				${number}
 				<c:set var="number" value="${number-1}"/>
 			</td>
-			<td>${dto.username }
+			<td>${dto.username}
+            <td>${dto.name}</td>
             <td>
-              ${dto.name }
+            <c:if test="${dto.gender=='Male'}">
+            	남
+            </c:if>
+            <c:if test="${dto.gender=='Female'}">
+            	여
+            </c:if>            
             </td>
-            <td>${dto.address }</td>
-            <td>${dto.phone_number }</td>
-            <td>${dto.birth }</td>
+            <td>${dto.address}</td>
+            <td>${dto.phone_number}</td>
+            <td>${dto.birth}</td>
             <td>${dto.email}</td>
-            <td>${dto.reg_date }</td>
-            <td>${dto.enabled }</td>  
+            <td>${dto.reg_date}</td>
+            <td>
+            <c:if test="${dto.enabled=='1'.charAt(0)}">
+            	활동중
+            </c:if>
+            <c:if test="${dto.enabled=='0'.charAt(0)}">
+            	활동중지
+            </c:if>
+            </td>  
 		</tr>
 			
 		</c:forEach>
@@ -99,7 +113,7 @@
 	<!-- 상품이 없으면 -->
 	<c:if test="${cnt == 0}">
 		<tr>
-			<td colspan="9" align="center">
+			<td colspan="11" align="center">
 				가입된 회원정보가 없습니다..!!
 			</td>			
 		</tr>
@@ -118,8 +132,8 @@
 			<c:if test="${cnt > 0}">
 				<!-- 처음[◀◀] / 이전블록[◀] -->
 				<c:if test="${startPage > pageBlock}">
-					<a href="host_disease">[◀◀]</a>
-					<a href="host_disease?pageNum=${startPage - pageBlock}">[◀]</a>					
+					<a href="host_userList">[◀◀]</a>
+					<a href="host_userList?pageNum=${startPage - pageBlock}">[◀]</a>					
 				</c:if>
 				
 				<!-- 블록내의 페이지 번호 -->
@@ -128,14 +142,14 @@
 						<span class="label label-info">[${i}]</span>
 					</c:if>
 					<c:if test="${i != currentPage}">
-						<span ><a href="host_disease?pageNum=${i}">[${i}]</a></span>
+						<span ><a href="host_userList?pageNum=${i}">[${i}]</a></span>
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음블록[▶] / 끝[▶▶] -->
 				<c:if test="${pageCount > endPage}">
-					<a href="host_disease?kind=all&pageNum=${startPage + pageBlock}">[▶]</a>
-					<a href="host_disease?kind=all&pageNum=${pageCount}">[▶▶]</a>
+					<a href="host_userList?pageNum=${startPage + pageBlock}">[▶]</a>
+					<a href="host_userList?pageNum=${pageCount}">[▶▶]</a>
 				</c:if>
 			</c:if>
 			

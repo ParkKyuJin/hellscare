@@ -32,7 +32,7 @@
 		<beans:property name="host" value="smtp.gmail.com"/>
 		<beans:property name="port" value="587"/>
 		<beans:property name="username" value="yeriel1908@gmail.com"/> <!-- 이메일아이디 Gmail로 입력하시면됩니다. 다른거 쓰고싶으면 말씀해주시고 변경하시면됩니다. -->
-	<beans:property name="password" value=" "/> <!-- 이메일 비밀번호 -->
+	<beans:property name="password" value="kosmo50190821"/> <!-- 이메일 비밀번호 -->
 	<beans:property name="javaMailProperties">
 		<beans:props>
 			<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>

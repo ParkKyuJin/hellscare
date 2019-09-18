@@ -12,7 +12,7 @@
 				<h1>도전과제</h1>
 				<span>도전과제를 달성하고 포인트를 쌓아보세요!</span>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="main2">Home</a></li>
+					<li class="breadcrumb-item"><a href="main">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><a href="Mychallenge">My challenge</a></li>
 				</ol>
 			</div>

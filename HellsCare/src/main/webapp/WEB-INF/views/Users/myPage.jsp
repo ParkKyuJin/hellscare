@@ -49,7 +49,7 @@
 				});
 			});
 		});
-	
+
 	</script>
 
 </head>
@@ -159,7 +159,7 @@
 	
 										<div class="col_full">
 											<label for="repwd">비밀번호 확인</label>
-											<input type="password" id="repwd" name="repassword"  class="form-control" required/>
+											<input type="password" id="repwd" name="repassword" class="form-control" required/>
 										</div>
 	
 										<div class="col_full">

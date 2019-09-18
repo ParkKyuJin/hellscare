@@ -79,6 +79,99 @@
 								style="display: block; width: 720px; height : 360px;" />
 						</div>
 						
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+							<h3>주간 탄수화물 섭취율</h3>
+							<div id="carbo-chart" style="width: 75%; height: 50%;"></div>
+							
+							<br>
+							<c:if test="${weekCarbo >= standard.avgCarbohydrate *100 && weekCarbo < standard.recoCarbohydrate *100}">
+								<div class="style-msg successmsg">
+									<div class="sb-msg"><i class="icon-thumbs-up"></i><strong>적정량을 섭취하셨습니다.</strong> 이 섭취량을 유지하십시오.</div>
+									<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+								</div>
+							</c:if>
+							
+							<c:if test="${weekCarbo < standard.avgCarbohydrate *100}">
+								<div class="style-msg alertmsg">
+									<div class="sb-msg"><i class="icon-warning-sign"></i><strong>부족량을 섭취하셨습니다.</strong> 더 많은 탄수화물을 섭취하십시오.</div>
+								</div>
+							</c:if>
+							
+							<c:if test="${weekCarbo > standard.recoCarbohydrate *100}">
+								<div class="style-msg errormsg">
+									<div class="sb-msg"><i class="icon-remove"></i><strong>과다량을 섭취하셨습니다.</strong> 탄수화물 섭취량을 줄이십시오.</div>
+								</div>
+							</c:if>
+							
+						</div>
+						
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+							<h3>주간 단백질 섭취량</h3>
+							<div id="protein-chart" style="width: 75%; height: 50%;"></div>
+							<br>
+							<c:if test="${weekProtein >= standard.avgProtein && weekProtein < standard.recoProtein}">
+								<div class="style-msg successmsg">
+									<div class="sb-msg"><i class="icon-thumbs-up"></i><strong>적정량을 섭취하셨습니다.</strong> 이 섭취량을 유지하십시오.</div>
+									<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+								</div>
+							</c:if>
+							
+							<c:if test="${weekProtein < standard.avgProtein}">
+								<div class="style-msg alertmsg">
+									<div class="sb-msg"><i class="icon-warning-sign"></i><strong>부족량을 섭취하셨습니다.</strong> 더 많은 단백질을 섭취하십시오.</div>
+								</div>
+							</c:if>
+							
+							<c:if test="${weekProtein > standard.recoProtein}">
+								<div class="style-msg errormsg">
+									<div class="sb-msg"><i class="icon-remove"></i><strong>과다량을 섭취하셨습니다.</strong> 단백질 섭취량을 줄이십시오.</div>
+								</div>
+							</c:if>
+							
+						</div>
+						
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+							<h3>주간 지방 섭취율</h3>
+							<div id="fat-chart" style="width: 75%; height: 50%;"></div>
+							<br>
+							<c:if test="${weekFat >= standard.avgFat *100 && weekFat < standard.recoFat *100}">
+								<div class="style-msg successmsg">
+									<div class="sb-msg"><i class="icon-thumbs-up"></i><strong>적정량을 섭취하셨습니다.</strong> 이 섭취량을 유지하십시오.</div>
+									<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+								</div>
+							</c:if>
+							
+							<c:if test="${weekFat < standard.avgFat * 100}">
+								<div class="style-msg alertmsg">
+									<div class="sb-msg"><i class="icon-warning-sign"></i><strong>부족량을 섭취하셨습니다.</strong> 더 많은 지방을 섭취하십시오.</div>
+								</div>
+							</c:if>
+							
+							<c:if test="${weekFat > standard.recoFat * 100}">
+								<div class="style-msg errormsg">
+									<div class="sb-msg"><i class="icon-remove"></i><strong>과다량을 섭취하셨습니다.</strong> 지방 섭취량을 줄이십시오.</div>
+								</div>
+							</c:if>
+						</div>
+						
+						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;">
+							<h3>주간 당류 섭취율</h3>
+							<div id="saccharide-chart" style="width: 75%; height: 50%;"></div>
+							<br>
+							<c:if test="${weekSaccharide <= standard.saccharide}">
+								<div class="style-msg successmsg">
+									<div class="sb-msg"><i class="icon-thumbs-up"></i><strong>적정량을 섭취하셨습니다.</strong> 이 섭취량을 유지하십시오.</div>
+									<!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+								</div>
+							</c:if>
+							
+							<c:if test="${weekSaccharide > standard.saccharide}">
+								<div class="style-msg errormsg">
+									<div class="sb-msg"><i class="icon-remove"></i><strong>과다량을 섭취하셨습니다.</strong> 지방 섭취량을 줄이십시오.</div>
+								</div>
+							</c:if>
+						</div>
+						
 						<!-- <h1> 선 그래프 끝 </h1> -->
 						
 						<!-- <h1> 막대 그래프 </h1>
@@ -105,13 +198,13 @@
 						
 						<!-- Post Content
 						============================================= -->
-						<div class="postcontent nobottommargin clearfix">
+						<!-- <div class="postcontent nobottommargin clearfix">
 			
 							<h3>추천 식단</h3>
 				
 							<ul id="myTab" class="nav nav-tabs boot-tabs">
 							  <li class="nav-item"><a class="nav-link active" href="#reasonable_food" data-toggle="tab">이상적인 식단</a></li>
-							  <!-- <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li> -->
+							  <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li>
 							</ul>
 							<div id="myTabContent" class="tab-content">
 							  <div class="tab-pane fade show active" id="reasonable_food">
@@ -233,7 +326,7 @@
 							  
 							</div>
 			
-						</div><!-- .postcontent end -->
+						</div> --><!-- .postcontent end -->
 					</c:if>
 
 						</div>
@@ -353,133 +446,99 @@
 			var ctx = document.getElementById("chart-0").getContext("2d");
 			window.myLine = new Chart(ctx, config);
 		};
-
-		document.getElementById('randomizeData').addEventListener('click', function() {
-			config.data.datasets.forEach(function(dataset) {
-				dataset.data = dataset.data.map(function() {
-					return randomScalingFactor();
-				});
-
-			});
-
-			window.myLine.update();
-		});
-
-		var NUTRIENTS = ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"];
-		var color = Chart.helpers.color;
-		var barChartData = {
-			labels: ["Carbohydrate", "Protein", "Fat", "Minerals", "Vitamin"],
-			datasets: [{
-				label: '내가 섭취한 영양소',
-				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-				borderColor: window.chartColors.red,
-				borderWidth: 1,
-				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
-				]
-			}, {
-				label: '영양소 한달 권장량',
-				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-				borderColor: window.chartColors.blue,
-				borderWidth: 1,
-				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
-				]
-			}]
-
-		};
-
-		window.onload = function() {
-			var ctx = document.getElementById("chart-1").getContext("2d");
-			window.myBar = new Chart(ctx, {
-				type: 'bar',
-				data: barChartData,
-				options: {
-					responsive: true,
-					legend: {
-						position: 'top',
-					},
-					title: {
-						display: true,
-						text: '한달 간 섭취한 영양소'
-					}
-				}
-			});
-
-		};
-
-		document.getElementById('randomizeData').addEventListener('click', function() {
-			var zero = Math.random() < 0.2 ? true : false;
-			barChartData.datasets.forEach(function(dataset) {
-				dataset.data = dataset.data.map(function() {
-					return zero ? 0.0 : randomScalingFactor();
-				});
-
-			});
-			window.myBar.update();
-		});
-
-		var colorNames = Object.keys(window.chartColors);
-		document.getElementById('addDataset').addEventListener('click', function() {
-			var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
-			var dsColor = window.chartColors[colorName];
-			var newDataset = {
-				label: 'Dataset ' + barChartData.datasets.length,
-				backgroundColor: color(dsColor).alpha(0.5).rgbString(),
-				borderColor: dsColor,
-				borderWidth: 1,
-				data: []
-			};
-
-			for (var index = 0; index < barChartData.labels.length; ++index) {
-				newDataset.data.push(randomScalingFactor());
-			}
-
-			barChartData.datasets.push(newDataset);
-			window.myBar.update();
-		});
-
-		document.getElementById('addData').addEventListener('click', function() {
-			if (barChartData.datasets.length > 0) {
-				var month = MONTHS[barChartData.labels.length % MONTHS.length];
-				barChartData.labels.push(month);
-
-				for (var index = 0; index < barChartData.datasets.length; ++index) {
-					//window.myBar.addData(randomScalingFactor(), index);
-					barChartData.datasets[index].data.push(randomScalingFactor());
-				}
-
-				window.myBar.update();
-			}
-		});
-
-		document.getElementById('removeDataset').addEventListener('click', function() {
-			barChartData.datasets.splice(0, 1);
-			window.myBar.update();
-		});
-
-		document.getElementById('removeData').addEventListener('click', function() {
-			barChartData.labels.splice(-1, 1); // remove the label first
-
-			barChartData.datasets.forEach(function(dataset, datasetIndex) {
-				dataset.data.pop();
-			});
-
-			window.myBar.update();
-		});
-
 	</script>
+	
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['bar']});
+	    google.charts.setOnLoadCallback(drawChartCarbo);
+	
+	    function drawChartCarbo() {
+	      var data = google.visualization.arrayToDataTable([
+	        ['탄수화물', '${standard.age}세 ${gender} 기준 평균 탄수화물 섭취율', '나의 섭취율', '${standard.age}세 ${gender} 기준 최대 탄수화물 섭취율'],
+	        ['주간 탄수화물 섭취율(%)', ${standard.avgCarbohydrate * 100}, ${weekCarbo}, ${standard.recoCarbohydrate * 100}]
+	      ]);
+	
+	      var options = {
+	        chart: {
+	          title: '주간 탄수화물 비교',
+	          subtitle: '${standard.age}세 ${gender} 기준 탄수화물 권장량과 나의 섭취량 비교',
+	        }
+	      };
+	
+	      var chart = new google.charts.Bar(document.getElementById('carbo-chart'));
+	
+	      chart.draw(data, google.charts.Bar.convertOptions(options));
+	    }
+	</script>
+	
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['bar']});
+	    google.charts.setOnLoadCallback(drawChartProtein);
+	
+	    function drawChartProtein() {
+	      var data = google.visualization.arrayToDataTable([
+	        ['단백질', '${standard.age}세 ${gender} 기준 평균 단백질 섭취량', '나의 섭취량', '${standard.age}세 ${gender} 기준 최대 단백질 섭취량'],
+	        ['주간 단백질 섭취량(g)', ${standard.avgProtein}, ${weekProtein}, ${standard.recoProtein}]
+	      ]);
+	
+	      var options = {
+	        chart: {
+	          title: '주간 단백질 비교',
+	          subtitle: '${standard.age}세 ${gender} 기준 단백질 권장량과 나의 섭취량 비교',
+	        }
+	      };
+	
+	      var chart = new google.charts.Bar(document.getElementById('protein-chart'));
+	
+	      chart.draw(data, google.charts.Bar.convertOptions(options));
+	    }
+	</script>
+	
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['bar']});
+	    google.charts.setOnLoadCallback(drawChartFat);
+	
+	    function drawChartFat() {
+	      var data = google.visualization.arrayToDataTable([
+	        ['지방', '${standard.age}세 ${gender} 기준 평균 지방 섭취율', '나의 섭취율', '${standard.age}세 ${gender} 기준 최대 지방 섭취율'],
+	        ['주간 지방 섭취율(%)', ${standard.avgFat * 100}, ${weekFat}, ${standard.recoFat * 100}]
+	      ]);
+	
+	      var options = {
+	        chart: {
+	          title: '주간 지방 비교',
+	          subtitle: '${standard.age}세 ${gender} 기준 지방 권장량과 나의 섭취량 비교',
+	        }
+	      };
+	
+	      var chart = new google.charts.Bar(document.getElementById('fat-chart'));
+	
+	      chart.draw(data, google.charts.Bar.convertOptions(options));
+	    }
+	</script>
+	
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['bar']});
+	    google.charts.setOnLoadCallback(drawChartSaccharide);
+	
+	    function drawChartSaccharide() {
+	      var data = google.visualization.arrayToDataTable([
+	        ['당류', '${standard.age}세 ${gender} 기준 당류 권장량', '나의 섭취량'],
+	        ['주간 당류 섭취량(g)', ${standard.saccharide}, ${weekSaccharide}]
+	      ]);
+	
+	      var options = {
+	        chart: {
+	          title: '주간 당류 비교',
+	          subtitle: '${standard.age}세 ${gender} 기준 지방 권장량과 나의 섭취량 비교',
+	        }
+	      };
+	
+	      var chart = new google.charts.Bar(document.getElementById('saccharide-chart'));
+	
+	      chart.draw(data, google.charts.Bar.convertOptions(options));
+	    }
+	</script>
+	
 </body>
 </html>

@@ -45,12 +45,12 @@
 	   <div class="container clearfix">
 	   
 	   
-		<!-- 약품검색 -->
+		<!-- 질병검색 -->
 			<h2>질병정보검색</h2>
 			
 			<div >
 				
-				<p>질병명 또는 상병코드를 입력하여 상세정보를 검색할 수 있습니다.</p>
+				<p>질병명 또는 질병코드를 입력하여 상세정보를 검색할 수 있습니다.</p>
 			</div>
 
 			<form id="diseaseSearchForm" action="" method="post">
@@ -131,7 +131,7 @@ function disease_Search() {
 	$.ajax({
 		url : '${pageContext.request.contextPath}/disease_sub', // 컨트롤러/disease_sub
 		type : 'GET',
-		data: 'disease_code=' + disease_code + '&disease_name=' + disease_name,
+		data: 'disease_code=' + disease_code + '&disease_name=' + disease_name + '&d_end=500',
 		
 		success : function(result) { // 콜백함수 - 정상적으로 처리되었을 때의 결과가 result에 들어간다.
 			// 변수명이 반드시 .html(result)일 필요는 없으나 위 콜백함수와의 변수명과 일치해야 한다.

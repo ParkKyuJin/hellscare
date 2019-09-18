@@ -74,7 +74,7 @@
 
 		<!-- Content
 		============================================= -->
-		<section id="content">
+		
 	
 			<div class="content-wrap">
 
@@ -84,7 +84,6 @@
 						<div class="col-xl-5">
 							<div class="heading-block topmargin">
 								<h1><b>건강진단</b></h1>
-								<h1><a href="perse">pserse</a></h1>
 								<h2>CREATING NEW VALUE FOR ADVANCING<br>Human Life</h2><br>
 								<a href="nextpage" class="button button-border button-dark button-rounded button-large noleftmargin topmargin-sm">알아보기</a>
 							</div>
@@ -146,78 +145,74 @@
             </div>
 				</div>
 
-				<div class="container clearfix">
+		    <div class="container clearfix">
+               <div class="heading-block topmargin-lg center">
+                  <h2>모바일 앱 기능소개</h2>
+                  <span class="divcenter">걸음수, 심박수등을 직접 측정할 수 있고 웹페이지의 대부분의 정보를 모바일에서도 사용할 수 있습니다.</span>
+               </div>
 
-					<div class="heading-block topmargin-lg center">
-						<h2>모바일 앱 기능소개</h2>
-						<span class="divcenter">Philanthropy convener livelihoods, initiative end hunger gender rights local. John Lennon storytelling; advocate, altruism impact catalyst.</span>
-					</div>
+               <div class="row bottommargin-sm">
 
-					<div class="row bottommargin-sm">
+                  <div class="col-lg-4 col-md-6 bottommargin">
 
-						<div class="col-lg-4 col-md-6 bottommargin">
+                     <div class="feature-box fbox-right topmargin" data-animate="fadeIn">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-line-heart"></i></a>
+                        </div>
+                        <h3>심박수 측정</h3>
+                        <p>심박수를 측정하여 확인할 수 있습니다.</p>
+                     </div>
 
-							<div class="feature-box fbox-right topmargin" data-animate="fadeIn">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-line-heart"></i></a>
-								</div>
-								<h3>Boxed &amp; Wide Layouts</h3>
-								<p>Stretch your Website to the Full Width or make it boxed to surprise your visitors.</p>
-							</div>
+                     <div class="feature-box fbox-right topmargin" data-animate="fadeIn" data-delay="200">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-line-paper"></i></a>
+                        </div>
+                        <h3>건강정보</h3>
+                        <p>개인의 건강정보 기록 &amp; 결과를 확인할 수 있습니다.</p>
+                     </div>
 
-							<div class="feature-box fbox-right topmargin" data-animate="fadeIn" data-delay="200">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-line-paper"></i></a>
-								</div>
-								<h3>Extensive Documentation</h3>
-								<p>We have covered each &amp; everything in our Docs including Videos &amp; Screenshots.</p>
-							</div>
+                     <div class="feature-box fbox-right topmargin" data-animate="fadeIn" data-delay="400">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-line-layers"></i></a>
+                        </div>
+                        <h3>식단</h3>
+                        <p>식품의 영양소 정보를 확인하고 섭취한 칼로리를 확인할 수 있습니다.</p>
+                     </div>
 
-							<div class="feature-box fbox-right topmargin" data-animate="fadeIn" data-delay="400">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-line-layers"></i></a>
-								</div>
-								<h3>Parallax Support</h3>
-								<p>Display your Content attractively using Parallax Sections with HTML5 Videos.</p>
-							</div>
+                  </div>
 
-						</div>
+                  <div class="col-lg-4 d-md-none d-lg-block bottommargin center">
+                     <img src="/hellscare/resources/images/services/iphone7.png" alt="iphone 2">
+                  </div>
 
-						<div class="col-lg-4 d-md-none d-lg-block bottommargin center">
-							<img src="/hellscare/resources/images/services/iphone7.png" alt="iphone 2">
-						</div>
+                  <div class="col-lg-4 col-md-6 bottommargin">
 
-						<div class="col-lg-4 col-md-6 bottommargin">
+                     <div class="feature-box topmargin" data-animate="fadeIn">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-line-power"></i></a>
+                        </div>
+                        <h3>운동</h3>
+                        <p>다양한 운동을 동영상으로 제공하여 보고 쉽게 따라할 수 있습니다.</p>
+                     </div>
 
-							<div class="feature-box topmargin" data-animate="fadeIn">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-line-power"></i></a>
-								</div>
-								<h3>HTML5 Video</h3>
-								<p>Canvas provides support for Native HTML5 Videos that can be added to a Background.</p>
-							</div>
+                     <div class="feature-box topmargin" data-animate="fadeIn" data-delay="200">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-line-check"></i></a>
+                        </div>
+                        <h3>질병정보</h3>
+                        <p>정확인 질병 정보를 확인하고 증상 &amp; 치료법 등을 조회 할 수 있습니다.</p>
+                     </div>
 
-							<div class="feature-box topmargin" data-animate="fadeIn" data-delay="200">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-line-check"></i></a>
-								</div>
-								<h3>Endless Possibilities</h3>
-								<p>Complete control on each &amp; every element that provides endless customization.</p>
-							</div>
-
-							<div class="feature-box topmargin" data-animate="fadeIn" data-delay="400">
-								<div class="fbox-icon">
-									<a href="#"><i class="icon-bulb"></i></a>
-								</div>
-								<h3>Light &amp; Dark Color Schemes</h3>
-								<p>Change your Website's Primary Scheme instantly by simply adding the dark class.</p>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
+                     <div class="feature-box topmargin" data-animate="fadeIn" data-delay="400">
+                        <div class="fbox-icon">
+                           <a href="#"><i class="icon-bulb"></i></a>
+                        </div>
+                        <h3>병원 &amp; 약국 정보</h3>
+                        <p>자신의 현재 위치를 기반으로 한 병원&amp;약국 정보를 확인할 수 있습니다.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
 				<div class="row clearfix align-items-stretch">
 

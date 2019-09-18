@@ -9,7 +9,7 @@
 				<h1>나의 도전과제</h1>
 				<span>진행중인 도전과제를 확인해보세요!</span>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="main2">Home</a></li>
+					<li class="breadcrumb-item"><a href="main">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><a href="challenge">challenge</a></li>
 				</ol>
 			</div>

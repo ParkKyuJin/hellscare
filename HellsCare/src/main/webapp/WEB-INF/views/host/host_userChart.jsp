@@ -5,15 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -21,20 +12,6 @@
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>Dashio - Bootstrap Admin Template</title>
 
-  <!-- Favicons -->
-  <link href="resources/img/favicon.png" rel="icon">
-  <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Bootstrap core CSS -->
-  <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-  <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
-  <link rel="stylesheet" type="text/css" href="resources/lib/gritter/css/jquery.gritter.css" />
-  <!-- Custom styles for this template -->
-  <link href="resources/css2/style.css" rel="stylesheet">
-  <link href="resources/css2/style-responsive.css" rel="stylesheet">
-  <script src="resources/lib/chart-master/Chart.js"></script>
 
   <!-- =======================================================
     Template Name: Dashio
@@ -101,11 +78,11 @@
     
     
 
-    <section id="main-content" style ="margin-left: 300px;">
+<!--     <section id="main-content" style ="margin-left: 300px;">
       <section class="wrapper">
     <div class="row">
           <div class="col-lg-9 main-chart">
-            <!--CUSTOM CHART START -->
+            CUSTOM CHART START
             <div class="border-head">
               <h3>회원 방문수(작업중)</h3>
             </div>
@@ -147,12 +124,12 @@
                 <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
               </div>
             </div>
-            <!--custom chart end-->
+            custom chart end
             </div>
   	</div>
  
-		</section><!-- #wrapper end -->
-      </section><!-- #content end -->
+		</section>#wrapper end
+      </section>#content end -->
       
 </section>
 <!--main content end-->

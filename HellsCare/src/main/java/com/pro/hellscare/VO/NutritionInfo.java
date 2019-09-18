@@ -13,6 +13,7 @@ public class NutritionInfo {
 	private int recoProtein;
 	private double avgFat;
 	private double recoFat;
+	private double saccharide;
 	
 	public NutritionInfo() {}
 
@@ -95,11 +96,20 @@ public class NutritionInfo {
 	public void setRecoFat(double recoFat) {
 		this.recoFat = recoFat;
 	}
+	
+	public double getSaccharide() {
+		return saccharide;
+	}
+	
+	public void setSaccharide(double saccharide) {
+		this.saccharide = saccharide;
+	}
 
 	@Override
 	public String toString() {
 		return "NutritionInfo [number=" + number + ", separation=" + separation + ", age=" + age + ", calory=" + calory
 				+ ", avgCarbohydrate=" + avgCarbohydrate + ", recoCarbohydrate=" + recoCarbohydrate + ", avgProtein="
-				+ avgProtein + ", recoProtein=" + recoProtein + ", avgFat=" + avgFat + ", recoFat=" + recoFat + "]";
+				+ avgProtein + ", recoProtein=" + recoProtein + ", avgFat=" + avgFat + ", recoFat=" + recoFat
+				+ ", saccharide=" + saccharide + "]";
 	}
 }

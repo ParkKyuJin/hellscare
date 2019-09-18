@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 <!-- 3초가 지나면 해당 ${path}를 통해 해당url로 이동 //그냘 ${path}인 경우 home으로 이동   -->
-<meta http-equiv="refresh" content="3,  ${pageContext.request.contextPath}/main2">
+<meta http-equiv="refresh" content="3,  ${pageContext.request.contextPath}/main">
 <title>HealthCare</title>
 </head>
 <body class="stretched">

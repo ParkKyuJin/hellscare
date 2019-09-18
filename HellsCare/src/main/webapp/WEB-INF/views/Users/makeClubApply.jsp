@@ -20,7 +20,7 @@
 	<c:if test="${insertCnt != 0}">
 		<script type="text/javascript">
 			alert("개설신청이 완료되었습니다.\n관리자의 승인후 개설됩니다.");
-			window.location = "main2"
+			window.location = "main"
 		</script>
 	</c:if>
 </c:if>

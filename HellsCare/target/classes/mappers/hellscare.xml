@@ -66,8 +66,8 @@
     <!-- 규진 종료 -->
     
     <!-- 재관 시작 -->
-  <!-- 재관 시작 -->
-   <!-- 관리자 - 질병정보 <== 재관     -->
+ <!-- 재관 시작 -->
+   <!-- ******** 관리자 ************   -->
 	<!-- 질병정보 갯수 -->
 	<select id="getDiseaseCount" resultType="int">
 		SELECT count(*) FROM disease_tbl
@@ -137,7 +137,7 @@
     <!-- 회원리스트 -->
     <select id="getUserList"  parameterType="java.util.Map" resultType="com.pro.hellscare.VO.UsersVO">
 		SELECT *  
-		  FROM ( SELECT username, name, address, phone_number, email,
+		  FROM ( SELECT username, name, address, phone_number, gender,email,
 						birth, reg_date, enabled,  rownum rNum   
 				  FROM ( 
 						SELECT * FROM users	
@@ -153,7 +153,7 @@
     <!-- 최근 가입 회원 -->
     <select id="recentJoinUser"  resultType="com.pro.hellscare.VO.UsersVO">
 		SELECT *  
-		  FROM ( SELECT username, name, reg_date, enabled,  rownum rNum   
+		  FROM ( SELECT username, name, reg_date, birth,  rownum rNum   
 				  FROM ( 
 						SELECT * FROM users	
 						WHERE not username='host'						 
@@ -171,6 +171,7 @@
 		 GROUP BY rollup(gender) 
 	</select>
 	
+	<!-- ********* 유저 *********** -->
 	<!-- 건강정보가 있는지 확인 -->
 	<select id="checkUserInfo" resultType="int">
 		SELECT count(*) FROM users_info_tbl where username=#{username}
@@ -215,8 +216,7 @@
     <!-- 재관 종료 -->
     
     
-    <!-- 예찬 시작 -->
-  <!-- 예찬 시작 -->
+<!-- 예찬 시작 -->
     <!-- 관리자 - 운동등록 -->
  	   <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
    	 	INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind,exercise_video)
@@ -249,7 +249,7 @@
 	</select>
 	
 	<!-- 운동목록 - 스트레칭 -->
-    	<select id="getstretching" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
+    <select id="getstretching" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
 		<![CDATA[
 		select * from (select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video, rownum rNum 
 			from (select * from exercise_tbl 
@@ -259,7 +259,7 @@
 	</select>
 	
 	<!-- 운동목록 - 다이어트 (유산소운동) -->
-  	  <select id="getdiet" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
+  	 <select id="getdiet" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.ExerciseVO">
 		<![CDATA[
 		select * from (select exercise_code, exercise_name, exercise_img, way, part, kcal, note, kind, exercise_video, rownum rNum 
 			from (select * from exercise_tbl 
@@ -718,7 +718,7 @@
 	<!-- QnA 저장 -->
 	<insert id="qnaWrite" parameterType="com.pro.hellscare.VO.BoardQnaVO">
 		INSERT INTO board_qna_tbl (qna_code, username, title, content,kind ,qna_password)
-			VALUES (com_qna_seq.nextval, #{username}, #{title}, #{content},#{kind}, #{qna_password})
+			VALUES (com_qna_seq.nextval,#{username},#{title},#{content},#{kind},#{qna_password})
 	</insert>
 	
 	<!-- 비밀번호 확인 -->
@@ -729,7 +729,7 @@
     
     <!-- QnA 내용가져와 -->
     <select id="getQnaArticle" resultType="com.pro.hellscare.VO.BoardQnaVO">
-		SELECT qna_code, username, title, content, readCnt, kind, to_char(qna_write_date,'yyyy-mm-dd') qna_write_date, rownum rNum
+		SELECT qna_code, username, title, content, readCnt, kind, to_char(qna_write_date,'yyyy-mm-dd') qna_write_date,qna_password,rownum rNum
 			FROM board_qna_tbl WHERE qna_code=#{qna_code}
 	</select>
     
@@ -745,7 +745,7 @@
     
     <!-- QnA글 수정 처리 -->
 	<update id="qnaUpdate" parameterType="com.pro.hellscare.VO.BoardQnaVO">
-		UPDATE board_tbl SET title=#{title}, content=#{content}, kind=#{kind}, qna_password=#{qna_password} WHERE qna_code=#{qna_code}
+		UPDATE board_qna_tbl SET title=#{title}, content=#{content}, kind=#{kind}, qna_password=#{qna_password} WHERE qna_code=#{qna_code}
 	</update>
 	
 	<!-- 공지사항 수 -->
@@ -787,19 +787,37 @@
     
     <!-- 한결 종료 -->
     
+       <select id ="selectUser" resultType="java.util.Map"><!-- #{map의 key} -->
+      SELECT u.username, u.password, u.name, u.address, u.phone_number, u.gender
+         ,u.birth, u.email, u.reg_date, u.enabled, a.authority 
+        FROM users u, authorities a 
+       WHERE u.username = #{username}
+         AND u.username = a.username
+   </select>
     
+<!--나현 시작 --> 
+    <!-- 아이디 찾기 시 이름 & 이메일 체크 -->
+    <select id="chkCnt" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM users WHERE name=#{name} and email=#{email}
+    </select>
+    <!-- 아이디 찾기 시 아이디 값 반환 -->
+    <select id="getUsername" resultType="String" parameterType="java.util.Map">
+		SELECT username FROM users WHERE name=#{name} and email=#{email}
+    </select>
     
-    <!-- 이나현 -->
-    <!-- UserAuthenticationService의 loadUserByUsername()메서드 에서 체크 
-	스프링 시큐리티에서 체크하는 필드로 별칭을 줌, 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리  
-	-->
-	<select id ="selectUser" resultType="java.util.Map"><!-- #{map의 key} -->
-		SELECT u.username, u.password, u.name, u.address, u.phone_number, u.gender
-			,u.birth, u.email, u.reg_date, u.enabled, a.authority 
-		  FROM users u, authorities a 
-		 WHERE u.username = #{username}
-		   AND u.username = a.username
-	</select>
+    <!-- 비밀번호 찾기 시 아이디 & 이름 & 이메일 체크 -->
+    <select id="pChkCnt" resultType="int" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM users WHERE username=#{username} and email=#{email}
+    </select>
+    <!--  비밀번호 찾기 시  이메일로 보낼 비밀번호 반환 -->
+    <update id="updatePw" parameterType="java.util.Map">
+    	update users set password=#{rdpw} where username =#{username}
+    </update>
+    <!-- 아이디 찾기 시 이메일 체크 -->
+    <select id="idChk" resultType="int" parameterType="java.util.Map">
+	SELECT COUNT(*) FROM users WHERE username=#{strId}
+    </select>
+    
     <!-- 회원가입 시 아이디 중복 확인 작업,정보 수정, 정보 삭제 -->
 	<select id="idCheck" resultType="int" >
 		SELECT COUNT(*) FROM users WHERE username=#{strId}
@@ -834,16 +852,19 @@
     
     <!-- 회원정보 수정처리  -->
     <update id="userModifyPro" parameterType="com.pro.hellscare.VO.UsersVO">
-    	update users set password=#{password},name=#{name},address=#{address},phone_number=#{phone_number} where username = #{username}
+    	update users set password=#{password},name=#{name},address=#{address},phone_number=#{phone_number} where username=#{username}
     </update>
     
     <!--  회원탈퇴 처리 -->
     <delete id="deleteMember" parameterType="String">
     	delete users where username=#{username}
     </delete>
-    <!-- 이나현 끝 -->
+<!-- 나현 종료  -->
     
-    <!-- 동렬 시작 -->
+    
+
+    
+    
 	<!-- 동렬 시작 -->
 	<!-- 관리자 - 음식 등록 -->
 	<insert id="insertFood" parameterType="com.pro.hellscare.VO.FoodVO">
@@ -935,8 +956,15 @@
 		]]>
 	</select>
 	
-	<!-- 동렬 끝 -->
+	<!-- 안드로이드 - 음식명으로 음식정보 가져오기 -->
+	<select id="getFoodInfoByUsingFoodName" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.FoodVO">
+		SELECT * FROM food_tbl WHERE food_name = #{food_name}
+	</select>
 	
+	<!-- 안드로이드 - 오늘일자 섭취한 칼로리 가져오기 -->
+	<select id="getTodayKcalInfo" parameterType="String" resultType="com.pro.hellscare.VO.KcalVO">
+		SELECT * FROM kcal_tbl WHERE username = #{username} AND kcal_date >= sysdate-1
+	</select>
 	<!-- 동렬 끝 -->
     
     

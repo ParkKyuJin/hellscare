@@ -32,9 +32,8 @@ function idfySend() {
 
 			<div class="container clearfix">
 				<h1>도전과제</h1>
-				<span  style="color:white;">도전과제를 달성하고 포인트를 쌓아보세요!</span>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="main2">Home</a></li>
+					<li class="breadcrumb-item"><a href="main">Home</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><a href="Mychallenge">My challenge</a></li>
 				</ol>
 			</div>
@@ -42,16 +41,22 @@ function idfySend() {
 </section><!-- #page-title end -->
 				
 <section id="content">
-				<div class="col-lg-2">
-					<label>이벤트명을 입력하세요</label>
+				<div class="container clearfix">
+				<div class="text-rotater" data-separator="|" data-rotate="bounceIn" data-speed="2500"style="font-size:2em;margin-top:50px;">
+							오늘의 <span class="t-rotate color" style="font-size:1.5em; color:blue;">걷기|달리기|하이킹|라이딩</span> 에 도전하세요!
+						</div>
+					<div class="col-lg-4" style="margin-top:50px;">
+					
+					<label>검색하실 이벤트명을 입력하세요</label>
 					<input  onkeyup="idfySend();" type="text"  class="required sm-form-control input-block-level valid" size="20px" id="search" >
-				</div>
+					</div>
+					</div>
 		 <div id="result">
 			<div class="content-wrap">
 				
 				<div class="container clearfix">
-			
-					<div class="row grid-container" data-layout="masonry" style="overflow: visible">
+				
+					<div class="row grid-container" data-layout="masonry" style="overflow: visible;margin-top:20px;">
 						<c:forEach var="dto" items="${dtos}">
 						<div class="col-lg-4 mb-4">
 							<div class="flip-card text-center">

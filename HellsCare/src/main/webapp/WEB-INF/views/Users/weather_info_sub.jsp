@@ -1,5 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="com.pro.hellscare.VO.WeatherVO"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.pro.hellscare.VO.WeatherVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,7 +35,11 @@
 					<img src="/hellscare/resources/weather_images/sunny.jpg">
 				</c:if>
 				
-				<c:if test="${weather.nowWeather == '비' }">
+				<c:if test="${weather.nowWeather == '비'}">
+					<img src="/hellscare/resources/weather_images/rainy.jpg">
+				</c:if>
+				
+				<c:if test="${weather.nowWeather == '흐리고 비'}">
 					<img src="/hellscare/resources/weather_images/rainy.jpg">
 				</c:if>
 				
@@ -646,7 +650,11 @@
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/sunny.jpg">
 							</c:if>
 							
-							<c:if test="${weather.tomorrowAMWeather == '비' }">
+							<c:if test="${weather.tomorrowAMWeather == '비'}">
+								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
+							</c:if>
+							
+							<c:if test="${weather.tomorrowAMWeather == '흐리고 비' }">
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
 							</c:if>
 							
@@ -706,7 +714,11 @@
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/sunny.jpg">
 							</c:if>
 							
-							<c:if test="${weather.tomorrowPMWeather == '비' }">
+							<c:if test="${weather.tomorrowPMWeather == '비'}">
+								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
+							</c:if>
+							
+							<c:if test="${weather.tomorrowPMWeather == '흐리고 비'}">
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
 							</c:if>
 							
@@ -916,7 +928,11 @@
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/sunny.jpg">
 							</c:if>
 							
-							<c:if test="${weather.theDayAfterTomorrowAMWeather == '비' }">
+							<c:if test="${weather.theDayAfterTomorrowAMWeather == '비'}">
+								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
+							</c:if>
+							
+							<c:if test="${weather.theDayAfterTomorrowAMWeather == '흐리고 비' }">
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
 							</c:if>
 							
@@ -976,7 +992,11 @@
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/sunny.jpg">
 							</c:if>
 							
-							<c:if test="${weather.theDayAfterTomorrowPMWeather == '비' }">
+							<c:if test="${weather.theDayAfterTomorrowPMWeather == '비'}">
+								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
+							</c:if>
+							
+							<c:if test="${weather.theDayAfterTomorrowPMWeather == '흐리고 비' }">
 								<img style="max-width : 80%;" src="/hellscare/resources/weather_images/rainy.jpg">
 							</c:if>
 							

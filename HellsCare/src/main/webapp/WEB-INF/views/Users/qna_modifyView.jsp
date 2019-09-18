@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 
 
 
@@ -60,16 +60,20 @@
 
 				<div class="container clearfix">
 
-					<div class="form-widget">
+					<div>
 
 						<div class="form-result"></div>
 
 						<div class="row">
 							<div class="col-lg-12">
 
-								<form class="row" action="qnaWritePro" method="post" enctype="multipart/form-data">
+								<form action="qnaUpdate" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="form-process"></div>
 									<input type="hidden" name="qna_code" value="${qto.qna_code}">
+									<input type="hidden" name="username" value="${qto.username}">
+									<input type="hidden" name="qna_password" value="${qto.qna_password}">
+									<input type="hidden" name="jobs-application-message" value="${qto.content}">
 									<div class="col-7 form-group">
 										<label>제목:</label>
 										<input type="text" name="title" id="title" class="form-control required" value="${qto.title}" placeholder="제목 입력">
@@ -86,18 +90,19 @@
 											<option value="기타 문의">기타 문의</option>
 										</select>
 									</div>
+
 							
 									<div class="col-12 form-group">
 										<div class="row">
 											<div class="col-md-3 form-group">
 												<label>작성자:</label>
-												<input type="text" name="username" id="username" class="form-control required" value="${qto.username}" disabled="disabled">
+												<input type="text" name="username" id="username" class="form-control required" value="${username}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-3 form-group">
 												<label>비밀번호:</label>
 												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
-												<input type="password" name="qna_password" id="qna_password" class="form-control required" value="${qto.qna_password}" disabled="disabled">
+												<input type="password" name="qna_password" id="qna_password" class="form-control required" value="${qna_password}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-6 form-group">

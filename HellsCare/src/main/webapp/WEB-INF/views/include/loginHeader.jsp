@@ -28,7 +28,7 @@
 						<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
 							<a class="dropdown-item tleft" href="myPage">My Page</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item tleft" href="main2">Logout <i class="icon-signout"></i></a>
+							<a class="dropdown-item tleft" href="main">Logout <i class="icon-signout"></i></a>
 						</ul>
 					</div>
 				

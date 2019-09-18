@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 
 
@@ -15,8 +14,6 @@
 
 	<!-- Stylesheets
 	============================================= -->
-
-		<%@ include file="../include/setting.jsp" %>
 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,6 +76,7 @@
 							============================================= -->
 							
 						<form name="form1" action="qna_modi" method="post">	
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="board_code" value="${dto.qna_code}">
 							<div class="entry clearfix">
 	
@@ -147,7 +145,7 @@
 
 								
 								<form name="form2" action="post">
-
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<!-- Comments List 댓글목록
 								============================================= -->
 								<ol class="commentlist clearfix" id="commentlist">

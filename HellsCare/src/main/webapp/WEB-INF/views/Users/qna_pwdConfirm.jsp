@@ -16,7 +16,6 @@
 	<!-- Stylesheets
 	============================================= -->
 
-		<%@ include file="../include/setting.jsp" %>
 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,6 +69,7 @@
 
 				
 					<form action="qna_detail" method="post" >
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="col-md-3 form-group">
 							<label>비밀번호:</label>
 							<input type="hidden" name="qna_code" value="${qna_code}">

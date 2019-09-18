@@ -16,73 +16,6 @@
 	============================================= -->
 	<title>Health | For Your Better Life</title>
 
-
-
-
-<script type="text/javascript">
-//초기화버튼 클릭시 ============================
-function refreshIdfy() {
-	$("#drug_name").val("");
-	$("#entp_name").val("");
-}
-
-function idfySend() {
-	var drug_name = $('#drug_name').val();
-	var entp_name = $('#entp_name').val();
-	
-	if(drug_name.length == 0 && entp_name.length == 0) {
-		alert('검색어를 입력하세요');
-		return false;
-	}
-	
-	//alert(drug_name+entp_name);
-	
-	$.ajax({
-		url : '${pageContext.request.contextPath}/drugInfo_sub', // 컨트롤러/drugInfo_sub
-		type : 'GET',
-		data: 'drug_name=' + drug_name + '&entp_name=' + entp_name,
-		
-		success : function(result) { // 콜백함수 - 정상적으로 처리되었을 때의 결과가 result에 들어간다.
-			// 변수명이 반드시 .html(result)일 필요는 없으나 위 콜백함수와의 변수명과 일치해야 한다.
-			$('#result').html(result);
-		},
-		error : function() {
-			alert("오류");	
-		}		
-	});
-	
-}
-
-// 제품명 엔터로 검색
-function searchEnter1() {
-	if(event.keyCode == 13){  // enter 누르면
-		//alert($("#drug_name").val());
-
-		if($("#drug_name").val() == ""){
-			alert("제품명을 입력해주세요.");
-			return false;
-		}else{
-			idfySend();
-		}
-	}
-}
-
-//제품명 엔터로 검색
-function searchEnter2() {
-	if(event.keyCode == 13){  // enter 누르면
-
-		if($("#entp_name").val() == ""){
-			alert("회사명을 입력해주세요.");
-			return false;
-		}else{
-			idfySend();
-		}
-	}
-}
-
-</script>
-
-
 </head>
 
 
@@ -174,6 +107,68 @@ function searchEnter2() {
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
 
+<script type="text/javascript">
+//초기화버튼 클릭시 ============================
+function refreshIdfy() {
+	$("#drug_name").val("");
+	$("#entp_name").val("");
+}
+
+function idfySend() {
+	var drug_name = $('#drug_name').val();
+	var entp_name = $('#entp_name').val();
+	
+	if(drug_name.length == 0 && entp_name.length == 0) {
+		alert('검색어를 입력하세요');
+		return false;
+	}
+	
+	//alert(drug_name+entp_name);
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/drugInfo_sub', // 컨트롤러/drugInfo_sub
+		type : 'GET',
+		data: 'drug_name=' + drug_name + '&entp_name=' + entp_name,
+		
+		success : function(result) { // 콜백함수 - 정상적으로 처리되었을 때의 결과가 result에 들어간다.
+			// 변수명이 반드시 .html(result)일 필요는 없으나 위 콜백함수와의 변수명과 일치해야 한다.
+			$('#result').html(result);
+		},
+		error : function() {
+			alert("오류");	
+		}		
+	});
+	
+}
+
+// 제품명 엔터로 검색
+function searchEnter1() {
+	if(event.keyCode == 13){  // enter 누르면
+		//alert($("#drug_name").val());
+
+		if($("#drug_name").val() == ""){
+			alert("제품명을 입력해주세요.");
+			return false;
+		}else{
+			idfySend();
+		}
+	}
+}
+
+//제품명 엔터로 검색
+function searchEnter2() {
+	if(event.keyCode == 13){  // enter 누르면
+
+		if($("#entp_name").val() == ""){
+			alert("회사명을 입력해주세요.");
+			return false;
+		}else{
+			idfySend();
+		}
+	}
+}
+
+</script>
 
 	
 	

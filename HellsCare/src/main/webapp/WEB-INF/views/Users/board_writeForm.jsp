@@ -1,8 +1,8 @@
+ 
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 
 
@@ -10,7 +10,7 @@
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
+<!-- 	<meta name="author" content="SemiColonWeb" /> -->
 
 	<!-- Stylesheets
 	============================================= -->
@@ -25,8 +25,8 @@
 	<title>Canvas | The Multi-Purpose HTML5 Template</title>
 
 </head>
-
-<body class="stretched">
+<!-- class="stretched" -->
+<body >
 
 <!-- Document Wrapper
 	============================================= -->
@@ -51,11 +51,11 @@
 
 					<div class="form-widget">
 
-						<div class="form-result"></div>
 
 						<div class="row">
 							<div class="col-lg-12">
-								<form class="row" action="writePro" method="post" >
+							<!-- class="row" -->
+								<form  action="writePro" method="post" >
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="form-process"></div>
 									
@@ -69,7 +69,7 @@
 											<div class="col-md-6 form-group">
 												<label>작성자:</label>
 												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
-												<input type="text" name="username" id="username" class="form-control required" value="" placeholder="">
+												<input type="text" name="username" id="username" class="form-control required" value="${sessionScope.memId}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-6 form-group">
@@ -82,22 +82,24 @@
 										
 										<div class="form-group">
 											<label>내용:</label>
-											<textarea name="jobs-application-message" id="jobs-application-message" class="form-control required" cols="30" rows="10"></textarea>
+											<textarea name="jobs-application-message"  class="form-control required" cols="30" rows="10"></textarea>
 										</div>
+									<!-- 	id="jobs-application-message" -->
 										<!-- <div class="form-group">
 											<label>파일 업로드:</label>
 											<input type="file" id="jobs-application-resume" name="jobs-application-resume" class="file-loading" data-show-preview="false" />
 										</div> -->
 									</div>
-									<div class="col-12 hidden">
+									<!-- <div class="col-12 hidden">
 										<input type="text" id="jobs-application-botcheck" name="jobs-application-botcheck" value="" />
-									</div> 
+									</div>  -->
 									<div class="col-12">
-										<button type="submit" name="jobs-application-submit" class="btn btn-secondary">글쓰기 완료</button>
-										<button  name="jobs-application-cancel" class="btn btn-secondary">글쓰기 취소</button>
+									<!-- name="jobs-application-submit"  -->
+										<button type="submit" class="btn btn-secondary">글쓰기 완료</button>
+										<button  class="btn btn-secondary" onclick="window.history.back();">글쓰기 취소</button>
 									</div>
-
-									<input type="hidden" name="prefix" value="jobs-application-">
+<!-- 
+									<input type="hidden" name="prefix" value="jobs-application-"> -->
 								</form>
 							</div>
 
@@ -135,7 +137,7 @@
 
 	<!-- Footer Scripts
 	============================================= -->
-	<script src="resources/js/functions.js"></script>
+<!-- 	<script src="resources/js/functions.js"></script> -->
 
 	<script>
 		jQuery(document).ready( function(){

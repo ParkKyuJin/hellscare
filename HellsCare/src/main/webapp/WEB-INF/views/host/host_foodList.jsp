@@ -10,7 +10,6 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
@@ -22,35 +21,35 @@
   <title>음식 조회</title>
 
   <!-- Favicons -->
-  <link href="resources/img/favicon.png" rel="icon">
+  <!-- <link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Bootstrap core CSS -->
+  Bootstrap core CSS
   <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
+  external css
   <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
   <link rel="stylesheet" type="text/css" href="resources/lib/gritter/css/jquery.gritter.css" />
-  <!-- Custom styles for this template -->
+  Custom styles for this template
   <link href="resources/css2/style.css" rel="stylesheet">
   <link href="resources/css2/style-responsive.css" rel="stylesheet">
   <script src="resources/lib/chart-master/Chart.js"></script>
   
   <link
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
-	rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="resources/css/bootstrap.css"
+	rel="stylesheet" type="text/css" /> -->
+<!-- <link rel="stylesheet" href="resources/css/bootstrap.css"
 	type="text/css" />
 <link rel="stylesheet" href="resources/style.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/dark.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/font-icons.css"
 	type="text/css" />
-<link rel="stylesheet" href="resources/css/animate.css" type="text/css" />
-<link rel="stylesheet" href="resources/css/magnific-popup.css"
+<link rel="stylesheet" href="resources/css/animate.css" type="text/css" /> -->
+<!-- <link rel="stylesheet" href="resources/css/magnific-popup.css"
 	type="text/css" />
 
 <link rel="stylesheet" href="resources/css/responsive.css"
-	type="text/css" />
+	type="text/css" /> -->
 
   <!-- =======================================================
     Template Name: Dashio

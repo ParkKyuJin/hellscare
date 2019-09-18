@@ -17,7 +17,7 @@
 
 							<div class="widget clearfix">
 
-								<img src="/hellscare/resources/images/footer-widget-logo.png" alt="" class="footer-logo">
+								<img src="/hellscare/resources/images/DrCARE2.png" alt="" class="footer-logo">
 
 								<div style="background: url('/hellscare/resources/images/world-map.png') no-repeat center center; background-size: 100%;">
 									<address>

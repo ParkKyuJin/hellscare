@@ -158,7 +158,7 @@ function checkCode(){
     var disease_code = $('#disease_code').val().toUpperCase();
     $.ajax({
         url:'codeDuplChk',
-        type:'post',
+        type:'GET',
         data:{disease_code:disease_code},
         success:function(data){
         	if(data==0){

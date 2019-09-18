@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 
 <head>
 
@@ -11,7 +11,6 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- DatePicker CSS -->
@@ -57,13 +56,14 @@
 
 				<div class="container clearfix">
 
-					<div class="form-widget">
+					<div>
 
 						<div class="form-result"></div>
 
 						<div class="row">
 							<div class="col-lg-12">
-								<form class="row" action="qnaWritePro" method="post" enctype="multipart/form-data">
+								<form class="row" action="qnaWritePro" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="form-process"></div>
 									
 									<div class="col-7 form-group">
@@ -88,11 +88,11 @@
 											<div class="col-md-3 form-group">
 												<label>작성자:</label>
 												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
-												<input type="text" name="username" id="username" class="form-control required" value="" placeholder="">
+												<input type="text" name="username" id="username" class="form-control required" value="${sessionScope.memId}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-3 form-group">
-												<label>비밀번호:</label>
+												<label>QNA 비밀번호:</label>
 												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
 												<input type="password" name="qna_password" id="qna_password" class="form-control required" value="" placeholder="">
 											</div>

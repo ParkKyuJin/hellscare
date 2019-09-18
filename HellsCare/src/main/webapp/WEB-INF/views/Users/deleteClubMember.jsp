@@ -21,7 +21,7 @@
 	<c:if test="${updateCnt != 0}">
 		<script type="text/javascript">
 			alert("회원이 탈퇴되었습니다.");
-			window.location="details_Club?club_name="+${club_name};
+			window.location="details_Club?club_name=${club_name}";
 		</script>
 	</c:if>
 </c:if>

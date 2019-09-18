@@ -4,11 +4,17 @@
 <!-- Document Wrapper
 	============================================= -->
 	<%@ include file="../include/header.jsp"%>
+<c:if test="${memId == null }">
+	<script type="text/javascript">
+		alert("회원만 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
 	<div>
 	<section id="page-title">
          <div class="container clearfix">
-            <h1>${club_name} 게시글 작성</h1>
-            <span>WRITE</span>
+            <h1>${club_name} 게시글 수정</h1>
+            <span>UPDATE</span>
          </div>
       </section><!-- #page-title end -->
 	

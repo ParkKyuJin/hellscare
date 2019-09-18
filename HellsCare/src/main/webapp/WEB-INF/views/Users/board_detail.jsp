@@ -16,7 +16,6 @@
 	<!-- Stylesheets
 	============================================= -->
 
-		<%@ include file="../include/setting.jsp" %>
 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -78,6 +77,7 @@
 							============================================= -->
 							
 						<form name="form1" action="post">	
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="board_code" value="${dto.board_code}">
 							<div class="entry clearfix">
 	
@@ -96,13 +96,13 @@
 									<c:if test="${board_image}"><li><i class="icon-camera-retro"></i></a></li></c:if>
 								</ul><!-- .entry-meta end -->
 
-								<c:if test="${board_image}">
+							<%-- 	<c:if test="${board_image}">
 								<!-- Entry Image 첨부 이미지가 있을 경우
 								============================================= -->
 								<div class="entry-image">
 									<img src="images/blog/full/1.jpg" alt="Blog Single"></a>
 								</div><!-- .entry-image end -->
-								</c:if>
+								</c:if> --%>
 
 								<!-- Entry Content
 								============================================= -->
@@ -156,8 +156,8 @@
 
 									<h3>Leave a <span>Comment</span></h3>
 
-									<form name="form3" class="clearfix" action="#" method="post" id="commentform">
-
+									<form name="form3" class="clearfix" action="#" method="GET" id="commentform">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 										<div class="clear"></div>
 
 										<div class="col_full">
@@ -266,7 +266,7 @@
 				var param = "comment=" + comment + "&board_code=" + board_code;
 				
 				$.ajax({
-					type:"post",
+					type:"GET",
 					url:"${pageContext.request.contextPath}/commentIn",
 					data:param,
 					success:function(){

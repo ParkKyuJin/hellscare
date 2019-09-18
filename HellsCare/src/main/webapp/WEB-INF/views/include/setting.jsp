@@ -37,3 +37,9 @@
 
  <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+  
+<!-- 구글 차트 -->  
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  

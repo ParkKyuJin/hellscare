@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,11 +45,11 @@
                   <canvas id="serverstatus01" height="120" width="120"></canvas>
                   <script>
                     var doughnutData = [{
-                        value: 70,
+                        value: 21,
                         color: "#FF6B6B"
                       },
                       {
-                        value: 30,
+                        value: 79,
                         color: "#fdfdfd"
                       }
                     ];
@@ -107,22 +108,22 @@
 					</td>				
 				</tr>
                   <tr>
-                  	<th>아이디</th>
-                    <th>회원명 </th>
-                    <th>가입일</th>
-                    <th>활동여부</th>
+                  	<th style="width:25%">아이디</th>
+                    <th style="width:25%">회원명 </th>
+                    <th style="width:25%">생년월일</th>
+                    <th style="width:25%">가입일</th>
                   </tr>
                 </thead>
                 <tbody>
-           <!-- 가입회면이 있으면 -->
+           <!-- 가입회원이 있으면 -->
 	<c:if test="${cnt > 0}">
 		<c:forEach var="dto" items="${dtos}" begin="0" end="4" varStatus="status">
 		
 		<tr>
 			<td>${dto.username }</td>
             <td>${dto.name } </td>
+            <td>${dto.birth }</td>  
             <td>${dto.reg_date }</td>
-            <td>${dto.enabled }</td>  
 		</tr>
 			
 		</c:forEach>
@@ -327,7 +328,7 @@
     <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+          &copy; Copyrights <strong>Healthcare</strong>. All Rights Reserved
         </p>
         <div class="credits">
           <!--
@@ -336,7 +337,7 @@
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
+          Created with Healthcare template by <a href="https://templatemag.com/">TemplateMag</a>
         </div>
         <a href="host_main#" class="go-top">
           <i class="fa fa-angle-up"></i>

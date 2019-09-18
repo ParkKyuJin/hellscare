@@ -7,10 +7,11 @@
         <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 등록</b></h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
-          <div class="col-lg-8" style="margin:0px 0px 0px 300px;">
+          <div class="col-md-12">
             <div class="form-panel">
               <h4 class="mb"><i class="fa fa-angle-right"></i> <b>도전과제 등록</b></h4>
-              <form class="form-horizontal style-form" action="host_challengeRegpro" method="post" enctype="multipart/form-data">
+              <form class="form-horizontal style-form" action="host_challengeRegpro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <div class="form-group">
                   <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>도전과제명</b></label>
                   <div class="col-sm-4">
@@ -56,7 +57,7 @@
 
 									</div>
 									<div style="float: right; margin: 0px 50px 0px 0px;">
-										<a href="host_challengeReg"><button type="submit"
+										<a href="#"><button type="submit"
 												class="btn btn-round btn-success">확인</button></a> <a
 											href="host_challenge"><button type="button"
 												class="btn btn-round btn-danger">돌아가기</button></a>

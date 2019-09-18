@@ -22,7 +22,7 @@
 	<c:if test="${updateCnt == 1}">
 		<script type="text/javascript">
 			alert("승인이 완료되었습니다.");
-			window.location="details_Club?club_name="+${club_name};
+			window.location="details_Club?club_name=${club_name}";
 		</script>
 	</c:if>
 	

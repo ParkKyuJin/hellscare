@@ -18,7 +18,12 @@
 	<link rel="stylesheet" href="resources/css/custom.css" type="text/css" />
 </head>
 <body class="stretched">
-
+<c:if test="${memId == null}">
+	<script type="text/javascript">
+		alert("회원만 이용하실수 있습니다.");
+		window.location="login_reg";
+	</script>
+</c:if>
 <!-- Document Wrapper
 	============================================= -->
 	<%@ include file="../include/header.jsp"%>
@@ -74,7 +79,7 @@
 										
 										<div class="form-group">
 											<br><br>
-											<a href="clubBoardModify?club_board_code=${vo.club_board_code}"><button type="button" class="btn btn-secondary">수정하기</button></a>
+											<a href="clubBoardModify?club_board_code=${vo.club_board_code}&club_name=${club_name}" onclick="return writerChk();"><button type="button" class="btn btn-secondary">수정하기</button></a>
 											<button name="jobs-application-cancel" class="btn btn-secondary" style="float:right" onclick="history.back();">뒤로가기</button>
 										</div>
 									</div>
@@ -115,6 +120,16 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="resources/js/functions.js"></script>
-
+	
+	<script type="text/javascript">
+		function writerChk(){
+			if("${vo.username}" == "${memId}"){
+				return true;
+			} else{
+				alert("작성자만 수정할 수 있습니다.");
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

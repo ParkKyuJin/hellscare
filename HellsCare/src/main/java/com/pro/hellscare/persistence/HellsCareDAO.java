@@ -22,50 +22,53 @@ import com.pro.hellscare.VO.challengeVO;
 // 인터페이스 작성양식
 // 함수명() 위에 어떤기능인지 반드시 적을것
 public interface HellsCareDAO {
-	
+
 	// == 동렬 시작
-	// == 동렬 시작
-			// 관리자 - 음식 등록
-			public int insertFood(FoodVO food);
-			
-			// 관리자 - 음식 개수
-			public int getFoodCount();
-			
-			// 관리자 - 음식 목록
-			public List<FoodVO> getFoodList(Map<String, Integer> map);
-			
-			// 관리자 - 음식 상세 정보
-			public FoodVO getFoodInfo(String food_code);
-			
-			// 관리자 - 음식 정보 수정
-			public int updateFood(FoodVO food);
-			
-			// 관리자 - 음식 삭제
-			public int deleteFood(String food_code);
-			
-			// 관리자 - 음식 중복 확인
-			public int checkFoodDup(String food_name);
-			
-			// 사용자 - 섭취한 음식 입력 정보 확인
-			public FoodVO getFoodInfoByUsingFoodNameAndFoodKind(Map<String, String> map);
-			
-			// 사용자 - 음식 종류에 해당하는 음식명들 찾기
-			public List<FoodVO> getFoodNamesByUsingFoodKind(String food_kind);
-			
-			// 사용자 - 세션에 접속한 사용자의 정보룰 가져오기
-			public UsersVO getUserInfoByUsingId(String username);
-			
-			// 사용자 - 사용자가 입력했던 음식 칼로리 값들 가져오기
-			public String getKcalInfo(Map<String, String> map);
-			
-			// 사용자 - 사용자가 입력 폼에 입력한 음식 정보 입력하기
-			public int insertUserFood(Map<String, String> map);
-			
-			// 사용자 - 칼로리 테이블에 입력된 회원의 일주일 간 칼로리 정보 가져오기
-			public List<KcalVO> getUserKcalInfo(Map<String, String> map);
-			
-			// == 동렬 종료
-		// == 동렬 종료
+	// 관리자 - 음식 등록
+	public int insertFood(FoodVO food);
+
+	// 관리자 - 음식 개수
+	public int getFoodCount();
+
+	// 관리자 - 음식 목록
+	public List<FoodVO> getFoodList(Map<String, Integer> map);
+
+	// 관리자 - 음식 상세 정보
+	public FoodVO getFoodInfo(String food_code);
+
+	// 관리자 - 음식 정보 수정
+	public int updateFood(FoodVO food);
+
+	// 관리자 - 음식 삭제
+	public int deleteFood(String food_code);
+
+	// 관리자 - 음식 중복 확인
+	public int checkFoodDup(String food_name);
+
+	// 사용자 - 섭취한 음식 입력 정보 확인
+	public FoodVO getFoodInfoByUsingFoodNameAndFoodKind(Map<String, String> map);
+
+	// 사용자 - 음식 종류에 해당하는 음식명들 찾기
+	public List<FoodVO> getFoodNamesByUsingFoodKind(String food_kind);
+
+	// 사용자 - 세션에 접속한 사용자의 정보룰 가져오기
+	public UsersVO getUserInfoByUsingId(String username);
+
+	// 사용자 - 사용자가 입력했던 음식 칼로리 값들 가져오기
+	public String getKcalInfo(Map<String, String> map);
+
+	// 사용자 - 사용자가 입력 폼에 입력한 음식 정보 입력하기
+	public int insertUserFood(Map<String, String> map);
+
+	// 사용자 - 칼로리 테이블에 입력된 회원의 일주일 간 칼로리 정보 가져오기
+	public List<KcalVO> getUserKcalInfo(Map<String, String> map);
+
+	// 안드로이드 - 음식 이름으로 음식 정보 가져오기
+	public FoodVO getFoodInfoByUsingFoodName(Map<String, String> map);
+
+	// 안드로이드 - 메인화면에 띄울 칼로리 정보 가져오기
+	public List<KcalVO> getTodayKcalInfo(String username);
+	// == 동렬 종료
 	
 	
 	
@@ -82,10 +85,29 @@ public interface HellsCareDAO {
 	public int delchall(Map<String, Object> map);
 	//도전과제 유무 체크
 	public int challcheck2(String id);
+	
+
 	//==규진 종료
 		
-	//이나현	
-	//회원가입 시 아이디 중복확인 처리
+	// 아이디 찾기 시 이름 & 이메일 체크
+		public int chkCnt(Map<String, Object> map);
+		
+		// 아이디 찾기 시 아이디 반환
+		public String getUsername(Map<String, Object> map);
+		
+		//아이디 찾기 _ 이메일로 아이디보내기 
+	    public void sendmail(String email, String username); 
+	  
+		// 비밀번호 찾기 시 아이디 & 이메일 체크
+		public int pChkCnt(Map<String, Object> map);
+
+		// 비밀번호 찾기 시  이메일로 보낼 비밀번호 반환
+		public void updatePw(Map<String, String> map2);
+		
+		//비밀번호 찾기 _ 이메일로 비밀번호 보낸 후 비밀번호 암호화 
+		public void sendmail2(String email, String rdpw); 
+		
+		//회원가입 시 아이디 중복확인 처리
 		public int idCheck(String strId);
 		
 		//회원가입처리_INSERT INTO USERS
@@ -94,10 +116,8 @@ public interface HellsCareDAO {
 		//회원가입처리_INSERT INTO AUTHORITIES
 		public int regUser1(Map<String, Object> Amap);
 
-		//회원가입 시 이메일인증  
-	            	public void sendmail(String email, String key); 
-	    
-	   	 // 권한 핸들러_  회원 상세 정보 
+		  
+	    // 권한 핸들러_  회원 상세 정보 
 	 	public Map<String, String> selectUser(String username); 
 	 		
 	 	// 마이페이지 회원정보 수정시 비밀번호 체크
@@ -113,10 +133,9 @@ public interface HellsCareDAO {
 		public int userModifyPro(UsersVO vo);
 				
 		// 회원탈퇴 처리
-		public int deleteMember(String username);	
-		//이나현 끝
+		public int deleteMember(String username);
 		
-		
+		//==나현 종료
 		
 		
 //==============host DAO부분
@@ -139,44 +158,59 @@ public interface HellsCareDAO {
 		// ===== 관리자 =====
 			// 질병정보갯수
 			public int getDiseaseCount();
+
 			// 질병정보 목록 구하기
 			public List<DiseaseVO> getDiseaseList(Map<String, Object> map);
+
 			// 질병정보 상세 페이지
-			public DiseaseVO getDisease(String disease_code);	
+			public DiseaseVO getDisease(String disease_code);
+
 			// 질병코드중복체크
 			public int diseaseCodeCheck(String disease_code);
+
 			// 질병 정보 등록
 			public int insertDisease(DiseaseVO vo);
+
 			// 질병 정보 수정
 			public int updateDisease(DiseaseVO vo);
+
 			// 질병 정보 삭제
 			public int deleteDisease(String disease_code);
+
 			// 회원수 구하기
 			public int getUserCnt();
+
 			// 회원리스트
 			public List<UsersVO> getUserList(Map<String, Object> map);
+
 			// 회원성별차트
 			public Map<String, Integer> getGenderChart();
+
 			// 최근가입회원
 			public List<UsersVO> recentJoinUser();
+
 		// ===== 유저 =====
 			// 건강정보가 있는지 확인
 			public int checkUserInfo(String username);
+
 			// 건강정보 불러오기
 			public UserInfoVO getUserInfo(String username);
+
 			// 건강정보 입력
 			public int insertUserInfo(UserInfoVO vo);
+
 			// 건강정보 수정
 			public int updateUserInfo(UserInfoVO vo);
+
 		// ===== 안드로이드 =====
 			// 로그인 정보체크
-			public String confirmId(String username); 
-			// 비밀번호 조회
-			public String getPwd(String username);
-			// 비밀번호 조회
+			public String confirmId(String username);
+
+			// 회원정보
 			public UsersVO getMemberInfo(String username);
 		// 재관 종료
-			public int deleteUser(String username);
+			
+	
 		
 	// ==한결 시작
 		//한결 ==============================
@@ -259,214 +293,210 @@ public interface HellsCareDAO {
 		
 		
 		
-		//==예찬 시작
-				// 관리자 - 운동등록처리
-				public int insertExercise(ExerciseVO vo);
+	// ==예찬 시작
+	// 관리자 - 운동등록처리
+	public int insertExercise(ExerciseVO vo);
 
-				// 관리자 - 운동 개수구하기
-				public int getexerciseArticleCnt();
+	// 관리자 - 운동 개수구하기
+	public int getexerciseArticleCnt();
 
-				// 운동 - 스트레칭 개수구하기
-				public int getArticleCntSt();
+	// 운동 - 스트레칭 개수구하기
+	public int getArticleCntSt();
 
-				// 운동 - 유산소운동 개수구하기
-				public int getArticleCntDi();
+	// 운동 - 유산소운동 개수구하기
+	public int getArticleCntDi();
 
-				// 관리자 - 운동목록
-				public List<ExerciseVO> getexerciseList(Map<String, Integer> map);
+	// 관리자 - 운동목록
+	public List<ExerciseVO> getexerciseList(Map<String, Integer> map);
 
-				// 운동목록 - 스트레칭
-				public List<ExerciseVO> getstretching(Map<String, Integer> map);
+	// 운동목록 - 스트레칭
+	public List<ExerciseVO> getstretching(Map<String, Integer> map);
 
-				// 운동목록 - 유산소운동
-				public List<ExerciseVO> getdiet(Map<String, Integer> map);
+	// 운동목록 - 유산소운동
+	public List<ExerciseVO> getdiet(Map<String, Integer> map);
 
-				// 관리자 - 운동삭제
-				public int deleteExercise(String exercise_code);
+	// 관리자 - 운동삭제
+	public int deleteExercise(String exercise_code);
 
-				// 관리자 - 운동수정 뷰
-				public ExerciseVO getExercise(String exercise_code);
+	// 관리자 - 운동수정 뷰
+	public ExerciseVO getExercise(String exercise_code);
 
-				// 관리자 - 운동수정처리
-				public int modifyPro(ExerciseVO vo);
+	// 관리자 - 운동수정처리
+	public int modifyPro(ExerciseVO vo);
 
-				// 운동 - 상세페이지
-				public ExerciseVO detailExercise(String exercise_code);
+	// 운동 - 상세페이지
+	public ExerciseVO detailExercise(String exercise_code);
 
-				// 운동 - 즐겨찾기 추가
-				public int addFavorit(Map<String, Object> map);
+	// 운동 - 즐겨찾기 추가
+	public int addFavorit(Map<String, Object> map);
 
-				// 운동 - 부위별 목록
-				public List<ExerciseVO> getPartList(String part);
-				
-				// 운동 - 부위별 목록 여부
-				public int getPartCnt(String part);
-				
-				// 즐겨찾기 여부
-				public int getFavoriteCnt(String username);
-				
-				// 동호회 - 동호회명 중복체크
-				public int clubNameCheck(String club_id);
-				
-				// 즐겨찾기 - 해당아이디에 즐겨찾기 여부
-				public int favoritCnt(Map<String, Object> map);
-				
-				// 즐겨찾기한 코드값
-				public String favoritCode(Map<String, Object> map);
-				
-				// 즐겨찾기 삭제 - 버튼
-				public int removeFavorit(String favorite_code);
-				
-				// 즐겨찾기 목록
-				public List<ExerciseVO> getFavoriteList(String username);
-				
-				// 즐겨찾기 - 해당 운동코드에 맞는 운동정보
-				public ExerciseVO getExerciseInfo(Map<String,Object> map);
-				
-				// 즐겨찾기 삭제 - 사용자
-				public int deletefavorite(String favorite_code);
+	// 운동 - 부위별 목록
+	public List<ExerciseVO> getPartList(String part);
 
-				// 동호회 - 개설신청
-				public int addClubApply(ClubVO vo);
-				
-				// 관리자 - 동호회 개설승인 / 거절
-				public List<ClubVO> getClubList(Map<String, Object> map);
-				
-				// 동호회 - 개수구하기
-				public int getClubCnt();
-				
-				// 관리자 - 동호회 상세페이지
-				public ClubVO clubDetail(String club_name);
-				
-				// 관리자 - 동호회 신청 삭제
-				public int deleteApplyClub(String club_name);
-				
-				// 관리자 - 동호회 신청 승인
-				public int clubPermit(String club_name);
-				
-				// 동호회 - 목록
-				public List<ClubVO> getClub_List(Map<String,Object> map);
-				
-				// 동호회 - 개수구하기
-				public int getClub_Cnt(String username);
-				
-				// 동호회 - 상세페이지
-				public ClubVO getClub(String club_name);
-				
-				// 동호회 - 로그인한 회원이 동호회원인지 여부
-				public int getMember(Map<String,Object> map);
-				
-				// 관리자 - 개설된 동호회 개수
-				public int getExistenceClubCnt();
-				
-				// 관리자 - 개설된 동호회 목록
-				public List<ClubVO> getExistenceClubList(Map<String, Object> map);
-				
-				// 동호회 - 내가 가입한 동호회 개수
-				public int getMyClubCnt(String username);
-				
-				// 동호회 - 내가 가입한 동호회 목록
-				public MyClubVO getMyClubList(String username);
-				
-				// 동호회 - 내가 가입한 동호회 목록 정보 
-				public ClubVO getMy_ClubList(String club_name);
-				
-				// 동호회 - 동호회 가입신청
-				public int applyClub(Map<String, Object> map);
-				
-				// 동호회 - 중복 가입신청방지
-				public int clubWhether(Map<String, Object> map);
-				
-				// 동호회 - 최대3곳만 가입가능하도록 설정
-				public int getJoinClubCnt(String username);
-				
-				// 동호회 - 가입신청 동호회 목록
-				public List<ClubVO> getApplyList(String username);
-				
-				// 동호회 - 대표자 클럽개수확인
-				public String getClubMaster(String club_name);
-				
-				// 첫번째 동호회 없을시 첫번째 업데이트
-				public void add_Club1(Map<String, Object> map);
-				
-				// 동호회 - 첫번째
-				public void addClub1(Map<String,Object> map);
-				
-				// 동호회 - 두번째
-				public void addClub2(Map<String, Object> map);
-				
-				// 동호회 - 세번째
-				public void addClub3(Map<String, Object> map);
-				
-				// 내가 신청한 동호회 목록 개수
-				public int applyCnt(String username);
-				
-				// 동호회 - 가입시 현재인원 증가
-				public void plusMember(String club_name);
-				
-				// ==예찬 종료
+	// 운동 - 부위별 목록 여부
+	public int getPartCnt(String part);
 
-				// 동호회 - 가입신청목록 삭제
-				public int deleteApply(String apply_code);
-				
-				// 동호회 - 신청삭제시 동호회테이블삭제
-				public void deleteClub(String club_name);
-				
-				// 동호회 - 현재인원
-				public int getCurrentMember(String club_name);
-				
-				// 동호회 - 현재인원목록
-				public List<UsersVO> getMemberList(Map<String, Object> map);
-				
-				// 동호회 - 회원탈퇴 1번째 동호회일경우
-				public int removeClub1(String username);
-				
-				// 동호회 - 회원탈퇴 2번째 동호회일경우
-				public int removeClub2(String username);
-				
-				// 동호회 - 회원탈퇴 3번째 동호회일경우
-				public int removeClub3(String username);
-				
-				// 동호회 - 삭제시 필요한 아이디
-				public List<UsersVO> getUserName(String club_name);
+	// 즐겨찾기 여부
+	public int getFavoriteCnt(String username);
 
-				// 동호회 - 해당동호회 가입신청목록
-				public List<UsersVO> getClubApply(Map<String,Object> map);
+	// 동호회 - 동호회명 중복체크
+	public int clubNameCheck(String club_id);
 
-				// 동호회 - 해당동호회 신청수
-				public int clubApplyCnt(String club_name);
+	// 즐겨찾기 - 해당아이디에 즐겨찾기 여부
+	public int favoritCnt(Map<String, Object> map);
 
-				// 동호회 - 최대인원수
-				public int getMax(String club_name);
+	// 즐겨찾기한 코드값
+	public String favoritCode(Map<String, Object> map);
 
-				// 동호회 - 현재인원수
-				public int getCurrent(String club_name);
+	// 즐겨찾기 삭제 - 버튼
+	public int removeFavorit(String favorite_code);
 
-				// 동호회 - 탈퇴시 인원감소
-				public void minusMember(String club_name);
+	// 즐겨찾기 목록
+	public List<ExerciseVO> getFavoriteList(String username);
 
-				// 동호회 - 동호회 게시판 개수
-				public int getClubBoardCnt(String club_name);
+	// 즐겨찾기 - 해당 운동코드에 맞는 운동정보
+	public ExerciseVO getExerciseInfo(Map<String, Object> map);
 
-				// 동호회 - 동호회 게시판 목록
-				public List<ClubBoardVO> getClubBoardList(String club_name);
+	// 즐겨찾기 삭제 - 사용자
+	public int deletefavorite(String favorite_code);
 
-				// 동호회 - 동호회 게시판 글쓰기 처리
-				public int insertClubBoard(ClubBoardVO vo);
+	// 동호회 - 개설신청
+	public int addClubApply(ClubVO vo);
 
-				// 동호회 - 동호회 게시판 글삭제 처리
-				public int deleteClubBoard(String club_board_code);
+	// 관리자 - 동호회 개설승인 / 거절
+	public List<ClubVO> getClubList(Map<String, Object> map);
 
-				// 동호회 - 동호회 게시판 글 상세페이지
-				public ClubBoardVO getBoardDetail(String club_board_code);
-								
-				// 동호회 - 상세페이지 들어갈때마다 조회수 증가
-				public void plusReadCnt(String club_board_code);
+	// 동호회 - 개수구하기
+	public int getClubCnt();
 
-				// 동호회 - 동호회 게시글 수정처리
-				public int updateClubCnt(ClubBoardVO vo);
+	// 관리자 - 동호회 상세페이지
+	public ClubVO clubDetail(String club_name);
 
+	// 관리자 - 동호회 신청 삭제
+	public int deleteApplyClub(String club_name);
 
+	// 관리자 - 동호회 신청 승인
+	public int clubPermit(String club_name);
+
+	// 동호회 - 목록
+	public List<ClubVO> getClub_List(Map<String, Object> map);
+
+	// 동호회 - 개수구하기
+	public int getClub_Cnt(String username);
+
+	// 동호회 - 상세페이지
+	public ClubVO getClub(String club_name);
+
+	// 동호회 - 로그인한 회원이 동호회원인지 여부
+	public int getMember(Map<String, Object> map);
+
+	// 관리자 - 개설된 동호회 개수
+	public int getExistenceClubCnt();
+
+	// 관리자 - 개설된 동호회 목록
+	public List<ClubVO> getExistenceClubList(Map<String, Object> map);
+
+	// 동호회 - 내가 가입한 동호회 개수
+	public int getMyClubCnt(String username);
+
+	// 동호회 - 내가 가입한 동호회 목록
+	public MyClubVO getMyClubList(String username);
+
+	// 동호회 - 내가 가입한 동호회 목록 정보
+	public ClubVO getMy_ClubList(String club_name);
+
+	// 동호회 - 동호회 가입신청
+	public int applyClub(Map<String, Object> map);
+
+	// 동호회 - 중복 가입신청방지
+	public int clubWhether(Map<String, Object> map);
+
+	// 동호회 - 최대3곳만 가입가능하도록 설정
+	public int getJoinClubCnt(String username);
+
+	// 동호회 - 가입신청 동호회 목록
+	public List<ClubVO> getApplyList(String username);
+
+	// 동호회 - 대표자 클럽개수확인
+	public String getClubMaster(String club_name);
+
+	// 첫번째 동호회 없을시 첫번째 업데이트
+	public void add_Club1(Map<String, Object> map);
+
+	// 동호회 - 첫번째
+	public void addClub1(Map<String, Object> map);
+
+	// 동호회 - 두번째
+	public void addClub2(Map<String, Object> map);
+
+	// 동호회 - 세번째
+	public void addClub3(Map<String, Object> map);
+
+	// 내가 신청한 동호회 목록 개수
+	public int applyCnt(String username);
+
+	// 동호회 - 가입시 현재인원 증가
+	public void plusMember(String club_name);
+
+	// 동호회 - 가입신청목록 삭제
+	public int deleteApply(String apply_code);
+
+	// 동호회 - 신청삭제시 동호회테이블삭제
+	public void deleteClub(String club_name);
+
+	// 동호회 - 현재인원
+	public int getCurrentMember(String club_name);
+
+	// 동호회 - 현재인원목록
+	public List<UsersVO> getMemberList(Map<String, Object> map);
+
+	// 동호회 - 회원탈퇴 1번째 동호회일경우
+	public int removeClub1(String username);
+
+	// 동호회 - 회원탈퇴 2번째 동호회일경우
+	public int removeClub2(String username);
+
+	// 동호회 - 회원탈퇴 3번째 동호회일경우
+	public int removeClub3(String username);
+
+	// 동호회 - 삭제시 필요한 아이디
+	public List<UsersVO> getUserName(String club_name);
+
+	// 동호회 - 해당동호회 가입신청목록
+	public List<UsersVO> getClubApply(Map<String, Object> map);
+
+	// 동호회 - 해당동호회 신청수
+	public int clubApplyCnt(String club_name);
+
+	// 동호회 - 최대인원수
+	public int getMax(String club_name);
+
+	// 동호회 - 현재인원수
+	public int getCurrent(String club_name);
+
+	// 동호회 - 탈퇴시 인원감소
+	public void minusMember(String club_name);
+
+	// 동호회 - 동호회 게시판 개수
+	public int getClubBoardCnt(String club_name);
+
+	// 동호회 - 동호회 게시판 목록
+	public List<ClubBoardVO> getClubBoardList(String club_name);
+
+	// 동호회 - 동호회 게시판 글쓰기 처리
+	public int insertClubBoard(ClubBoardVO vo);
+
+	// 동호회 - 동호회 게시판 글삭제 처리
+	public int deleteClubBoard(String club_board_code);
+
+	// 동호회 - 동호회 게시판 글 상세페이지
+	public ClubBoardVO getBoardDetail(String club_board_code);
+
+	// 동호회 - 상세페이지 들어갈때마다 조회수 증가
+	public void plusReadCnt(String club_board_code);
+
+	// 동호회 - 동호회 게시글 수정처리
+	public int updateClubCnt(ClubBoardVO vo);
 
 	// ==예찬 종료
 		

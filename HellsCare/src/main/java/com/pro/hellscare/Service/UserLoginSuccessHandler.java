@@ -16,51 +16,51 @@ import com.pro.hellscare.VO.UserVO;
 public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	// 로그인이 성공한 경우에 실행할 코드 
-	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
-		System.out.println("UserLoginSuccessHandler");
-		// 로그인이 성공한 경우에 실행할 코드
-		
-		UserVO vo = (UserVO)authentication.getPrincipal();
-		System.out.println("UserVO ==> " + vo);
-		
-		String msg = authentication.getName() + "님 환영합니다.";
-		request.setAttribute("msg", msg);
-		String memId = authentication.getName();
-		request.getSession().setAttribute("memId", memId);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("main2");
-		if(memId.equals("host")) {
-			rd = request.getRequestDispatcher("host_main");
+		@Override
+		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+				Authentication authentication) throws IOException, ServletException {
+			System.out.println("UserLoginSuccessHandler");
+			// 로그인이 성공한 경우에 실행할 코드
+			
+			UserVO vo = (UserVO)authentication.getPrincipal();
+			System.out.println("UserVO ==> " + vo);
+			
+			String msg = authentication.getName() + "님 환영합니다.";
+			request.setAttribute("msg", msg);
+			String memId = authentication.getName();
+			request.getSession().setAttribute("memId", memId);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("main");
+			if(memId.equals("host")) {
+				rd = request.getRequestDispatcher("/host_main");
+			}
+			rd.forward(request, response);
+			
+			
+			//파라미터 authentication이용 
+		/*
+		  System.out.println("UserVO ==> " + authentication.getName() );
+		  
+		  String viewpage = "";
+		  
+		  if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+		  
+		  // 관리자 로그인 성공 시 이동 페이지 
+		  request.getSession().setAttribute("memId", authentication.getName()); 
+		  viewpage="/WEB-INF/views/host/host_main.jsp";
+		  }else { 
+		  request.getSession().setAttribute("memId", authentication.getName());
+		  
+		  // 회원 로그인 성공 시 이동 페이지 
+		  viewpage="/WEB-INF/views/index.jsp";
+		  System.out.println(viewpage);
+		  
+		  }
+		  
+		  RequestDispatcher rd = request.getRequestDispatcher(viewpage);
+		  rd.forward(request, response);
+		 */
 		}
-		rd.forward(request, response);
-		
-		
-		//파라미터 authentication이용 
-	/*
-	  System.out.println("UserVO ==> " + authentication.getName() );
-	  
-	  String viewpage = "";
-	  
-	  if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-	  
-	  // 관리자 로그인 성공 시 이동 페이지 
-	  request.getSession().setAttribute("memId", authentication.getName()); 
-	  viewpage="/WEB-INF/views/host/host_main.jsp";
-	  }else { 
-	  request.getSession().setAttribute("memId", authentication.getName());
-	  
-	  // 회원 로그인 성공 시 이동 페이지 
-	  viewpage="/WEB-INF/views/index.jsp";
-	  System.out.println(viewpage);
-	  
-	  }
-	  
-	  RequestDispatcher rd = request.getRequestDispatcher(viewpage);
-	  rd.forward(request, response);
-	 */
-	}
 		
 
 }

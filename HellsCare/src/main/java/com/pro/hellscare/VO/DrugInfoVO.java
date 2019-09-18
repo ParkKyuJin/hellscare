@@ -1,15 +1,15 @@
 package com.pro.hellscare.VO;
 
 public class DrugInfoVO {
-	private String item_seq; // 품목일련번호
-	private String item_name; // 품목명
-	private String entp_name; // 업체명
-	private String drug_shape; // 모양
-	private String color_class1; // 색상
-	private String form_code_name; // 정제
-	private String leng_long; // 장축
-	private String leng_short; // 단축
-	private String thick; // 두께
+	private String item_seq; 		// 품목일련번호
+	private String item_name; 		// 품목명
+	private String entp_name; 		// 업체명
+	private String drug_shape; 		// 모양
+	private String color_class1; 	// 색상
+	private String form_code_name; 	// 정제
+	private String leng_long; 		// 장축
+	private String leng_short; 		// 단축
+	private String thick; 			// 두께
 	
 	// 생성자
 	public DrugInfoVO() {}

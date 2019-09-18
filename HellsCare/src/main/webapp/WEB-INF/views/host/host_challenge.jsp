@@ -7,7 +7,7 @@
 		  <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 목록</b></h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
-          <div class="col-lg-8" style="margin:0px 0px 0px 300px;">
+          <div class="col-md-12" >
        
             <div class="form-panel">
             
@@ -25,8 +25,8 @@
 							</tr>
                 </thead>
                 <form class="form-horizontal style-form" method="post">
-            <c:forEach var="dto" items="${dtos}"> 
-           
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+            <c:forEach var="dto" items="${dtos}">
 				  <tbody>
                   <tr>
                   <th valign="middle"><input  type="checkbox" name="challenge_check" value="${dto.challenge_code}"></th>
