@@ -14,7 +14,6 @@
 
 	<!-- Stylesheets
 	============================================= -->
-	<%@ include file="../include/setting.jsp" %>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<!-- DatePicker CSS -->
@@ -73,7 +72,7 @@
 									<input type="hidden" name="qna_code" value="${qto.qna_code}">
 									<input type="hidden" name="username" value="${qto.username}">
 									<input type="hidden" name="qna_password" value="${qto.qna_password}">
-									<input type="hidden" name="jobs-application-message" value="${qto.content}">
+									
 									<div class="col-7 form-group">
 										<label>제목:</label>
 										<input type="text" name="title" id="title" class="form-control required" value="${qto.title}" placeholder="제목 입력">
@@ -81,7 +80,7 @@
 									
 									<div class="col-5 bottommargin-sm">
 										<label for="template-contactform-default-select">문의 유형:</label>
-										<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control valid">
+										<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control valid" required="required">
 											<option value="" disabled="" selected="">문의 유형</option>
 											<option value="개인정보 문의">개인정보 문의</option>
 											<option value="건강정보 문의">건강정보 문의</option>
@@ -96,13 +95,13 @@
 										<div class="row">
 											<div class="col-md-3 form-group">
 												<label>작성자:</label>
-												<input type="text" name="username" id="username" class="form-control required" value="${username}" disabled="disabled">
+												<input type="text" name="username" id="username" class="form-control required" value="${qto.username}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-3 form-group">
 												<label>비밀번호:</label>
 												<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
-												<input type="password" name="qna_password" id="qna_password" class="form-control required" value="${qna_password}" disabled="disabled">
+												<input type="password" name="qna_password" id="qna_password" class="form-control required" value="${qto.qna_password}" disabled="disabled">
 											</div>
 											
 											<div class="col-md-6 form-group">
@@ -113,9 +112,10 @@
 											<div class="w-100"></div>
 										</div>
 										
-										<div class="form-group">
+										<div class="form-group">${qto.content}
 											<label>내용:</label>
-											<textarea name="jobs-application-message" id="jobs-application-message" class="form-control required" cols="30" rows="10">${qto.content}</textarea>
+											
+											<textarea name="jobs-application-message" id="jobs-application-message" class="form-control required" cols="30" rows="10"></textarea>
 										</div>
 										<!-- <div class="form-group">
 											<label>파일 업로드:</label>

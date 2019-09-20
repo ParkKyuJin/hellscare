@@ -38,7 +38,7 @@
             <h4 class="title">공지사항 작성</h4>
             <div id="message"></div>
             <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
-
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
               <div class="form-group">
                 <input type="text" name="subject" class="form-control" id="contact-subject" placeholder="제목" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
                 <div class="validate"></div>

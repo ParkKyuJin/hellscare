@@ -63,15 +63,15 @@
 		============================================= -->
 		<section id="content">
 
-			<div class="content-wrap">
+			<div class="content-wrap" align="center">
 
-				<div class="container clearfix">
+				<div class="container clearfix" align="center">
 
 				
 					<form action="qna_detail" method="post" >
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="col-md-3 form-group">
-							<label>비밀번호:</label>
+							<label>비밀번호 입력</label>
 							<input type="hidden" name="qna_code" value="${qna_code}">
 							<!-- <input type="text" name="username" id="username" class="form-control required" value="" disabled="disabled" placeholder=""> -->
 							<input type="password" name="qna_password" id="qna_password" class="form-control required" value="" placeholder="">

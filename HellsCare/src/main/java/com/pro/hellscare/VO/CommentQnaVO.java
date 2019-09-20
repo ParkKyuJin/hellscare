@@ -7,8 +7,8 @@ public class CommentQnaVO {
 	private int qna_code;		//원글번호
 	private String username;  //작성자
 	private String content; //글내용
-
 	private Date comment_date;	//작성일
+	
 	private int rNum;
 	
 	

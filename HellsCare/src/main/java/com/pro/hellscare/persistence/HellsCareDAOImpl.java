@@ -142,7 +142,10 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		
 		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challcheck2",id);
 	}
-
+	@Override
+	public UserInfoVO Userhealthss(String username) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.Userhealthss",username);
+	}
 	
 	//==규진파트 종료
 	
@@ -697,6 +700,20 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	// ==예찬 종료
 	// ========================================
 		//==한결 시작
+	@Override
+	public List<BoardQnaVO> QnAHosts(int qna_code) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.QnAHosts",qna_code);
+	}
+
+
+	
+		//댓글만 삭제
+		@Override
+		public int cDelete(String c_code) {
+			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.cDelete",c_code);
+	
+		}
+		
 		//게시글 갯수 조회
 		@Override
 		public int getBoardCnt() {
@@ -778,6 +795,7 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		//QnA 수정 처리
 		@Override
 		public int qnaUpdate(BoardQnaVO vo) {
+			
 			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.qnaUpdate", vo);
 		}
 
@@ -851,7 +869,19 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		public int getmyArticleCnt(String username) {
 			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getmyArticleCnt", username);
 		}
-
+		//QnA 답변
+		@Override
+		public int QnAAnswer(Map<String, Object> map) {
+			
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.QnAAnswer",map);
+		}
+		//Qna상태변경
+		@Override
+		public int Qnastate(int qna_code) {
+			
+			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.Qnastate",qna_code);
+		}
+		
 //		//공지사항 수정 처리
 //		@Override
 //		public int noticeUpdate(BoardVO vo) {
@@ -1088,6 +1118,21 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getTodayKcalInfo", username);
 	}
 	// ========== 동렬 파트 종료 ===============
-		
+
+
+
+	
+
+
+
+	
+
+
+
+
+	
+
+
+
 		
 }

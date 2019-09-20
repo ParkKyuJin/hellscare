@@ -120,5 +120,13 @@
 			return false;
 		}
 	</script>
+	<script type="text/javascript">
+	$(function() {
+		$("#all_check").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".remove").prop("checked", is_check);
+		});
+	});
+</script>
 </body>
 </html>

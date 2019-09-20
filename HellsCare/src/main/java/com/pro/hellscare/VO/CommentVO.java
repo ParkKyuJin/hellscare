@@ -7,7 +7,7 @@ public class CommentVO {
 	private int board_code;		//원글번호
 	private String username;  //작성자
 	private String content; //글내용
-
+	private int c_code; //댓글 고유코드
 	private Date comment_date;	//작성일
 	private int rNum;
 	
@@ -41,6 +41,12 @@ public class CommentVO {
 	}
 	public void setrNum(int rNum) {
 		this.rNum = rNum;
+	}
+	public int getC_code() {
+		return c_code;
+	}
+	public void setC_code(int c_code) {
+		this.c_code = c_code;
 	}
 	
 	

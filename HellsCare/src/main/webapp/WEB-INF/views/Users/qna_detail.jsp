@@ -77,7 +77,7 @@
 							
 						<form name="form1" action="qna_modi" method="post">	
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-							<input type="hidden" name="board_code" value="${dto.qna_code}">
+							<input type="hidden" name="qna_code" value="${dto.qna_code}">
 							<div class="entry clearfix">
 	
 								<!-- Entry Title
@@ -227,6 +227,64 @@
 		})
 	</script>
 	
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			
+			commentList();
+		
+		/* 	//게시글 삭제 버튼 클릭 이벤트
+			$("#bDelete").click(function(){
+				if(confirm("삭제하시겠습니까?")){
+					document.form1.action = "${pageContext.request.contextPath}/board_delete";
+					document.form1.submit();
+				}
+			});
+			
+			//게시글 수정 버튼 이벤트
+			$("#bUpdate").click(function(){
+				document.form1.action = "${pageContext.request.contextPath}/boardUpdate";
+			});
+			
+			//댓글 삭제 버튼 클릭 이벤트
+			$("#cDelete").click(function(){
+				if(confirm("삭제하시겠습니까?")){
+					document.form2.action = "${pageContext.request.contextPath}/commentDelete";
+					document.form2.submit();
+				}
+			});
+			
+			//댓글 수정 버튼 이벤트
+			$("#cUpdate").click(function(){
+				var content = $("#content").val();
+				
+				if(content == ""){
+					alert("내용을 입력하세요");
+					document.form2.content.focus();
+					return;
+				}
+				
+				document.form2.action="${pageContext.request.contextPath}/commentUpdate";
+				document.form2.submit();
+			}); */
+			
+			function commentList(){
+				$.ajax({
+					type:"GET",
+					url:"${pageContext.request.contextPath}/QnAHosts?qna_code=${dto.qna_code}",
+					success:function(result){
+						
+						console.log(result);
+						
+						
+						$("#commentlist").html(result);
+					}
+				});
+			}
+		
+		});
+	</script>
+
 
 </body>
 </html>

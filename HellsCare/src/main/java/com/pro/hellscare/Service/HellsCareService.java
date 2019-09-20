@@ -26,7 +26,8 @@ public interface HellsCareService {
 	public void Mychallenge(HttpServletRequest req, Model model);
 	//내 도전과제 삭제
 	public void delchall(HttpServletRequest req, Model model);
-	
+	//로그인한 유저 건강정보 가져오기
+	public void Userhealthss(HttpServletRequest req, Model model);
 	//==규진 끝
 	
 	//====재관시작 : 유저
@@ -72,7 +73,10 @@ public interface HellsCareService {
 	//나현 종료==	
 		
 	//한결
-	
+		//댓글만 삭제
+		public void cDelete(HttpServletRequest req, Model model);
+		
+		
 		//글목록
 		public void boardList(HttpServletRequest req, Model model);
 		
@@ -129,6 +133,12 @@ public interface HellsCareService {
 
 		//notice modify pro
 		public void n_modify(HttpServletRequest req, Model model);
+		//호스트 QNA보기
+		public void host_qnaContent(HttpServletRequest req, Model model);
+		//호스트 QnA 답변등록
+		public void QnAAnswer(HttpServletRequest req, Model model);
+		
+		public void QnAHosts(HttpServletRequest req, Model model);
 	//한결 끝
 	
 	// 동렬 시작 ---------------

@@ -49,7 +49,7 @@
 
 				<div class="container clearfix">
 
-					<div class="form-widget">
+					<div>
 
 
 						<div class="row">

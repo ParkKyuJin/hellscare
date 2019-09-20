@@ -16,7 +16,7 @@ public class BoardQnaVO {
 	private int commentCnt;	//총댓글갯수
 	private String qna_password;
 	private String kind;
-	private int state;
+	private String state;
 	
 	public int getQna_code() {
 		return qna_code;
@@ -84,10 +84,10 @@ public class BoardQnaVO {
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
-	public int getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 	

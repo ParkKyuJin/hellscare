@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
     <%@ include file="../include/h_sidebarMenu.jsp" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="author" content="Dashboard">
-  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+<!--   <meta name="author" content="Dashboard"> -->
+<!--   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"> -->
+  <title>Dr.Care_HostMode</title>
 
   
 
@@ -35,42 +35,45 @@
    <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> 공지사항 작성</h3>
+        <h3><i class="fa fa-angle-right"></i> QNA 답변</h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
           <div class="col-lg-12 col-md-12 col-sm-12">
-            <h4 class="title">공지사항 작성</h4>
+            <h4 class="title">글 제목</h4>
             <div id="message"></div>
-            <form class="contact-form php-mail-form" role="form" action="contactform/contactform.php" method="POST">
-
+            <form class="contact-fo	rm php-mail-form" role="form" action="QnAAnswer" method="POST">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" name="qna_code" value="${dto.qna_code}">
               <div class="form-group">
-                <input type="text" name="subject" class="form-control" id="contact-subject" value="질문있습니ㅏㄷ." data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                <div class="form-control"  id="contact-message">${dto.title}</div>
                 <div class="validate"></div>
               </div>
-              
+               <h4 class="title">작성자</h4>
                <div class="form-group">
-                <input type="text" name="subject" class="form-control" id="contact-subject" value="짱구" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                <div class="form-control"  id="contact-message">${dto.username}</div>
                 <div class="validate"></div>
-              </div>
-
+                
+              </div> 
+               <h4 class="title">문의 내용</h4>
               <div class="form-group">
-                <textarea class="form-control" name="message" id="contact-message"  rows="5" data-rule="required" data-msg="Please write something for us">집에 언제 갈 수 있니ㅏ요</textarea>
+              	<div class="form-control"  id="contact-message">${dto.content}</div>
+                <div class="validate"></div>
+				</div>
+				<h2>답변작성</h2>
+              <div class="form-group">
+                <textarea class="form-control" name="message" id="contact-message"  rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
                 <div class="validate"></div>
               </div>
 
               <div class="loading"></div>
               <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-
+              <div class="sent-message">답변을 입력하기 전에 다시한번 확인해주세요!</div>
               <div class="form-send">
                 <button type="submit" class="btn btn-large btn-primary">답글 작성</button>
-               <button type="submit" class="btn btn-large btn-primary"><a href="host_board">취소</a></button>
+               <button type="button" class="btn btn-large btn-primary" onclick="window.history.back();">취소</a></button>
               </div>
-
             </form>
           </div>
-
-         
         </div>
         <!-- /row -->
 

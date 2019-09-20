@@ -182,11 +182,11 @@
 	/*생년월일 정규식  */
 	function birthChk() {
 
-		var bthReg = /^\d{4}-\d{1,2}-\d{2}$/;
+		var bthReg = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
 
 		var rs = bthReg.test(document.signupform.birth.value);
 		if (!rs) {
-			alert("1900-00-00형식으로 입력해주세요.");
+			alert("19910101(8자리)형식으로 입력해주세요.");
 			document.signupform.birth.value = "";
 			document.signupform.birth.focus();
 			return;

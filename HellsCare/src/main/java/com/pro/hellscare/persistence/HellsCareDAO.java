@@ -73,6 +73,8 @@ public interface HellsCareDAO {
 	
 	
 	//==규진 시작
+	//유저건강정보 가져오기
+	public UserInfoVO Userhealthss(String username);
 	//도전과제 검색
 	public List<challengeVO> challengesearch(String content);
 	//도전과제 담기
@@ -214,7 +216,10 @@ public interface HellsCareDAO {
 		
 	// ==한결 시작
 		//한결 ==============================
-		
+		//댓글만 삭제
+			public int cDelete(String c_code);
+			
+			
 				// 게시글 갯수 구하기 --몇건인지 
 				public int getBoardCnt();
 				
@@ -285,6 +290,12 @@ public interface HellsCareDAO {
 				//내 질문글 갯수
 				public int getmyArticleCnt(String username);
 
+				//Qna에 댓글달기
+				public int QnAAnswer(Map<String, Object> map);
+				//Qna답변시 QnA게시글 상태변경
+				public int Qnastate(int qna_code);
+				//사용자화면에서 Qna답변보기
+				public List<BoardQnaVO> QnAHosts(int qna_code);
 //				//공지사항 수정처리
 //				public int noticeUpdate(BoardVO vo);
 

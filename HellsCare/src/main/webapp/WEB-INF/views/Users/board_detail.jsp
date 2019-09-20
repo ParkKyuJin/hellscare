@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%> 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 
 
@@ -76,7 +75,7 @@
 							<!-- Single Post
 							============================================= -->
 							
-						<form name="form1" action="post">	
+						<form name="form1" method="post">	
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="board_code" value="${dto.board_code}">
 							<div class="entry clearfix">
@@ -118,8 +117,11 @@
 							<!-- 작성자와 접속자가 동일할 때 수정/삭제 가능 -->
 							<%-- <c:if test="${sessionScope.username == dto.username}">  --%>
 								<div style="float: right;">
-								<button type="button" class="btn btn-outline-info" id="bUpdate">수정</button>
-								<button type="button" class="btn btn-outline-info" id="bDelete">삭제</button>
+								<c:if test="${sessionScope.memId == dto.username }">
+								<button type="submit" class="btn btn-outline-info" id="bUpdate" formaction="board_modi">수정</button>
+								<button type="submit" class="btn btn-outline-info" id="bDelete" fromaction="board_delete">삭제</button>
+								</c:if>
+							
 								</div>
 							<%-- </c:if> --%>
 						</form>	
@@ -158,6 +160,7 @@
 
 									<form name="form3" class="clearfix" action="#" method="GET" id="commentform">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+											<input type="hidden" name="board_code" value="${dto.board_code}">
 										<div class="clear"></div>
 
 										<div class="col_full">
@@ -280,7 +283,7 @@
 			//게시글 삭제 버튼 클릭 이벤트
 			$("#bDelete").click(function(){
 				if(confirm("삭제하시겠습니까?")){
-					document.form1.action = "${pageContext.request.contextPath}/boardDelete";
+					document.form1.action = "${pageContext.request.contextPath}/board_delete";
 					document.form1.submit();
 				}
 			});

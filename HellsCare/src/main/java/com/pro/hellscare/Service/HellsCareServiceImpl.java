@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -886,8 +887,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 
 		@SuppressWarnings("deprecation")
 		String saveDir = req.getRealPath("/resources/images/food/");
-
-		String realDir = "C:\\Dev50\\workspace_spring\\HellsCare\\src\\main\\webapp\\resources\\images\\food\\";
+		
+		String realDir = "C:\\Users\\wovkf\\git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\images\\food\\";
 
 		try {
 			file.transferTo(new File(saveDir + file.getOriginalFilename()));
@@ -1712,6 +1713,14 @@ public class HellsCareServiceImpl implements HellsCareService {
 //규진 유저 서비스
 	
 	@Override
+	public void Userhealthss(HttpServletRequest req, Model model) {
+		String username=(String)req.getSession().getAttribute("memId");
+		UserInfoVO vo = dao.Userhealthss(username);
+		model.addAttribute("dto",vo);
+	}
+	
+	
+	@Override
 	public void challengesearch(HttpServletRequest req, Model model) {
 		String cc = req.getParameter("content");
 		List<challengeVO> list = dao.challengesearch(cc);
@@ -1988,8 +1997,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 
 						@SuppressWarnings("deprecation")
 						String saveDir = req.getRealPath("/resources/images/videos/");
-
-						String realDir = "C:\\Users\\park\\workspace_git\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\images\\videos\\";
+						
+						String realDir = "C:\\Users\\wovkf\\git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\images\\videos\\";
 
 						try {
 							file.transferTo(new File(saveDir + file.getOriginalFilename()));
@@ -3426,14 +3435,55 @@ public class HellsCareServiceImpl implements HellsCareService {
 		
 		//한결===========================================================
 		
+		@Override
+		public void QnAHosts(HttpServletRequest req, Model model) {
+		int  qna_code = Integer.parseInt(req.getParameter("qna_code"));
+		List<BoardQnaVO> vo = dao.QnAHosts(qna_code);
+		model.addAttribute("co",vo);
+		
+		}
+			
+					
+					
+		//답변등록
+		@Override
+		public void QnAAnswer(HttpServletRequest req, Model model) {
+			String username=(String)req.getSession().getAttribute("memId");
+			int  qna_code = Integer.parseInt(req.getParameter("qna_code"));
+			String content = req.getParameter("message");
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("username", username);
+			map.put("qna_code", qna_code);
+			map.put("content", content);
+			map.put("comment_date", new Timestamp(System.currentTimeMillis()));
+			int cnt = dao.QnAAnswer(map);
+			if(cnt==1) {
+				cnt = dao.Qnastate(qna_code);
+			}
+			model.addAttribute("cnt",cnt);
+			
+		}			
+								
+			//댓글만 삭제
+			@Override
+			public void cDelete(HttpServletRequest req, Model model) {
+				int board_code = Integer.parseInt(req.getParameter("board_code"));
+				String c_code = req.getParameter("c_code");	
+				int cnt = dao.cDelete(c_code);	
+				model.addAttribute("cnt",cnt);
+				model.addAttribute("board_code",board_code);
+			}
+
 		//게시글 목록
 		@Override
 		public void boardList(HttpServletRequest req, Model model) {
 			int b_cnt = 0; //글의 갯수
 			int q_cnt = 0; //qna 갯수
+			int n_cnt = 0; //공지사항
 			
 			b_cnt = dao.getBoardCnt();
 			q_cnt = dao.getQnaCnt();
+			n_cnt = dao.getnoticeCnt();
 			
 			System.out.println("게시글 갯수 : " + b_cnt);
 			
@@ -3445,7 +3495,10 @@ public class HellsCareServiceImpl implements HellsCareService {
 				List<BoardVO> dtos = dao.getArticleList();
 				model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
 				model.addAttribute(b_cnt);
-				
+				List<BoardVO> ntos = dao.getNoticeArticleList();
+				model.addAttribute("ntos",ntos);
+				model.addAttribute("n_cnt",n_cnt);	
+			
 			}
 			
 			if(q_cnt > 0) {
@@ -3494,6 +3547,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			
 			List<CommentVO> co = dao.getCommentList(board_code);
 			model.addAttribute("co", co);
+			
 		}
 
 		//게시글 작성 처리
@@ -3544,7 +3598,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			
 			//String username = SecurityContextHolder.getContext().getAuthentication().getName();
 			//String username = req.getRequestedSessionId();
-			String username = req.getParameter("username");
+			String username = (String)req.getSession().getAttribute("memId");
 			System.out.println("username : " + username);
 			
 			BoardVO vo = new BoardVO();
@@ -3567,8 +3621,13 @@ public class HellsCareServiceImpl implements HellsCareService {
 			CommentVO vo = new CommentVO();
 			
 			//vo.setUsername(username);
+			String username=(String)req.getSession().getAttribute("memId");
+			vo.setUsername(username);
 			vo.setBoard_code(board_code);
 			vo.setContent(req.getParameter("comment"));
+			System.out.println("댓글"+req.getParameter("comment"));
+			System.out.println("댓글"+username);
+			System.out.println("댓글"+board_code);
 			int commentInsert = dao.commentWrite(vo);
 			
 			System.out.println("댓글 등록: " + commentInsert);
@@ -3639,30 +3698,6 @@ public class HellsCareServiceImpl implements HellsCareService {
 			//String username = SecurityContextHolder.getContext().getAuthentication().getName();
 			String username = req.getParameter("username");
 			System.out.println("username : " + username);
-			
-//			MultipartFile file = req.getFile("jobs-application-resume");
-//			System.out.println("file : " + file);
-//			//임시 파일이 저장되는 논리적인 경로
-//			String saveDir = req.getSession().getServletContext().getRealPath("/resources/upload/");
-//			//업로드할 파일이 위치하게될 물리적인 경로
-//			String realDir = "C:\\프로그램\\workspace_mybatis\\spring_pj\\spring_PJ\\src\\main\\webapp\\resources\\upload\\";
-//			
-//			try {
-//				file.transferTo(new File(saveDir+file.getOriginalFilename()));
-//				
-//				FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
-//				FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
-//				int data = 0;
-//				while((data = fis.read()) != -1) {
-//					fos.write(data);
-//				}
-//				fis.close();
-//				fos.close();
-	//
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			
 			BoardVO vo = new BoardVO();
 			vo.setBoard_code(board_code);
 			vo.setTitle(req.getParameter("title"));
@@ -3700,6 +3735,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			
 			BoardQnaVO vo = new BoardQnaVO();
 			
+			vo.setQna_code(qna_code);
 			vo.setQna_password(req.getParameter("qna_password"));
 			System.out.println("비밀번호????"+req.getParameter("qna_password"));
 			vo.setTitle(req.getParameter("title"));
@@ -3708,7 +3744,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 			vo.setKind(req.getParameter("template-contactform-default-select"));
 			int qnaUpdateCnt = dao.qnaUpdate(vo);
 			
-			System.out.println("문의글 등록 : " + qnaUpdateCnt);
+			System.out.println("QNA수정 처리여부 : " + qnaUpdateCnt);
 			
 			model.addAttribute("qnaUpdateCnt", qnaUpdateCnt);
 
@@ -3780,80 +3816,91 @@ public class HellsCareServiceImpl implements HellsCareService {
 		}
 
 		//host 한결==========================start==========================================
-		
-		//공지사항 리스트
+		//호스트 QNA읽기
 		@Override
-		public void noticeList(HttpServletRequest req, Model model) {
-			int n_cnt = 0; //공지사항 갯수
-			
-			n_cnt = dao.getnoticeCnt();
-			
-			System.out.println("공지사항 갯수 : " + n_cnt);
-			
-			
-			if(n_cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
-				
-				System.out.println("공지사항 읽으러 옴");
-				
-				List<BoardVO> dtos = dao.getNoticeArticleList();
-				model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
-				model.addAttribute(n_cnt);
-				
-			}
-
-		}
-
-		//공지사항 보기
-		@Override
-		public void notice_contentForm(HttpServletRequest req, Model model) {
-			int board_code = Integer.parseInt(req.getParameter("board_code"));
-			
-			System.out.println("게시글 번호 : " + board_code);
-			
-			dao.addReadCnt(board_code);	//조회수 증가
-			
-			BoardVO vo = dao.getNoticeArticle(board_code);
+		public void host_qnaContent(HttpServletRequest req, Model model) {
+			int qna_code = Integer.parseInt(req.getParameter("qna_code"));
+			BoardQnaVO vo = dao.getQnaArticle(qna_code);
 			
 			model.addAttribute("dto", vo); //조회수는 vo가 가지고 있고 키 dto에 넘겨줌
-
 		}
 
-		//notice modify view
-		@Override
-		public void n_modify_view(HttpServletRequest req, Model model) {
-			int board_code = Integer.parseInt(req.getParameter("board_code"));
-			
-			System.out.println("수정할 공지사항 번호 : " + board_code);
-			//String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		
+		
+		
+		//공지사항 리스트
+				@Override
+				public void noticeList(HttpServletRequest req, Model model) {
+					int n_cnt = 0; //공지사항 갯수
+					
+					n_cnt = dao.getnoticeCnt();
+					
+					System.out.println("공지사항 갯수 : " + n_cnt);
+					
+					
+					if(n_cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
+						
+						System.out.println("공지사항 읽으러 옴");
+						
+						List<BoardVO> dtos = dao.getNoticeArticleList();
+						model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
+						model.addAttribute(n_cnt);
+						
+					}
 
-			BoardVO vo = dao.getNoticeArticle(board_code);
-			model.addAttribute("dto", vo);
-		}
+				}
 
-		//notice modify pro
-		@Override
-		public void n_modify(HttpServletRequest req, Model model) {
-			int board_code = Integer.parseInt(req.getParameter("board_code"));
-			//String username = req.getParameter("username");
-			//로그인 안되므로 하드코딩
-			String username = "hsot";
-			
-			System.out.println("board_code 번호 : " + board_code);
-			System.out.println("관리자 : " + username);
-			
-			BoardVO vo = new BoardVO();
-			
-			vo.setBoard_code(board_code);
-			vo.setTitle(req.getParameter("subject"));
-			vo.setUsername(username);                                                                  
-			vo.setContent(req.getParameter("message"));
-			int boardUpdate = dao.boardUpdate(vo);
-			
-			System.out.println("문의글 등록 : " + boardUpdate);
-			
-			model.addAttribute("boardUpdate", boardUpdate);
-			model.addAttribute("board_code", board_code);
-		}
+				//공지사항 보기
+				@Override
+				public void notice_contentForm(HttpServletRequest req, Model model) {
+					int board_code = Integer.parseInt(req.getParameter("board_code"));
+					
+					System.out.println("게시글 번호 : " + board_code);
+					
+					dao.addReadCnt(board_code);	//조회수 증가
+					
+					BoardVO vo = dao.getNoticeArticle(board_code);
+					
+					model.addAttribute("dto", vo); //조회수는 vo가 가지고 있고 키 dto에 넘겨줌
+
+				}
+
+				//notice modify view
+				@Override
+				public void n_modify_view(HttpServletRequest req, Model model) {
+					int board_code = Integer.parseInt(req.getParameter("board_code"));
+					
+					System.out.println("수정할 공지사항 번호 : " + board_code);
+					//String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+					BoardVO vo = dao.getNoticeArticle(board_code);
+					model.addAttribute("dto", vo);
+				}
+				//notice modify pro
+				@Override
+				public void n_modify(HttpServletRequest req, Model model) {
+					int board_code = Integer.parseInt(req.getParameter("board_code"));
+					//String username = req.getParameter("username");
+					//로그인 안되므로 하드코딩
+					String username = "hsot";
+					
+					System.out.println("board_code 번호 : " + board_code);
+					System.out.println("관리자 : " + username);
+					
+					BoardVO vo = new BoardVO();
+					
+					vo.setBoard_code(board_code);
+					vo.setTitle(req.getParameter("subject"));
+					vo.setUsername(username);                                                                  
+					vo.setContent(req.getParameter("message"));
+					int boardUpdate = dao.boardUpdate(vo);
+					
+					System.out.println("문의글 등록 : " + boardUpdate);
+					
+					model.addAttribute("boardUpdate", boardUpdate);
+					model.addAttribute("board_code", board_code);
+				}
 
 
 
@@ -4463,6 +4510,14 @@ public class HellsCareServiceImpl implements HellsCareService {
 			e.printStackTrace();
 		}
 	}
+
+	
+
+
+	
+
+
+
 
 	
 		

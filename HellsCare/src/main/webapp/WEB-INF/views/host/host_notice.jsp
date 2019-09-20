@@ -54,7 +54,7 @@
    
    <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Basic Table Examples</h3>
+        <h3><i class="fa fa-angle-right"></i> 공지사항 작성</h3>
         <div class="row">
           <!-- /col-md-12 -->
           <div class="col-md-12 mt">

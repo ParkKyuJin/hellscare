@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pro.hellscare.VO.BoardVO;
+import com.pro.hellscare.VO.CommentVO;
 import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
 import com.pro.hellscare.VO.FoodVO;
@@ -47,7 +48,7 @@ public class AndroidController {
 	// @ResponseBody   //맵에서 안드로이드로 값을 전달하기위한 어노테이션(Gson형식)
 	//return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
 	
-	
+// 재관 시작
 	// 로그인
 	@ResponseBody // spring에서 안드로이드로 데이터(json)를 보내기 위한 어노테이션
 	@RequestMapping("androidSignIn")
@@ -85,7 +86,7 @@ public class AndroidController {
 		
 		return out;
 	}
-	
+
 	// 질병정보목록
 	@ResponseBody
 	@RequestMapping("androidDiseaseList")
@@ -111,22 +112,9 @@ public class AndroidController {
 	
 		return map;
 	}	
-	
-	// 게시글목록
-	@ResponseBody
-	@RequestMapping("androidBoardList")
-	public Map<String, BoardVO> androidBoardList(HttpServletRequest req) {
-		logger.info("androidBoardList");
-		
-		// 게시글을 모두 조회
-		List<BoardVO> list = dao.getArticleList();
-		Map<String, BoardVO> map = new HashMap<String, BoardVO>();		
-		for(int i=0; i<list.size(); i++) {
-			
-			map.put("data"+i, list.get(i));
-		}	
-		return map;
-	}	
+// 재관 끝
+
+// 규진시작
 	@ResponseBody
 	@RequestMapping("androidMychall")
 	public Map<String,MychalleangeVO> androidMychall(HttpServletRequest req){
@@ -140,7 +128,7 @@ public class AndroidController {
 		}
 		return map;
 	}
-	
+// 규진끝	
 	
 	//동렬파트 시작==============
 	// 오늘의 칼로리 - 음식 분류에 맞는 음식 리스트 가져오기
@@ -818,5 +806,144 @@ public class AndroidController {
 		   }
 		
 		//예찬파트 끝
+		  
+// 한결시작
+	// 게시판목록
+	   @ResponseBody
+	   @RequestMapping("androidBoardList")
+	   public Map<String, BoardVO> androidBoardList(HttpServletRequest req) {
+	      logger.info("androidBoardList");
+
+	      // 게시글을 모두 조회
+	      List<BoardVO> list = dao.getArticleList();
+	      Map<String, BoardVO> map = new HashMap<String, BoardVO>();
+	      for (int i = 0; i < list.size(); i++) {
+	         System.out.println(list.get(i).getTitle());
+	         map.put("data" + i, list.get(i));
+	      }
+	      return map;
+	   }
+
+		   
+		   
+	//게시글 작성
+	@ResponseBody
+	@RequestMapping("androidBoardUpdate")
+	public Map<String, String> androidBoardUpdate(HttpServletRequest req) {
+		logger.info("androidBoardUpdate");
+		
+		String username = req.getParameter("id");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		System.out.println("작성자 : " + username + ", 제목 : " + title);
+		
+		BoardVO vo = new BoardVO();
+		vo.setTitle(title);
+		vo.setUsername(username);                                                                  
+		vo.setContent(content);
+		
+		String boardWriteCnt = String.valueOf(dao.boardWrite(vo));
+
+		Map<String, String> up = new HashMap<String, String>();
+		if(boardWriteCnt.equals("1")) {
+			logger.info("게시글 등록 성공");
+			up.put("boardWriteCnt", boardWriteCnt);
+		} else {
+			logger.info("게시글 등록 실패");
+			up.put("boardWriteCnt", boardWriteCnt);
+		}
+		return up;
+	}
+	
+	
+	//댓글 작성
+	@ResponseBody
+	@RequestMapping("androidCommentIN")
+	public Map<String, String> androidCommentIN(HttpServletRequest req) {
+		logger.info("androidCommentIN");
+		
+		int board_code = Integer.parseInt(req.getParameter("boardCode"));
+		String username = req.getParameter("username");
+		String content = req.getParameter("content");
+		System.out.println("작성자 : " + username);
+		
+		CommentVO vo = new CommentVO();
+		vo.setUsername(username);                                                                  
+		vo.setContent(content);
+		vo.setBoard_code(board_code);
+		
+		String commentInsert = String.valueOf(dao.commentWrite(vo));
+
+		Map<String, String> in = new HashMap<String, String>();
+		if(commentInsert.equals("1")) {
+			logger.info("댓글 등록 성공");
+			in.put("commentInsert", commentInsert);
+		} else {
+			logger.info("댓글 등록 실패");
+			in.put("commentInsert", commentInsert);
+		}
+		return in;
+	}
+
+	
+	//게시글 수정
+	@ResponseBody
+	@RequestMapping("androidBoardModify")
+	public Map<String, String> androidBoardModify(HttpServletRequest req) {
+		logger.info("androidBoardModify");
+		
+		String username = req.getParameter("id");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		int board_code = Integer.parseInt(req.getParameter("boardCode"));
+		System.out.println("작성자 : " + username + ", 제목 : " + title + ", 번호 : " + board_code);
+		
+		BoardVO vo = new BoardVO();
+		vo.setTitle(title);
+		vo.setUsername(username);                                                                  
+		vo.setContent(content);
+		vo.setBoard_code(board_code);
+		
+		String boardModiCnt = String.valueOf(dao.boardUpdate(vo));
+
+		Map<String, String> up = new HashMap<String, String>();
+		if(boardModiCnt.equals("1")) {
+			logger.info("게시글 수정 성공");
+			up.put("boardModiCnt", boardModiCnt);
+		} else {
+			logger.info("게시글 수정 실패");
+			up.put("boardModiCnt", boardModiCnt);
+		}
+		return up;
+	}
+	
+	
+	//게시글 삭제
+	@ResponseBody
+	@RequestMapping("androidBoardDelete")
+	public Map<String, String> androidBoardDelete(HttpServletRequest req) {
+		logger.info("androidBoardDelete");
+
+		int board_code = Integer.parseInt(req.getParameter("boardCode"));
+		System.out.println("삭제 글번호 : " + board_code);
+		
+		String boardDelCnt = String.valueOf(dao.b_delete(board_code));
+		
+		System.out.println("삭제 : " + boardDelCnt);
+		
+		Map<String, String> up = new HashMap<String, String>();
+		int comment_delete = 0;
+		if(boardDelCnt.equals("1")) {
+			comment_delete = dao.c_delete(board_code);
+			logger.info("게시글 삭제 성공");
+			up.put("boardDelCnt", boardDelCnt);
+		} else {
+			logger.info("게시글 삭제 실패");
+			up.put("boardDelCnt", boardDelCnt);
+		}
+		return up;
+	}
+// 한결끝
+			
 	
 }

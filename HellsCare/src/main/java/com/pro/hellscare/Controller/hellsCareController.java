@@ -61,7 +61,8 @@ public class hellsCareController {
 				return "Users/login_reg";
 			}
 			logger.info("URL ==> healthstate");
-			service.getUserHealthInfo(req, model);
+			
+		/* service.getUserHealthInfo(req, model); */
 			return "Users/healthstate";
 		}
 
@@ -72,7 +73,8 @@ public class hellsCareController {
 				return "Users/login_reg";
 			}
 			logger.info("URL ==> healthstateresult");
-			service.getUserHealthInfo(req, model);
+			service.Userhealthss(req, model);
+		/* service.getUserHealthInfo(req, model); */
 			return "Users/healthstateresult";
 		}
 		//이벤트 도전과제 페이지
@@ -321,8 +323,17 @@ public class hellsCareController {
 
 			return "Users/board_detail";
 		}
-
-		// 게시글 작성 폼
+		
+		// 댓글만 삭제 
+		@RequestMapping("cDelete")
+		public String cDelete(HttpServletRequest req, Model model) {
+	
+			logger.info("URL ==> board_detail");
+			service.cDelete(req, model);
+	
+			return "Users/commentdel";
+		}
+			// 게시글 작성 폼
 		@RequestMapping("writeForm")
 		public String writeForm(Locale locale, HttpServletRequest req, Model model) {
 
@@ -368,7 +379,7 @@ public class hellsCareController {
 			logger.info("URL ==> board_delete");
 			service.b_delete(req, model);
 	 
-			return "Users/board_delete";
+			return "redirect:boardList";
 		}
 		
 		//게시글 수정화면
@@ -391,11 +402,11 @@ public class hellsCareController {
 			return "redirect:board_detail";
 		}
 		
+		
 		// 댓글뷰 ajax->controller
 		@RequestMapping("commentList")
 		public String commentList(HttpServletRequest req, Model model) {
 			logger.info("URL ==> commentList");
-
 			service.commentList(req, model);
 			return "Users/commentList";
 		}
@@ -510,7 +521,13 @@ public class hellsCareController {
 			return "Users/stepsRank";
 		}
 		
-		
+		//사용자화면에서 Qna댓글 불러오기
+		@RequestMapping("QnAHosts")
+		public String QnAHosts(HttpServletRequest req, Model model) {
+			logger.info("URL ==> stepsRank");
+			service.QnAHosts(req, model);
+			return "Users/QnAHosts";
+		}
 		
 	//===한결 part - end	
 //한결 종료
@@ -1288,6 +1305,7 @@ public class hellsCareController {
 		public String host_qna(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!
 			logger.info("URL ==> host_qna");
+			service.boardList(req, model);
 			return "host/host_qna";
 		}
 		
@@ -1361,6 +1379,7 @@ public class hellsCareController {
 		public String host_qnaContent(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!
 			logger.info("URL ==> host_qnaContent");
+			service.host_qnaContent(req, model);
 			return "host/host_qnaContent";
 		}
 
@@ -1369,6 +1388,15 @@ public class hellsCareController {
 			// 로거 작성 필수!
 			logger.info("URL ==> notice_write");
 			return "host/notice_write";
+		}
+		
+		@RequestMapping("QnAAnswer")
+		public String QnAAnswer(HttpServletRequest req, Model model) {
+			// 로거 작성 필수!
+			logger.info("URL ==> QnAAnswer");
+			service.QnAAnswer(req, model);
+			service.boardList(req, model);
+			return "host/host_qna";
 		}
 		// ==한결 Part End==================================================
 	

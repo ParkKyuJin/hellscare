@@ -8,8 +8,8 @@
 <mapper namespace="com.pro.hellscare.persistence.HellsCareDAO">
     
     <!-- 규진 시작 -->
-    <select id="testDAO" resultType="com.pro.hellscare.VO.HellsCareVO">
-    	select username,name from users where name = '박규진'
+    <select id="Userhealthss" parameterType="String" resultType="com.pro.hellscare.VO.UserInfoVO">
+    	select * from users_info_tbl where username = #{username}
     </select>
     
     <select id="challengePro2" resultType="int" parameterType="java.util.Map" >
@@ -634,6 +634,11 @@
     
     <!-- 한결 시작 -->
    <!-- 게시글 수 -->
+   <!-- 댓글만 삭제 -->
+   <delete id="cDelete" parameterType="String">
+   	delete comment_board_tbl where c_code=#{c_code}
+   </delete>
+   
     <select id="getBoardCnt" resultType="int">
     	SELECT COUNT(*) as cnt FROM board_tbl 
     </select>
@@ -647,7 +652,7 @@
     
     <!-- 게시글 목록 -->
     <select id="getArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardVO">
-		SELECT board_code, username, title, content, readCnt, write_date, rownum as rNum,
+		SELECT board_code, username, title, content, readCnt, write_date, ROW_NUMBER() OVER(ORDER BY write_date DESC) as rNum,
 			(SELECT COUNT(*) FROM comment_board_tbl WHERE board_code = b.board_code) as commentCnt
 			FROM board_tbl b
 	</select>
@@ -667,16 +672,11 @@
 	
 	<!-- 댓글 -->
 	<select id="getCommentList" parameterType="int" resultType="com.pro.hellscare.VO.CommentVO">
-		SELECT username, content, comment_date
+		SELECT username, content, comment_date,board_code,c_code
 			FROM comment_board_tbl
 				WHERE board_code = #{board_code}
 	</select>
 	
-	<!-- 게시글 저장 -->
-	<!-- <insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
-		INSERT INTO board_tbl (board_code, username, title, content, board_image)
-			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content}, #{board_image})
-	</insert>  -->
 	<insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
 		INSERT INTO board_tbl (board_code, username, title, content)
 			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content})
@@ -685,7 +685,7 @@
 	<!-- 댓글 등록 -->
 	<insert id="commentWrite" parameterType="com.pro.hellscare.VO.CommentVO">
 		INSERT INTO comment_board_tbl (c_code, username, content, board_code)
-			VALUES (comment_seq.nextval, 'parkId', #{content}, #{board_code})
+			VALUES (comment_seq.nextval,#{username},#{content}, #{board_code})
 	</insert>
 	
 	<!-- 게시글 삭제 --> 
@@ -710,7 +710,7 @@
     
     <!-- QnA 목록 -->
     <select id="getQnaArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
-		SELECT qna_code, username, title, content, readCnt, qna_password, kind, qna_write_date, rownum as rNum,
+		SELECT qna_code, username, title, content, readCnt, qna_password, kind, qna_write_date,state, rownum as rNum,
 			(SELECT COUNT(*) FROM comment_qna_tbl WHERE qna_code = q.qna_code) as commentCnt
 			FROM board_qna_tbl q
 	</select>
@@ -745,7 +745,7 @@
     
     <!-- QnA글 수정 처리 -->
 	<update id="qnaUpdate" parameterType="com.pro.hellscare.VO.BoardQnaVO">
-		UPDATE board_qna_tbl SET title=#{title}, content=#{content}, kind=#{kind}, qna_password=#{qna_password} WHERE qna_code=#{qna_code}
+		UPDATE board_qna_tbl SET title=#{title}, content=#{content}, kind=#{kind} WHERE qna_code=#{qna_code}
 	</update>
 	
 	<!-- 공지사항 수 -->
@@ -780,9 +780,19 @@
     <select id="getmyArticleCnt" resultType="int">
     	SELECT COUNT(*) as cnt FROM board_qna_tbl WHERE username=#{username}
     </select>     
-
-
-
+	<!-- 관리자 QNA답변등록 -->
+	<insert id="QnAAnswer" parameterType="java.util.Map">
+		Insert into comment_qna_tbl(username,qna_code,content,comment_date) values(#{username},#{qna_code},#{content},#{comment_date}) 
+	</insert>
+	<!-- 사용자 QNA 상태변경 -->
+    <update id="Qnastate" parameterType="int">
+    	update board_qna_tbl SET state=1 where qna_code = #{qna_code}
+    </update>
+    
+    <select id="QnAHosts" parameterType="int" resultType="com.pro.hellscare.VO.CommentQnaVO">
+    	select username,qna_code,content,comment_date from comment_qna_tbl where qna_code = #{qna_code}
+    </select>
+    
     
     
     <!-- 한결 종료 -->

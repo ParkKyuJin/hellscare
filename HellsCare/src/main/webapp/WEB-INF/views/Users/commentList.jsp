@@ -5,8 +5,12 @@
 <body>
 
 	
-
+<form method="POST" name="commentform">
 	 <c:forEach var="com" items="${co}">
+	 
+	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="c_code" value="${com.c_code}">
+		<input type="hidden" name="board_code" value="${com.getBoard_code()}">
 		<li class="comment even thread-even depth-1" id="li-comment-1">
 
 			<div id="comment-1" class="comment-wrap clearfix">
@@ -31,10 +35,11 @@
 					<a class='comment-reply-link' href='#'><i class="icon-reply"></i></a>
 					
 					<%-- <c:if test="${sessionScope.username == com.username}"> --%>
+						<c:if test="${sessionScope.memId == com.username }">
 						<div style="float: right;">
-						<button type="button" class="btn btn-secondary btn-sm" id="cUpdate">수정</button>
-						<button type="button" class="btn btn-secondary btn-sm" id="cDelete">삭제</button>
+						<button type="submit" class="btn btn-secondary btn-sm" id="cDelete" formaction="cDelete">삭제</button>
 						</div>
+						</c:if>
 					<%-- </c:if> --%>
 					
 				</div>
@@ -42,23 +47,13 @@
 
 			</div>	
 		</li>
+		
 		</c:forEach> 
-									
+						</form>			
 	<!-- Go To Top
 	============================================= -->
 	<div id="gotoTop" class="icon-angle-up"></div>
 
-	<!-- External JavaScripts
-	============================================= -->
-	<script src="resources/js/jquery.js"></script>
-	<script src="resources/js/plugins.js"></script>
-
-	<!-- Bootstrap Data Table Plugin -->
-	<script src="resources/js/components/bs-datatable.js"></script>
-
-	<!-- Footer Scripts
-	============================================= -->
-	<script src="resources/js/functions.js"></script>
 
 	
 	

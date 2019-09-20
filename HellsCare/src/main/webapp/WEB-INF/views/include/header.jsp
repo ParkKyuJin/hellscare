@@ -27,8 +27,8 @@
 						<li><a href="#"><div style="font-size:1.5em">건강진단</div></a>
 							<ul style="background:white">
 							<!--@@@@@@@@@ 메뉴 배경색 바꾸는 곳 @@@@@@@@@@@@-->
-								<li><a href="nextpage" ><div style="color:black; font-size:1.2em;">건강진단 목록</div></a></li>
-								<li><a href="healthstateresult"><div style="color:black; font-size:1.2em;">건강진단 결과</div></a></li>
+								
+								<li><a href="healthstateresult"><div style="color:black; font-size:1.2em;">건강진단</div></a></li>
 							</ul>
 						</li>
 						<li><a href="#"><div style="font-size:1.5em">운동</div></a>
@@ -42,9 +42,9 @@
 								</li>
 							
 								
-								<li><a href="steps"><div style="color:black; font-size:1.2em;">걸음수</div></a>
+							<!-- 	<li><a href="steps"><div style="color:black; font-size:1.2em;">걸음수</div></a>
 								</li>
-								<li><a href="stepsRank"><div style="color:black; font-size:1.2em;">걸음수 랭킹</div></a></li>
+								<li><a href="stepsRank"><div style="color:black; font-size:1.2em;">걸음수 랭킹</div></a></li> -->
 							</ul>
 						</li>
 					<li><a href="#"><div style="font-size:1.5em">식단</div></a>

@@ -39,21 +39,23 @@
 
 				<!-- Sidebar
 					============================================= -->
-				<div class="sidebar nobottommargin col_last clearfix">
-					<div class="sidebar-widgets-wrap">
-						<div class="widget widget_links clearfix">
-							<h4>부위별 스트레칭</h4>
-							<ul>
-								<li><a href="details_stretching?part=1" style="font-weight:bold">목</a></li>
-								<li><a href="details_stretching?part=2" style="font-weight:bold">어깨</a></li>
-								<li><a href="details_stretching?part=3" style="font-weight:bold">허리</a></li>
-								<li><a href="details_stretching?part=4" style="font-weight:bold">골반</a></li>
-								<li><a href="details_stretching?part=5" style="font-weight:bold">다리</a></li>
-								<li><a href="details_stretching?part=6" style="font-weight:bold">손목,발목</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<c:if test="${vo.part != null}">
+	<div class="sidebar nobottommargin col_last clearfix">
+		<div class="sidebar-widgets-wrap">
+			<div class="widget widget_links clearfix">
+				<h4>부위별 스트레칭</h4>
+				<ul>
+					<li><a href="details_stretching?part=1" style="font-weight:bold">목</a></li>
+					<li><a href="details_stretching?part=2" style="font-weight:bold">어깨</a></li>
+					<li><a href="details_stretching?part=3" style="font-weight:bold">허리</a></li>
+					<li><a href="details_stretching?part=4" style="font-weight:bold">골반</a></li>
+					<li><a href="details_stretching?part=5" style="font-weight:bold">다리</a></li>
+					<li><a href="details_stretching?part=6" style="font-weight:bold">손목,발목</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</c:if>
 				<!-- .sidebar end -->
 				<!-- Portfolio Single Content
 						============================================= -->

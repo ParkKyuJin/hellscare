@@ -1,6 +1,6 @@
 /*
 자바스크립트 관련 파일입니다. 반드시 기능을 주석으로 함께 적어주세요!
-*/
+
 
 var msg_username = "아이디를 입력하세요."; 
 var msg_pwd = "비밀번호를 입력하세요. ";
@@ -78,12 +78,12 @@ function idChk(){
 
 	var idReg = /^[A-Za-z0-9]{5,19}/;
 
-	/*if(!idReg.test($("input[name=username]").val())) {
+	if(!idReg.test($("input[name=username]").val())) {
         alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
         document.signupform.username.value =""; 
         return;
     }
-	*/
+	
 	// resultTypeb ==> boolean 형 
 	var result = idReg.test(document.signupform.username.value); 
 	
@@ -103,10 +103,10 @@ function confirmId(){
       document.signupform.username.focus();
       return false; 
   }
-  /*
+  
    * window.open("파일명", "윈도우명", "창속성");
    * url = "주소?속성="+ 속성값;  ->  get방식
-   */
+   
   var url="confirmId?username=" +document.signupform.username.value; //get방식으로 아이디 값 가져옴. 
   window.open(url, "confirm", "menubar=no, width=500, height=200");
   // confirmId.do 서블릿 지정-----.do가 있으면 무조건 서블릿으로 가야됨 버튼 누르는 순간 다음페이지로 가야되니까
@@ -197,3 +197,4 @@ function findId(){
 	window.location="findId?email="+document.signupform.email.value;
 }
 
+*/
