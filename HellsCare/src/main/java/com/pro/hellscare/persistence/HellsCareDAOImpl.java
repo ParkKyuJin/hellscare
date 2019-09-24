@@ -227,9 +227,9 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 					Map<String, Integer> m = null;
 
 					m = new HashMap<String, Integer>();
-					m.put("total", 2);
-					m.put("Female", 1);
-					m.put("Male", 1);
+					m.put("total", 0);
+					m.put("Female", 0);
+					m.put("Male", 0);
 
 					List<GenderChartVO> list = null;
 					list = sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getGenderChart");
@@ -881,6 +881,22 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 			
 			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.Qnastate",qna_code);
 		}
+		
+		
+		//게시글 검색
+		@Override
+		public List<BoardVO> boardSearch(String query) {
+			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.boardSearch", query);
+			
+		}
+
+		//공지사항 작성 처리
+		@Override
+		public int noticeWrite(BoardVO vo) {
+			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.noticeWrite", vo);
+		}
+		
+		
 		
 //		//공지사항 수정 처리
 //		@Override

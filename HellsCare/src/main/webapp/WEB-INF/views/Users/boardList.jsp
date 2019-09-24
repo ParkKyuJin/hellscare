@@ -69,7 +69,8 @@
 							</tr>
 						</tfoot>
 						<tbody>
-								<!-- 공지사항 -->
+						
+							<!-- 공지사항 -->
 							<c:if test="${n_cnt==0}">
 								<tr>
 									<th colspan="6" align="center">공지사항 없음</th>							
@@ -111,14 +112,22 @@
 									</tr>
 								</c:forEach>
 								</c:if>
+							
 							<!-- 게시글이 있으면 -->
 							<!-- 컬럼은 dto에서 꺼내고 계산한한것들은 일반변수..dto붙이면 안됨 -->
 								<c:forEach var="dto" items="${dtos}" >
+								<c:set  var="val" value="host" ></c:set>
 									<tr>
+									<c:if test="${dto.username != val}">
 										<td align="center" style="width:50px">
 										${dto.rNum}
 										</td>
-										
+									</c:if>	
+									<c:if test="${dto.username == val}">
+										<td align="center" style="width:50px">
+										공지사항
+										</td>
+									</c:if>	
 										<td align="left">
 										<%-- <!-- hot 이미지 -->
 										<c:if test="${dto.readCnt > 18}">
@@ -132,10 +141,16 @@
 												<c:if test="${dto.commentCnt>0}"><i class="icon-chat-3">${dto.commentCnt}</i></c:if>
 											</a>
 										</td>
-										
+										<c:if test="${dto.username != val}">
 										<td align="left" style="width:150px">
 											${dto.username}
 										</td>
+										</c:if>	
+										<c:if test="${dto.username == val}">
+										<td align="left" style="width:150px">
+											관리자
+										</td>
+										</c:if>	
 										
 										<td align="center" style="width:70px">
 											${dto.readCnt}
@@ -163,21 +178,19 @@
 										<thead>
 											<tr>
 												<th>No.</th>
+												<th>Date.</th>
 												<th>제목</th>
 												<th>작성자</th>
 												<th>조회수</th>
-												<th>Date.</th>
-												<th>답변상태</th>
 											</tr>
 										</thead>
 										<tfoot>
 											<tr>
 												<th>No.</th>
+												<th>Date.</th>
 												<th>제목</th>
 												<th>작성자</th>
 												<th>조회수</th>
-												<th>Date.</th>
-												<th>답변상태</th>
 											</tr>
 										</tfoot>
 										<tbody>
@@ -212,16 +225,7 @@
 												<td align="left" style="width:200px">
 													${qto.qna_write_date}
 												</td>
-												<c:if test="${qto.state==1}">
-												<td align="left" style="width:200px; color:#1DDB16;">
-													<b>답변완료</b>
-												</td>
-												</c:if>
-												<c:if test="${qto.state==0}">
-												<td align="left" style="width:200px; color:#F15F5F;">
-													<b>미답변</b>
-												</td>
-												</c:if>
+		
 											</tr>
 											</c:forEach>
 										</tbody>

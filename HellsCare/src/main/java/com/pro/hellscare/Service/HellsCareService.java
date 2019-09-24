@@ -139,6 +139,8 @@ public interface HellsCareService {
 		public void QnAAnswer(HttpServletRequest req, Model model);
 		
 		public void QnAHosts(HttpServletRequest req, Model model);
+		//notice write pro
+		public void noticeWritePro(HttpServletRequest req, Model model);
 	//한결 끝
 	
 	// 동렬 시작 ---------------

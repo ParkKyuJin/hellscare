@@ -139,6 +139,16 @@
 		</dependency>
 		<!-- Mybatis 설정 종료 -->
 	
+	<!-- web3j -->
+	 <!-- web3j/core -->
+   <dependency>
+       <groupId>org.web3j</groupId>
+       <artifactId>core</artifactId>
+       <version>3.6.0</version>
+   </dependency>
+	
+	<!-- web3j종료 -->
+	
 	<!-- Json -->
 	<!-- json, gson lib -->
 		<dependency>

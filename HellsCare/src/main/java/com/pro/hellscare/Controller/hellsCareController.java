@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.pro.hellscare.Service.ClubService;
 import com.pro.hellscare.Service.HellsCareService;
 import com.pro.hellscare.Service.ParseService;
 import com.pro.hellscare.VO.FoodVO;
@@ -38,6 +39,7 @@ public class hellsCareController {
 	//서비스 Autowired로 연경
 	 @Autowired HellsCareService service;
 	 @Autowired ParseService service2;
+	 @Autowired ClubService service3; 
 	 //안드로이드 연동시에 Gson방식의 어노테이션 필요함!
 	 // @ResponseBody   //맵에서 안드로이드로 값을 전달하기위한 어노테이션(Gson형식)
 	 //return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
@@ -130,6 +132,29 @@ public class hellsCareController {
 		}
 //규진 종료
 //=============================	
+	//================블록체인
+		// 재관 
+		// 동호회 개설비 페이지
+		@RequestMapping("payCreateClub")
+		public String payCreateClub(HttpServletRequest req, Model model) throws Exception {
+			logger.info("URL ==> payCreateClub");
+			service3.deploy();
+			service.addClubApply(req, model);
+			return "Users/payCreateClub";
+		}
+		// 동호회 개설비 페이지
+		@RequestMapping("payCreateClubPro")
+		public String payCreateClubPro(HttpServletRequest req, Model model) throws Exception {
+			logger.info("URL ==> payCreateClubPro");
+			service3.payCreateClub(req);
+			return "index";
+		}
+		
+		
+	//=========================
+		
+		
+		
 	// 재관 시작 : 유저
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletRequest req) {
@@ -625,7 +650,7 @@ public class hellsCareController {
 			public String myPage(HttpServletRequest req, Model model, Authentication auth) {
 				auth.getAuthorities(); 
 				logger.info("URL ==> myPage");
-				
+				service.getUserInfo(req, model);
 				service.userModiView(req, model);
 				return "Users/myPage";
 			}
@@ -701,7 +726,6 @@ public class hellsCareController {
 		if (memId != null) {
 			service.addFavorit(req, model);
 		}
-
 		return "Users/addFavorit";
 	}
 
@@ -1300,7 +1324,7 @@ public class hellsCareController {
 	
 	
 
-	// ==한결 Part Start===============================================================
+	// ==한결 Part Start=================================================
 		@RequestMapping("host_qna")
 		public String host_qna(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!
@@ -1320,35 +1344,47 @@ public class hellsCareController {
 			return "host/host_notice";
 		}
 		
-		//공지사항 글 보기
-		@RequestMapping("host_noticeContent")
-		public String host_noticeContent(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> host_noticeContent");
-			
-			service.notice_contentForm(req, model);
-			return "host/host_noticeContent";
-		}
-		
-		//공지사항 수정 뷰
-		@RequestMapping("notice_modify")
-		public String notice_modify(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> notice_modify");
-			
-			service.n_modify_view(req, model);
-			return "host/host_notice_modify";
-		}
-		
-		//공지사항 수정 처리
-		@RequestMapping("noticeUpdate")
-		public String noticeUpdate(HttpServletRequest req, Model model) {
+	// 공지사항 작성 처리
+	@RequestMapping("host_noticeWrite")
+	public String host_noticeWrite(HttpServletRequest req, Model model) {
 
-			logger.info("URL ==> noticeUpdate");
-			service.n_modify(req, model);
+		logger.info("URL ==> host_noticeWrite");
 
-			return "redirect:host_noticeContent";
-		}
+		service.noticeWritePro(req, model);
+
+		return "redirect:host_notice";
+	}
+		
+		
+	// 공지사항 글 보기
+	@RequestMapping("host_noticeContent")
+	public String host_noticeContent(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_noticeContent");
+
+		service.notice_contentForm(req, model);
+		return "host/host_noticeContent";
+	}
+		
+	// 공지사항 수정 뷰
+	@RequestMapping("notice_modify")
+	public String notice_modify(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> notice_modify");
+
+		service.n_modify_view(req, model);
+		return "host/host_notice_modify";
+	}
+		
+	// 공지사항 수정 처리
+	@RequestMapping("noticeUpdate")
+	public String noticeUpdate(HttpServletRequest req, Model model) {
+
+		logger.info("URL ==> noticeUpdate");
+		service.n_modify(req, model);
+
+		return "redirect:host_noticeContent";
+	}
 		
 		//공지사항 삭제
 //		@RequestMapping("notice_delete")
@@ -1383,13 +1419,14 @@ public class hellsCareController {
 			return "host/host_qnaContent";
 		}
 
-		@RequestMapping("notice_write")
-		public String notice_write(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> notice_write");
-			return "host/notice_write";
-		}
-		
+	// 공지사항 작성 폼으로 이동
+	@RequestMapping("notice_write")
+	public String notice_write(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> notice_write");
+		return "host/notice_write";
+	}
+
 		@RequestMapping("QnAAnswer")
 		public String QnAAnswer(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!

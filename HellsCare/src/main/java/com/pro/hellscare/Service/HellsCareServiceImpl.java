@@ -3435,6 +3435,27 @@ public class HellsCareServiceImpl implements HellsCareService {
 		
 		//한결===========================================================
 		
+					
+	// 공지사항 작성 처리
+	@Override
+	public void noticeWritePro(HttpServletRequest req, Model model) {
+		String username = (String) req.getSession().getAttribute("memId");
+		System.out.println("username : " + username);
+
+		BoardVO vo = new BoardVO();
+		vo.setTitle(req.getParameter("subject"));
+		vo.setUsername(username);
+		vo.setContent(req.getParameter("message"));
+		int noticeWriteCnt = dao.noticeWrite(vo);
+
+		System.out.println("공지사항 등록 : " + noticeWriteCnt);
+
+		model.addAttribute("noticeWriteCnt", noticeWriteCnt);
+
+	}
+					
+					
+					
 		@Override
 		public void QnAHosts(HttpServletRequest req, Model model) {
 		int  qna_code = Integer.parseInt(req.getParameter("qna_code"));
@@ -3474,42 +3495,42 @@ public class HellsCareServiceImpl implements HellsCareService {
 				model.addAttribute("board_code",board_code);
 			}
 
-		//게시글 목록
-		@Override
-		public void boardList(HttpServletRequest req, Model model) {
-			int b_cnt = 0; //글의 갯수
-			int q_cnt = 0; //qna 갯수
-			int n_cnt = 0; //공지사항
-			
-			b_cnt = dao.getBoardCnt();
-			q_cnt = dao.getQnaCnt();
-			n_cnt = dao.getnoticeCnt();
-			
-			System.out.println("게시글 갯수 : " + b_cnt);
-			
-			
-			if(b_cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
-				
-				System.out.println("게시글 읽으러 옴");
-				
-				List<BoardVO> dtos = dao.getArticleList();
-				model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
-				model.addAttribute(b_cnt);
-				List<BoardVO> ntos = dao.getNoticeArticleList();
-				model.addAttribute("ntos",ntos);
-				model.addAttribute("n_cnt",n_cnt);	
-			
-			}
-			
-			if(q_cnt > 0) {
-				System.out.println("문의사항 읽으러 옴");
-				
-				List<BoardQnaVO> qtos = dao.getQnaArticleList();
-				model.addAttribute("qtos", qtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
-				model.addAttribute(q_cnt);
-			}
-			
+	// 게시글 목록
+	@Override
+	public void boardList(HttpServletRequest req, Model model) {
+		int b_cnt = 0; // 글의 갯수
+		int q_cnt = 0; // qna 갯수
+		int n_cnt = 0; // 공지사항
+
+		b_cnt = dao.getBoardCnt();
+		q_cnt = dao.getQnaCnt();
+		n_cnt = dao.getnoticeCnt();
+
+		System.out.println("게시글 갯수 : " + b_cnt);
+
+		if (b_cnt > 0) { // (글갯수)cnt가 0보다 클 때 읽으러 감
+
+			System.out.println("게시글 읽으러 옴");
+
+			List<BoardVO> dtos = dao.getArticleList();
+			model.addAttribute("dtos", dtos); // 큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
+			model.addAttribute("b_cnt", b_cnt);
+
+			List<BoardVO> ntos = dao.getNoticeArticleList();
+			model.addAttribute("ntos", ntos);
+			model.addAttribute("n_cnt", n_cnt);
+
 		}
+
+		if (q_cnt > 0) {
+			System.out.println("문의사항 읽으러 옴");
+
+			List<BoardQnaVO> qtos = dao.getQnaArticleList();
+			model.addAttribute("qtos", qtos); // 큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
+			model.addAttribute(q_cnt);
+		}
+
+	}
 
 		//게시글 상세 보기                                                                                                                                                                                                             
 		@Override
@@ -3829,78 +3850,80 @@ public class HellsCareServiceImpl implements HellsCareService {
 		
 		
 		
-		//공지사항 리스트
-				@Override
-				public void noticeList(HttpServletRequest req, Model model) {
-					int n_cnt = 0; //공지사항 갯수
-					
-					n_cnt = dao.getnoticeCnt();
-					
-					System.out.println("공지사항 갯수 : " + n_cnt);
-					
-					
-					if(n_cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
-						
-						System.out.println("공지사항 읽으러 옴");
-						
-						List<BoardVO> dtos = dao.getNoticeArticleList();
-						model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
-						model.addAttribute(n_cnt);
-						
-					}
+	// 공지사항 리스트
+	@Override
+	public void noticeList(HttpServletRequest req, Model model) {
+		int n_cnt = 0; // 공지사항 갯수
 
-				}
+		n_cnt = dao.getnoticeCnt();
 
-				//공지사항 보기
-				@Override
-				public void notice_contentForm(HttpServletRequest req, Model model) {
-					int board_code = Integer.parseInt(req.getParameter("board_code"));
-					
-					System.out.println("게시글 번호 : " + board_code);
-					
-					dao.addReadCnt(board_code);	//조회수 증가
-					
-					BoardVO vo = dao.getNoticeArticle(board_code);
-					
-					model.addAttribute("dto", vo); //조회수는 vo가 가지고 있고 키 dto에 넘겨줌
+		System.out.println("공지사항 갯수 : " + n_cnt);
 
-				}
+		if (n_cnt > 0) { // (글갯수)cnt가 0보다 클 때 읽으러 감
 
-				//notice modify view
-				@Override
-				public void n_modify_view(HttpServletRequest req, Model model) {
-					int board_code = Integer.parseInt(req.getParameter("board_code"));
-					
-					System.out.println("수정할 공지사항 번호 : " + board_code);
-					//String username = SecurityContextHolder.getContext().getAuthentication().getName();
+			System.out.println("공지사항 읽으러 옴");
 
-					BoardVO vo = dao.getNoticeArticle(board_code);
-					model.addAttribute("dto", vo);
-				}
-				//notice modify pro
-				@Override
-				public void n_modify(HttpServletRequest req, Model model) {
-					int board_code = Integer.parseInt(req.getParameter("board_code"));
-					//String username = req.getParameter("username");
-					//로그인 안되므로 하드코딩
-					String username = "hsot";
-					
-					System.out.println("board_code 번호 : " + board_code);
-					System.out.println("관리자 : " + username);
-					
-					BoardVO vo = new BoardVO();
-					
-					vo.setBoard_code(board_code);
-					vo.setTitle(req.getParameter("subject"));
-					vo.setUsername(username);                                                                  
-					vo.setContent(req.getParameter("message"));
-					int boardUpdate = dao.boardUpdate(vo);
-					
-					System.out.println("문의글 등록 : " + boardUpdate);
-					
-					model.addAttribute("boardUpdate", boardUpdate);
-					model.addAttribute("board_code", board_code);
-				}
+			List<BoardVO> dtos = dao.getNoticeArticleList();
+			model.addAttribute("dtos", dtos); // 큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
+			model.addAttribute(n_cnt);
+
+		}
+
+	}
+
+	// 공지사항 보기
+	@Override
+	public void notice_contentForm(HttpServletRequest req, Model model) {
+		int board_code = Integer.parseInt(req.getParameter("board_code"));
+
+		System.out.println("게시글 번호 : " + board_code);
+
+		dao.addReadCnt(board_code); // 조회수 증가
+
+		BoardVO vo = dao.getNoticeArticle(board_code);
+
+		model.addAttribute("dto", vo); // 조회수는 vo가 가지고 있고 키 dto에 넘겨줌
+
+	}
+
+	// notice modify view
+	@Override
+	public void n_modify_view(HttpServletRequest req, Model model) {
+		int board_code = Integer.parseInt(req.getParameter("board_code"));
+
+		System.out.println("수정할 공지사항 번호 : " + board_code);
+		// String username =
+		// SecurityContextHolder.getContext().getAuthentication().getName();
+
+		BoardVO vo = dao.getNoticeArticle(board_code);
+		model.addAttribute("dto", vo);
+	}
+
+	// notice modify pro
+	// notice modify pro
+	@Override
+	public void n_modify(HttpServletRequest req, Model model) {
+		int board_code = Integer.parseInt(req.getParameter("board_code"));
+		// String username = req.getParameter("username");
+		// 로그인 안되므로 하드코딩
+		String username = "hsot";
+
+		System.out.println("board_code 번호 : " + board_code);
+		System.out.println("관리자 : " + username);
+
+		BoardVO vo = new BoardVO();
+
+		vo.setBoard_code(board_code);
+		vo.setTitle(req.getParameter("subject"));
+		vo.setUsername(username);
+		vo.setContent(req.getParameter("message"));
+		int boardUpdate = dao.boardUpdate(vo);
+
+		System.out.println("문의글 등록 : " + boardUpdate);
+
+		model.addAttribute("boardUpdate", boardUpdate);
+		model.addAttribute("board_code", board_code);
+	}
 
 
 
@@ -4510,6 +4533,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 			e.printStackTrace();
 		}
 	}
+
+
 
 	
 

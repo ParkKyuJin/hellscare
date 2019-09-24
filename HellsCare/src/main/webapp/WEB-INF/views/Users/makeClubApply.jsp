@@ -19,8 +19,8 @@
 	
 	<c:if test="${insertCnt != 0}">
 		<script type="text/javascript">
-			alert("개설신청이 완료되었습니다.\n관리자의 승인후 개설됩니다.");
-			window.location = "main"
+			alert("동호회 개설이 정상적으로 신청되었습니다.\n개설비 지급 페이지로 이동합니다.");
+			window.location = "payCreateClub?club_name=${vo.club_name}&club_master=${vo.club_master}&club_kind=${vo.club_kind}&area=${vo.area}&club_max=${vo.club_max}";
 		</script>
 	</c:if>
 </c:if>

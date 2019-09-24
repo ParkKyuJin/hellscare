@@ -43,7 +43,7 @@
 					<c:forEach var="dto" items="${list}">
 						<article class="portfolio-item pf-media pf-icons clearfix">
 							<div class="portfolio-image">
-									<img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="height:500px;" alt="Open Imagination">		
+									<img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="height:500px;width:700px;" alt="Open Imagination">		
 							</div>
 							<div class="portfolio-desc">
 								<h3><a href="challengedetail?code=${dto.challenge_code}">${dto.challenge_name}</a></h3>

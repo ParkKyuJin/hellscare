@@ -298,8 +298,10 @@ public interface HellsCareDAO {
 				public List<BoardQnaVO> QnAHosts(int qna_code);
 //				//공지사항 수정처리
 //				public int noticeUpdate(BoardVO vo);
-
-
+				//게시글 검색
+				public List<BoardVO> boardSearch(String query);
+				//공지사항 작성 처리
+				public int noticeWrite(BoardVO vo);
 	// ==한결 종료
 		
 		

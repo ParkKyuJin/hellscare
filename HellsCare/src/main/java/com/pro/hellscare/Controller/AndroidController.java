@@ -943,6 +943,44 @@ public class AndroidController {
 		}
 		return up;
 	}
+	
+	// 게시글 검색
+	@ResponseBody
+	@RequestMapping("androidBoardSearch")
+	public Map<String, BoardVO> androidBoardSearch(HttpServletRequest req) {
+		logger.info("androidBoardSearch");
+
+		String query = req.getParameter("query");
+		System.out.println("검색글 : " + query);
+
+		List<BoardVO> list = dao.boardSearch(query);
+
+		Map<String, BoardVO> map = new HashMap<String, BoardVO>();
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getTitle());
+			map.put("data" + i, list.get(i));
+		}
+
+		return map;
+	}
+
+	// 공지사항 목록
+	@ResponseBody
+	@RequestMapping("androidNoticeList")
+	public Map<String, BoardVO> androidNoticeList(HttpServletRequest req) {
+		logger.info("androidNoticeList");
+
+		// 공지사항을 모두 조회
+		List<BoardVO> list = dao.getNoticeArticleList();
+		Map<String, BoardVO> map = new HashMap<String, BoardVO>();
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getTitle());
+			map.put("data" + i, list.get(i));
+		}
+		return map;
+	}
+	
+	
 // 한결끝
 			
 	
