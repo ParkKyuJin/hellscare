@@ -149,7 +149,6 @@ public class hellsCareController {
 					logger.info("URL ==> payCreateClubPro");
 					service3.deploy();
 					service3.payCreateClub(req, model);			
-					
 					return "Users/payCreateClubPro";
 				}
 				

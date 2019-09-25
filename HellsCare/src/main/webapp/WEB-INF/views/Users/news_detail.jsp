@@ -101,7 +101,7 @@
 									<div class="mpost clearfix">
 										<div class="entry-image">
 											<a href="news_detail?newsUrl=${other_news.newsUrl}">
-												<img src="${other_news.newsThumbnail}" onerror="this.src='/hellscare/resources/white.JPG'">				
+												<img src="${other_news.newsThumbnail}" onerror="this.src='/hellscare/resources/white.jpg'">				
 											</a>
 										</div>
 										<div class="entry-c">
