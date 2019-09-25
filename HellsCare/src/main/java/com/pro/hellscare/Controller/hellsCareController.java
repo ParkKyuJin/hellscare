@@ -133,22 +133,37 @@ public class hellsCareController {
 //규진 종료
 //=============================	
 	//================블록체인
+	
 		// 재관 
-		// 동호회 개설비 페이지
-		@RequestMapping("payCreateClub")
-		public String payCreateClub(HttpServletRequest req, Model model) throws Exception {
-			logger.info("URL ==> payCreateClub");
-			service3.deploy();
-			service.addClubApply(req, model);
-			return "Users/payCreateClub";
-		}
-		// 동호회 개설비 페이지
-		@RequestMapping("payCreateClubPro")
-		public String payCreateClubPro(HttpServletRequest req, Model model) throws Exception {
-			logger.info("URL ==> payCreateClubPro");
-			service3.payCreateClub(req);
-			return "index";
-		}
+				// 동호회 개설비 지불 페이지
+				@RequestMapping("payCreateClub")
+				public String payCreateClub(HttpServletRequest req, Model model) throws Exception {
+					logger.info("URL ==> payCreateClub");
+					
+					return "Users/payCreateClub";
+				}
+				
+				// 동호회 개설비 지불
+				@RequestMapping("payCreateClubPro")
+				public String payCreateClubPro(HttpServletRequest req, Model model) throws Exception {
+					logger.info("URL ==> payCreateClubPro");
+					service3.deploy();
+					service3.payCreateClub(req, model);			
+					
+					return "Users/payCreateClubPro";
+				}
+				
+				// 동호회 개설 취소
+				@RequestMapping("cancel_club")
+				public String cancel_club(HttpServletRequest req, Model model) throws Exception {
+					logger.info("URL ==> cancel_club");
+					
+					service.cancel_club(req, model);			
+					
+					return "Users/cancel_club";
+				}
+
+		
 		
 		
 	//=========================

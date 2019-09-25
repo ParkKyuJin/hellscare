@@ -68,6 +68,11 @@
     <!-- 재관 시작 -->
  <!-- 재관 시작 -->
    <!-- ******** 관리자 ************   -->
+	<!-- 동호회 - 개설신청  -->
+    <update id="payCreateClubDone" parameterType="com.pro.hellscare.VO.ClubVO">
+    	update club_tbl set hashkey=#{hashkey} where club_name=#{club_name}    	
+    </update>
+	
 	<!-- 질병정보 갯수 -->
 	<select id="getDiseaseCount" resultType="int">
 		SELECT count(*) FROM disease_tbl
@@ -379,7 +384,7 @@
     
     <!-- 관리자 - 동호회 상세페이지 -->
     <select id="clubDetail" parameterType="String" resultType="com.pro.hellscare.VO.ClubVO">
-    	select club_name,club_kind,club_max,area,club_date,club_master,club_pr
+    	select club_name,club_kind,club_max,area,club_date,club_master,club_pr,hashkey
     	from club_tbl
     	where club_name=#{club_name}
     </select>

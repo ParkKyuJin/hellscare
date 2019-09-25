@@ -2230,11 +2230,12 @@ public class HellsCareServiceImpl implements HellsCareService {
 					public void addClubApply(HttpServletRequest req, Model model) {
 						String club_name = req.getParameter("club_name");
 						String club_kind = req.getParameter("kind");
-						if(club_kind == "1") {
+											
+						if(club_kind.equals("1")) {
 							club_kind = "건강정보";
-						} else if(club_kind == "2") {
+						} else if(club_kind.equals("2")) {
 							club_kind = "운동";
-						} else if(club_kind == "3") {
+						} else if(club_kind.equals("3")) {
 							club_kind = "다이어트";
 						} else {
 							club_kind = "스트레칭";
@@ -2278,8 +2279,10 @@ public class HellsCareServiceImpl implements HellsCareService {
 							area = "제주특별자치도";
 						}
 						
+						
 						String club_master = req.getParameter("club_master");
 						String club_pr = req.getParameter("club_pr");
+						
 						
 						ClubVO vo = new ClubVO();
 						
@@ -2291,10 +2294,10 @@ public class HellsCareServiceImpl implements HellsCareService {
 						vo.setClub_pr(club_pr);
 						
 						int insertCnt = 0;
-						
 						insertCnt = dao.addClubApply(vo);
 						
 						model.addAttribute("insertCnt",insertCnt);
+						model.addAttribute("vo",vo);
 					}
 
 					// 관리자 - 동호회 신청 목록
@@ -4394,7 +4397,17 @@ public class HellsCareServiceImpl implements HellsCareService {
 		
 	}
 
+	// 동호회 개설 취소
+		@Override
+		public void cancel_club(HttpServletRequest req, Model model) {
+			String club_name = req.getParameter("club_name");
+			
+			dao.deleteClub(club_name);
+			
+		}
 
+
+						
 
 
 	

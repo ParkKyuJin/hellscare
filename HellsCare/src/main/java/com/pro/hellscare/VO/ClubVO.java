@@ -12,7 +12,16 @@ public class ClubVO {
 	private String club_master;
 	private String club_pr;
 	private Date club_date;
+	private String hashkey;
 	
+	
+	
+	public String getHashkey() {
+		return hashkey;
+	}
+	public void setHashkey(String hashkey) {
+		this.hashkey = hashkey;
+	}
 	public String getClub_name() {
 		return club_name;
 	}

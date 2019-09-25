@@ -10,19 +10,19 @@
 	</script>
 </c:if>
 <c:if test="${memId != null}">
-	<c:if test="${insertCnt == 0}">
+ 	<c:if test="${insertCnt == 0}">
 		<script type="text/javascript">
 			alert("개설신청실패!");
 			history.back();
 		</script>
 	</c:if>
 	
-	<c:if test="${insertCnt != 0}">
+	<c:if test="${insertCnt != 0}"> 
 		<script type="text/javascript">
-			alert("동호회 개설이 정상적으로 신청되었습니다.\n개설비 지급 페이지로 이동합니다.");
-			window.location = "payCreateClub?club_name=${vo.club_name}&club_master=${vo.club_master}&club_kind=${vo.club_kind}&area=${vo.area}&club_max=${vo.club_max}";
+			alert("개설비를 지불 하셔야 신청이 완료 됩니다.\n개설비 지불페이지로 이동합니다.");
+			window.location = "payCreateClub?club_name=${vo.club_name}&club_master=${vo.club_master}&club_kind=${vo.club_kind}&area=${vo.area}&club_max=${vo.club_max}&club_pr=${vo.club_pr}";
 		</script>
-	</c:if>
+	 </c:if> 
 </c:if>
 </body>
 </html>

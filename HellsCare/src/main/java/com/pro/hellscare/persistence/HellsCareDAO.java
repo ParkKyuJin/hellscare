@@ -78,6 +78,8 @@ public interface HellsCareDAO {
 	// 안드로이드 - 메인화면에 띄울 칼로리 정보 가져오기
 	public List<KcalVO> getTodayKcalInfo(String username);
 
+	// 동호회 블록체인 개설비지급후 해쉬값 저장
+	public int payCreateClubDone(ClubVO vo);
 	// == 동렬 종료
 	
 	//==규진 시작

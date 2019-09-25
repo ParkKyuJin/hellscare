@@ -271,6 +271,12 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 					return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updateUserInfo", vo);
 				}
 
+				// 동호회 블록체인 개설비지급후 해쉬값 저장
+				@Override
+				public int payCreateClubDone(ClubVO vo) {
+					return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.payCreateClubDone", vo);
+				}
+
 			// ===== 재관 앱 =====
 				// 로그인 정보체크
 				@Override

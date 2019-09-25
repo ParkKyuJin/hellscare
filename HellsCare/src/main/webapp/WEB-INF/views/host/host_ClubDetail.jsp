@@ -68,6 +68,17 @@
 					<td>소개 : ${vo.club_pr}</td>
 				</tr>
 				<tr>
+					
+					<td>
+					<c:if test="${vo.hashkey==null }">
+					지불 정보가 없습니다.
+					</c:if>
+					<c:if test="${vo.hashkey!=null }">					
+					Transation hash : <a href="https://ropsten.etherscan.io/tx/${vo.hashkey}" alt="정보 보러가기">${vo.hashkey}</a>
+					</c:if>
+					</td>
+				</tr>
+				<tr>
 					<td><button type="submit" class="button button-3d button-rounded"
 							style="width: 300px;" onclick="window.history.back();">뒤로가기</button></td>
 				</tr>

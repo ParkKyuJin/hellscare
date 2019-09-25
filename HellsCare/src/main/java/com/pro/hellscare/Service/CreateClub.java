@@ -153,6 +153,7 @@ public class CreateClub extends Contract {
         return deployRemoteCall(CreateClub.class, web3j, transactionManager, contractGasProvider, BINARY, "");
     }
 
+    // deploy 사용한 메소드
     @Deprecated
     public static RemoteCall<CreateClub> deploy(Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return deployRemoteCall(CreateClub.class, web3j, credentials, gasPrice, gasLimit, BINARY, "");
@@ -196,6 +197,7 @@ public class CreateClub extends Contract {
         return logNewCreateClubEventObservable(filter);
     }
 
+    // 이더전송에 사용한 메소드(계약hashcode, 서버, 계정, gasprice, gaslimit)
     @Deprecated
     public static CreateClub load(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
         return new CreateClub(contractAddress, web3j, credentials, gasPrice, gasLimit);

@@ -23,6 +23,14 @@
 <!-- Document Wrapper
 	============================================= -->
 	<%@ include file="../include/header.jsp" %>
+		<%
+		String club_name = request.getParameter("club_name");
+		String club_master = request.getParameter("club_master");
+		String club_kind = request.getParameter("club_kind");
+		String area = request.getParameter("area");
+		String club_max = request.getParameter("club_max");
+		String club_pr = request.getParameter("club_pr");
+		%>
 	<div>
 	
 		<!-- Page Title
@@ -60,18 +68,26 @@
 							</div>
 						</div>
 					</div><!-- portfolio-single-image end -->
-
+		<form action="payCreateClubPro" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+			<input type="hidden" name="club_name" value="<%= club_name %>">
+			<input type="hidden" name="club_master" value="<%= club_master %>">
+			<input type="hidden" name="club_kind" value="<%= club_kind %>">
+			<input type="hidden" name="area" value="<%= area %>">
+			<input type="hidden" name="club_max" value="<%= club_max %>">
+			<input type="hidden" name="club_pr" value="<%= club_pr %>">
+		
 					<div class="col_one_third nobottommargin">
-
+		
 						<!-- Portfolio Single - Meta
 						============================================= -->
 						<div class="card events-meta">
 							<div class="card-body">
 								<ul class="portfolio-meta nobottommargin">
-									<li><span><i class="icon-book"></i>동호회명:</span> ${vo.club_name}</li>
-									<li><span><i class="icon-user"></i>개설자:</span> ${vo.club_master}</li>
-									<li><span><i class="icon-lightbulb"></i>분류:</span> ${vo.club_kind}</li>
-									<li><span><i class="icon-link"></i>지역:</span> ${vo.area}</li>
+									<li><span><i class="icon-book"></i>동호회명:</span> <%= club_name %></li>
+									<li><span><i class="icon-user"></i>개설자:</span> <%= club_master %></li>
+									<li><span><i class="icon-lightbulb"></i>분류:</span> <%= club_kind %></li>
+									<li><span><i class="icon-link"></i>지역:</span> <%= area %></li>
 								</ul>
 							</div>
 						</div>
@@ -92,20 +108,26 @@
 						</div>
 
 						<div class="col_half nobottommargin">
-							<p>개설비는 1이더(eth)입니다.</p>
+							<p>이더를 지급하실 개인키와 지불하실 이더를 입력하세요</p>
 							<p>개설비는 동호회를 개설할 때 최초 일회만 지급받습니다.</p>
 							<p>지불한 개설비는 동호회를 해산하여도 반환되지 않습니다.</p>
 						</div>
 
 						<div class="col_half col_last nobottommargin">
-							<p><b style="font-size:1.5em"> 개설비: 1이더</b></p>
-							<p><a href="payCreateClubPro" class="button button-desc button-border button-rounded center">지불하기</a></p>
+						
 							
+							<p><b style="font-size:1.5em" >private key: </b><br>
+							<input type="password" name="user_key" size="50"></p>
+							<p><b style="font-size:1.5em"> 개설비(ETH): </b><br>
+							<input type="text" name="amount"></p>
+							<p><button type="submit" class="button button-desc button-border button-rounded center">지불하기</button>
+							<button type="button" class="button button-desc button-border button-rounded center" onclick="return cancelChk();">취소</button></p>
+					
 						</div>
 						<!-- Portfolio Single - Description End -->
 
 					</div><!-- .portfolio-single-content end -->
-
+			</form>
 					<div class="clear"></div>
 
 					<div class="divider divider-center"><i class="icon-circle"></i></div>
@@ -140,6 +162,15 @@
 
 </script>
 
+<script type="text/javascript">
+	function cancelChk(){
+		if(confirm("동호회 개설을 취소하시겠습니까?")){
+			window.location="cancel_club?club_name="+<%=club_name%>;	
+		} else{
+			return false;
+		}
+	}
+</script>
 
 
 </body>

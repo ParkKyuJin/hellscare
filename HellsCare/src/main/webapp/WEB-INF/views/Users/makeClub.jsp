@@ -10,8 +10,9 @@
 		<div class="content-wrap">
 			<div class="row clearfix">
 				<div class="col-lg-6" style="margin: 0 auto;">
-					<form name="makeClubForm" class="nobottommargin" action="makeClubApply?${_csrf.parameterName}=${_csrf.token}"
+					<form name="makeClubForm" class="nobottommargin" action="makeClubApply?
 						method="post" onsubmit="return subCheck();">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
 						<div id="checkCnt"></div>
 
 						<div class="col_full">
@@ -84,7 +85,7 @@
 	<%@ include file="../include/footer.jsp"%>
 
 	<%@ include file="../include/footerScript.jsp"%>
-
+	<script src="/hellscare/resources/ajax/jquery-3.4.1.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#club_id").keyup(function() {

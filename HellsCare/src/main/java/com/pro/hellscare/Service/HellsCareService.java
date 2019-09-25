@@ -354,6 +354,9 @@ public interface HellsCareService {
 
 	// 회원 최근 가입목록
 	public void userRecentList(HttpServletRequest req, Model model);
+	
+	// 동호회 개설취소
+	public void cancel_club(HttpServletRequest req, Model model);
 	// ====재관담당 종료
 
 
