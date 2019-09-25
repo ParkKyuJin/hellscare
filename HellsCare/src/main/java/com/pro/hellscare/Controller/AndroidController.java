@@ -954,7 +954,7 @@ public class AndroidController {
 		System.out.println("검색글 : " + query);
 
 		List<BoardVO> list = dao.boardSearch(query);
-
+ 
 		Map<String, BoardVO> map = new HashMap<String, BoardVO>();
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getTitle());
