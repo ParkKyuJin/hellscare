@@ -40,7 +40,7 @@
 							<li><a href="food_info"><div style="color: black; font-size:1.2em;">식단
 										정보</div></a></li>
 							<li><a href="javascript:goFoodRecommendation();"><div
-										style="color: black; font-size:1.2em;">식단 추천</div></a></li>
+										style="color: black; font-size:1.2em;">섭취영양성분 분석</div></a></li>
 							
 							
 						</ul></li>
