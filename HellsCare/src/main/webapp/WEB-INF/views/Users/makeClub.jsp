@@ -84,7 +84,7 @@
 	<%@ include file="../include/footer.jsp"%>
 
 	<%@ include file="../include/footerScript.jsp"%>
-	<script src="/hellscare/resources/ajax/jquery-3.4.1.min.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#club_id").keyup(function() {

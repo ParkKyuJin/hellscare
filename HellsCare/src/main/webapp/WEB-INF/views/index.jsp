@@ -222,33 +222,7 @@
 					
 				</div>
 
-				<div class="row clearfix align-items-stretch bottommargin-lg">
-
-					<div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #515875;">
-						<i class="i-plain i-xlarge divcenter icon-line2-directions"></i>
-						<div class="counter counter-lined"><span data-from="100" data-to="846" data-refresh-interval="50" data-speed="2000"></span>K</div>
-						<h5>Lines of Codes</h5>
-					</div>
-
-					<div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #576F9E;">
-						<i class="i-plain i-xlarge divcenter icon-line2-graph"></i>
-						<div class="counter counter-lined"><span data-from="3000" data-to="21500" data-refresh-interval="100" data-speed="2500"></span></div>
-						<h5>KBs of HTML Files</h5>
-					</div>
-
-					<div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #6697B9;">
-						<i class="i-plain i-xlarge divcenter icon-line2-layers"></i>
-						<div class="counter counter-lined"><span data-from="10" data-to="408" data-refresh-interval="25" data-speed="3500"></span></div>
-						<h5>No. of Templates</h5>
-					</div>
-
-					<div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #88C3D8;">
-						<i class="i-plain i-xlarge divcenter icon-line2-clock"></i>
-						<div class="counter counter-lined"><span data-from="60" data-to="1400" data-refresh-interval="30" data-speed="2700"></span></div>
-						<h5>Hours of Coding</h5>
-					</div>
-
-				</div>
+				
 
 				<div class="section topmargin nobottommargin nobottomborder">
 				<div class="container clearfix">
@@ -303,32 +277,6 @@
 						style="top: 4px;"></i>
 				</div>
 			</a>
-
-				
-
-				
-				<br><br>
-				
-				
-				<div class="container clearfix">
-
-					<div id="oc-clients" class="owl-carousel image-carousel carousel-widget" data-margin="60" data-loop="true" data-nav="false" data-autoplay="5000" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5" data-items-xl="6">
-
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/1.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/2.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/3.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/4.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/5.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/6.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/7.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/8.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/9.png" alt="Clients"></a></div>
-						<div class="oc-item"><a href="#"><img src="/hellscare/resources/images/clients/10.png" alt="Clients"></a></div>
-
-					</div>
-
-				</div>
-
 			</div>
 
 		</section><!-- #content end -->

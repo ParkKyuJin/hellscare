@@ -362,15 +362,21 @@ public class hellsCareController {
 		@RequestMapping("writeForm")
 		public String writeForm(Locale locale, HttpServletRequest req, Model model) {
 
-			logger.info("URL ==> writeForm");
-			Date date = new Date();
-			DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+			
+			if(req.getSession().getAttribute("memId") == null) {
+				return "Users/login_reg";
+			}else {
+				logger.info("URL ==> writeForm");
+				Date date = new Date();
+				DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
-			String formattedDate = dateFormat.format(date);
+				String formattedDate = dateFormat.format(date);
 
-			model.addAttribute("serverTime", formattedDate);
+				model.addAttribute("serverTime", formattedDate);
 
-			return "Users/board_writeForm";
+				return "Users/board_writeForm";
+			}
+			
 		}
 
 		
@@ -455,7 +461,9 @@ public class hellsCareController {
 		// 게시글 작성 폼
 		@RequestMapping("qnaWriteForm")
 		public String qnaWriteForm(Locale locale, HttpServletRequest req, Model model) {
-
+			if(req.getSession().getAttribute("memId") == null) {
+				return "Users/login_reg";
+			}else {
 			logger.info("URL ==> qnaWriteForm");
 			Date date = new Date();
 			DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -465,6 +473,7 @@ public class hellsCareController {
 			model.addAttribute("serverTime", formattedDate);
 
 			return "Users/qna_writeForm";
+			}
 		}
 		
 		//게시글 작성 처리
