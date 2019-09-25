@@ -65,11 +65,7 @@
 				
 				<h5>체감 기온 : ${weather.sensibleTemp}C</h5>
 				
-				<c:if test="${weather.checkWeather != '자외선'}">
-					<h5>시간당 강수량 : <span style="color:#40b8f1;">${weather.rainfallOnHour}mm </span></h5>
-				</c:if>
-					
-				<c:if test="${weather.checkWeather == '자외선'}">
+				<c:if test="${weather.checkWeather == ''}">
 					<!-- 자외선 지수 -->
 					<c:set var="ultraVioletCriteria" value="자외선지수" />
 					
@@ -112,6 +108,10 @@
 						<span id="ultraViolet">${weather.ultraVioletRay}ppm ${ultraVioletCriteria}</span>
 						<i class="icon-line2-info" id="ultraVioletStandard"></i>
 					</h5>
+				</c:if>
+				
+				<c:if test="${weather.checkWeather != ''}">
+					<h5>시간당 강수량 : <span style="color:#40b8f1;">${weather.rainfallOnHour}mm </span></h5>
 				</c:if>
 				
 			</div>
@@ -465,112 +465,8 @@
 			</div>
 			
 			<!-- 시간대별 날씨 탭으로 -->
-			<div class="col_three_fourth">
+			<div class="col_three_fourth" align="center">
 				<h4>시간대별 날씨</h4>
-				
-				<script type="text/javascript">
-					google.charts.load('current', {packages: ['corechart', 'line']});
-					google.charts.setOnLoadCallback(drawTodayTemperatureChart);
-					google.charts.setOnLoadCallback(drawTodayPrecipitationChart);
-					google.charts.setOnLoadCallback(drawTodayHumidityChart);
-				
-					// 오늘 시간대의 기온 차트
-					function drawTodayTemperatureChart() {
-						var data = new google.visualization.DataTable();
-						data.addColumn('number', 'X');
-						data.addColumn('number', '기온');
-				
-						data.addRows([
-					        [${weather.todayTimes.get(0)}, ${weather.todayTemperature.get(0)}],
-					        [${weather.todayTimes.get(1)}, ${weather.todayTemperature.get(1)}],
-					        [${weather.todayTimes.get(2)}, ${weather.todayTemperature.get(2)}],
-					        [${weather.todayTimes.get(3)}, ${weather.todayTemperature.get(3)}],
-					        [${weather.todayTimes.get(4)}, ${weather.todayTemperature.get(4)}],
-					        [${weather.todayTimes.get(5)}, ${weather.todayTemperature.get(5)}],
-					        [${weather.todayTimes.get(6)}, ${weather.todayTemperature.get(6)}],
-					        [${weather.todayTimes.get(7)}, ${weather.todayTemperature.get(7)}] 
-						]);
-				
-						var options = {
-							hAxis: {
-								title: '시간'
-							},
-							vAxis: {
-								title: '기온'
-							},
-							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
-						};
-				
-						var todayTempChart = new google.visualization.LineChart(document.getElementById('todayTemp_div'));
-						todayTempChart.draw(data, options);
-					}
-					
-					function drawTodayPrecipitationChart() {
-						var data = new google.visualization.DataTable();
-						data.addColumn('number', 'X');
-						data.addColumn('number', '강수확률');
-				
-						data.addRows([
-					        [${weather.todayTimes.get(8)}, ${weather.todayPrecipitation.get(0)}],
-					        [${weather.todayTimes.get(9)}, ${weather.todayPrecipitation.get(1)}],
-					        [${weather.todayTimes.get(10)}, ${weather.todayPrecipitation.get(2)}],
-					        [${weather.todayTimes.get(11)}, ${weather.todayPrecipitation.get(3)}],
-					        [${weather.todayTimes.get(12)}, ${weather.todayPrecipitation.get(4)}],
-					        [${weather.todayTimes.get(13)}, ${weather.todayPrecipitation.get(5)}],
-					        [${weather.todayTimes.get(14)}, ${weather.todayPrecipitation.get(6)}],
-					        [${weather.todayTimes.get(15)}, ${weather.todayPrecipitation.get(7)}]
-						]);
-				
-						var options = {
-							hAxis: {
-								title: '시간'
-							},
-							vAxis: {
-								title: '강수확률'
-							},
-							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
-						};
-				
-						var todayPrecipitationChart = new google.visualization.LineChart(document.getElementById('todayPrecipitation_div'));
-						todayPrecipitationChart.draw(data, options);
-					}
-					
-					function drawTodayHumidityChart() {
-						var data = new google.visualization.DataTable();
-						data.addColumn('number', 'X');
-						data.addColumn('number', '습도');
-				
-						data.addRows([
-					        [${weather.todayTimes.get(24)}, ${weather.todayHumidity.get(0)}],
-					        [${weather.todayTimes.get(25)}, ${weather.todayHumidity.get(1)}],
-					        [${weather.todayTimes.get(26)}, ${weather.todayHumidity.get(2)}],
-					        [${weather.todayTimes.get(27)}, ${weather.todayHumidity.get(3)}],
-					        [${weather.todayTimes.get(28)}, ${weather.todayHumidity.get(4)}],
-					        [${weather.todayTimes.get(29)}, ${weather.todayHumidity.get(5)}],
-					        [${weather.todayTimes.get(30)}, ${weather.todayHumidity.get(6)}],
-					        [${weather.todayTimes.get(31)}, ${weather.todayHumidity.get(7)}]
-						]);
-				
-						var options = {
-							hAxis: {
-								title: '시간'
-							},
-							vAxis: {
-								title: '습도'
-							},
-							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
-						};
-				
-						var todayHumidityChart = new google.visualization.LineChart(document.getElementById('todayHumidity_div'));
-						todayHumidityChart.draw(data, options);
-					}
-				</script>
 				
 				<script type="text/javascript">
 					$(function() {
@@ -600,11 +496,230 @@
 					</tr>
 					<tr>
 						<td>
-							<div id="todayTemp_div" class="todayChart"></div>
+							<div id="todayTemp_div" class="todayChart">
+								<table class="table" width="100%">
+									<thead>
+										<tr>
+											<th>
+												${weather.todayTemperature.get(0)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(1)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(2)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(3)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(4)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(5)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(6)}℃
+											</th>
+											
+											<th>
+												${weather.todayTemperature.get(7)}℃
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												${weather.todayTimes.get(0)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(1)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(2)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(3)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(4)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(5)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(6)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(7)}시
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							
-							<div id="todayPrecipitation_div" class="todayChart" style="display:none;"></div>
+							<div id="todayPrecipitation_div" class="todayChart" style="display:none;">
+								<table class="table" width="100%">
+									<thead>
+										<tr>
+											<th>
+												${weather.todayPrecipitation.get(0)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(1)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(2)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(3)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(4)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(5)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(6)}%
+											</th>
+											
+											<th>
+												${weather.todayPrecipitation.get(7)}%
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												${weather.todayTimes.get(0)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(1)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(2)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(3)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(4)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(5)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(6)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(7)}시
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							
-							<div id="todayHumidity_div" class="todayChart" style="display:none;"></div>
+							<div id="todayHumidity_div" class="todayChart" style="display:none;">
+								<table class="table" width="100%">
+									<thead>
+										<tr>
+											<th>
+												${weather.todayHumidity.get(0)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(1)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(2)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(3)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(4)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(5)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(6)}%
+											</th>
+											
+											<th>
+												${weather.todayHumidity.get(7)}%
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												${weather.todayTimes.get(0)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(1)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(2)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(3)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(4)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(5)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(6)}시
+											</td>
+											
+											<td>
+												${weather.todayTimes.get(7)}시
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -794,8 +909,8 @@
 								title: '기온'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var tomorrowTempChart = new google.visualization.LineChart(document.getElementById('tomorrowTemp_div'));
@@ -826,8 +941,8 @@
 								title: '강수확률'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var tomorrowPrecipitationChart = new google.visualization.LineChart(document.getElementById('tomorrowPrecipitation_div'));
@@ -858,8 +973,8 @@
 								title: '습도'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var tomorrowHumidityChart = new google.visualization.LineChart(document.getElementById('tomorrowHumidity_div'));
@@ -1071,8 +1186,8 @@
 								title: '기온'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var dayAfterTomorrowTempChart = new google.visualization.LineChart(document.getElementById('dayAfterTomorrowTemp_div'));
@@ -1103,8 +1218,8 @@
 								title: '강수확률'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var dayAfterTomorrowTempChart = new google.visualization.LineChart(document.getElementById('dayAfterTomorrowPrecipitation_div'));
@@ -1135,8 +1250,8 @@
 								title: '습도'
 							},
 							width : 750,
-							height : 400,
-							backgroundColor: '#f1f8e9'
+							height : 200,
+							backgroundColor: '#ffffff'
 						};
 				
 						var dayAfterTomorrowTempChart = new google.visualization.LineChart(document.getElementById('dayAfterTomorrowHumidity_div'));

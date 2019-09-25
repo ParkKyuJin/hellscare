@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class challengeVO {
 		
-	public int challenge_code;
-	public String challenge_name;
-	public String challenge_content;
-	public String challenge_gift;
-	public String challenge_img;
-	public Date challange_date;
+	public int challenge_code; //이벤트 고유코드
+	public String challenge_name; //이벤트명
+	public String challenge_content; //이벤트 내용
+	public String challenge_gift; //이벤트 보상포인트
+	public String challenge_img; //이벤트 이미지
+	public Date challange_date; //이벤트 날짜
 	
 	
 	public challengeVO(){}

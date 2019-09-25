@@ -13,7 +13,7 @@
 	<c:if test="${deleteCnt != 0}">
 		<script type="text/javascript">
 			alert("탈퇴에 성공했습니다. \n이용해주셔서 감사합니다.");
-			window.location="main2";
+			window.location="main";
 		</script>
 	</c:if>
 </body>

@@ -1417,6 +1417,7 @@ public class hellsCareController {
 		public String host_board(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!
 			logger.info("URL ==> host_board");
+			service.boardList(req, model);
 			return "host/host_board";
 		}
 

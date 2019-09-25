@@ -48,97 +48,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="dto" items="${dtos}" >
                   <tr>
-                    <td>1</td>
-                    <td>2019/07/12</td>
-                    <td><a href="host_boardContent">키자루랑 원장썜이랑 싸우면 누가 이기냐</a></td>
-                    <td>짱구</td>
-                    <td>3453</td>
+                    <td>${dto.board_code}</td>
+                    <td>${dto.write_date}</td>
+                    <td><a href="host_boardContent">${dto.content}</a></td>
+                    <td>${dto.username}</td>
+                    <td>${dto.readCnt}</td>
                   </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                  <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
-                 <tr>
-                    <td>11110</td>
-                    <td>2019/07/11</td>
-                    <td>안녕</td>
-                    <td>짱구</td>
-                    <td>23</td>
-                  </tr>
+                  </c:forEach>
+               
                 </tbody>
               </table>
             </div>

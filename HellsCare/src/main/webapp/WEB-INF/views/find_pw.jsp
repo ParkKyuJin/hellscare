@@ -14,7 +14,7 @@
 		<script type="text/javascript">
 			setTimeout(function() {
 				alert("이메일이 전송되었습니다.");
-				window.history.back();
+				window.location="login_reg";
 			}, 500);
 		</script>
 	</c:if>

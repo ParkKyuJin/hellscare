@@ -3,14 +3,14 @@ package com.pro.hellscare.VO;
 import java.sql.Date;
 
 public class MychalleangeVO {
-	String challenge_code;
-	String challenge_name;
-	String challenge_content;
-	String challenge_gift;
-	String challenge_img;
-	int done;
-	Date challenge_start;
-	Date challenge_end;
+	String challenge_code; //이벤트 코드
+	String challenge_name; //이벤트 이름
+	String challenge_content; //이벤트 내용
+	String challenge_gift; //이벤트 보상
+	String challenge_img; //이벤트 이미지
+	int done; //완료여부
+	Date challenge_start; //이벤트 시작일
+	Date challenge_end; //이벤트 종료일
 	
 	public String getChallenge_code() {
 		return challenge_code;

@@ -966,6 +966,22 @@
 		]]>
 	</select>
 	
+	<!-- 사용자 - 칼로리 테이블에 입력된 정보가 있는지 조회하기 -->
+	<select id="searchUserKcalInfo" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM kcal_tbl WHERE username = #{username} AND kcal_date = #{kcal_date}
+	</select>
+	
+	<!-- 사용자 - 칼로리 테이블에 입력된 정보가 없으면 0으로 데이터 생성하기 -->
+	<insert id="makeUserKcalInfo" parameterType="java.util.Map">
+		INSERT INTO kcal_tbl(username, food_code, kcal, kcal_date)
+		VALUES(#{username}, 4, 0, #{kcal_date})
+	</insert>
+	
+	<!-- 사용자 - 칼로리 테이블에서 각 일자 데이터들을 가져오기 -->
+	<select id="getUserKcalInfoEachDay" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.KcalVO">
+		SELECT * FROM kcal_tbl WHERE username = #{username} AND kcal_date = #{kcal_date}
+	</select>
+	
 	<!-- 안드로이드 - 음식명으로 음식정보 가져오기 -->
 	<select id="getFoodInfoByUsingFoodName" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.FoodVO">
 		SELECT * FROM food_tbl WHERE food_name = #{food_name}

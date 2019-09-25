@@ -77,12 +77,12 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	}
 	
 	
-	
+	//이벤트 세부사항
 	@Override
 	public challengeVO challengedetail(int code) {
-	
 		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challengedetail",code);
 	}
+	
 	@Override
 	public int challengePro(Map<String, Object> map) {
 		int cnt = sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challengePro2", map);	
@@ -104,7 +104,7 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challengecount");
 	}
 
-
+	//도전과제 출력 DAO
 	@Override
 	public List<challengeVO> challengecount2(Map<String, Object> map) {
 		
@@ -122,12 +122,13 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.addchall",map);
 	}
 	
+	//내가 등록해둔 이벤트 가져오기
 	@Override
 	public List<MychalleangeVO> Mychallenge(String id) {
 		
 		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.Mychallenge",id);
 	}
-	
+	//이벤트 등록여부
 	@Override
 	public int challchek(Map<String, Object> map) {
 		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.challchek",map);
@@ -1133,22 +1134,25 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	public List<KcalVO> getTodayKcalInfo(String username) {
 		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getTodayKcalInfo", username);
 	}
+
+	// 사용자 - 칼로리 테이블에 입력된 정보가 없으면 0으로 데이터 생성하기
+	@Override
+	public int makeUserKcalInfo(Map<String, String> map) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.makeUserKcalInfo", map);
+	}
+
+	// 사용자 - 칼로리 테이블에서 각 일자 데이터들을 가져오기
+	@Override
+	public List<KcalVO> getUserKcalInfoEachDay(Map<String, String> map) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getUserKcalInfoEachDay", map);
+	}
+
+	// 사용자 - 칼로리 테이블에 해당 일자 데이터가 있는지 조회하기
+	@Override
+	public int searchUserKcalInfo(Map<String, String> map) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.searchUserKcalInfo", map);
+	}
+
 	// ========== 동렬 파트 종료 ===============
 
-
-
-	
-
-
-
-	
-
-
-
-
-	
-
-
-
-		
 }

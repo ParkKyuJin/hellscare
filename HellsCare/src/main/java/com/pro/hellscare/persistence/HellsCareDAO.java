@@ -63,14 +63,22 @@ public interface HellsCareDAO {
 	// 사용자 - 칼로리 테이블에 입력된 회원의 일주일 간 칼로리 정보 가져오기
 	public List<KcalVO> getUserKcalInfo(Map<String, String> map);
 
+	// 사용자 - 칼로리 테이블에 입력된 정보가 없으면 0으로 데이터 생성하기
+	public int makeUserKcalInfo(Map<String, String> map);
+
+	// 사용자 - 칼로리 테이블에서 각 일자 데이터들을 가져오기
+	public List<KcalVO> getUserKcalInfoEachDay(Map<String, String> map);
+
+	// 사용자 - 칼로리 테이블에 해당 날짜 칼로리 정보가 있는지 조회하기
+	public int searchUserKcalInfo(Map<String, String> map);
+
 	// 안드로이드 - 음식 이름으로 음식 정보 가져오기
 	public FoodVO getFoodInfoByUsingFoodName(Map<String, String> map);
 
 	// 안드로이드 - 메인화면에 띄울 칼로리 정보 가져오기
 	public List<KcalVO> getTodayKcalInfo(String username);
+
 	// == 동렬 종료
-	
-	
 	
 	//==규진 시작
 	//유저건강정보 가져오기

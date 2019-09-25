@@ -57,10 +57,11 @@ function idfySend() {
 				<div class="container clearfix">
 				
 					<div class="row grid-container" data-layout="masonry" style="overflow: visible;margin-top:20px;">
-						<c:forEach var="dto" items="${dtos}">
+					<c:forEach var="dto" items="${dtos}">
 						<div class="col-lg-4 mb-4">
 							<div class="flip-card text-center">
-								<div class="flip-card-front dark" style="background-image: url('/hellscare/resources/eventimg/${dto.challenge_img}')">
+								<div class="flip-card-front dark"
+									style="background-image: url('/hellscare/resources/eventimg/${dto.challenge_img}')">
 									<div class="flip-card-inner">
 										<div class="card nobg noborder text-center">
 											<div class="card-body">
@@ -74,13 +75,14 @@ function idfySend() {
 								<div class="flip-card-back bg-danger no-after">
 									<div class="flip-card-inner">
 										<p class="mb-2 text-white">${dto.challenge_content}</p>
-										<a href="challengedetail?code=${dto.challenge_code}"><button type="button"class="btn btn-outline-light mt-2">자세히보기</button></a>
+										<a href="challengedetail?code=${dto.challenge_code}"><button
+												type="button" class="btn btn-outline-light mt-2">자세히보기</button></a>
 									</div>
 								</div>
 							</div>
 						</div>
-						</c:forEach>
-					</div>
+					</c:forEach>
+				</div>
 			
 				</div>
 					

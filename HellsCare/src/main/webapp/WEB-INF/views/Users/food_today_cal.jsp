@@ -203,6 +203,14 @@
 																					$("#food_name_list" + cellCount).css("display", "none");
 																				});
 																				
+																				$("#food_count" + cellCount).focusout(function() {
+																					if($("#food_count" + cellCount).val() < 1) {
+																						alert("음식 인분은 1개 이상으로 해주십시오.");
+																						return false;
+																					}
+																				});
+																				
+																				
 																			},
 																			error : function() {
 																				alert("오류");
@@ -265,7 +273,6 @@
 																				
 																				$("#food_name_list").css("display", "none");
 																			});
-																			
 																		},
 																		error : function() {
 																			alert("오류");
@@ -273,6 +280,19 @@
 																	});
 																});
 															});
+														</script>
+														
+														<script type="text/javascript">
+															
+															$(document).ready(function() {
+																$("#food_count").focusout(function () {
+																	if($("#food_count").val() < 1) {
+																		alert("음식 인분은 1개 이상으로 해주십시오.");
+																		return false;
+																	}
+																});
+															});
+														
 														</script>
 														
 														<script type="text/javascript">
@@ -309,7 +329,6 @@
 																});
 															});
 														</script>
-														
 													</div>
 													
 													<button type="button" id="add" name="add" class="btn btn-secondary btn-block btn-lg" onclick="insRow();">입력 추가</button>
