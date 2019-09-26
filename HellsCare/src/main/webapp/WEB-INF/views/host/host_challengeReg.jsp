@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
      <%@ include file="../include/h_sidebarMenu.jsp"%>
 <!DOCTYPE html>
+
+
 <section id="main-content">
       <section class="wrapper">
         <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 등록</b></h3>
@@ -54,14 +56,63 @@
 												class="fa fa-undo"></i> Change</span> <input type="file"
 											class="default" name="c_img" id="c_img" required />
 										</span>
-
+									<div id="map" style="width:100%;height:350px;"></div>
+									
+									<input type="text" id="clickLatlng" name="lat" value="" readonly="readonly" required="required">
+									<input type="text" id="clickLatlng2" name="lng" readonly="readonly" required="required">
 									</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f11ce067be0e4302a3047b3e2f5dbe9"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 지도를 클릭한 위치에 표출할 마커입니다
+var marker = new kakao.maps.Marker({ 
+    // 지도 중심좌표에 마커를 생성합니다 
+    position: map.getCenter() 
+}); 
+// 지도에 마커를 표시합니다
+marker.setMap(map);
+
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
+    
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
+    
+    var message =latlng.getLat();
+    var message2 =latlng.getLng();
+    /*  + ' 이고, ';
+    message += '경도는 ' + latlng.getLng() + ' 입니다'; */
+    /* alert(message+"    "+message2); */
+    document.getElementById('clickLatlng').value = message;
+    
+    document.getElementById('clickLatlng2').value = message2;
+   	/* var resultDiv = document.getElementById('clickLatlng2').value; 
+   	resultDiv = message +"        "+message2 ; */
+    
+});
+
+
+
+
+</script>
 									<div style="float: right; margin: 0px 50px 0px 0px;">
 										<a href="#"><button type="submit"
 												class="btn btn-round btn-success">확인</button></a> <a
 											href="host_challenge"><button type="button"
 												class="btn btn-round btn-danger">돌아가기</button></a>
 									</div>
+									
 								</div>
 
 							</div>
@@ -72,16 +123,17 @@
             </div>
             
           </div>
-          
+            
           <!-- col-lg-12-->
         </div>
         <!-- /row -->
         <!-- INLINE FORM ELELEMNTS -->
         
-       
+     
        
       </section>
       <!-- /wrapper -->
+      
     </section>
  <footer class="site-footer">
       <div class="text-center">
@@ -103,3 +155,4 @@
       </div>
     </footer>
 </section>
+

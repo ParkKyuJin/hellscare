@@ -86,8 +86,8 @@
 						</ul></li>
 					<li><a href="#"><div style="font-size:1.5em">이벤트</div></a>
 							<ul style="background:white">
-								<li><a href="challenge"><div style="color:black; font-size:1.2em;">도전과제</div></a></li>
-								<li><a href="Mychallenge"><div style="color:black; font-size:1.2em;">진행중인 도전과제</div></a></li>
+								<li><a href="challenge"><div style="color:black; font-size:1.2em;">개최예정 이벤트</div></a></li>
+								<li><a href="Mychallenge"><div style="color:black; font-size:1.2em;">찜한 이벤트</div></a></li>
 							</ul>
 						</li>
 						<li><a href="#"><div style="font-size:1.5em">게시판</div></a>

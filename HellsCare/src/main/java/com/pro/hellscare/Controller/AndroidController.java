@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pro.hellscare.VO.BoardVO;
+import com.pro.hellscare.VO.ClubBoardVO;
+import com.pro.hellscare.VO.ClubVO;
 import com.pro.hellscare.VO.CommentVO;
 import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
 import com.pro.hellscare.VO.FoodVO;
 import com.pro.hellscare.VO.KcalVO;
+import com.pro.hellscare.VO.MyClubVO;
 import com.pro.hellscare.VO.MychalleangeVO;
 import com.pro.hellscare.VO.NutritionCSV;
 import com.pro.hellscare.VO.NutritionInfo;
@@ -58,16 +61,18 @@ public class AndroidController {
 		// Android 로그인 화면에서 로그인 정보를 넘겨준다.
 		String username = req.getParameter("id");
 		String password = req.getParameter("pwd");
-	
+		
 		String enabled ="";
+		// 암호화된 비밀번호를 변수에 담는다.
 		String encodedPassword = dao.returnPassword(username);
 		if(encodedPassword==null) {
 			enabled=null;
 		} else {
+			// 입력받은 비밀번호화 암호화된 비밀번호를 비교한다.
 			Boolean checkPwd = passwordEncoder.matches(password, encodedPassword);
-			//System.out.println(encodedPassword + " = " + checkPwd);
+			
 			if(checkPwd) {
-				enabled = dao.confirmId(username);  // 비밀번호가 일치하면  1
+				enabled = dao.confirmId(username);  // 비밀번호가 일치하면  1이 들어간다.
 			} else {
 				enabled="0";
 			}
@@ -92,10 +97,10 @@ public class AndroidController {
 	@RequestMapping("androidDiseaseList")
 	public Map<String, DiseaseVO> androidDiseaseList(HttpServletRequest req) {
 		logger.info("androidDiseaseList");
-		
+		// 화면에서 질병명, 질병코드를 입력받는다.
 		String s_name = req.getParameter("disease_name");
 		String s_code = req.getParameter("disease_code");
-		
+		// 검색할 keyword를 map에 담는다.
 		Map<String, Object> in = new HashMap<String, Object>();
 		in.put("s_name", s_name);
 		in.put("s_code", s_code);
@@ -104,7 +109,8 @@ public class AndroidController {
 		
 		// 코드와 질병명으로 정보를 조회
 		List<DiseaseVO> list = dao.getDiseaseList(in);
-		Map<String, DiseaseVO> map = new HashMap<String, DiseaseVO>();		
+		Map<String, DiseaseVO> map = new HashMap<String, DiseaseVO>();
+		// 리스트정보를 map으로 변환한다.
 		for(int i=0; i<list.size(); i++) {
 			// System.out.println(list.get(i).getDisease_name());
 			map.put("data"+i, list.get(i));
@@ -784,29 +790,515 @@ public class AndroidController {
 		
 		//나현파트 끝========
 		
-		//예찬파트 시작===========
-		 // 운동목록
-		   @ResponseBody
-		   @RequestMapping("androidGetExerciseList")
-		   public Map<String, ExerciseVO> androidGetExerciseList(HttpServletRequest req) {
-		      logger.info("androidGetExerciseList");
-		      
-		      Map<String,Integer> map = new HashMap<>();
-		      
-		      map.put("start", 0);
-		      map.put("end", 1000);
-		      // 운동목록 조회
-		      List<ExerciseVO> list = dao.getexerciseList(map);
-		      Map<String, ExerciseVO> exerciseMap = new HashMap<String, ExerciseVO>();      
-		      for(int i=0; i<list.size(); i++) {
-		         System.out.println(list.get(i).getExercise_name());
-		         exerciseMap.put("Data"+i, list.get(i));
-		      }
-		      return exerciseMap;
-		   }
+//예찬파트 시작===========
+		// 운동목록
+		@ResponseBody
+		@RequestMapping("androidGetExerciseList")
+		public Map<String, ExerciseVO> androidGetExerciseList(HttpServletRequest req) {
+			logger.info("androidGetExerciseList");
+
+			Map<String, Integer> map = new HashMap<>();
+
+			map.put("start", 0);
+			map.put("end", 1000);
+			// 운동목록 조회
+			List<ExerciseVO> list = dao.getexerciseList(map);
+			Map<String, ExerciseVO> exerciseMap = new HashMap<String, ExerciseVO>();
+			for (int i = 0; i < list.size(); i++) {
+				System.out.println(list.get(i).getExercise_name());
+				exerciseMap.put("Data" + i, list.get(i));
+			}
+			return exerciseMap;
+		}
+
+		// 내 동호회 목록
+		@ResponseBody
+		@RequestMapping("androidGetMyClubList")
+		public Map<String, ClubVO> androidGetMyClubList(HttpServletRequest req) {
+			logger.info("androidGetMyClubList");
+
+			String username = req.getParameter("username");
+			System.out.println("username : " + username);
+			String club1 = null;
+			String club2 = null;
+			String club3 = null;
+
+			// 내 동호회
+			int cnt = dao.getMyClubCnt(username);
+			Map<String, ClubVO> clubMap = new HashMap<String, ClubVO>();
+
+			if (cnt > 0) {
+				MyClubVO vo = dao.getMyClubList(username);
+
+				if (vo != null) {
+					club1 = vo.getClub1();
+					club2 = vo.getClub2();
+					club3 = vo.getClub3();
+				}
+
+				if (club1 != null) {
+					ClubVO vo1 = dao.getMy_ClubList(club1);
+					clubMap.put("vo1", vo1);
+				}
+
+				if (club2 != null) {
+					ClubVO vo2 = dao.getMy_ClubList(club2);
+					clubMap.put("vo2", vo2);
+				}
+
+				if (club3 != null) {
+					ClubVO vo3 = dao.getMy_ClubList(club3);
+					clubMap.put("vo3", vo3);
+				}
+
+				if (club1 == null && club2 == null && club3 == null) {
+					clubMap.put("cnt", null);
+				}
+
+				return clubMap;
+			} else {
+				clubMap.put("cnt", null);
+				return clubMap;
+			}
+		}
+
+		// 전체 동호회 목록
+		@ResponseBody
+		@RequestMapping("androidGetClubList")
+		public Map<String, ClubVO> androidGetClubList(HttpServletRequest req) {
+			logger.info("androidGetClubList");
+
+			String username = req.getParameter("username");
+			String club1 = null;
+			String club2 = null;
+			String club3 = null;
+
+			// 전체동호회
+			int cnt = dao.getClub_Cnt(username);
+
+			if (cnt > 0) {
+				Map<String, ClubVO> clubMap = new HashMap<String, ClubVO>();
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("start", 1);
+				map.put("end", 1000);
+				map.put("username", username);
+
+				int MyClubcnt = dao.getMyClubCnt(username);
+
+				if (MyClubcnt != 0) {
+					MyClubVO vo = dao.getMyClubList(username);
+					if (vo != null) {
+						club1 = vo.getClub1();
+						club2 = vo.getClub2();
+						club3 = vo.getClub3();
+					}
+				}
+				if (club1 == null)
+					club1 = "0";
+				if (club2 == null)
+					club2 = "0";
+				if (club3 == null)
+					club3 = "0";
+
+				map.put("club1", club1);
+				map.put("club2", club2);
+				map.put("club3", club3);
+
+				List<ClubVO> list = dao.getClub_List(map);
+
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println("allClub : " + list.get(i).getClub_name());
+					clubMap.put("DATA" + i, list.get(i));
+				}
+				return clubMap;
+
+			} else {
+				return null;
+			}
+		}
+
+		// 동호회 상세페이지
+		@ResponseBody
+		@RequestMapping("androidGetClubDetail")
+		public Map<String, ClubVO> androidGetClubDetail(HttpServletRequest req) {
+			logger.info("androidGetClubDetail");
+
+			String club_name = req.getParameter("club_name");
+
+			ClubVO vo = dao.getClub(club_name);
+
+			Map<String, ClubVO> clubMap = new HashMap<String, ClubVO>();
+
+			System.out.println(vo.getCurrent_personnel());
+			clubMap.put("DATA", vo);
+
+			return clubMap;
+		}
+
+		// 동호회 가입신청
+		@ResponseBody
+		@RequestMapping("androidClubApply")
+		public Map<String, Integer> androidClubApply(HttpServletRequest req) {
+			logger.info("androidClubApply");
+			Map<String, Integer> applyMap = new HashMap<String, Integer>();
+
+			String club_name = req.getParameter("club_name");
+			String username = req.getParameter("username");
+			int insertCnt = 0;
+			int clubJoinCnt = dao.getJoinClubCnt(username);
+			int selectCnt = 0;
+			//applyCnt = dao.clubApplyCnt(club_name);
+			Map<String, Object> map = new HashMap<>();
+			map.put("username", username);
+			map.put("club_name", club_name);
+
+			if (clubJoinCnt == 0) {
+				selectCnt = dao.clubWhether(map);
+				if (selectCnt == 0) {
+					insertCnt = dao.applyClub(map);
+				} else {
+					insertCnt = 0;
+				}
+			} else {
+				insertCnt = 2;
+			}
+
+			applyMap.put("insertCnt", insertCnt);
+
+			return applyMap;
+		}
+
+		// 동호회 - 가입한 동호회 회원목록
+		@ResponseBody
+		@RequestMapping("androidGetMemberList")
+		public Map<String, UsersVO> androidGetMemberList(HttpServletRequest req) {
+			logger.info("androidGetMemberList");
+
+			String club_name = req.getParameter("club_name");
+			String username = req.getParameter("username");
+
+			System.out.println("username :: " + username);
+			System.out.println("club_name ::" + club_name);
+			int memberCnt = dao.getCurrentMember(club_name);
+
+			Map<String, UsersVO> memberMap = new HashMap<>();
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			map.put("start", 1);
+			map.put("end", 1000);
+			map.put("club_name", club_name);
+
+			if (memberCnt > 0) {
+				List<UsersVO> list = dao.getMemberList(map);
+				for (int i = 0; i < list.size(); i++) {
+					memberMap.put("Member" + i, list.get(i));
+				}
+			}
+
+			return memberMap;
+		}
+
+		// 동호회 - 회원탈퇴처리
+		@ResponseBody
+		@RequestMapping("androidDeleteMember")
+		public Map<String, Integer> androidDeleteMember(HttpServletRequest req) {
+			logger.info("androidDeleteMember");
+
+			Map<String, Integer> map = new HashMap<>();
+
+			String club_name = req.getParameter("club_name");	//클럽명
+			String username = req.getParameter("member");		//탈퇴시키는 회원
+			String memId = req.getParameter("username");		//세션아이디
+
+			int deleteCnt = 0;
+			
+			String club_master = dao.getClubMaster(club_name);	//클럽장
+			
+			if (memId.equals(club_master)) {
+				if (memId.equals(club_master) && memId.equals(username)) {
+					// 탈퇴시키려는 회원이 동호회장일때
+					deleteCnt = 3;
+				} else {
+					MyClubVO vo = dao.getMyClubList(username);
+					String club1 = vo.getClub1();
+					String club2 = vo.getClub2();
+					String club3 = vo.getClub3();
+
+					if (club1 != null) {
+						if (club1.equals(club_name))
+							deleteCnt = dao.removeClub1(username);
+					}
+
+					if (club2 != null) {
+						if (club2.equals(club_name))
+							deleteCnt = dao.removeClub2(username);
+					}
+
+					if (club3 != null) {
+						if (club3.equals(club_name))
+							deleteCnt = dao.removeClub3(username);
+					}
+					dao.minusMember(club_name);
+
+				}
+				map.put("deleteCnt", deleteCnt);
+			} else {
+				// 동호회장이 아닐때
+				map.put("deleteCnt", 2);
+			}
+
+			return map;
+		}
+
+		// 동호회 - 회원탈퇴
+		@ResponseBody
+		@RequestMapping("androidExitMember")
+		public Map<String, Integer> androidExitMember(HttpServletRequest req) {
+			logger.info("androidExitMember");
+
+			Map<String,Integer> map = new HashMap<>();
+			
+			String username = req.getParameter("username");
+			String club_name = req.getParameter("club_name");
+			
+			int updateCnt = 0;
+			
+			String master = dao.getClubMaster(club_name);
+			
+			if(username.equals(master)) {
+				Map<String,Object> mMap = new HashMap<>();
+				mMap.put("club_name", club_name);
+				mMap.put("club_master", master);
+				
+				dao.updateMaster(mMap);
+			}
+			
+			MyClubVO vo = dao.getMyClubList(username);
+			String club1 = vo.getClub1();
+			String club2 = vo.getClub2();
+			String club3 = vo.getClub3();
+
+			if(club1 != null) {
+				if(club1.equals(club_name))	updateCnt = dao.removeClub1(username);
+			}
+			
+			if(club2 != null) {
+				if(club2.equals(club_name))	updateCnt = dao.removeClub2(username);
+			} 
+
+			if(club3 != null) {
+				if(club3.equals(club_name))	updateCnt = dao.removeClub3(username);
+			}
+			
+			dao.minusMember(club_name);
+			
+			int curMember = dao.getCurrentMember(club_name);
+			
+			if(curMember == 0) {
+				dao.deleteClub(club_name);
+			}
+
+			map.put("updateCnt", updateCnt);
+			
+			return map;
+		}
+
+		// 동호회 - 해당 동호회 가입신청목록
+		@ResponseBody
+		@RequestMapping("androidClubApplyList")
+		public Map<String, UsersVO> androidClubApplyList(HttpServletRequest req) {
+			logger.info("androidClubApplyList");
+
+			String club_name = req.getParameter("club_name");
+			
+			Map<String,UsersVO> map = new HashMap<>();
+			
+			int applyCnt = dao.clubApplyCnt(club_name);
+			Map<String, Object> a_map = new HashMap<String, Object>();
+
+			a_map.put("start", 1);
+			a_map.put("end", 1000);
+			a_map.put("club_name", club_name);
+			
+			if(applyCnt > 0) {
+				List<UsersVO> list = dao.getClubApply(a_map);
+				
+				for(int i = 0; i<list.size(); i++) {
+					map.put("apply"+i, list.get(i));
+				}
+			} 
+			
+			return map;
+		}
 		
-		//예찬파트 끝
-		  
+		// 동호회 - 가입신청목록 승인
+		@ResponseBody
+		@RequestMapping("androidAddMember")
+		public Map<String, Integer> androidAddMember(HttpServletRequest req) {
+			logger.info("androidAddMember");
+
+			Map<String,Integer> map = new HashMap<String, Integer>();
+			
+			String club_name = req.getParameter("club_name");
+			String username = req.getParameter("username");
+			String apply_code = req.getParameter("apply_code");
+			String memId = req.getParameter("memId");
+			
+			String club_master = dao.getClubMaster(club_name);
+			
+			int updateCnt = 0;
+			
+			// 동호회 최대인원수
+			int max = dao.getMax(club_name);
+			
+			// 동호회 현재인원수
+			int current = dao.getCurrent(club_name);
+			
+			if(club_master.equals(username)) {
+				if(current < max) {
+	 				String club1 = null;
+					String club2 = null;
+					String club3 = null;
+					String name = null;
+					
+					Map<String,Object> map2 = new HashMap<>();
+					map2.put("username",memId);
+					map2.put("club_name", club_name);
+					
+					MyClubVO vo = dao.getMyClubList(memId);
+					if(vo != null) {
+						club1 = vo.getClub1();
+						club2 = vo.getClub2();
+						club3 = vo.getClub3();
+						name = vo.getUsername();
+					}
+					
+					// 이미 세개의 동호회에 가입했을때
+					if(club1 != null && club2 != null && club3 != null) {
+						updateCnt = 2;
+						
+					// 처음 동호회에 가입할때
+					} else if(name == null){
+						dao.plusMember(club_name);
+						dao.addClub1(map2);
+						updateCnt = dao.deleteApply(apply_code);
+						
+					// 처음이 아니지만 가입한 동호회가 없을때
+					} else if(name != null && club1 == null) {
+						dao.plusMember(club_name);
+						dao.add_Club1(map2);
+						updateCnt = dao.deleteApply(apply_code);
+						
+					// 두번째 동호회애 가입할때
+					} else if(name != null && club1 != null && club2 == null) {
+						dao.plusMember(club_name);
+						dao.addClub2(map2);
+						updateCnt = dao.deleteApply(apply_code);
+						
+					// 세번째 동호회에 가입할때
+					} else if(name != null && club1 != null && club2 != null && club3 == null) {
+						dao.plusMember(club_name);
+						dao.addClub3(map2);
+						updateCnt = dao.deleteApply(apply_code);
+					} 
+				} else {
+					// 동호회에 인원이 최대일때
+					updateCnt = 3;
+				}
+				map.put("updateCnt",updateCnt);
+			} else {
+				// 동호회장이 아닐때 0
+				map.put("updateCnt", 0);
+			}
+			
+			return map;
+		}
+		
+		// 동호회 - 가입신청목록 거절
+		@ResponseBody
+		@RequestMapping("androidNoMember")
+		public Map<String, Integer> androidNoMember(HttpServletRequest req) {
+			logger.info("androidNoMember");
+
+			Map<String,Integer> map = new HashMap<String, Integer>();
+			
+			String club_name = req.getParameter("club_name");
+			String username = req.getParameter("username");
+			String apply_code = req.getParameter("apply_code");
+			String club_master = dao.getClubMaster(club_name);
+			
+			int deleteCnt = 0;
+			
+			if(club_master.equals(username)) {
+				deleteCnt = dao.deleteApply(apply_code);
+			}else {
+				deleteCnt = 0;
+			}
+			
+			map.put("deleteCnt", deleteCnt);
+			return map;
+		}
+		
+		// 동호회 - 동호회 게시판 목록
+		@ResponseBody
+		@RequestMapping("androidGetClubBoardList")
+		public Map<String, ClubBoardVO> androidGetClubBoardList(HttpServletRequest req) {
+			logger.info("androidGetClubBoardList");
+
+			Map<String,ClubBoardVO> map = new HashMap<String, ClubBoardVO>();
+			
+			String club_name = req.getParameter("club_name");
+					
+			List<ClubBoardVO> list = dao.getClubBoardList(club_name);
+			
+			for(int i=0; i<list.size(); i++) {
+				map.put("board"+i, list.get(i));
+			}
+			
+			return map;
+		}
+		
+		// 동호회 - 동호회 게시글 조회수 증가
+		@ResponseBody
+		@RequestMapping("androidPlusReadCnt")
+		public Map<String, ClubBoardVO> androidPlusReadCnt(HttpServletRequest req) {
+			logger.info("androidPlusReadCnt");
+
+			String club_board_code = req.getParameter("club_board_code");
+			
+			dao.plusReadCnt(club_board_code);
+			
+			return null;
+		}
+		
+		// 동호회 - 동호회 게시글 글쓰기
+		@ResponseBody
+		@RequestMapping("androidWriteClubBoard")
+		public Map<String, Integer> androidWriteClubBoard(HttpServletRequest req) {
+			logger.info("androidWriteClubBoard");
+			Map<String, Integer> map = new HashMap<>();
+			
+			int insertCnt = 0;
+			String username = req.getParameter("username");
+			String club_name = req.getParameter("club_name");
+			String title = req.getParameter("title");
+			String content = req.getParameter("content");
+			
+			ClubBoardVO vo = new ClubBoardVO();
+			
+			vo.setUsername(username);
+			vo.setClub_name(club_name);
+			vo.setTitle(title);
+			vo.setContent(content);
+
+			insertCnt = dao.insertClubBoard(vo);
+			
+			map.put("insertCnt", insertCnt);
+			
+			return map;
+		}
+//예찬파트 끝
+  
 // 한결시작
 	// 게시판목록
 	   @ResponseBody
@@ -818,7 +1310,7 @@ public class AndroidController {
 	      List<BoardVO> list = dao.getArticleList();
 	      Map<String, BoardVO> map = new HashMap<String, BoardVO>();
 	      for (int i = 0; i < list.size(); i++) {
-	         System.out.println(list.get(i).getTitle());
+	         //System.out.println(list.get(i).getTitle());
 	         map.put("data" + i, list.get(i));
 	      }
 	      return map;
@@ -855,35 +1347,60 @@ public class AndroidController {
 		return up;
 	}
 	
-	
-	//댓글 작성
-	@ResponseBody
-	@RequestMapping("androidCommentIN")
-	public Map<String, String> androidCommentIN(HttpServletRequest req) {
-		logger.info("androidCommentIN");
-		
-		int board_code = Integer.parseInt(req.getParameter("boardCode"));
-		String username = req.getParameter("username");
-		String content = req.getParameter("content");
-		System.out.println("작성자 : " + username);
-		
-		CommentVO vo = new CommentVO();
-		vo.setUsername(username);                                                                  
-		vo.setContent(content);
-		vo.setBoard_code(board_code);
-		
-		String commentInsert = String.valueOf(dao.commentWrite(vo));
+	// 댓글목록
+	   @ResponseBody
+	   @RequestMapping("androidComment")
+	   public Map<String, CommentVO> androidComment(HttpServletRequest req) {
+	      logger.info("androidComment");
 
-		Map<String, String> in = new HashMap<String, String>();
-		if(commentInsert.equals("1")) {
-			logger.info("댓글 등록 성공");
-			in.put("commentInsert", commentInsert);
-		} else {
-			logger.info("댓글 등록 실패");
-			in.put("commentInsert", commentInsert);
-		}
-		return in;
-	}
+	      int board_code = Integer.parseInt(req.getParameter("boardCode"));
+	      System.out.println(board_code);
+	      
+	      Map<String, Object> in = new HashMap<String, Object>();
+	      in.put("board_code", board_code);
+
+	      // 게시글을 모두 조회
+	      List<CommentVO> list = dao.getCommentList(board_code);
+	      
+	      Map<String, CommentVO> map = new HashMap<String, CommentVO>();
+	      for (int i = 0; i < list.size(); i++) {
+	         System.out.println(list.get(i).getBoard_code());
+	         map.put("data" + i, list.get(i));
+	      }
+	      
+	      return map;
+	   }
+	   
+	
+	
+	 //댓글 작성
+	   @ResponseBody
+	   @RequestMapping("androidCommentIN")
+	   public Map<String, String> androidCommentIN(HttpServletRequest req) {
+	      logger.info("androidCommentIN");
+	      
+	      int board_code = Integer.parseInt(req.getParameter("boardCode"));
+	      String username = req.getParameter("username");
+	      String content = req.getParameter("content");
+	      System.out.println("작성자 : " + username);
+	      
+	      CommentVO vo = new CommentVO();
+	      vo.setUsername(username);                                                                  
+	      vo.setContent(content);
+	      vo.setBoard_code(board_code);
+	      
+	      String commentInsert = String.valueOf(dao.commentWrite(vo));
+
+	      Map<String, String> in = new HashMap<String, String>();
+	      if(commentInsert.equals("1")) {
+	         logger.info("댓글 등록 성공");
+	         in.put("commentInsert", commentInsert);
+	      } else {
+	         logger.info("댓글 등록 실패");
+	         in.put("commentInsert", commentInsert);
+	      }
+	      return in;
+	   }
 
 	
 	//게시글 수정
@@ -944,7 +1461,7 @@ public class AndroidController {
 		return up;
 	}
 	
-	// 게시글 검색
+	//게시글 검색
 	@ResponseBody
 	@RequestMapping("androidBoardSearch")
 	public Map<String, BoardVO> androidBoardSearch(HttpServletRequest req) {
@@ -952,34 +1469,33 @@ public class AndroidController {
 
 		String query = req.getParameter("query");
 		System.out.println("검색글 : " + query);
-
-		List<BoardVO> list = dao.boardSearch(query);
- 
+		
+		List<BoardVO> list  = dao.boardSearch(query);
+		
 		Map<String, BoardVO> map = new HashMap<String, BoardVO>();
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getTitle());
-			map.put("data" + i, list.get(i));
-		}
-
-		return map;
-	}
-
-	// 공지사항 목록
-	@ResponseBody
-	@RequestMapping("androidNoticeList")
-	public Map<String, BoardVO> androidNoticeList(HttpServletRequest req) {
-		logger.info("androidNoticeList");
-
-		// 공지사항을 모두 조회
-		List<BoardVO> list = dao.getNoticeArticleList();
-		Map<String, BoardVO> map = new HashMap<String, BoardVO>();
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getTitle());
-			map.put("data" + i, list.get(i));
-		}
+	      for (int i = 0; i < list.size(); i++) {
+	         System.out.println(list.get(i).getTitle());
+	         map.put("data" + i, list.get(i));
+	      }
+		
 		return map;
 	}
 	
+	//공지사항 목록
+	@ResponseBody
+	   @RequestMapping("androidNoticeList")
+	   public Map<String, BoardVO> androidNoticeList(HttpServletRequest req) {
+	      logger.info("androidNoticeList");
+
+	      // 공지사항을 모두 조회
+	      List<BoardVO> list = dao.getNoticeArticleList();
+	      Map<String, BoardVO> map = new HashMap<String, BoardVO>();
+	      for (int i = 0; i < list.size(); i++) {
+	         System.out.println(list.get(i).getTitle());
+	         map.put("data" + i, list.get(i));
+	      }
+	      return map;
+	   }
 	
 // 한결끝
 			

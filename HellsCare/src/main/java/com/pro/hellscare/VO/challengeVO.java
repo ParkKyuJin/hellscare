@@ -10,9 +10,46 @@ public class challengeVO {
 	public String challenge_gift; //이벤트 보상포인트
 	public String challenge_img; //이벤트 이미지
 	public Date challange_date; //이벤트 날짜
+	public String latitude; //위도
+	public String longitude; //경도
 	
 	
 	public challengeVO(){}
+
+
+	
+	
+	
+	public String getLatitude() {
+		return latitude;
+	}
+
+
+
+
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+
+
+
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+
+
+
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+
+
 
 
 	public int getChallenge_code() {

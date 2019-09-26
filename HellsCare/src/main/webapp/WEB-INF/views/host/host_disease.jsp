@@ -205,13 +205,15 @@ $(function () {
 function selectDiseaseDel() { 	 
 	var f = document.diseaseform;
 	var count=0;
-	var v_id = f.check.value;
-	// alert(id);
-	for(var i=0; i<f.check.length; i++){
-		if(f.check[i].checked){
-			count++;
-	    }
-    }
+	   if(!f.check.length){
+		      count = 1;
+		   } else {
+		      for(var i=0; i<f.check.length; i++){
+		         if(f.check[i].checked){
+		            count++;
+		          }
+		       }
+		   }
     if(count > 0){
         if(confirm("선택된 항목을 삭제하시겠습니까?")){
         	diseaseform.action="host_diseaseDeletePro";

@@ -559,7 +559,7 @@
 										
 										<table style="width: 1000px; text-align: left;" >
 											<tr>
-												<th >
+												<th>
 													<!-- 게시글이 있는 경우 -->
 													<c:if test="${cnt > 0}">
 														<!-- 처음[◀◀] / 이전[◀]  -->

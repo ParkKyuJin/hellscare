@@ -17,7 +17,7 @@
     </select>
     
     <insert id="challengePro" parameterType="java.util.Map" >
-    insert into challenge_tbl values(challenge_seq.nextval,#{challenge_name},#{challenge_content},#{challenge_gift},#{challenge_img},#{challange_date})
+    insert into challenge_tbl values(challenge_seq.nextval,#{challenge_name},#{challenge_content},#{challenge_gift},#{challenge_img},#{challange_date},#{lat},#{lng})
     </insert>
     
     <select id="challengecount" resultType="int">
@@ -33,7 +33,7 @@
     </delete>
     
       <select id="challengedetail" resultType="com.pro.hellscare.VO.challengeVO" parameterType="int">
-    	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date from challenge_tbl where challenge_code = #{code}
+    	select challenge_code, challenge_name , challenge_content , challenge_gift , challenge_img , challange_date ,latitude,longitude from challenge_tbl where challenge_code = #{code}
     </select>
 
     <select id="challengesearch" resultType="com.pro.hellscare.VO.challengeVO" parameterType="String">
@@ -47,6 +47,7 @@
     <select id="Mychallenge" resultType="com.pro.hellscare.VO.MychalleangeVO" parameterType="String">
     	select c.challenge_code as challenge_code, c.challenge_name as challenge_name, c.challenge_content as challenge_content
     	,c.challenge_gift as challenge_gift, c.challenge_img as challenge_img, m.done as done, m.challenge_start as challenge_start, m.challenge_end as challenge_end
+    	c.latitude as , c.longitude
     	from Mychallenge_tbl m, challenge_tbl c
     	where m.challenge_code = c.challenge_code
     	and m.username = #{id}
@@ -222,6 +223,10 @@
     
     
 <!-- 예찬 시작 -->
+ <update id="updateMaster" parameterType="java.util.Map">
+      update club_tbl set club_master=(select username from clubs where #{club_name} in (club1,club2,club3) and username!=#{club_master} and rownum=1) where club_name=#{club_name}
+   </update>
+
     <!-- 관리자 - 운동등록 -->
  	   <insert id="insertExercise" parameterType="com.pro.hellscare.VO.ExerciseVO">
    	 	INSERT INTO exercise_tbl(exercise_code,exercise_name,exercise_img,way,part,kcal,note,kind,exercise_video)
@@ -679,7 +684,7 @@
 	<select id="getCommentList" parameterType="int" resultType="com.pro.hellscare.VO.CommentVO">
 		SELECT username, content, comment_date,board_code,c_code
 			FROM comment_board_tbl
-				WHERE board_code = #{board_code}
+				WHERE board_code = #{board_code} ORDER BY comment_date DESC
 	</select>
 	
 	<insert id="boardWrite" parameterType="com.pro.hellscare.VO.BoardVO">
@@ -770,16 +775,16 @@
 			FROM board_tbl WHERE board_code=#{board_code} AND notice=1
 	</select>
     
-<!-- 게시글 목록 조회 -->
+<!-- 내 질문 목록 조회 -->
 	<select id="getmyArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
 		<![CDATA[
 			SELECT * FROM 
 			    (SELECT qna_code, username, title, content, readCnt, qna_write_date, kind, state, rownum rNum
 			        FROM (SELECT * FROM board_qna_tbl )
 				) 
-			WHERE rNum >= #{start} AND rNum <= ${end} AND username=#{username}
+			WHERE rNum >= #{start} AND rNum <= #{end} AND username=#{username}
 		 ]]>
-	</select> 
+	</select>
 	
 	<!-- 내 질문글 수 -->
     <select id="getmyArticleCnt" resultType="int">

@@ -30,9 +30,9 @@
 
 			<form id="challengedetail" action="" method="post">
 			<div class="row">
-			<div class="col-lg-6 pl-lg-3">
-				<div class="entry-image">
-							<a href="/hellscare/resources/eventimg/${dto.challenge_img}" data-lightbox="image"><img class="image_fade" src="/hellscare/resources/eventimg/${dto.challenge_img}" alt="Standard Post with Image"></a>
+			<div class="col-lg-6 pl-lg-6">
+				<div class="entry-image" >
+							<a href="/hellscare/resources/eventimg/${dto.challenge_img}" data-lightbox="image" style="height:100%;"><img style="height:100%;"T class="image_fade" src="/hellscare/resources/eventimg/${dto.challenge_img}" alt="Standard Post with Image"></a>
 				</div>
 			</div>
 			<div class="col-lg-5">
@@ -49,8 +49,35 @@
 					<label for="entp_name">보상포인트</label>
 					<hr>
 					<h4>${dto.challenge_gift} Points</h4>
+					<div id="map" style="width:100%;height:350px;"></div>
 				</div>
-				
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f11ce067be0e4302a3047b3e2f5dbe9"></script>
+<script>
+var ttt = ${dto.latitude};
+var vvv = ${dto.longitude};
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+
+    mapOption = { 
+        center: new kakao.maps.LatLng(ttt,vvv), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+       
+    };
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+//마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(ttt, vvv); 
+
+//마커를 생성합니다
+var marker = new kakao.maps.Marker({
+ position: markerPosition
+});
+
+//마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+//아래 코드는 지도 위의 마커를 제거하는 코드입니다
+//marker.setMap(null);    
+</script>
 				<br>
 				<c:if test="${cnt != 0}">
 				<div class="style-msg infomsg">

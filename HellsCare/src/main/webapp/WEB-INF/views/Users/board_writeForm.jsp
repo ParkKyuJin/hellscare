@@ -55,13 +55,13 @@
 						<div class="row">
 							<div class="col-lg-12">
 							<!-- class="row" -->
-								<form  action="writePro" method="post" >
+								<form  action="writePro" method="post" onsubmit="return checkTitleLength();" name="writeform">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="form-process"></div>
 									
 									<div class="col-12 form-group">
 										<label>제목:</label>
-										<input type="text" name="title" id="title" class="form-control required" value="" placeholder="제목 입력">
+										<input type="text" name="title" id="title" class="form-control required" value="" placeholder="제목 입력" maxlength="50">
 									</div>
 							
 									<div class="col-12 form-group">
@@ -96,7 +96,7 @@
 									<div class="col-12">
 									<!-- name="jobs-application-submit"  -->
 										<button type="submit" class="btn btn-secondary">글쓰기 완료</button>
-										<button  class="btn btn-secondary" onclick="window.history.back();">글쓰기 취소</button>
+										<button type="button" class="btn btn-secondary" onclick="window.history.back();">글쓰기 취소</button>
 									</div>
 <!-- 
 									<input type="hidden" name="prefix" value="jobs-application-"> -->
@@ -167,6 +167,18 @@
 		})
 	</script>
 	
+	<script type="text/javascript">
+	
+		function checkTitleLength() {
+			var title = document.writeform.title.value;
+			alert("title : "+title);
+			alert("title : "+title.length);
+			if(title.length > 50) {
+				alert("글자 수는 50자로 제한되어 있습니다.");
+				return false;
+			}
+		}
+	</script>
 
 </body>
 </html>

@@ -290,7 +290,11 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getMemberInfo", username);
 				}
 			// 재관 종료
-	// ==예찬 시작
+	// ==예찬 시작	
+	@Override
+	public void updateMaster(Map<String, Object> map) {
+		sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updateMaster", map);
+	}			
 	// 관리자 - 운동등록처리
 	@Override
 	public int insertExercise(ExerciseVO vo) {

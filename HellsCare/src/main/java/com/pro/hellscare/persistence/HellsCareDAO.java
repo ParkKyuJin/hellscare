@@ -521,6 +521,9 @@ public interface HellsCareDAO {
 	// 동호회 - 동호회 게시글 수정처리
 	public int updateClubCnt(ClubBoardVO vo);
 
+	
+	// 동호회 - 동호회장 탈퇴시 회장변경
+	public void updateMaster(Map<String, Object> mMap);
 	// ==예찬 종료
 		
 	

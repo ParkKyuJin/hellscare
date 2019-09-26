@@ -64,7 +64,12 @@
 			<div class="content-wrap">
 
 				<div class="container clearfix">
-				
+				<c:if test="${pwdconfirm == 0}">
+					<script type="text/javascript">
+						alert("비밀번호가 틀렸습니다!");
+						window.history.back();
+					</script>
+				</c:if>
 				<c:if test="${pwdconfirm==1}">
 					<!-- Post Content
 					============================================= -->

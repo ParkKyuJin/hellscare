@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/hellscare/resources/ajax/jquery-3.4.1.min.js"></script>
 <meta charset="UTF-8">
 <title>오늘의 칼로리</title>
 </head>

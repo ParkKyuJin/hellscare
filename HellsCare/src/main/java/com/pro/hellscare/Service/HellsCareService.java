@@ -151,6 +151,7 @@ public interface HellsCareService {
 	// 한결 끝
 
 	// 동렬 시작 ---------------
+	
 	// 뉴스기사 크롤링 Service 담당자
 	public void crawlArticle(HttpServletRequest req, Model model) throws IOException;
 
@@ -195,7 +196,7 @@ public interface HellsCareService {
 	public void foodListDeletePro(HttpServletRequest req, Model model);
 
 	// 관리자 - 음식 중복 확인
-	public void foodDupcheck(HttpServletRequest req, Model model);
+	public int foodDupcheck(HttpServletRequest req, Model model);
 
 // ========================== 동렬 관리자 끝 =============================
 

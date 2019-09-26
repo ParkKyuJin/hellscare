@@ -21,35 +21,32 @@
   <title>음식 조회</title>
 
   <!-- Favicons -->
-  <!-- <link href="resources/img/favicon.png" rel="icon">
+<link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  Bootstrap core CSS
   <link href="resources/css2/bootstrap.min.css" rel="stylesheet">
-  external css
   <link href="resources/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="resources/css2/zabuto_calendar.css">
   <link rel="stylesheet" type="text/css" href="resources/lib/gritter/css/jquery.gritter.css" />
-  Custom styles for this template
   <link href="resources/css2/style.css" rel="stylesheet">
   <link href="resources/css2/style-responsive.css" rel="stylesheet">
   <script src="resources/lib/chart-master/Chart.js"></script>
   
   <link
 	href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
-	rel="stylesheet" type="text/css" /> -->
-<!-- <link rel="stylesheet" href="resources/css/bootstrap.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="resources/css/bootstrap.css"
 	type="text/css" />
 <link rel="stylesheet" href="resources/style.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/dark.css" type="text/css" />
 <link rel="stylesheet" href="resources/css/font-icons.css"
 	type="text/css" />
-<link rel="stylesheet" href="resources/css/animate.css" type="text/css" /> -->
-<!-- <link rel="stylesheet" href="resources/css/magnific-popup.css"
+<link rel="stylesheet" href="resources/css/animate.css" type="text/css" /> 
+ <link rel="stylesheet" href="resources/css/magnific-popup.css"
 	type="text/css" />
 
 <link rel="stylesheet" href="resources/css/responsive.css"
-	type="text/css" /> -->
+	type="text/css" />
 
   <!-- =======================================================
     Template Name: Dashio
@@ -59,18 +56,6 @@
   ======================================================= -->
 </head>
 
-<script type="text/javascript">
-	$(function() {
-		$("#all_check").change(function() {
-			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
-			$(".remove").prop("checked", is_check);
-		});
-		
-		$(".remove").click(function() {  // 개별선택
-			$("#all_check").prop("checked", false);
-		});
-	});
-</script>
 <body>
   <section id="container">
    <!-- **********************************************************************************************************************************************************
@@ -225,48 +210,6 @@
 								
 								</script>
 								
-								<!-- <script type="text/javascript">
-									// 삭제버튼 눌렀을시 음식선택했는지 여부
-									function confirmCheckboxSelected(){
-										var temp = false;
-										if(document.deleteform.food_code.length == 0){
-											alert("현재 삭제하실 음식이없습니다.");
-											return false;
-										}
-										
-										if(!document.deleteform.food_code.length){
-											temp = document.deleteform.food_code.checked;
-											if(temp){
-												var yn = confirm("선택하신 음식을 삭제하시겠습니까?");
-												if(yn){
-													return true;
-												} else{
-													return false;	
-												}
-											}
-										} else{
-											for(var i=0; i<document.deleteform.food_code.length; i++){
-												alert("temp : " + temp)
-												temp = document.deleteform.food_code[i].checked;
-												if(temp){
-													var yn = confirm("선택하신 음식을 삭제하시겠습니까?");
-													if(yn){
-														return true;
-													} else{
-														return false;	
-													}
-												}
-											}
-										}
-										
-										if(!temp){
-											alert("음식을 하나이상 선택해주세요.");
-											return false;
-										}
-										return false;
-									}
-								</script> -->
-								
 							</tbody>
 						</table>
 
@@ -305,67 +248,6 @@
 						</table>
 						</form>
 					</div>
-              <!-- <table class="table table-striped table-advance table-hover">
-                
-                <hr>
-                <thead>
-                  <tr>
-                    <th><i class="fa fa-bullhorn"></i> 음식명</th>
-                    <th>음식 이미지</th>
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> 음식 코드</th>
-                    <th><i class="fa fa-bookmark"></i> 일일 권장 칼로리</th>
-                    <th><i class=" fa fa-edit"></i> 권장 섭취량</th>
-                    <th>음식 종류</th>
-                    <th>상세조회</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">현미밥</a>
-                    </td>
-                    <td class="hidden-phone">R001</td>
-                    <td>123 kcal </td>
-                    <td><span class="label label-info label-mini">50 g</span></td>
-                    <td>밥류</td>
-                    <td>
-                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
-                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
-                      <button class="btn btn-light btn-xs">삭제</button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">김치찌개</a>
-                    </td>
-                    <td class="hidden-phone">S001</td>
-                    <td>256 kcal </td>
-                    <td><span class="label label-info label-mini">100 g</span></td>
-                    <td>찌개류</td>
-                    <td>
-                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
-                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
-                      <button class="btn btn-light btn-xs">삭제</button>
-                    </td>
-                  </tr>
-                  
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">삼겹살</a>
-                    </td>
-                    <td class="hidden-phone">M001</td>
-                    <td>100 kcal </td>
-                    <td><span class="label label-info label-mini">80 g</span></td>
-                    <td>반찬류</td>
-                    <td>
-                      <button class="btn btn-light btn-xs"  onclick="location.href='medi_reg' ">등록</button>
-                      <button class="btn btn-light btn-xs" onclick="location.href='medi_reg' ">수정</button>
-                      <button class="btn btn-light btn-xs">삭제</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
             </div>
             <!-- /content-panel -->
 
@@ -382,6 +264,19 @@
     <!--main content end-->
     
   </div><!-- #wrapper end -->
+  
+  <script type="text/javascript">
+	$(function() {
+		$("#all_check").change(function() {
+			var is_check = $(this).is(":checked"); // this는 전체선택용 체크박스
+			$(".remove").prop("checked", is_check);
+		});
+		
+		$(".remove").click(function() {  // 개별선택
+			$("#all_check").prop("checked", false);
+		});
+	});
+	</script>
 
 
 </body>

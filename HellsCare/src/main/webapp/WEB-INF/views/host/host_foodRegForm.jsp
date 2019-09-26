@@ -80,24 +80,35 @@
                       
                       <input class="form-control" id="food_name" name="food_name" type="text" required>
                     </div>
-                    <div class="col-lg-2">
-                    	<button class="btn btn-theme" type="button" onclick="checkFoodDup();">중복확인</button>
+                    <div class="col-lg-2" id="food_name_dup_check">
+                    	<!-- <button class="btn btn-theme" type="button" onclick="checkFoodDup();">중복확인</button> -->
                     </div>
                   </div>
                   
                    <script>
-						function checkFoodDup() {
-							var food_name = document.getElementById("food_name").value;
-							document.getElementById("food_name_chk").value = 0;
-							
-							if(!document.food_register.food_name.value) {
-								alert("음식명을 입력해주세요!");
-								document.food_register.food_name.focus();
-								return false;
-							}
-							
-							window.open('host_foodDupCheck?food_name=' + food_name, 'width=300, height=150', true);
-						}
+                   		$(document).ready(function() {
+                   			$("#food_name").keyup(function() {
+                   				var food_name = document.getElementById("food_name").value;
+                   				
+                   				if(food_name != null) {
+                   					$.ajax({
+        								url : 'foodNameDupCheck',
+        								type : 'GET',
+        								data : {food_name:food_name},
+        								success : function(data) {
+        									if(data == 0) {
+        										$('#food_name_dup_check').html("<span style='color:blue;'>사용가능</span>");
+        									} else if(data == 1) {
+        										$('#food_name_dup_check').html("<span style='color:red;'>사용불가</span>");
+        									}
+        								},
+        								error : function() {
+        									alert("오류");								
+        								}
+        							});
+                   				}
+                   			});
+                   		});
                   </script>
                   
                   <div class="form-group ">

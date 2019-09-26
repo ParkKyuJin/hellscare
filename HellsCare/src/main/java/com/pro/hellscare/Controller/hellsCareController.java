@@ -244,6 +244,12 @@ public class hellsCareController {
 	// 재관 종료
 //=============================	
 		//===동렬 part - start
+	// 관리자 - 음식 중복 확인
+		@RequestMapping("foodNameDupCheck")
+		public @ResponseBody int foodNameDupCheck(HttpServletRequest req, Model model) {
+			logger.info("URL ==> foodNameDupCheck");
+			return service.foodDupcheck(req, model);
+		}
 		// 식단 정보
 		@RequestMapping("food_info")
 		public String food_info(HttpServletRequest req, Model model) {
@@ -668,22 +674,23 @@ public class hellsCareController {
 		 		return "Users/denied";
 		 	}
 						
-			// 마이페이지
-			@RequestMapping("myPage")
-			public String myPage(HttpServletRequest req, Model model, Authentication auth) {
-				auth.getAuthorities(); 
-				logger.info("URL ==> myPage");
-				service.getUserInfo(req, model);
-				service.userModiView(req, model);
-				return "Users/myPage";
-			}
+	// 마이페이지
+	@RequestMapping("myPage")
+	public String myPage(HttpServletRequest req, Model model, Authentication auth) {
+		auth.getAuthorities();
+		logger.info("URL ==> myPage");
+		service.getUserInfo(req, model);
+		service.userModiView(req, model);
+		service.myQnaList(req, model); // 마이페이지 내 문의 목록
+		System.out.println("성공");
+		return "Users/myPage";
+	}
 			
 			// 마이페이지 회원정보 수정시 비밀번호 체크
 			@RequestMapping(value = "pwCheckCnt", method = RequestMethod.GET)
 			@ResponseBody
 			public int pwCheckCnt(@RequestParam("password") String password, @RequestParam("username") String username) {
 				Map<String, Object> map = new HashMap<>();
-				
 				map.put("password", password);
 				map.put("username", username);
 				return service.pwCheckCnt(map);

@@ -1160,14 +1160,12 @@ public class HellsCareServiceImpl implements HellsCareService {
 					model.addAttribute("pageNum", pageNum);
 				}
 				
+			
 				// 관리자 - 음식 중복 체크
 				@Override
-				public void foodDupcheck(HttpServletRequest req, Model model) {
+				public int foodDupcheck(HttpServletRequest req, Model model) {
 					String food_name = req.getParameter("food_name");
-					int selectCnt = dao.checkFoodDup(food_name);
-					
-					model.addAttribute("selectCnt", selectCnt);
-					model.addAttribute("food_name", food_name);
+					return dao.checkFoodDup(food_name);
 				}
 				
 //				pom.xml에 추가
@@ -1740,13 +1738,18 @@ public class HellsCareServiceImpl implements HellsCareService {
 		String c_content = req.getParameter("c_content");
 		int c_point = Integer.parseInt(req.getParameter("c_point"));
 		String c_img =  file.getOriginalFilename();
+		String lat = req.getParameter("lat");
+		String lng = req.getParameter("lng");
+		System.out.println("위도"+lat);
+		System.out.println("경도"+lng);
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("challenge_name", c_name);
 		map.put("challenge_content", c_content);
 		map.put("challenge_gift", c_point);
 		map.put("challenge_img", c_img);
 		map.put("challange_date", new Timestamp(System.currentTimeMillis()));
-	
+		map.put("lat", lat);
+		map.put("lng", lng);
 	    int cnt = dao.challengePro(map);
 		model.addAttribute("cnt", cnt); 
 		}catch(IOException e){
@@ -3700,6 +3703,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 				model.addAttribute("commentCnt",commentCnt);
 				model.addAttribute("pwdconfirm",pwdconfirm);
 			}
+			model.addAttribute("pwdconfirm",pwdconfirm);
 		}
 
 
@@ -3775,12 +3779,11 @@ public class HellsCareServiceImpl implements HellsCareService {
 
 	// notice modify pro
 	// notice modify pro
+	// notice modify pro
 	@Override
 	public void n_modify(HttpServletRequest req, Model model) {
 		int board_code = Integer.parseInt(req.getParameter("board_code"));
-		// String username = req.getParameter("username");
-		// 로그인 안되므로 하드코딩
-		String username = "hsot";
+		String username = (String)req.getSession().getAttribute("memId");
 
 		System.out.println("board_code 번호 : " + board_code);
 		System.out.println("관리자 : " + username);
@@ -3802,105 +3805,112 @@ public class HellsCareServiceImpl implements HellsCareService {
 
 
 
-			//게시판 목록
-			@Override
-			public void myQnaList(HttpServletRequest req, Model model) {
-				
-				//현재 로그인된 아이디 받음
-				//일단은 하드코딩
-				String username = "kimId";
-				
-				int pageSize = 5;    //한 페이지당 출력할 게시글 수
-				int pageBlock = 3;   //한 블럭당 페이지 갯수
-				
-				int cnt = 0;		 //글 갯수
-				int start = 0;		 //현재 페이지의 시작 글번호
-				int end = 0;		 //현재 페이지의 마지막 글번호
-				int number = 0;		 //출력용 글번호 //글이 삭제됐을 때(30,29,28,25) 화면상으로는 (28,27,26,25) 출력되게 하는 용
-				String pageNum = ""; //페이지 번호
-				int currentPage = 0; //현재 페이지
-				
-				int pageCount = 0;	 //페이지 갯수
-				int startPage = 0;	 //시작 페이지
-				int endPage = 0;	 //마지막 페이지
-				
-				cnt = dao.getmyArticleCnt(username);
-				
-				System.out.println("cnt : " + cnt); 
+	//내 질문 목록
+	@Override
+	public void myQnaList(HttpServletRequest req, Model model) {
+		
+		//현재 로그인된 아이디 받음
+		String username = (String)req.getSession().getAttribute("memId");
+		
+		int pageSize = 5;    //한 페이지당 출력할 게시글 수
+		int pageBlock = 3;   //한 블럭당 페이지 갯수
+		
+		int cnt = 0;		 //글 갯수
+		int start = 0;		 //현재 페이지의 시작 글번호
+		int end = 0;		 //현재 페이지의 마지막 글번호
+		int number = 0;		 //출력용 글번호 //글이 삭제됐을 때(30,29,28,25) 화면상으로는 (28,27,26,25) 출력되게 하는 용
+		String pageNum = ""; //페이지 번호
+		int currentPage = 0; //현재 페이지
+		
+		int pageCount = 0;	 //페이지 갯수
+		int startPage = 0;	 //시작 페이지
+		int endPage = 0;	 //마지막 페이지
+		
+		cnt = dao.getmyArticleCnt(username);
+		
+		System.out.println("cnt : " + cnt); 
 
-				pageNum = req.getParameter("pageNum");
-				
-				if(pageNum == null) {
-					pageNum = "1";	//첫 페이지를 1로 지정
-				}
-				
-				//글 30건 기준
-				currentPage = Integer.parseInt(pageNum); //현재 페이지 : 1
-				System.out.println("currentPage : " + currentPage);
-				
-				//페이지 갯수 6 = (30 / 5) + (0)
-				pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); //페이지 갯수 + 나머지 있으면 +1
-				
-				//현재 페이지 시작 글번호 (페이지별)
-				// 1 = (1 - 1) * 5 + 1
-				start = (currentPage - 1) * pageSize + 1;
-				
-				//현재 페이지의 마지막 글번호(페이지별)
-				// 5 = 1 + 5 - 1
-				end = start + pageSize - 1;
-				
-				System.out.println("start : " + start);
-				System.out.println("end : " + end);
-				
-				//현재페이지의 마지막 글번호가 글 갯수보다 클 때 ...마지막글번호에 글갯수 대입(저장)
-				if(end > cnt) end = cnt;
-				
-				//출력용 글번호
-				//30 = 30 - ( 1 - 1 ) * 5
-				number = cnt - (currentPage - 1) * pageSize;
-				System.out.println("number : " + number);
-				System.out.println("pageSize : " + pageSize);
-				
-				if(cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
-					
-					Map<String, Object> map = new HashMap<String,Object>();
-					map.put("start", start);
-					map.put("end", end);
-					map.put("username",username);
-					List<BoardQnaVO> dtos = dao.getmyArticleList(map);
-					model.addAttribute("dtos", dtos); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
-				}
-				
-				//6단계. requeset나 session에 처리 결과를 저장(jsp에 전달하기 위함)
-				
-				//시작페이지
-				// 1 = (1 / 3) * 3 + 1;
-				startPage = (currentPage / pageBlock) * pageBlock + 1;
-				
-				if(currentPage % pageBlock == 0) startPage -= pageBlock;
-				System.out.println("startPage : " + startPage);
-				
-				//마지막페이지
-				// 3 = 1 + 3 - 1;
-				endPage = startPage + pageBlock - 1;
-				
-				if(endPage > pageCount) endPage = pageCount;
-				System.out.println("endPage : " + endPage);
-				
-				System.out.println("===================================");
-
-				model.addAttribute("cnt", cnt); //글 갯수
-				model.addAttribute("number", number); //출력용 글번호
-				model.addAttribute("pageNum", pageNum); //페이지 번호
-				
-				if(cnt > 0) {
-					model.addAttribute("startPage", startPage); //시작페이지
-					model.addAttribute("endPage", endPage); //마지막페이지
-					model.addAttribute("pageBlock", pageBlock); //출력할 페이지 갯수
-					model.addAttribute("pageCount", pageCount); //페이지 갯수
-					model.addAttribute("currentPage", currentPage); //현재 페이지
-				}
+		pageNum = req.getParameter("pageNum");
+		
+		if(pageNum == null) {
+			pageNum = "1";	//첫 페이지를 1로 지정
+		}
+		
+		//글 30건 기준
+		currentPage = Integer.parseInt(pageNum); //현재 페이지 : 1
+		System.out.println("currentPage : " + currentPage);
+		
+		//페이지 갯수 6 = (30 / 5) + (0)
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); //페이지 갯수 + 나머지 있으면 +1
+		
+		//현재 페이지 시작 글번호 (페이지별)
+		// 1 = (1 - 1) * 5 + 1
+		start = (currentPage - 1) * pageSize + 1;
+		
+		//현재 페이지의 마지막 글번호(페이지별)
+		// 5 = 1 + 5 - 1
+		end = start + pageSize - 1;
+		
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		System.out.println("username : " + username);
+		//현재페이지의 마지막 글번호가 글 갯수보다 클 때 ...마지막글번호에 글갯수 대입(저장)
+		if(end > cnt) end = cnt;
+		
+		//출력용 글번호
+		//30 = 30 - ( 1 - 1 ) * 5
+		number = cnt - (currentPage - 1) * pageSize;
+		System.out.println("number : " + number);
+		System.out.println("pageSize : " + pageSize);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("username",username);
+		
+		if(cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
+			
+			List<BoardQnaVO> dtoqs = dao.getmyArticleList(map);
+			
+			if(dtoqs != null) {
+				System.out.println("ddddddddddddddddddddddddddddddddddd"+dtoqs.get(0).getTitle());
+			} else {
+				System.out.println("null");
 			}
+			
+			model.addAttribute("dtoqs", dtoqs); 	//큰바군 : 게시글 목록 cf) 작은바구니 : 게시글1
+		}
+		
+		//6단계. requeset나 session에 처리 결과를 저장(jsp에 전달하기 위함)
+		
+		//시작페이지
+		// 1 = (1 / 3) * 3 + 1;
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		System.out.println("startPage : " + startPage);
+		
+		//마지막페이지
+		// 3 = 1 + 3 - 1;
+		endPage = startPage + pageBlock - 1;
+		
+		if(endPage > pageCount) endPage = pageCount;
+		System.out.println("endPage : " + endPage);
+		
+		System.out.println("===================================");
+
+		model.addAttribute("cnt", cnt); //글 갯수
+		model.addAttribute("number", number); //출력용 글번호
+		model.addAttribute("pageNum", pageNum); //페이지 번호
+		
+		if(cnt > 0) {
+			model.addAttribute("startPage", startPage); //시작페이지
+			model.addAttribute("endPage", endPage); //마지막페이지
+			model.addAttribute("pageBlock", pageBlock); //출력할 페이지 갯수
+			model.addAttribute("pageCount", pageCount); //페이지 갯수
+			model.addAttribute("currentPage", currentPage); //현재 페이지
+		}
+	}
 	//==한결 파트 종료	
 		
 		
@@ -4034,10 +4044,13 @@ public class HellsCareServiceImpl implements HellsCareService {
 			// 질병등록처리 
 			@Override
 			public void diseaseInsertPro(HttpServletRequest req, Model model) {
-		  		// DiseaseVO 바구니 생성 
-		  		DiseaseVO vo = new DiseaseVO();
-				// 화면으로부터 입력받은 값을 받아와서 바구니에 담는다.
-				vo.setDisease_code(req.getParameter("disease_code"));
+				String disease_code= req.getParameter("disease_code");
+			      String d_code = disease_code.toUpperCase();
+			      
+			        // DiseaseVO 바구니 생성 
+			        DiseaseVO vo = new DiseaseVO();
+			      // 화면으로부터 입력받은 값을 받아와서 바구니에 담는다.
+			     vo.setDisease_code(d_code);
 				vo.setDisease_name(req.getParameter("disease_name"));
 				vo.setD_category(req.getParameter("d_category"));
 				vo.setDefinition(req.getParameter("definition"));

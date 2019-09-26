@@ -11,7 +11,21 @@ public class MychalleangeVO {
 	int done; //완료여부
 	Date challenge_start; //이벤트 시작일
 	Date challenge_end; //이벤트 종료일
+	public String latitude; //위도
+	public String longitude; //경도
 	
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 	public String getChallenge_code() {
 		return challenge_code;
 	}
