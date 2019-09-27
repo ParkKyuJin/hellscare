@@ -67,21 +67,71 @@
 		
 			<!-- Content
 		============================================= -->
-		<section id="content">
+		<section id="content"> 
 
-			<div class="content-wrap">
+			<div class="content-wrap" align="center">
 
 				<div class="container clearfix">
-
+					
 					<!-- Post Content
 					============================================= -->
 					<div class="postcontent nobottommargin clearfix">
 			
 						<h3>병원/약국 위치</h3>
-			
-						<div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
+						<div align="center">
+						<div class="col_half nobottommargin" style="width:48%;">  
 							<div class="map_wrap">
-							    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+							    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> 
+							    <ul id="category"> 
+							        <li id="HP8" data-order="2"> 
+							            <span class="category_bg pharmacy"></span>
+							            병원
+							        </li>       
+							        <li id="PM9" data-order="2"> 
+							            <span class="category_bg pharmacy"></span>
+							            약국
+							        </li> 
+							    </ul> 
+			 		  
+			 			</div>
+					</div>
+
+					<div class="col_half nobottommargin col_last">
+								<label for="billing-form-lname">이름</label>
+								<input type="text"  id="name" name="billing-form-lname" value="" class="sm-form-control" />
+								<label for="billing-form-lname">주소</label>
+								<input type="text"  id="address" name="billing-form-lname" value="" class="sm-form-control" />
+								<label for="billing-form-lname">전화번호</label>
+								<input type="text"  id="phone" name="billing-form-lname" value="" class="sm-form-control" />
+						
+					</div>
+					</div>
+					
+			 			<!-- <div class="col_half nobottommargin">
+			 		
+							<div class="map_wrap">
+							    <div id="map" style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
+							     <div id="placename" style="float:right;"></div>
+							    <ul id="category">
+							        <li id="HP8" data-order="2"> 
+							            <span class="category_bg pharmacy"></span>
+							            병원
+							        </li>       
+							        <li id="PM9" data-order="2"> 
+							            <span class="category_bg pharmacy"></span>
+							            약국
+							        </li>
+							    </ul>
+			 		  
+			 			</div>
+			 			
+			 			<div class="col_half nobottommargin col_last">
+			 			gkgkgkgkgkgkgkgkgk 
+			 			</div> -->
+						<!-- <div class="bottommargin divcenter" style="max-width: 750px; min-height: 350px;" >
+							<div class="map_wrap">
+							    <div id="map" style="width:70%;height:100%;position:relative;overflow:hidden;"></div>
+							     <div id="placename" style="float:right;"></div>
 							    <ul id="category">
 							        <li id="HP8" data-order="2"> 
 							            <span class="category_bg pharmacy"></span>
@@ -92,7 +142,8 @@
 							            약국
 							        </li>  
 							    </ul>
-							</div>
+							   
+							</div> -->
 							
 							<input type="hidden" id="latitude">
 							<input type="hidden" id="longitude">
@@ -269,7 +320,10 @@
 								
 								    contentNode.innerHTML = content;
 								    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
-								    placeOverlay.setMap(map);  
+								    placeOverlay.setMap(map);
+								    document.getElementById('name').value = place.place_name;
+								     document.getElementById('address').value =  place.address_name;
+								    document.getElementById('phone').value = place.phone; 
 								}
 								
 								
@@ -324,8 +378,9 @@
 						</div>
 						
 					</div><!-- .postcontent end -->
+					
 				</div>
-
+		</section>
 			</div>
 
 		</section>

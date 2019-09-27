@@ -905,7 +905,7 @@ public class HellsCareServiceImpl implements HellsCareService {
 					@SuppressWarnings("deprecation")
 					String saveDir = req.getRealPath("/resources/images/food/");
 
-					String realDir = "C:\\Dev50\\workspace_spring\\HellsCare\\src\\main\\webapp\\resources\\images\\food\\";
+					String realDir = "C:\\Users\\wovkf\\git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\images\\food\\";
 
 					try {
 						file.transferTo(new File(saveDir + file.getOriginalFilename()));

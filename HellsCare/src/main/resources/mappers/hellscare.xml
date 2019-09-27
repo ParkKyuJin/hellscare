@@ -45,9 +45,8 @@
     </insert>
     
     <select id="Mychallenge" resultType="com.pro.hellscare.VO.MychalleangeVO" parameterType="String">
-    	select c.challenge_code as challenge_code, c.challenge_name as challenge_name, c.challenge_content as challenge_content
-    	,c.challenge_gift as challenge_gift, c.challenge_img as challenge_img, m.done as done, m.challenge_start as challenge_start, m.challenge_end as challenge_end
-    	c.latitude as , c.longitude
+    	select c.challenge_code as challenge_code, c.challenge_name as challenge_name, c.challenge_content as challenge_content,c.challenge_gift as challenge_gift, c.challenge_img as challenge_img, m.done as done, m.challenge_start as challenge_start, m.challenge_end as challenge_end,
+    	c.latitude as latitude, c.longitude as longitude
     	from Mychallenge_tbl m, challenge_tbl c
     	where m.challenge_code = c.challenge_code
     	and m.username = #{id}

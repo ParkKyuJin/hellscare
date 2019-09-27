@@ -117,7 +117,7 @@
 						</div>
 								</c:if>
 								
-								<c:if test="${dto.glucose>=100&&dto.glucose<=125}">
+								<c:if test="${dto.glucose>125}">
 									<div class="alert alert-danger">
 			 <i class="icon-remove-sign"></i><strong>Oh snap!</strong> 위험! 관리가 필요합니다!
 						 
