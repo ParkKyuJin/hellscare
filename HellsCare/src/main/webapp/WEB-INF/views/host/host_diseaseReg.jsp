@@ -20,7 +20,6 @@
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <title>Dashio - Bootstrap Admin Template</title>
-
   <!-- Favicons -->
   <link href="resources/img/favicon.png" rel="icon">
   <link href="resources/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -174,6 +173,32 @@ function checkCode(){
         }
     });
 }
+
+//textarea 입력 글자수 제한
+$(document).ready(function() {
+    $('#definition').on('keyup', function() {
+        if($(this).val().length > 3999) {
+            $(this).val($(this).val().substring(0, 3999));
+        }
+    });
+    $('#cause').on('keyup', function() {
+        if($(this).val().length > 3999) {
+            $(this).val($(this).val().substring(0, 3999));
+        }
+    });
+    $('#symptom').on('keyup', function() {
+        if($(this).val().length > 3999) {
+            $(this).val($(this).val().substring(0, 3999));
+        }
+    });
+    $('#cure').on('keyup', function() {
+        if($(this).val().length > 3999) {
+            $(this).val($(this).val().substring(0, 3999));
+        }
+    });
+
+});
+
 
 </script>
 

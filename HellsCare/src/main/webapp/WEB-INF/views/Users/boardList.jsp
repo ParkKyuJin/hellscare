@@ -175,25 +175,25 @@
 								<div class="table-responsive">
 									<table id="datatable2"
 										class="table table-striped table-bordered" cellspacing="0" width="100%">
-										<thead>
-											<tr>
-												<th>No.</th>
-												<th>Date.</th>
-												<th>제목</th>
-												<th>작성자</th>
-												<th>조회수</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>No.</th>
-												<th>Date.</th>
-												<th>제목</th>
-												<th>작성자</th>
-												<th>조회수</th>
-											</tr>
-										</tfoot>
-										<tbody>
+											<thead>
+												<tr>
+													<th>No.</th>
+													<th>제목</th>
+													<th>작성자</th>
+													<th>조회수</th>
+													<th>Date.</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>No.</th>
+													<th>제목</th>
+													<th>작성자</th>
+													<th>조회수</th>
+													<th>Date.</th>
+												</tr>
+											</tfoot>
+											<tbody>
 											<c:forEach var="qto" items="${qtos}" >
 											<tr>
 												<td align="center" style="width:50px">

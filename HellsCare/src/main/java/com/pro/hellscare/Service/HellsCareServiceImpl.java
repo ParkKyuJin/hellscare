@@ -402,12 +402,21 @@ public class HellsCareServiceImpl implements HellsCareService {
 								weather.setSuperMicrodust(superMicrodust);
 								break;
 								
-							// 오늘자 오존지수
-							case 2 :
-								getDustValue = dusts.get(i).text().split("ppm");
-								double ozon = Double.parseDouble(getDustValue[0]);
-								weather.setOzon(ozon);
-								break;
+								// 오늘자 오존지수
+		                     case 2 :
+		                        getDustValue = dusts.get(i).text().split("ppm");
+		                        
+		                        double ozon;
+		                        
+		                        if(getDustValue[0].contains("null")) {
+		                           ozon = 0;
+		                        } else {
+		                           ozon = Double.parseDouble(getDustValue[0]);
+		                        }
+		                        
+		                        
+		                        weather.setOzon(ozon);
+		                        break;
 						}
 					}
 						
@@ -3871,8 +3880,8 @@ public class HellsCareServiceImpl implements HellsCareService {
 		if(cnt > 0) { //(글갯수)cnt가 0보다 클 때 읽으러 감
 			
 			List<BoardQnaVO> dtoqs = dao.getmyArticleList(map);
-			
-			if(dtoqs != null) {
+			System.out.println("dtoqs"+dtoqs);
+			if(0 != dtoqs.size()) {
 				System.out.println("ddddddddddddddddddddddddddddddddddd"+dtoqs.get(0).getTitle());
 			} else {
 				System.out.println("null");
