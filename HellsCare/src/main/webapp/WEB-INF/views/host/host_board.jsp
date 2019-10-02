@@ -34,6 +34,7 @@
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i> 게시글 관리</h3>
         <div class="row mb">
+        <div class="col-md-12">
           <!-- page start-->
           <div class="content-panel">
             <div class="adv-table">
@@ -52,7 +53,7 @@
                   <tr>
                     <td>${dto.board_code}</td>
                     <td>${dto.write_date}</td>
-                    <td><a href="host_boardContent">${dto.content}</a></td>
+                    <td><a href="host_boardContent?board_code=${dto.board_code}">${dto.content}</a></td>
                     <td>${dto.username}</td>
                     <td>${dto.readCnt}</td>
                   </tr>
@@ -63,6 +64,7 @@
             </div>
           </div>
           <!-- page end-->
+        </div>
         </div>
         <!-- /row -->
       </section>

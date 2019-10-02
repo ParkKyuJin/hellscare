@@ -165,8 +165,8 @@
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <div class="form-send">
-                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='noticeUpdate?board_code=${dto.board_code}'">수정 완료</button>
-               <button type="button" class="btn btn-large btn-primary" onclick="javascript: form.action='host_noticeContent?board_code=${dto.board_code}'">취소</a></button>
+                <button type="submit" class="btn btn-large btn-primary" formaction='noticeUpdate?board_code=${dto.board_code}'>수정 완료</button>
+               <button type="submit" class="btn btn-large btn-primary" formaction='host_noticeContent?board_code=${dto.board_code}'>취소</a></button>
               </div>
 
             </form>

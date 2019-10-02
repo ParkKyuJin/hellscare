@@ -42,8 +42,8 @@
 					<div id="portfolio" class="portfolio grid-container portfolio-1 clearfix">
 					<c:forEach var="dto" items="${list}">
 						<article class="portfolio-item pf-media pf-icons clearfix">
-							<div class="portfolio-image">
-									<img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="height:500px;width:700px;" alt="Open Imagination">		
+							<div class="portfolio-image" align="center">
+									<img src="/hellscare/resources/eventimg/${dto.challenge_img}" style="width:500px;height:680px;" alt="Open Imagination">		
 							</div>
 							<div class="portfolio-desc">
 								<h3><a href="challengedetail?code=${dto.challenge_code}">${dto.challenge_name}</a></h3>

@@ -527,93 +527,78 @@
 									
 									<!-- 1:1문의 사항은 QnA에서 내가 질문한거 모음 으로 알고있기 떄문에 바꾸겠음 -->
 										<div class="tab-content clearfix" id="tab-replies">
-											<div class="clear topmargin-sm"></div>
-							
-											<table class="table">
-										  <thead>
-											<tr>
-											  <th>#</th>
-											  <th>질문</th>
-											  <th>제목</th>
-											  <th>답변여부</th>
-											</tr>
-										  </thead>
-										  <tbody>
-										  
-										  <c:if test="${cnt > 0}">
-										  <c:forEach var="dto" items="${dtos}">
-											<tr>
-											  <td>${number}</td>
-											  <td>${dto.kind}</td>
-											  <td><a href="qna_pwdconfirm?qna_code=${dto.qna_code}">${dto.title}</a></td>
-											  <td>
-											  	<c:if test="${dto.state == 0}">답변없음</c:if>
-											  	<c:if test="${dto.state > 0}">답변있음</c:if>
-											  </td>
-											  
-											</tr>
-											</c:forEach>
-											</c:if>
-										  </tbody>
-										</table>	
-										
-										<table style="width: 1000px; text-align: left;" >
-											<tr>
-												<th>
-													<!-- 게시글이 있는 경우 -->
-													<c:if test="${cnt > 0}">
-														<!-- 처음[◀◀] / 이전[◀]  -->
-														<c:if test="${startPage > pageBlock}">
-															<a href="boardList">[◀◀ ] </a>
-															<a href="boardList?pageNum=${startPage - pageBlock}">[◀ ] </a>
-														</c:if>
-														
-														<!-- 블록내의 페이지 번호 -->
-														<c:forEach var="i" begin="${startPage}" end="${endPage}">
-															<c:if test="${i == currentPage}">
-																<span><b>[${i}]</b></span>
-															</c:if>
-															<c:if test="${i != currentPage}">
-																<span><b><a href="boardList?pageNum=${i}">[${i}]</a></b></span>
-															</c:if>
-														
-														</c:forEach>
-														
-														<!-- 다음[▶] / 끝[▶▶]   -->
-														<c:if test="${pageCount > endPage}">
-															<a href="boardList?pageNum=${startPage + pageBlock}">[▶]  </a>
-															<a href="boardList?pageNum=${pageCount}">[▶▶]</a>
-														</c:if>
-													</c:if>
-												</th>
-											</tr>
-										</table>
-											
+
+											<div id="myQnaListt">
+												<!-- 결과 출력위치 -->
+												<%@ include file="../Users/myQnaList.jsp"%>		
+											</div>
 											<!-- <a href="qnaWriteForm" class="button button-black tright noleftmargin" style="text-align: center;">문의하기<i class="icon-angle-right"></i></a>					 -->
-								
+
+											<table style="width: 1000px; text-align: center;">
+												<tr>
+													<th>
+														<!-- 게시글이 있는 경우 --> <c:if test="${cnt > 0}">
+															<!-- 처음[◀◀] / 이전[◀]  -->
+															<c:if test="${startPage > pageBlock}">
+																<a onclick="mminus();">[◀◀ ] </a>
+																<a onclick="minus();">[◀ ]</a>
+																<%-- <a href="myQnaList?pageNum=${startPage - pageBlock}">[◀ ] </a> --%>
+															</c:if>
+									
+															<!-- 블록내의 페이지 번호 -->
+															<c:forEach var="i" begin="${startPage}" end="${endPage}">
+																<c:if test="${i == currentPage}">
+																	<span><b>[${i}]</b></span>
+																</c:if>
+																<c:if test="${i != currentPage}">
+																<!-- myQnaList?pageNum=${i} -->
+																	<span><b><a href="#" onclick="now();">[${i}]</a></b></span>
+																</c:if>
+									
+															</c:forEach>
+									
+															<!-- 다음[▶] / 끝[▶▶]   -->
+															<c:if test="${pageCount > endPage}">
+																<a onclick="plus();">[▶] </a>
+																<a onclick="pplus();">[▶▶]</a>
+																<%-- <a href="myQnaList?pageNum=${startPage + pageBlock}">[▶] </a>
+																<a href="myQnaList?pageNum=${pageCount}">[▶▶]</a> --%>
+															</c:if>
+														</c:if>
+													</th>
+												</tr>
+											</table>
+										
 											<hr>
-		
-											
+
 										<div class="tab-content clearfix" id="tab-replies">
-											<div class="clear topmargin-sm"></div>
-												<form class="row mb-0" id="website-cost" action="include/form.php" method="post" enctype="multipart/form-data">
+											<form class="row mb-0" id="website-cost" action="#"
+												method="GET" enctype="multipart/form-data">
+												<input type="hidden" name="${_csrf.parameterName}"
+													value="${_csrf.token}">
 												<h4>문의사항 작성</h4>
 												<div class="form-process"></div>
-												
+
 												<div class="col-12 form-group mb-4">
-													<label for="website-cost-email">제목:</label>
-													<input type="email" name="website-cost-email" id="website-cost-email" class="form-control required" value="" placeholder="제목 입력" required="required">
+													<label for="website-cost-email">제목:</label> <input
+														name="website-cost-email" id="website-cost-email"
+														class="form-control required" value="" placeholder="제목 입력"
+														required="required">
 												</div>
-				
+
 												<div class="col-md-6 form-group mb-4">
-													<label for="website-cost-name">비밀번호:</label>
-													<input type="password" name="website-cost-name" id="website-cost-name" class="form-control required" value="" placeholder="비밀번호 입력" required="required">
+													<label for="website-cost-name">비밀번호:</label> <input
+														type="password" name="website-cost-name"
+														id="website-cost-name" class="form-control required"
+														value="" placeholder="비밀번호 입력" required="required">
 												</div>
 												<div class="col-md-6 form-group mb-4">
 													<label for="website-cost-contact">문의사항:</label>
 													<!-- <input type="text" name="website-cost-contact" id="website-cost-contact" class="form-control required" value="" placeholder="Enter your Contact Number"> -->
-													<select id="template-contactform-default-select" name="template-contactform-default-select" class="form-control valid">
-														<option value="" disabled="" selected="" >문의 유형</option>
+													<select id="kind"
+														name="template-contactform-default-select"
+														class="form-control valid">
+														<option value="" disabled="" selected="">문의 유형</option>
 														<option value="개인정보">개인정보 문의</option>
 														<option value="건강정보">건강정보 문의</option>
 														<option value="운동정보">운동정보 문의</option>
@@ -621,24 +606,25 @@
 														<option value="기타">기타 문의</option>
 													</select>
 												</div>
-												
-				
+
+
 												<div class="col-12 form-group mb-4">
 													<label for="website-cost-message">문의내용:</label>
-													<textarea name="website-cost-message" id="website-cost-message" class="form-control" cols="30" rows="10"></textarea>
+													<textarea name="website-cost-message"
+														id="website-cost-message" class="form-control" cols="30"
+														rows="10"></textarea>
 												</div>
-				
+
 												<div class="col-12 hidden">
-													<input type="text" id="website-cost-botcheck" name="website-cost-botcheck" value="" />
+													<input type="text" id="website-cost-botcheck"
+														name="website-cost-botcheck" value="" />
 												</div>
 												<div class="col-12">
-													<a href="#" class="button button-rounded button-reveal button-large button-dirtygreen"><span>등록</span><i class="icon-angle-right"></i></a>
+													<button type="submit" id="qnaSubmit"
+														name="jobs-application-submit" class="btn btn-secondary">질문작성
+														완료</button>
 												</div>
-				
-												<input type="hidden" name="prefix" value="website-cost-">
-												<input type="hidden" name="subject" value="Website Cost Estimate Request">
-												<input type="hidden" name="html_title" value="Website Cost Estimation">
-												<input type="hidden" id="website-cost-price" name="website-cost-total-price" value="">
+
 											</form>
 							
 											</div>
@@ -734,6 +720,91 @@
 <!-- Footer Scripts
 ============================================= -->
 <%@ include file="../include/footerScript.jsp" %>
+
+
+<%@ include file="../include/footerScript.jsp"%>
+
+<script type="text/javascript" )>
+$(document).ready(function(){
+
+		//질문목록 출력
+		myQnaList();
+		
+		//질문등록 버튼 클릭
+		$("#qnaSubmit").click(function(){
+			var title = $("#website-cost-email").val();
+			var content = $("#website-cost-message").val();
+			var qna_password = $("#website-cost-name").val();
+			var kind = $("#kind").val();
+			var param = "title=" + title + "&content=" + content + "&qna_password=" + qna_password + "&kind=" + kind;
+			
+			$.ajax({
+				type:"GET",
+				url:"${pageContext.request.contextPath}/MyqnaWritePro",
+				data:param,
+				success:function(){
+					console.log("success");
+					alert("문의글 등록");
+					myQnaList();
+					return false;
+				}
+			});
+		});
+		
+	
+	//질문목록
+	function myQnaList(){
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/myQnaList",
+			success:function(result){
+				console.dir(result);
+				
+				$("#myQnaListt").html(result);
+			}
+		});
+	}
+	
+	function mminus(){
+		var pageNum=${startPage - pageBlock};
+		var param = "pageNum=" + pageNum;
+		
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/myQnaList",
+			data:param,
+			success:function(){
+				console.log("pageNum success");
+				alert("다음페이지");
+				myQnaList();
+				return false;
+			}
+		});
+	}
+	
+	function now(){
+		var pageNum=${i};
+		var param = "pageNum=" +pageNum;
+		
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/myQnaList",
+			data:param,
+			success:function(){
+				console.log("pageNum success");
+				alert("페페이지");
+				myQnaList();
+				return false;
+			}
+		});
+		
+	}
+	
+	
+});
+
+</script>
+
 <script type="text/javascript">
 	function modiChk(){
 		if(document.modiform.scrit.value != document.modiform.repassword.value){

@@ -142,7 +142,9 @@
             <br>
             <div id="message"></div>
             
-            <form class="contact-form php-mail-form" role="form" action="notice_modify" method="POST">
+            <form class="contact-form php-mail-form" id="form" role="form" action="notice_modify" method="POST">
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+            
               <div class="form-group">
                 제목<input type="text" name="subject" class="form-control" id="contact-subject" value="${dto.title}" data-rule="minlen:4" disabled="disabled">
                 <div class="validate"></div>
@@ -164,9 +166,9 @@
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <div class="form-send">
-                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='notice_modify?board_code=${dto.board_code}'">수정</button>
-                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='board_delete?board_code=${dto.board_code}'">삭제</button>
-                <button type="submit" class="btn btn-large btn-primary" onclick="javascript: form.action='host_notice'">취소</a></button>
+                <button type="submit" class="btn btn-large btn-primary" formaction='notice_modify?board_code=${dto.board_code}'>수정</button>
+                <button type="submit" class="btn btn-large btn-primary" formaction='hnboard_delete?board_code=${dto.board_code}'>삭제</button>
+                <button type="submit" class="btn btn-large btn-primary" formaction='host_notice'>취소</a></button>
               </div>
 
             </form>

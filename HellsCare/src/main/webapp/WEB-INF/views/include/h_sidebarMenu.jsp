@@ -146,7 +146,7 @@
               <span>이벤트 관리</span>
               </a>
             <ul class="sub">
-              <li><a href="host_challenge">도전과제 관리</a></li>
+              <li><a href="host_challenge">이벤트 등록/삭제</a></li>
             </ul>
           </li>
           <li>

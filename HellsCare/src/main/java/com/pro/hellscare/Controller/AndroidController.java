@@ -19,9 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pro.hellscare.VO.BoardQnaVO;
 import com.pro.hellscare.VO.BoardVO;
 import com.pro.hellscare.VO.ClubBoardVO;
 import com.pro.hellscare.VO.ClubVO;
+import com.pro.hellscare.VO.CommentQnaVO;
 import com.pro.hellscare.VO.CommentVO;
 import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
@@ -32,6 +34,7 @@ import com.pro.hellscare.VO.MychalleangeVO;
 import com.pro.hellscare.VO.NutritionCSV;
 import com.pro.hellscare.VO.NutritionInfo;
 import com.pro.hellscare.VO.UserDayKcalInfo;
+import com.pro.hellscare.VO.UserInfoVO;
 import com.pro.hellscare.VO.UsersVO;
 import com.pro.hellscare.persistence.HellsCareDAO;
 
@@ -51,7 +54,7 @@ public class AndroidController {
 	// @ResponseBody   //맵에서 안드로이드로 값을 전달하기위한 어노테이션(Gson형식)
 	//return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
 	
-// 재관 시작
+// TODO 탁재관 파트	
 	// 로그인
 	@ResponseBody // spring에서 안드로이드로 데이터(json)를 보내기 위한 어노테이션
 	@RequestMapping("androidSignIn")
@@ -120,7 +123,7 @@ public class AndroidController {
 	}	
 // 재관 끝
 
-// 규진시작
+	// TODO 박규진 파트	
 	@ResponseBody
 	@RequestMapping("androidMychall")
 	public Map<String,MychalleangeVO> androidMychall(HttpServletRequest req){
@@ -136,7 +139,8 @@ public class AndroidController {
 	}
 // 규진끝	
 	
-	//동렬파트 시작==============
+
+	// TODO 이동렬 파트 ===================	
 	// 오늘의 칼로리 - 음식 분류에 맞는 음식 리스트 가져오기
 		@ResponseBody
 		@RequestMapping("androidGetFoodList")
@@ -380,323 +384,243 @@ public class AndroidController {
 		}
 		
 		// 식단 추천
-		@ResponseBody
-		@RequestMapping("androidFoodRecommendation")
-		public Map<String, String> androidFoodRecommendation(HttpServletRequest req) {
-			
-			logger.info("androidFoodRecommendation");
-			
-			String username = req.getParameter("username");
-			String getDate = "";
-			
-			// 사용자의 나이 구하기
-			UsersVO user = dao.getUserInfoByUsingId(username);
-			
-			// 오늘 날짜 받기
-			Date today = new Date();
-			SimpleDateFormat getAge = new SimpleDateFormat("YYYYMMdd");
-			
-			// 오늘 년도와 태어난 년도의 차를 구한 다음 나이를 구한다.
-			int present = Integer.parseInt((String)getAge.format(today)) / 10000;	// 현재 년도 환산
-			int birth = Integer.parseInt(user.getBirth()) / 10000;	// 출생년도
-			
-			int age = present - birth + 1;
-			String getGender = user.getGender(), gender = "";
-			
-			if(getGender.startsWith("M")) {
-				gender = "man";
-			} else if(getGender.startsWith("F")) {
-				gender = "woman";
-			}
-			
-			// 영양소 기준표 불러오기
-			NutritionCSV nutritionCSV = new NutritionCSV();
-			List<NutritionInfo> nutritionStandard = nutritionCSV.readCsv();
-			
-			NutritionInfo standard = new NutritionInfo();
-			
-			for (int i = 0; i < nutritionStandard.size(); i++) {
-				if(age == nutritionStandard.get(i).getAge() &&
-					gender.equals(nutritionStandard.get(i).getSeparation())) {
-					standard = nutritionStandard.get(i);
-				}
-			}
-			
-			if(gender.startsWith("m")) {
-				gender = "남성";
-			} else if(gender.startsWith("f")) {
-				gender = "여성";
-			}
-			
-			// 최근 칼로리 섭취량에 따른 식단 추천하기
-			// 지난 주 날짜 구하기
-			Calendar cal = new GregorianCalendar();
-			cal.add(Calendar.DATE, -7);
-			
-			Date lastWeek = cal.getTime();
-			SimpleDateFormat formatType = new SimpleDateFormat("YY/MM/dd");
-			getDate = (String)(formatType.format(lastWeek));
-			
-			Map<String, String> map = new HashMap<>();
-			map.put("username", username);
-			map.put("kcal_date", getDate);
+	      @ResponseBody
+	      @RequestMapping("androidFoodRecommendation")
+	      public Map<String, String> androidFoodRecommendation(HttpServletRequest req) {
+	         
+	         logger.info("androidFoodRecommendation");
+	         
+	         String username = req.getParameter("username");
+	         String getDate = "";
+	         
+	         // 사용자의 나이 구하기
+	         UsersVO user = dao.getUserInfoByUsingId(username);
+	         
+	         // 오늘 날짜 받기
+	         Date today = new Date();
+	         SimpleDateFormat getAge = new SimpleDateFormat("YYYYMMdd");
+	         
+	         // 오늘 년도와 태어난 년도의 차를 구한 다음 나이를 구한다.
+	         int present = Integer.parseInt((String)getAge.format(today)) / 10000;   // 현재 년도 환산
+	         int birth = Integer.parseInt(user.getBirth()) / 10000;   // 출생년도
+	         
+	         int age = present - birth + 1;
+	         String getGender = user.getGender(), gender = "";
+	         
+	         if(getGender.startsWith("M")) {
+	            gender = "man";
+	         } else if(getGender.startsWith("F")) {
+	            gender = "woman";
+	         }
+	         
+	         // 영양소 기준표 불러오기
+	         NutritionCSV nutritionCSV = new NutritionCSV();
+	         List<NutritionInfo> nutritionStandard = nutritionCSV.readCsv();
+	         
+	         NutritionInfo standard = new NutritionInfo();
+	         
+	         for (int i = 0; i < nutritionStandard.size(); i++) {
+	            if(age == nutritionStandard.get(i).getAge() &&
+	               gender.equals(nutritionStandard.get(i).getSeparation())) {
+	               standard = nutritionStandard.get(i);
+	            }
+	         }
+	         
+	         if(gender.startsWith("m")) {
+	            gender = "남성";
+	         } else if(gender.startsWith("f")) {
+	            gender = "여성";
+	         }
 
-			// 일주일 간 칼로리 섭취 정보 가져오기
-			// 리스트로 kcal_tbl에 지난 일주일간 정보들을 모두 가져와서
-			List<KcalVO> userWeeklyKcalNotCombined = dao.getUserKcalInfo(map);
-			
-			// 일자가 같은 칼로리 정보들은 합친다.
-			List<UserDayKcalInfo> userWeeklyKcalList = new ArrayList<>();
-			
-			int j = 0;	// userWeeklyKcalNotCombined와 숫자 불일치 시 
-						// userWeeklyKcalList를 맞춰갈 순환 수
-			for (int i = 0; i < userWeeklyKcalNotCombined.size(); i++) {
-				UserDayKcalInfo oneDayKcalInfo = new UserDayKcalInfo();
-				
-				// 처음 시작 칼로리 정보는 일단 넣는다.
-				if(i == 0) {
-					// 
-					oneDayKcalInfo.getKcalList().add(userWeeklyKcalNotCombined.get(i));
-					oneDayKcalInfo.setTotal_kcal(userWeeklyKcalNotCombined.get(i).getKcal());
-					oneDayKcalInfo.setKcal_date(userWeeklyKcalNotCombined.get(i).getKcal_date());
-					
-					userWeeklyKcalList.add(oneDayKcalInfo);
-				} else if(i >= 1) {
-					// userWeeklyKcalNotCombined의 날짜들을 순차적으로 비교한다.
-					// 날짜가 동일하다면 총합 칼로리를 증가시키고 KcalVO 리스트에 추가해준다.
-					if(userWeeklyKcalList.get(j).getKcal_date().equals(userWeeklyKcalNotCombined.get(i).getKcal_date())) {
-						int total_kcal = userWeeklyKcalNotCombined.get(i).getKcal() + userWeeklyKcalList.get(j).getTotal_kcal();
-						userWeeklyKcalList.get(j).setTotal_kcal(total_kcal);
-						userWeeklyKcalList.get(j).getKcalList().add(userWeeklyKcalNotCombined.get(i));
-					} else {
-						// 날짜가 동일하지 않다면 리스트에 추가해주고, 
-						// 다음 일주일치 리스트의 인덱스를 다음 값으로 바꾸기 위해 j를 증가시킨다.
-						oneDayKcalInfo.getKcalList().add(userWeeklyKcalNotCombined.get(i));
-						oneDayKcalInfo.setTotal_kcal(userWeeklyKcalNotCombined.get(i).getKcal());
-						oneDayKcalInfo.setKcal_date(userWeeklyKcalNotCombined.get(i).getKcal_date());
-						
-						userWeeklyKcalList.add(oneDayKcalInfo);
-						j++;
-					}
-				}	// end else if(i >= 1)
-			}
-			
-			
-			// 일주일 치 정보가 모이지 않는다면
-			if(userWeeklyKcalList.size() < 7) {
-				// 나머지 일자에 대한 정보는 입력하지 않은 것이므로
-				// 나머지 남은 정보들을 다 0으로 처리한다.
-				for (int i = userWeeklyKcalList.size()-1; i < 6; i++) {
-					// 날짜
-					UserDayKcalInfo oneDayKcalInfo = new UserDayKcalInfo();
-					
-					int number = userWeeklyKcalList.size() - i;
-					number = number * (-1);
-					
-					Calendar tempCal = new GregorianCalendar();
-					tempCal.add(Calendar.DATE, number);
-					Date tempDate = tempCal.getTime();
-					java.sql.Date tempSQLDate = new java.sql.Date(tempDate.getTime());
-					
-					oneDayKcalInfo.setKcal_date(tempSQLDate);
-					
-					// 총합 칼로리
-					oneDayKcalInfo.setTotal_kcal(0);
-					
-					userWeeklyKcalList.add(oneDayKcalInfo);
-				}
-				
-				// 제대로 된 주간 칼로리 리스트 날짜를 받는다.
-				List<java.sql.Date> sqlDateList = new ArrayList<>();
-				
-				// 선행되어 저장된 주간 칼로리 리스트에 저장되지 않은 날짜들을 저장한다.
-				// 결과적으로 순차적인 일자들을 저장하게 된다.
-				for (int i = 0; i < 7; i++) {
-					Calendar tempCal = new GregorianCalendar();
-					tempCal.add(Calendar.DATE, -(7-i));
-					Date tempDate = tempCal.getTime();
-					java.sql.Date tempSQLDate = new java.sql.Date(tempDate.getTime());
-					sqlDateList.add(tempSQLDate);
-				}
-				
-				for (int i = 0; i < sqlDateList.size(); i++) {
-					System.out.println("sqlDate : " + sqlDateList.get(i));
-				}
-				
-				// 두 리스트의 날짜 값을 순차적으로 받는다.
-				for (int i = 0; i < 7; i++) {
-					
-					int compare = userWeeklyKcalList.get(i).getKcal_date().compareTo(sqlDateList.get(i));
-					
-					// 순차적으로 날짜 비교 후 일치하지 않는다면
-					if(compare > 0) {
-						UserDayKcalInfo temp = new UserDayKcalInfo();
-						
-						temp.setKcal_date(sqlDateList.get(i));
-						temp.setTotal_kcal(0);
-						temp.setKcalList(new ArrayList<>());
-						
-						userWeeklyKcalList.add(temp);
-					}
-				}
+	         // 일주일 간 칼로리 섭취 정보 가져오기
+	         // 리스트로 kcal_tbl에 지난 일주일간 정보들을 모두 가져와서
+	         List<KcalVO> userWeeklyKcalNotCombined = new ArrayList<>();
+	         
+	         // 지난 주 날짜 구하기
+	         int tempNum = 7;
+	         for (int i = 0; i < 7; i++) {
+	            List<KcalVO> tempList = new ArrayList<>();
+	            
+	            String tempDate = "";
+	            int tempI = tempNum * -1;
+	            
+	            Calendar tempCal = new GregorianCalendar();
+	            tempCal.add(Calendar.DATE, tempI);
+	            
+	            Date lastWeekDay = tempCal.getTime();
+	            SimpleDateFormat tempFormatType = new SimpleDateFormat("YY/MM/dd");
+	            tempDate = (String)(tempFormatType.format(lastWeekDay));
+	            
+	            Map<String, String> tempMap = new HashMap<>();
+	            tempMap.put("username", username);
+	            tempMap.put("kcal_date", tempDate);
+	            
+	            // 일자별 칼로리 정보 검색
+	            int selectCnt = dao.searchUserKcalInfo(tempMap);
+	            int insertCnt = 0;
+	            
+	            // 해당 일자에 데이터가 없으면 0으로 초기화하여 만든다.
+	            if(selectCnt <= 0) insertCnt = dao.makeUserKcalInfo(tempMap);
+	            
+	            tempList = dao.getUserKcalInfoEachDay(tempMap);
+	            
+	            for (int k = 0; k < tempList.size(); k++) {
+	               KcalVO tempKcalVO = tempList.get(k);
+	               
+	               if(tempKcalVO != null) {
+	                  userWeeklyKcalNotCombined.add(tempKcalVO);
+	               }
+	            }
+	            
+	            tempNum--;
+	         }
+	         
+	         // 일자가 같은 칼로리 정보들은 합친다.
+	         List<UserDayKcalInfo> userWeeklyKcalList = new ArrayList<>();
+	         
+	         int j = 0;   // userWeeklyKcalNotCombined와 숫자 불일치 시 
+	                  // userWeeklyKcalList를 맞춰갈 순환 수
+	         for (int i = 0; i < userWeeklyKcalNotCombined.size(); i++) {
+	            UserDayKcalInfo oneDayKcalInfo = new UserDayKcalInfo();
+	            
+	            // 처음 시작 칼로리 정보는 일단 넣는다.
+	            if(i == 0) {
+	               // 
+	               oneDayKcalInfo.getKcalList().add(userWeeklyKcalNotCombined.get(i));
+	               oneDayKcalInfo.setTotal_kcal(userWeeklyKcalNotCombined.get(i).getKcal());
+	               oneDayKcalInfo.setKcal_date(userWeeklyKcalNotCombined.get(i).getKcal_date());
+	               
+	               userWeeklyKcalList.add(oneDayKcalInfo);
+	            } else if(i >= 1) {
+	               // userWeeklyKcalNotCombined의 날짜들을 순차적으로 비교한다.
+	               // 날짜가 동일하다면 총합 칼로리를 증가시키고 KcalVO 리스트에 추가해준다.
+	               if(userWeeklyKcalList.get(j).getKcal_date().equals(userWeeklyKcalNotCombined.get(i).getKcal_date())) {
+	                  int total_kcal = userWeeklyKcalNotCombined.get(i).getKcal() + userWeeklyKcalList.get(j).getTotal_kcal();
+	                  userWeeklyKcalList.get(j).setTotal_kcal(total_kcal);
+	                  userWeeklyKcalList.get(j).getKcalList().add(userWeeklyKcalNotCombined.get(i));
+	               } else {
+	                  // 날짜가 동일하지 않다면 리스트에 추가해주고, 
+	                  // 다음 일주일치 리스트의 인덱스를 다음 값으로 바꾸기 위해 j를 증가시킨다.
+	                  oneDayKcalInfo.getKcalList().add(userWeeklyKcalNotCombined.get(i));
+	                  oneDayKcalInfo.setTotal_kcal(userWeeklyKcalNotCombined.get(i).getKcal());
+	                  oneDayKcalInfo.setKcal_date(userWeeklyKcalNotCombined.get(i).getKcal_date());
+	                  
+	                  userWeeklyKcalList.add(oneDayKcalInfo);
+	                  j++;
+	               }
+	            }   // end else if(i >= 1)
+	         }
+	         
+	         // 섭취한 성분 분석
+	         // 탄수화물, 단백질, 지방 성분을 분석하여 섭취한 영양소 성분에 대한 통계를 낸다.
+	         // 기준치와 비교해서 자신이 섭취한 양과 비교한다.
+	         
+	         // 한주간 섭취한 탄수화물, 단백질, 지방 비율
+	         double weekCarbo = 0;
+	         double weekProtein = 0;
+	         double weekFat = 0;
+	         double weekSaccharide = 0;
+	         
+	         for (int i = 0; i < userWeeklyKcalList.size(); i++) {
+	            // 순차적으로 돌면서 하루의 칼로리 데이터를 받는다.
+	            UserDayKcalInfo tempKcalInfo = userWeeklyKcalList.get(i);
+	            
+	            // 하루 총 섭취량
+	            double onedayCarbo = 0;
+	            double onedayProtein = 0;
+	            double onedayFat = 0;
+	            double onedaySaccharide = 0;
+	            
+	            // 비율 산출을 위한 하루 평균치
+	            double avgCarbo = standard.getAvgCarbohydrate() * 100;
+	            double avgFat = standard.getAvgFat() * 100;
+	            
+	            // 하루의 칼로리를 섭취한 칼로리 리스트 정보를 받는다.
+	            for (int k = 0; k < tempKcalInfo.getKcalList().size(); k++) {
+	               KcalVO tempKcalVO = tempKcalInfo.getKcalList().get(k);
+	               
+	               // 칼로리 리스트에 담겨있는 음식 리스트의 정보를 받는다.
+	               FoodVO tempFoodVO = dao.getFoodInfo(tempKcalVO.getFood_code());
+	               
+	               // k번째 칼로리 정보에서 k번째 칼로리 섭취한 음식 정보의 칼로리 값을 받아서
+	               // 총 음식을 섭취한 칼로리 / 1개당 함유 칼로리를 계산해서
+	               // 음식의 섭취 갯수를 받는다.
+	               int foodCount = tempKcalInfo.getKcalList().get(k).getKcal() /
+	                           tempFoodVO.getKcal();
+	               
+	               // 해당 음식을 섭취한 갯수에 영양 성분들의 그람수를 곱하여 하루 섭취량을 누적 계산한다.
+	               double eachCarbo = (double)tempFoodVO.getCarbohydrate() * foodCount;
+	               double eachProtein = (double)tempFoodVO.getProtein() * foodCount;
+	               double eachFat = (double)tempFoodVO.getFat() * foodCount;
+	               double eachSaccharide = (double)tempFoodVO.getSaccharides() * foodCount;
+	               
+	               // 탄수화물과 지방만 비율 값을 산출한다.
+	               // 하루 기준 섭취량
+	               // 하루 기준 탄수화물량(g) = 하루 섭취기준 칼로리 / 100 * 평균치 / 4(1g당 4kcal) 
+	               double availableCarbo = (double)standard.getCalory() / 100 * avgCarbo / 4;
+	               
+	               // 하루 기준 지방량(g) = 하루 섭취기준 칼로리 / 100 * 평균치 / 9(1g당 9kcal)
+	               double availableFat = (double)standard.getCalory() / 100 * avgFat / 9;
+	               
+	               onedayCarbo += eachCarbo * 100 / availableCarbo;
+	               onedayProtein += eachProtein;
+	               onedayFat += eachFat * 100 / availableFat;
+	               onedaySaccharide += eachSaccharide;
+	            }
+	            
+	            // 하루 섭취한 영양소 값들을 
+	            weekCarbo += onedayCarbo / tempKcalInfo.getKcalList().size();
+	            weekProtein += onedayProtein / tempKcalInfo.getKcalList().size();
+	            weekFat += onedayFat / tempKcalInfo.getKcalList().size();
+	            weekSaccharide += onedaySaccharide / tempKcalInfo.getKcalList().size();
+	         }
+	         
+	         weekCarbo = weekCarbo / userWeeklyKcalList.size();
+	         weekProtein = weekProtein / userWeeklyKcalList.size();
+	         weekFat = weekFat / userWeeklyKcalList.size();
+	         weekSaccharide = weekSaccharide / userWeeklyKcalList.size();
+	         
+	         System.out.println("일주일 평균 탄수화물 섭취량 : " + weekCarbo + "%");
+	         System.out.println("일주일 평균 단백질 섭취량 : " + weekProtein + "g");
+	         System.out.println("일주일 평균 지방 섭취량 : " + weekFat + "%");
+	         System.out.println("일주일 평균 당류 섭취량 : " + weekSaccharide + "g");
+	         
+	         int weekTotalKcal = 0;
+	         
+	         for (int i = 0; i < userWeeklyKcalList.size(); i++) {
+	            weekTotalKcal += userWeeklyKcalList.get(i).getTotal_kcal();
+	         }
+	         
+	         weekTotalKcal /= userWeeklyKcalList.size();
+	         
+	         Map<String, String> recommendationMap = new HashMap<>();
+	         
+	         recommendationMap.put("weekCarbo", String.valueOf(weekCarbo));
+	         recommendationMap.put("weekProtein", String.valueOf(weekProtein));
+	         recommendationMap.put("weekFat", String.valueOf(weekFat));
+	         recommendationMap.put("weekSaccharide", String.valueOf(weekSaccharide));
+	         
+	         System.out.println(" weekAvgKcal : " + weekTotalKcal);
+	         
+	         recommendationMap.put("weekAvgKcal", String.valueOf(weekTotalKcal));
+	         
+	         recommendationMap.put("stdKcal", String.valueOf(standard.getCalory()));
+	         
+	         recommendationMap.put("gender", gender);
+	         recommendationMap.put("age", String.valueOf(age));
+	         
+	         recommendationMap.put("avgCarbo", String.valueOf(standard.getAvgCarbohydrate()*100));
+	         recommendationMap.put("avgProtein", String.valueOf(standard.getAvgProtein()));
+	         recommendationMap.put("avgFat", String.valueOf(standard.getAvgFat()*100));
+	         
+	         recommendationMap.put("stdSaccharide", String.valueOf(standard.getSaccharide()));
+	         
+	         recommendationMap.put("recoCarbo", String.valueOf(standard.getRecoCarbohydrate()*100));
+	         recommendationMap.put("recoProtein", String.valueOf(standard.getRecoProtein()));
+	         recommendationMap.put("recoFat", String.valueOf(standard.getRecoFat()*100));
 
-				// 유효한 값들만 걸러낸다.
-				List<UserDayKcalInfo> kcalList = new ArrayList<>();
-				
-				for (int i = 0; i < userWeeklyKcalList.size(); i++) {
-					
-					if(i > 0) {
-						UserDayKcalInfo temp = userWeeklyKcalList.get(i-1);
-						
-						// 값이 0이 아닌 날짜들만 먼저 선별하고
-						if(temp.getTotal_kcal() != 0) {
-							kcalList.add(temp);
-						} else {
-							// 값이 0이 아닌 것들은 날짜를 비교해서 
-							int compare = temp.getKcal_date().compareTo(userWeeklyKcalList.get(i).getKcal_date());
-							
-							// 날짜가 같지 않은 것들만 선별한다.
-							if(compare != 0) {
-								kcalList.add(userWeeklyKcalList.get(i));
-							}
-						}
-					}
-				}
-				
-				// 날짜가 중복되는 인덱스를 찾는다.
-				List<Integer> find = new ArrayList<>();
-				
-				for (int i = 0; i < kcalList.size(); i++) {
-					
-					java.sql.Date tempDate = kcalList.get(i).getKcal_date();
-					
-					for (int k = i+1; k < kcalList.size(); k++) {
-						
-						String compareI = tempDate.toString();
-						String compareK = kcalList.get(k).getKcal_date().toString();
-						
-						if(compareI.equals(compareK)) {
-							find.add(k);
-						}
-					}
-				}
-				
-				for (int i = 0; i < find.size(); i++) {
-					kcalList.remove(find.get(i));
-				}
-				
-				find.clear();
-				userWeeklyKcalList = kcalList;
-			}
-			
-			// 섭취한 성분 분석
-			// 탄수화물, 단백질, 지방 성분을 분석하여 섭취한 영양소 성분에 대한 통계를 낸다.
-			// 기준치와 비교해서 자신이 섭취한 양과 비교한다.
-			
-			// 한주간 섭취한 탄수화물, 단백질, 지방 비율
-			double weekCarbo = 0;
-			double weekProtein = 0;
-			double weekFat = 0;
-			double weekSaccharide = 0;
-			
-			for (int i = 0; i < userWeeklyKcalList.size(); i++) {
-				// 순차적으로 돌면서 하루의 칼로리 데이터를 받는다.
-				UserDayKcalInfo tempKcalInfo = userWeeklyKcalList.get(i);
-				
-				// 하루 총 섭취량
-				double onedayCarbo = 0;
-				double onedayProtein = 0;
-				double onedayFat = 0;
-				double onedaySaccharide = 0;
-				
-				// 비율 산출을 위한 하루 평균치
-				double avgCarbo = standard.getAvgCarbohydrate() * 100;
-				double avgFat = standard.getAvgFat() * 100;
-				
-				// 하루의 칼로리를 섭취한 칼로리 리스트 정보를 받는다.
-				for (int k = 0; k < tempKcalInfo.getKcalList().size(); k++) {
-					KcalVO tempKcalVO = tempKcalInfo.getKcalList().get(k);
-					
-					// 칼로리 리스트에 담겨있는 음식 리스트의 정보를 받는다.
-					FoodVO tempFoodVO = dao.getFoodInfo(tempKcalVO.getFood_code());
-					
-					// k번째 칼로리 정보에서 k번째 칼로리 섭취한 음식 정보의 칼로리 값을 받아서
-					// 총 음식을 섭취한 칼로리 / 1개당 함유 칼로리를 계산해서
-					// 음식의 섭취 갯수를 받는다.
-					int foodCount = tempKcalInfo.getKcalList().get(k).getKcal() /
-									tempFoodVO.getKcal();
-					
-					// 해당 음식을 섭취한 갯수에 영양 성분들의 그람수를 곱하여 하루 섭취량을 누적 계산한다.
-					double eachCarbo = (double)tempFoodVO.getCarbohydrate() * foodCount;
-					double eachProtein = (double)tempFoodVO.getProtein() * foodCount;
-					double eachFat = (double)tempFoodVO.getFat() * foodCount;
-					double eachSaccharide = (double)tempFoodVO.getSaccharides() * foodCount;
-					
-					// 탄수화물과 지방만 비율 값을 산출한다.
-					// 하루 기준 섭취량
-					// 하루 기준 탄수화물량(g) = 하루 섭취기준 칼로리 / 100 * 평균치 / 4(1g당 4kcal) 
-					double availableCarbo = (double)standard.getCalory() / 100 * avgCarbo / 4;
-					
-					// 하루 기준 지방량(g) = 하루 섭취기준 칼로리 / 100 * 평균치 / 9(1g당 9kcal)
-					double availableFat = (double)standard.getCalory() / 100 * avgFat / 9;
-					
-					onedayCarbo += eachCarbo * 100 / availableCarbo;
-					onedayProtein += eachProtein;
-					onedayFat += eachFat * 100 / availableFat;
-					onedaySaccharide += eachSaccharide;
-				}
-				
-				// 하루 섭취한 영양소 값들을 
-				weekCarbo += onedayCarbo / tempKcalInfo.getKcalList().size();
-				weekProtein += onedayProtein / tempKcalInfo.getKcalList().size();
-				weekFat += onedayFat / tempKcalInfo.getKcalList().size();
-				weekSaccharide += onedaySaccharide / tempKcalInfo.getKcalList().size();
-			}
-			
-			weekCarbo = weekCarbo / userWeeklyKcalList.size();
-			weekProtein = weekProtein / userWeeklyKcalList.size();
-			weekFat = weekFat / userWeeklyKcalList.size();
-			weekSaccharide = weekSaccharide / userWeeklyKcalList.size();
-			
-			System.out.println("일주일 평균 탄수화물 섭취량 : " + weekCarbo + "%");
-			System.out.println("일주일 평균 단백질 섭취량 : " + weekProtein + "g");
-			System.out.println("일주일 평균 지방 섭취량 : " + weekFat + "%");
-			System.out.println("일주일 평균 당류 섭취량 : " + weekSaccharide + "g");
-			
-			int weekTotalKcal = 0;
-			
-			for (int i = 0; i < userWeeklyKcalList.size(); i++) {
-				weekTotalKcal += userWeeklyKcalList.get(i).getTotal_kcal();
-			}
-			
-			weekTotalKcal /= userWeeklyKcalList.size();
-			
-			Map<String, String> recommendationMap = new HashMap<>();
-			
-			recommendationMap.put("weekCarbo", String.valueOf(weekCarbo));
-			recommendationMap.put("weekProtein", String.valueOf(weekProtein));
-			recommendationMap.put("weekFat", String.valueOf(weekFat));
-			recommendationMap.put("weekSaccharide", String.valueOf(weekSaccharide));
-			
-			recommendationMap.put("weekAvgKcal", String.valueOf(weekTotalKcal));
-			
-			recommendationMap.put("stdKcal", String.valueOf(standard.getCalory()));
-			
-			recommendationMap.put("gender", gender);
-			recommendationMap.put("age", String.valueOf(age));
-			
-			recommendationMap.put("avgCarbo", String.valueOf(standard.getAvgCarbohydrate()*100));
-			recommendationMap.put("avgProtein", String.valueOf(standard.getAvgProtein()));
-			recommendationMap.put("avgFat", String.valueOf(standard.getAvgFat()*100));
-			
-			recommendationMap.put("stdSaccharide", String.valueOf(standard.getSaccharide()));
-			
-			recommendationMap.put("recoCarbo", String.valueOf(standard.getRecoCarbohydrate()*100));
-			recommendationMap.put("recoProtein", String.valueOf(standard.getRecoProtein()));
-			recommendationMap.put("recoFat", String.valueOf(standard.getRecoFat()*100));
-
-			return recommendationMap;
-		}
+	         return recommendationMap;
+	      }
 		
 		// 오늘일자 현재기준 칼로리 정보 받아오기
 		@ResponseBody
@@ -720,7 +644,24 @@ public class AndroidController {
 	
 	//동렬파트 종료 ==============
 	
-		//나현파트 시작=============
+// TODO 이나현 파트	 =============
+		// 마이페이지
+		@ResponseBody
+		@RequestMapping("androidMyPageInfo")
+		public Map<String, UsersVO> androidMyPageInfo(HttpServletRequest req) {
+			logger.info("androidMyPageInfo");
+			
+			String username = req.getParameter("username");
+			
+			UsersVO vo = dao.andrModiPro(username); 
+			
+			Map<String, UsersVO> map = new HashMap<String, UsersVO>(); 
+			map.put("vo", vo); 
+			 
+			return map; 
+		}
+		
+				
 		// 마이페이지
 		@ResponseBody
 		@RequestMapping("androidMyPageMain")
@@ -744,6 +685,7 @@ public class AndroidController {
 			return map;
 		}	
 
+		
 		// 마이페이지 _회원정보 수정 
 		@ResponseBody
 		@RequestMapping("androidMyPageModi")
@@ -788,9 +730,160 @@ public class AndroidController {
 			return umap;
 		}	
 		
+		
+		//마이페이지 건강정보
+		@ResponseBody
+		@RequestMapping("androidMyHealthInfo")
+		public Map<String, UserInfoVO> androidMyHealthInfo(HttpServletRequest req) {
+			logger.info("androidMyHealthInfo");
+			
+			String username = req.getParameter("username");
+			
+			UserInfoVO vo = dao.getUserInfo(username); 
+			
+			Map<String, UserInfoVO> map = new HashMap<String, UserInfoVO>(); 
+			map.put("vo", vo); 
+			 
+			return map; 	
+		}
+		
+		// 마이페이지 _건강정보 수정 
+		@ResponseBody
+		@RequestMapping("androidMyHealthInfoModi")
+		public Map<String, Object> andrMyHealthInfoModi(HttpServletRequest req) {
+			logger.info("andrMyHealthInfoModi");
+			
+			String username = req.getParameter("username");
+			String height = req.getParameter("height");
+			String weight = req.getParameter("weight");
+			String bmi = req.getParameter("bmi");
+			String sightR = req.getParameter("sightR");
+			String sightL = req.getParameter("sightL");
+			String glucose = req.getParameter("glucose");
+			String pressure = req.getParameter("pressure");
+			String pressure2 = req.getParameter("pressure2");
+			String smokeAmount = req.getParameter("smokeAmount");
+			String drinkAmount = req.getParameter("drinkAmount");
+			
+			UserInfoVO vo = new UserInfoVO();
+			vo.setUsername(username);
+			vo.setHeight(Float.parseFloat(req.getParameter("height")));
+			vo.setWeight(Float.parseFloat(req.getParameter("weight")));
+			vo.setBmi(Float.parseFloat(req.getParameter("bmi")));
+			vo.setSightL(Float.parseFloat(req.getParameter("sightL")));
+			vo.setSightR(Float.parseFloat(req.getParameter("sightR")));
+			vo.setGlucose(Integer.parseInt(req.getParameter("glucose")));
+			vo.setPressure(Integer.parseInt(req.getParameter("pressure")));
+			vo.setPressure2(Integer.parseInt(req.getParameter("pressure2")));
+			vo.setSmokeAmount(Integer.parseInt(req.getParameter("smokeAmount")));
+			vo.setDrinkAmount(Integer.parseInt(req.getParameter("drinkAmount")));
+			
+			int updateCnt = dao.andrHealthModi(vo);
+			System.out.println("=====>vo"+ vo);
+			
+			Map<String, Object> hmap = new HashMap<String, Object>();
+			UserInfoVO memHealthInfo;
+			//dao.getUserInfo(username); 
+			if(updateCnt != 1) {
+				logger.info("업데이트 실패, cnt : " + updateCnt);
+				memHealthInfo = (UserInfoVO)dao.getUserInfo(username);
+				hmap.put("member", memHealthInfo);  
+				
+			} else {
+				logger.info("업데이트 성공, cnt : " + updateCnt);
+				memHealthInfo = (UserInfoVO)dao.getUserInfo(username);
+				hmap.put("member", memHealthInfo);  
+			}
+			
+			return hmap;
+		}	
+		
+		// 마이페이지 _일대일문의목록 
+		@ResponseBody
+		@RequestMapping("androidMyOtoOInfo")
+		public Map<String, BoardQnaVO> androidMyOtoOInfo(HttpServletRequest req) {
+			logger.info("androidMyOtoOInfo");
+			Map<String, BoardQnaVO> omap = new HashMap<String, BoardQnaVO>(); 
+			
+			String username = req.getParameter("username");
+			List<BoardQnaVO> list = dao.getOtOInfo(username); 
+
+			for(int i=0; i<list.size(); i++) {
+				omap.put("list"+i, list.get(i));
+			}
+	
+			return omap; 
+		}
+		
+		// 마이페이지 _일대일문의글 삭제 
+		@ResponseBody
+		@RequestMapping("androidOtODel")
+		public Map<String, Integer> androidOtODel(HttpServletRequest req) {
+			logger.info("androidOtODel");
+			Map<String, Integer> omap = new HashMap<String, Integer>(); 
+			
+			int qna_code = Integer.parseInt(req.getParameter("qna_code"));
+			
+			int deleteCnt = dao.q_delete(qna_code);
+			
+			omap.put("deleteCnt", deleteCnt);
+			
+			return omap; 
+		}
+		
+		// 마이페이지 _일대일문의글 등록
+		@ResponseBody
+		@RequestMapping("androidOtOWrite")
+		public Map<String, Integer> androidOtOWrite(HttpServletRequest req) {
+			logger.info("androidOtODel");
+			Map<String, Integer> omap = new HashMap<String, Integer>(); 
+			
+			String username = req.getParameter("username"); 
+			String title = req.getParameter("title"); 
+			String qna_password = req.getParameter("qna_password"); 
+			String content = req.getParameter("content"); 
+			String kind = req.getParameter("kind");  
+			
+			BoardQnaVO vo = new BoardQnaVO(); 
+			vo.setTitle(title);
+			vo.setUsername(username);
+			vo.setQna_password(qna_password);
+			vo.setContent(content);
+			vo.setKind(kind);
+			
+			int insertCnt = dao.qnaWrite(vo);
+			
+			omap.put("insertCnt", insertCnt);
+			
+			return omap; 
+		}
+		// 마이페이지 _일대일문의목록 
+		@ResponseBody
+		@RequestMapping("androidOtOCo")
+		public Map<String, CommentQnaVO> androidOtOCo(HttpServletRequest req) {
+			logger.info("androidOtOCo");
+
+			Map<String, CommentQnaVO> cmap = new HashMap<String, CommentQnaVO>(); 
+			int qna_code = Integer.parseInt(req.getParameter("qna_code"));
+			System.out.println("@@@@@@qna_code" + qna_code);
+			
+			List<CommentQnaVO> list = dao.QnAComment(qna_code);
+			System.out.println("@@@@@@list" +list );
+			for(int i=0; i < list.size(); i++) {
+				cmap.put("cmap"+i, list.get(i));
+				System.out.println("@@@@@@list2" +list.get(i) );
+			}
+			
+			System.out.println("@@@@@@cmap" + cmap);
+			return cmap; 
+		}
+					
+		
+			
+		
 		//나현파트 끝========
 		
-//예찬파트 시작===========
+// TODO 박예찬 파트	===========
 		// 운동목록
 		@ResponseBody
 		@RequestMapping("androidGetExerciseList")
@@ -1299,7 +1392,7 @@ public class AndroidController {
 		}
 //예찬파트 끝
   
-// 한결시작
+// TODO 김한결 파트	
 	// 게시판목록
 	   @ResponseBody
 	   @RequestMapping("androidBoardList")

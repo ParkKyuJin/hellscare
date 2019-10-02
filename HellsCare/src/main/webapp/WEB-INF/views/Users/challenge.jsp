@@ -31,10 +31,10 @@ function idfySend() {
 <section id="page-title" class="page-title-parallax page-title-dark" style="background-image: url('/hellscare/resources/images/challmenu.jpg'); background-size: cover; padding: 80px 0;" data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;">
 
 			<div class="container clearfix">
-				<h1>도전과제</h1>
+				<h1>이벤트</h1>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="main">Home</a></li>
-					<li class="breadcrumb-item active" aria-current="page"><a href="Mychallenge">My challenge</a></li>
+					<li class="breadcrumb-item active" aria-current="page"><a href="Mychallenge">My Event</a></li>
 				</ol>
 			</div>
 
@@ -43,7 +43,7 @@ function idfySend() {
 <section id="content">
 				<div class="container clearfix">
 				<div class="text-rotater" data-separator="|" data-rotate="bounceIn" data-speed="2500"style="font-size:2em;margin-top:50px;">
-							오늘의 <span class="t-rotate color" style="font-size:1.5em; color:blue;">걷기|달리기|하이킹|라이딩</span> 에 도전하세요!
+							오늘의 <span class="t-rotate color" style="font-size:1.5em; color:blue;">걷기|달리기|하이킹|라이딩</span> 에 참여하세요!
 						</div>
 					<div class="col-lg-4" style="margin-top:50px;">
 					

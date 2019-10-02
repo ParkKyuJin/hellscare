@@ -14,7 +14,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Canvas | The Multi-Purpose HTML5 Template</title>
+	<title>DrCARE | 개설비 지급</title>
 
 </head>
 
@@ -121,7 +121,7 @@
 							<p><b style="font-size:1.5em"> 개설비(ETH): </b><br>
 							<input type="text" name="amount"></p>
 							<p><button type="submit" class="button button-desc button-border button-rounded center">지불하기</button>
-							<button type="button" class="button button-desc button-border button-rounded center" onclick="return cancelChk();">취소</button></p>
+							<button type="button" class="button button-desc button-border button-rounded center" onclick="cancelChk();">취소</button></p>
 					
 						</div>
 						<!-- Portfolio Single - Description End -->
@@ -156,11 +156,6 @@
 
 
 	<%@ include file="../include/footerScript.jsp" %>
-
-<script type="text/javascript">
-
-
-</script>
 
 <script type="text/javascript">
 	function cancelChk(){

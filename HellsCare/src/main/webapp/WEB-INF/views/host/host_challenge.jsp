@@ -4,7 +4,7 @@
 <!DOCTYPE html>
  <section id="main-content">
 	<section class="wrapper">
-		  <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 목록</b></h3>
+		  <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>이벤트 목록</b></h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
           <div class="col-md-12" >
@@ -12,16 +12,16 @@
             <div class="form-panel">
             
             <table class="table table-hover">
-            <h4><i class="fa fa-angle-right"></i> 도전과제</h4>
+            <h4><i class="fa fa-angle-right"></i> 이벤트</h4>
              <thead align="center">
                   <tr >
 								<th>선택</th>
-								<th>도전과제 번호</th>
+								<th>이벤트 번호</th>
 								<th>이미지</th>
 								<th>이벤트명</th>
 								<th>내용</th>
 								<th>등록일</th>
-								<th>포인트</th>
+								<!-- <th>포인트</th> -->
 							</tr>
                 </thead>
                 <form class="form-horizontal style-form" method="post">
@@ -35,7 +35,7 @@
                     <th>${dto.challenge_name}</th>
                     <th>${dto.challenge_content}</th>
                      <th >${dto.challange_date}</th>
-                    <th >${dto.challenge_gift} Points</th>
+                   <%--  <th >${dto.challenge_gift} Points</th> --%>  
                     
                   </tr>
                 </tbody>
@@ -96,7 +96,7 @@
     <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+          &copy; Copyrights <strong>Healthcare</strong>. All Rights Reserved
         </p>
         <div class="credits">
           <!--
@@ -105,7 +105,7 @@
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
+          <!-- Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a> -->
         </div>
         <a href="general.html#" class="go-top">
           <i class="fa fa-angle-up"></i>

@@ -7,6 +7,7 @@ import com.pro.hellscare.VO.BoardQnaVO;
 import com.pro.hellscare.VO.BoardVO;
 import com.pro.hellscare.VO.ClubBoardVO;
 import com.pro.hellscare.VO.ClubVO;
+import com.pro.hellscare.VO.CommentQnaVO;
 import com.pro.hellscare.VO.CommentVO;
 import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
@@ -146,6 +147,18 @@ public interface HellsCareDAO {
 				
 		// 회원탈퇴 처리
 		public int deleteMember(String username);
+		
+		// 안드로이드 회원정보 수정처리
+		public UsersVO andrModiPro(String username);
+		
+		// 안드로이드 건강정보 수정처리
+		public int andrHealthModi(UserInfoVO vo) ;
+
+		// 일대일 문의 목록 
+		public List<BoardQnaVO> getOtOInfo(String username);
+	
+		// 문의글 답글
+		public List<CommentQnaVO> QnAComment(int qna_code);
 		
 		//==나현 종료
 		

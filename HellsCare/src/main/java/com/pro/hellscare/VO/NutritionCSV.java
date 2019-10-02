@@ -10,7 +10,8 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 public class NutritionCSV {
-	private String filename = "C:\\Users\\wovkf\\git\\hellscare\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\CSV\\nutrition_standard.csv";
+	// 설치위치의 경로명으로 변경해야한다.
+	private String filename = "C:\\Dev50\\git3\\hellscare\\HellsCare\\src\\main\\webapp\\resources\\CSV\\nutrition_standard.csv";
 	
 	public NutritionCSV() {}
 	

@@ -6,26 +6,26 @@
 
 <section id="main-content">
       <section class="wrapper">
-        <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>도전과제 등록</b></h3>
+        <h3> <b>이벤트관리</b> <i class="fa fa-angle-right"></i> <b>이벤트 등록</b></h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
           <div class="col-md-12">
             <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>도전과제 등록</b></h4>
+              <h4 class="mb"><i class="fa fa-angle-right"></i> <b>이벤트 등록</b></h4>
               <form class="form-horizontal style-form" action="host_challengeRegpro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>도전과제명</b></label>
+                  <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>이벤트명</b></label>
                   <div class="col-sm-4">
                     <input type="text" class="form-control" size="10" name="c_name" required>
-                     <span class="help-block"><b>도전과제명을 입력해주세요</b></span>
+                     <span class="help-block"><b>이벤트명을 입력해주세요</b></span>
                   </div>
                 </div>
                 <div class="form-group" >
-                  <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>도전과제 내용</b></label>
+                  <label class="col-sm-2 col-sm-2 control-label" style="text-align:center;"><b>이벤트 내용</b></label>
                  <div class="col-sm-4">
                     <textarea  class="form-control"  style="height:150px;" name="c_content" required></textarea>
-                     <span class="help-block"><b>도전과제 내용을 입력해주세요</b></span>
+                     <span class="help-block"><b>이벤트 내용을 입력해주세요</b></span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -37,7 +37,7 @@
                 </div>
 						<div class="form-group last">
 							<label class="col-sm-2 col-sm-2 control-label"
-								style="text-align: center;"><b>도전과제 이미지</b></label>
+								style="text-align: center;"><b>이벤트 이미지</b></label>
 							<div class="col-md-9">
 								<div class="fileupload fileupload-new"
 									data-provides="fileupload">
@@ -55,17 +55,19 @@
 												Select image</span><span class="fileupload-exists"><i
 												class="fa fa-undo"></i> Change</span> <input type="file"
 											class="default" name="c_img" id="c_img" required />
+									
 										</span>
+										
 									<div id="map" style="width:100%;height:350px;"></div>
 									
 									<input type="text" id="clickLatlng" name="lat" value="" readonly="readonly" required="required">
 									<input type="text" id="clickLatlng2" name="lng" readonly="readonly" required="required">
-									</div>
+									</div> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f11ce067be0e4302a3047b3e2f5dbe9"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    mapOption = {  
+        center: new kakao.maps.LatLng(37.478736, 126.878700), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 

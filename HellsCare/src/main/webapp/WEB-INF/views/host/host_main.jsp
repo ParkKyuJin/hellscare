@@ -28,16 +28,16 @@
         <div class="row">
         
               <!-- WEATHER PANEL -->
-              <div class="col-md-4 mb">
+   <!--            <div class="col-md-4 mb">
                 <div class="weather pn">
                   <i class="fa fa-cloud fa-4x"></i>
                   <h2>25º C</h2>
                   <h4>금천구</h4>
                 </div>
-              </div>
+              </div> -->
               <!-- /col-md-4 -->
                <!--   SERVER STATUS PANELS -->
-              <div class="col-md-4 col-sm-4 mb">
+              <div class="col-md-6 col-sm-6 mb">
                 <div class="grey-panel pn donut-chart">
                   <div class="grey-header">
                     <h5>SERVER LOAD</h5>
@@ -67,7 +67,8 @@
                 <!-- /grey-panel -->
               </div>
               <!-- /col-md-4 -->
-              <div class="col-md-4 col-sm-4 mb">
+              
+              <div class="col-md-6 col-sm-6 mb">
                 <div class="green-panel pn">
                   <div class="green-header">
                     <h5>DISK SPACE</h5>
@@ -75,17 +76,17 @@
                   <canvas id="serverstatus03" height="120" width="120"></canvas>
                   <script>
                     var doughnutData = [{
-                        value: 60,
+                        value: 40,
                         color: "#2b2b2b"
                       },
                       {
-                        value: 40,
+                        value: 60,
                         color: "#fffffd"
                       }
                     ];
                     var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
                   </script>
-                  <h3>60% USED</h3>
+                  <h3>40% USED</h3>
                 </div>
               </div>
               <!-- /col-md-4 -->
@@ -337,7 +338,7 @@
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-          Created with Healthcare template by <a href="https://templatemag.com/">TemplateMag</a>
+          <!-- Created with Healthcare template by <a href="https://templatemag.com/">TemplateMag</a> -->
         </div>
         <a href="host_main#" class="go-top">
           <i class="fa fa-angle-up"></i>

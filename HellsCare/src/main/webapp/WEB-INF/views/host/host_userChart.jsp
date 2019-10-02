@@ -72,64 +72,30 @@
         <!-- page end-->
       </section>
     </section>
-    <!-- /MAIN CONTENT -->
-    <!--main content end-->
-    
-    
-    
-
-<!--     <section id="main-content" style ="margin-left: 300px;">
-      <section class="wrapper">
-    <div class="row">
-          <div class="col-lg-9 main-chart">
-            CUSTOM CHART START
-            <div class="border-head">
-              <h3>회원 방문수(작업중)</h3>
-            </div>
-            <div class="custom-bar-chart">
-              <ul class="y-axis">
-                <li><span>10.000</span></li>
-                <li><span>8.000</span></li>
-                <li><span>6.000</span></li>
-                <li><span>4.000</span></li>
-                <li><span>2.000</span></li>
-                <li><span>0</span></li>
-              </ul>
-              <div class="bar">
-                <div class="title">JAN</div>
-                <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">FEB</div>
-                <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">MAR</div>
-                <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">APR</div>
-                <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-              </div>
-              <div class="bar">
-                <div class="title">MAY</div>
-                <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">JUN</div>
-                <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-              </div>
-              <div class="bar">
-                <div class="title">JUL</div>
-                <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-              </div>
-            </div>
-            custom chart end
-            </div>
-  	</div>
- 
-		</section>#wrapper end
-      </section>#content end -->
+     
+      
+<!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+          &copy; Copyrights <strong>Healthcare</strong>. All Rights Reserved
+        </p>
+        <div class="credits">
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+          <!-- Created with Healthcare template by <a href="https://templatemag.com/">TemplateMag</a> -->
+        </div>
+        <a href="host_main#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+      
       
 </section>
 <!--main content end-->

@@ -300,7 +300,7 @@
 	      var data = google.visualization.arrayToDataTable([
 	        ['탄수화물', '${standard.age}세 ${gender} 기준 평균 탄수화물 섭취율', '나의 섭취율', '${standard.age}세 ${gender} 기준 최대 탄수화물 섭취율'],
 	        ['주간 탄수화물 섭취율(%)', ${standard.avgCarbohydrate * 100}, ${weekCarbo}, ${standard.recoCarbohydrate * 100}]
-	      ]);
+	        ]);
 	
 	      var options = {
 	        chart: {
@@ -346,7 +346,8 @@
 	      var data = google.visualization.arrayToDataTable([
 	        ['지방', '${standard.age}세 ${gender} 기준 평균 지방 섭취율', '나의 섭취율', '${standard.age}세 ${gender} 기준 최대 지방 섭취율'],
 	        ['주간 지방 섭취율(%)', ${standard.avgFat * 100}, ${weekFat}, ${standard.recoFat * 100}]
-	      ]);
+	      	
+	        ]);
 	
 	      var options = {
 	        chart: {

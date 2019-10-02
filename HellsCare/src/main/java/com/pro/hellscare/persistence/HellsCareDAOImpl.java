@@ -18,6 +18,7 @@ import com.pro.hellscare.VO.BoardQnaVO;
 import com.pro.hellscare.VO.BoardVO;
 import com.pro.hellscare.VO.ClubBoardVO;
 import com.pro.hellscare.VO.ClubVO;
+import com.pro.hellscare.VO.CommentQnaVO;
 import com.pro.hellscare.VO.CommentVO;
 import com.pro.hellscare.VO.DiseaseVO;
 import com.pro.hellscare.VO.ExerciseVO;
@@ -69,7 +70,7 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 //=============호스트 DAO	
 	
 	
-	//==규진파트 시작
+// TODO 박규진 파트
 	
 	@Override
 	public List<challengeVO> challengesearch(String content) {
@@ -151,14 +152,11 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 	//==규진파트 종료
 	
 	
-	//==재관 유저 시작
-	
-	//==재관 유저 종료
-	
+
 	
 
 
-	
+// TODO 탁재관 파트	
 	// host
 				//재관 ===== 관리자 =====
 				// 질병정보갯수
@@ -290,7 +288,8 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getMemberInfo", username);
 				}
 			// 재관 종료
-	// ==예찬 시작	
+				
+// TODO 박예찬 파트
 	@Override
 	public void updateMaster(Map<String, Object> map) {
 		sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updateMaster", map);
@@ -710,203 +709,201 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 
 	// ==예찬 종료
 	// ========================================
-		//==한결 시작
+// TODO 김한결 파트
 	@Override
 	public List<BoardQnaVO> QnAHosts(int qna_code) {
 		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.QnAHosts",qna_code);
 	}
 
+	//댓글만 삭제
+	@Override
+	public int cDelete(String c_code) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.cDelete",c_code);
 
+	}
 	
-		//댓글만 삭제
-		@Override
-		public int cDelete(String c_code) {
-			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.cDelete",c_code);
+	//게시글 갯수 조회
+	@Override
+	public int getBoardCnt() {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getBoardCnt");
+	}
 	
-		}
+	//게시글 당 댓글 수
+	@Override
+	public int getCommentCnt(int board_code) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getCommentCnt", board_code);
+	}
+	@Override
+	public int getQnaCommentCnt(int qna_code) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaCommentCnt", qna_code);
+	}
+
+	//게시글 목록 조회
+	@Override
+	public List<BoardVO> getArticleList() {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getArticleList");
+	}
+
+	//조회수 증가 
+	@Override
+	public void addReadCnt(int board_code) {
+		HellsCareDAO dao = sqlsession.getMapper(HellsCareDAO.class);
+		dao.addReadCnt(board_code);
+	}
+	
+	@Override
+	public void addQnAReadCnt(int qna_code) {
+		HellsCareDAO dao = sqlsession.getMapper(HellsCareDAO.class);
+		dao.addQnAReadCnt(qna_code);
+	}
+
+
+	//게시글 상세 조회
+	@Override
+	public BoardVO getArticle(int board_code) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getArticle", board_code);
+	}
+
+	//게시글 저장
+	@Override
+	public int boardWrite(BoardVO vo) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.boardWrite", vo);
+	}
+
+	//댓글 불러움
+	@Override
+	public List<CommentVO> getCommentList(int board_code) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getCommentList", board_code);
+	}
+
+	//댓글 등록
+	@Override
+	public int commentWrite(CommentVO vo) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.commentWrite", vo);
+	}
+
+	//게시글 삭제
+	@Override
+	public int b_delete(int board_code) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.b_delete", board_code);
+	}
+
+	//게시글 삭제시 -> 댓글 삭제
+	@Override
+	public int c_delete(int board_code) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.c_delete", board_code);
+	}
+
+	//게시글 수정
+	@Override
+	public int boardUpdate(BoardVO vo) {
+		return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.boardUpdate", vo);
+	}
+	
+	//QnA 수정 처리
+	@Override
+	public int qnaUpdate(BoardQnaVO vo) {
 		
-		//게시글 갯수 조회
-		@Override
-		public int getBoardCnt() {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getBoardCnt");
-		}
+		return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.qnaUpdate", vo);
+	}
+
+	//QnA 글 갯수
+	@Override
+	public int getQnaCnt() {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaCnt");
+	}
+
+	//QnA 글 목록
+	@Override
+	public List<BoardQnaVO> getQnaArticleList() {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getQnaArticleList");
+	}
+
+	//QnA 저장
+	@Override
+	public int qnaWrite(BoardQnaVO vo) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.qnaWrite", vo);
+	}
+
+	//비밀번호 확인
+	@Override
+	public int getPwdConfirm(Map<String, Object> map) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getPwdConfirm",map);
+	}
+
+	//qna 내용
+	@Override
+	public BoardQnaVO getQnaArticle(int qna_code) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaArticle", qna_code);
+	}
+
+	//qna글 삭제
+	@Override
+	public int q_delete(int qna_code) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.q_delete", qna_code);
+	}
+
+	//qna 답변댓글 삭제
+	@Override
+	public int qc_delete(int qna_code) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.qc_delete", qna_code);
+	}
+	//공지사항 갯수
+	@Override
+	public int getnoticeCnt() {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getnoticeCnt");
+	}
+
+	//공지사항 가져오깅
+	@Override
+	public List<BoardVO> getNoticeArticleList() {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getNoticeArticleList");
+	}
+
+	//공지사항보기
+	@Override
+	public BoardVO getNoticeArticle(int board_code) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getNoticeArticle", board_code);
+	}
+
+
+	@Override
+	public List<BoardQnaVO> getmyArticleList(Map<String, Object> map) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getmyArticleList", map);
+	}
+
+	//내 질문글 갯수
+	@Override
+	public int getmyArticleCnt(String username) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getmyArticleCnt", username);
+	}
+	//QnA 답변
+	@Override
+	public int QnAAnswer(Map<String, Object> map) {
 		
-		//게시글 당 댓글 수
-		@Override
-		public int getCommentCnt(int board_code) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getCommentCnt", board_code);
-		}
-		@Override
-		public int getQnaCommentCnt(int qna_code) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaCommentCnt", qna_code);
-		}
-
-		//게시글 목록 조회
-		@Override
-		public List<BoardVO> getArticleList() {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getArticleList");
-		}
-
-		//조회수 증가 
-		@Override
-		public void addReadCnt(int board_code) {
-			HellsCareDAO dao = sqlsession.getMapper(HellsCareDAO.class);
-			dao.addReadCnt(board_code);
-		}
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.QnAAnswer",map);
+	}
+	//Qna상태변경
+	@Override
+	public int Qnastate(int qna_code) {
 		
-		@Override
-		public void addQnAReadCnt(int qna_code) {
-			HellsCareDAO dao = sqlsession.getMapper(HellsCareDAO.class);
-			dao.addQnAReadCnt(qna_code);
-		}
-
-
-		//게시글 상세 조회
-		@Override
-		public BoardVO getArticle(int board_code) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getArticle", board_code);
-		}
-
-		//게시글 저장
-		@Override
-		public int boardWrite(BoardVO vo) {
-			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.boardWrite", vo);
-		}
-
-		//댓글 불러움
-		@Override
-		public List<CommentVO> getCommentList(int board_code) {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getCommentList", board_code);
-		}
-
-		//댓글 등록
-		@Override
-		public int commentWrite(CommentVO vo) {
-			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.commentWrite", vo);
-		}
-
-		//게시글 삭제
-		@Override
-		public int b_delete(int board_code) {
-			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.b_delete", board_code);
-		}
-
-		//게시글 삭제시 -> 댓글 삭제
-		@Override
-		public int c_delete(int board_code) {
-			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.c_delete", board_code);
-		}
-
-		//게시글 수정
-		@Override
-		public int boardUpdate(BoardVO vo) {
-			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.boardUpdate", vo);
-		}
+		return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.Qnastate",qna_code);
+	}
+	
+	
+	//게시글 검색
+	@Override
+	public List<BoardVO> boardSearch(String query) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.boardSearch", query);
 		
-		//QnA 수정 처리
-		@Override
-		public int qnaUpdate(BoardQnaVO vo) {
-			
-			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.qnaUpdate", vo);
-		}
+	}
 
-		//QnA 글 갯수
-		@Override
-		public int getQnaCnt() {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaCnt");
-		}
-
-		//QnA 글 목록
-		@Override
-		public List<BoardQnaVO> getQnaArticleList() {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getQnaArticleList");
-		}
-
-		//QnA 저장
-		@Override
-		public int qnaWrite(BoardQnaVO vo) {
-			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.qnaWrite", vo);
-		}
-
-		//비밀번호 확인
-		@Override
-		public int getPwdConfirm(Map<String, Object> map) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getPwdConfirm",map);
-		}
-
-		//qna 내용
-		@Override
-		public BoardQnaVO getQnaArticle(int qna_code) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getQnaArticle", qna_code);
-		}
-
-		//qna글 삭제
-		@Override
-		public int q_delete(int qna_code) {
-			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.q_delete", qna_code);
-		}
-
-		//qna 답변댓글 삭제
-		@Override
-		public int qc_delete(int qna_code) {
-			return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.qc_delete", qna_code);
-		}
-		//공지사항 갯수
-		@Override
-		public int getnoticeCnt() {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getnoticeCnt");
-		}
-
-		//공지사항 가져오깅
-		@Override
-		public List<BoardVO> getNoticeArticleList() {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getNoticeArticleList");
-		}
-
-		//공지사항보기
-		@Override
-		public BoardVO getNoticeArticle(int board_code) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getNoticeArticle", board_code);
-		}
-
-
-		@Override
-		public List<BoardQnaVO> getmyArticleList(Map<String, Object> map) {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getmyArticleList", map);
-		}
-
-		//내 질문글 갯수
-		@Override
-		public int getmyArticleCnt(String username) {
-			return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getmyArticleCnt", username);
-		}
-		//QnA 답변
-		@Override
-		public int QnAAnswer(Map<String, Object> map) {
-			
-			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.QnAAnswer",map);
-		}
-		//Qna상태변경
-		@Override
-		public int Qnastate(int qna_code) {
-			
-			return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.Qnastate",qna_code);
-		}
-		
-		
-		//게시글 검색
-		@Override
-		public List<BoardVO> boardSearch(String query) {
-			return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.boardSearch", query);
-			
-		}
-
-		//공지사항 작성 처리
-		@Override
-		public int noticeWrite(BoardVO vo) {
-			return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.noticeWrite", vo);
-		}
-		
+	//공지사항 작성 처리
+	@Override
+	public int noticeWrite(BoardVO vo) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.noticeWrite", vo);
+	}
+	
 		
 		
 //		//공지사항 수정 처리
@@ -916,142 +913,167 @@ public class HellsCareDAOImpl implements HellsCareDAO{
 //			return 0;
 //		}
 		//==한결 종료
-		
-		//==나현 시작
-		
-				@Autowired
-				private JavaMailSender mailSender; // xml에 등록한 bean autowired
-				
-				// 아이디 찾기 시 이름 & 이메일 체크
-				public int chkCnt(Map<String, Object> map){
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.chkCnt", map);
-				}
-				// 아이디 찾기 시 아이디 반환
-				public String getUsername(Map<String, Object> map){
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getUsername", map);
-				}
-				
-				//아이디 찾기 _ 이메일로 아이디보내기 
-			    @Override
-			    public void sendmail(String email, String username) {
-			    
-			        try{
-			             MimeMessage message = mailSender.createMimeMessage();
-			            String txt = "안녕하세요 회원님! 회원님의 명의로 가입된 아이디입니다.<br><h3><b><font color=blue>"+username+"</font></b></h3>";
-			            message.setSubject("papahana 아이디찾기 서비스");
-			            message.setText(txt, "UTF-8", "html");
-			            message.setFrom(new InternetAddress("admin@mss.com"));
-			            message.addRecipient(RecipientType.TO, new InternetAddress(email));
-			            mailSender.send(message);
-			        }catch(Exception e){
-			            e.printStackTrace();
-			        }   
-			    }
-			    
-				// 비밀번호 찾기 시 아이디 & 이름 & 이메일 체크
-				public int pChkCnt(Map<String, Object> map){
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.pChkCnt", map);
-				}
-				//  비밀번호 찾기 시  이메일로 보낼 비밀번호 반환
-				public void updatePw(Map<String, String> map2){
-					sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updatePw", map2);
-				}
-				
-				//비밀번호 찾기 _ 이메일로 비밀번호 보낸 후 비밀번호 암호화 
-			    @Override
-			    public void sendmail2(String email, String rdpw) {
-			    
-			        try{
-			             MimeMessage message = mailSender.createMimeMessage();
-			            String txt = "안녕하세요 회원님! 회원님의 임시 비밀번호는<br><h3><b><font color=blue>"+rdpw+"</font></b></h3>입니다. "
-			            		+ "<br> 보안을 위해 로그인 후 비밀번호를 변경해주세요.  ";
-			            message.setSubject("papahana 비밀번호찾기 서비스");
-			            message.setText(txt, "UTF-8", "html");
-			            message.setFrom(new InternetAddress("admin@mss.com"));
-			            message.addRecipient(RecipientType.TO, new InternetAddress(email));
-			            mailSender.send(message);
-			        }catch(Exception e){
-			            e.printStackTrace();
-			        }   
-			    }
-			
-				// 회원가입 시 아이디 중복확인 처리
-				@Override
-				public int idCheck(String strId) {
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.idCheck", strId);
-				}
-				
-				//회원가입처리_INSERT INTO USERS
-				@Override
-				public int regUser(Map<String, String> map) {
-					
-				  String authority = (String)map.get("authority");
-				  String username = (String)map.get("username");
-				  
-				  System.out.println("authority :: "+authority);
-				  System.out.println("username :: " +username);
-				  
-				  Map<String, Object> Amap = new HashMap<String, Object>(); 
-				  Amap.put("username",username);
-				  Amap.put("authority", authority);
-				  
-				 
-				  int insertCnt =  sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser",map); 
-				  System.out.println("insertCnt =========="+insertCnt); 
-				  
-				  int insertUACnt = regUser1(Amap);
-				  System.out.println("insertUACnt =========="+insertUACnt); 
-				 
-				  
-				  return insertCnt;
-				}
-				
-				//회원가입처리_INSERT INTO AUTHORITIES
-				@Override
-				public int regUser1(Map<String, Object> Amap) {
-					return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser1", Amap);
-				}
-			    
-			    // 권한 핸들러_  회원 상세 정보
-			    @Override
-				public Map<String, String> selectUser(String username) {
-			    	System.out.println("HellscareDAO_selectUser_username:==>" + username);
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.selectUser", username); 
-				}
 
-			    // 마이페이지 회원정보 수정시 비밀번호 체크
-			    @Override
-				public int pwCheckCnt(Map<String,Object> map) {
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.pwCheckCnt",map);
-				}
-			    
-				//회원정보 수정폼
-				@Override
-				public UsersVO userModiView(String username) {
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.userModiView",username);
-				}
-				
-				//DB에 있는 비밀번호 리턴
-				@Override
-				public String returnPassword(String username) {
-					return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.returnPassword",username);
-				}
-				
-				//회원정보 수정처리
-				@Override
-				public int userModifyPro(UsersVO vo) {
-					return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.userModifyPro",vo);
-				}
-				
-				//회원탈퇴 처리
-				@Override
-				public int deleteMember(String username) {
-					return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.deleteMember",username);
-				}
-				
-				//==나현 종료
+// TODO 이나현 파트
 
+	@Autowired
+	private JavaMailSender mailSender; // xml에 등록한 bean autowired
+	
+	// 아이디 찾기 시 이름 & 이메일 체크
+	public int chkCnt(Map<String, Object> map){
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.chkCnt", map);
+	}
+	// 아이디 찾기 시 아이디 반환
+	public String getUsername(Map<String, Object> map){
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.getUsername", map);
+	}
+	
+	//아이디 찾기 _ 이메일로 아이디보내기 
+    @Override
+    public void sendmail(String email, String username) {
+    
+        try{
+             MimeMessage message = mailSender.createMimeMessage();
+            String txt = "안녕하세요 회원님! 회원님의 명의로 가입된 아이디입니다.<br><h3><b><font color=blue>"+username+"</font></b></h3>";
+            message.setSubject("papahana 아이디찾기 서비스");
+            message.setText(txt, "UTF-8", "html");
+            message.setFrom(new InternetAddress("admin@mss.com"));
+            message.addRecipient(RecipientType.TO, new InternetAddress(email));
+            mailSender.send(message);
+        }catch(Exception e){
+            e.printStackTrace();
+        }   
+    }
+    
+	// 비밀번호 찾기 시 아이디 & 이름 & 이메일 체크
+	public int pChkCnt(Map<String, Object> map){
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.pChkCnt", map);
+	}
+	//  비밀번호 찾기 시  이메일로 보낼 비밀번호 반환
+	public void updatePw(Map<String, String> map2){
+		sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.updatePw", map2);
+	}
+	
+	//비밀번호 찾기 _ 이메일로 비밀번호 보낸 후 비밀번호 암호화 
+    @Override
+    public void sendmail2(String email, String rdpw) {
+    
+        try{
+             MimeMessage message = mailSender.createMimeMessage();
+            String txt = "안녕하세요 회원님! 회원님의 임시 비밀번호는<br><h3><b><font color=blue>"+rdpw+"</font></b></h3>입니다. "
+            		+ "<br> 보안을 위해 로그인 후 비밀번호를 변경해주세요.  ";
+            message.setSubject("papahana 비밀번호찾기 서비스");
+            message.setText(txt, "UTF-8", "html");
+            message.setFrom(new InternetAddress("admin@mss.com"));
+            message.addRecipient(RecipientType.TO, new InternetAddress(email));
+            mailSender.send(message);
+        }catch(Exception e){
+            e.printStackTrace();
+        }   
+    }
+
+	// 회원가입 시 아이디 중복확인 처리
+	@Override
+	public int idCheck(String strId) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.idCheck", strId);
+	}
+	
+	//회원가입처리_INSERT INTO USERS
+	@Override
+	public int regUser(Map<String, String> map) {
 		
+	  String authority = (String)map.get("authority");
+	  String username = (String)map.get("username");
+	  
+	  System.out.println("authority :: "+authority);
+	  System.out.println("username :: " +username);
+	  
+	  Map<String, Object> Amap = new HashMap<String, Object>(); 
+	  Amap.put("username",username);
+	  Amap.put("authority", authority);
+	  
+	 
+	  int insertCnt =  sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser",map); 
+	  System.out.println("insertCnt =========="+insertCnt); 
+	  
+	  int insertUACnt = regUser1(Amap);
+	  System.out.println("insertUACnt =========="+insertUACnt); 
+	 
+	  
+	  return insertCnt;
+	}
+	
+	//회원가입처리_INSERT INTO AUTHORITIES
+	@Override
+	public int regUser1(Map<String, Object> Amap) {
+		return sqlsession.insert("com.pro.hellscare.persistence.HellsCareDAO.regUser1", Amap);
+	}
+    
+    // 권한 핸들러_  회원 상세 정보
+    @Override
+	public Map<String, String> selectUser(String username) {
+    	System.out.println("HellscareDAO_selectUser_username:==>" + username);
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.selectUser", username); 
+	}
+
+    // 마이페이지 회원정보 수정시 비밀번호 체크
+    @Override
+	public int pwCheckCnt(Map<String,Object> map) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.pwCheckCnt",map);
+	}
+    
+	//회원정보 수정폼
+	@Override
+	public UsersVO userModiView(String username) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.userModiView",username);
+	}
+	
+	//DB에 있는 비밀번호 리턴
+	@Override
+	public String returnPassword(String username) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.returnPassword",username);
+	}
+	
+	//회원정보 수정처리
+	@Override
+	public int userModifyPro(UsersVO vo) {
+		return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.userModifyPro",vo);
+	}
+	
+	//회원탈퇴 처리
+	@Override
+	public int deleteMember(String username) {
+		return sqlsession.delete("com.pro.hellscare.persistence.HellsCareDAO.deleteMember",username);
+	}
+	
+	//안드로이드 회원정보 수정처리
+	@Override
+	public UsersVO andrModiPro(String username) {
+		return sqlsession.selectOne("com.pro.hellscare.persistence.HellsCareDAO.andrModiPro", username);
+	}
+	//안드로이드 건강정보 수정처리
+	@Override
+	public int andrHealthModi(UserInfoVO vo) {
+		return sqlsession.update("com.pro.hellscare.persistence.HellsCareDAO.andrHealthModi", vo);
+	}
+	
+	
+	// 일대일 문의 목록 
+	public List<BoardQnaVO> getOtOInfo(String username) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.getOtOInfo", username);
+	
+		
+	}
+	
+	// 문의글 답글
+	@Override
+	public List<CommentQnaVO> QnAComment(int qna_code) {
+		return sqlsession.selectList("com.pro.hellscare.persistence.HellsCareDAO.QnAComment",qna_code);
+	}
+	
+	//==나현 종료
+
+// TODO 이동렬 파트		
 	// ================ 동렬 파트 시작 ========================
 	// 관리자 - 음식 등록
 	@Override

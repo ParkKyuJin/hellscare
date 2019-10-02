@@ -44,7 +44,7 @@ public class hellsCareController {
 	 // @ResponseBody   //맵에서 안드로이드로 값을 전달하기위한 어노테이션(Gson형식)
 	 //return 형식이 주소값이 아닌 그 외의 자료형의 값일경우 사용. 나머지는 IP연동으로 안드로이드에서 설정
 	
-//규진 시작
+// TODO 박규진 시작
 	//유저 메인페이지
 		@RequestMapping("main")
 		public String main2(HttpServletRequest req, Model model)throws IOException{
@@ -132,44 +132,10 @@ public class hellsCareController {
 		}
 //규진 종료
 //=============================	
-	//================블록체인
 	
-		// 재관 
-				// 동호회 개설비 지불 페이지
-				@RequestMapping("payCreateClub")
-				public String payCreateClub(HttpServletRequest req, Model model) throws Exception {
-					logger.info("URL ==> payCreateClub");
-					
-					return "Users/payCreateClub";
-				}
-				
-				// 동호회 개설비 지불
-				@RequestMapping("payCreateClubPro")
-				public String payCreateClubPro(HttpServletRequest req, Model model) throws Exception {
-					logger.info("URL ==> payCreateClubPro");
-					service3.deploy();
-					service3.payCreateClub(req, model);			
-					return "Users/payCreateClubPro";
-				}
-				
-				// 동호회 개설 취소
-				@RequestMapping("cancel_club")
-				public String cancel_club(HttpServletRequest req, Model model) throws Exception {
-					logger.info("URL ==> cancel_club");
-					
-					service.cancel_club(req, model);			
-					
-					return "Users/cancel_club";
-				}
-
 		
-		
-		
-	//=========================
-		
-		
-		
-	// 재관 시작 : 유저
+	
+// TODO 탁재관 파트 - 유저
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletRequest req) {
 		session.invalidate();
@@ -240,10 +206,40 @@ public class hellsCareController {
 
 		return "Users/topSearch";
 	}
+	
+//================블록체인
 
-	// 재관 종료
-//=============================	
-		//===동렬 part - start
+	// 동호회 개설비 지불 페이지
+	@RequestMapping("payCreateClub")
+	public String payCreateClub(HttpServletRequest req, Model model) throws Exception {
+		logger.info("URL ==> payCreateClub");
+		
+		return "Users/payCreateClub";
+	}
+	
+	// 동호회 개설비 지불
+	@RequestMapping("payCreateClubPro")
+	public String payCreateClubPro(HttpServletRequest req, Model model) throws Exception {
+		logger.info("URL ==> payCreateClubPro");
+		service3.deploy();
+		service3.payCreateClub(req, model);			
+		return "Users/payCreateClubPro";
+	}
+	
+	// 동호회 개설 취소
+	@RequestMapping("cancel_club")
+	public String cancel_club(HttpServletRequest req, Model model) throws Exception {
+		logger.info("URL ==> cancel_club");
+		
+		service.cancel_club(req, model);			
+		
+		return "Users/cancel_club";
+	}
+
+// 재관 종료
+					
+
+// TODO 이동렬 part - start
 	// 관리자 - 음식 중복 확인
 		@RequestMapping("foodNameDupCheck")
 		public @ResponseBody int foodNameDupCheck(HttpServletRequest req, Model model) {
@@ -345,8 +341,8 @@ public class hellsCareController {
 		}
 	//===동렬 part - end
 //=============================	
-//한결 시작
-		//===한결 part - start
+		
+// TODO 김한결 part - start
 
 		// 게시판 목록
 		@RequestMapping("boardList")
@@ -585,94 +581,95 @@ public class hellsCareController {
 		
 	//===한결 part - end	
 //한결 종료
-//=============================		
-		//===나현 Part - Start
-		   // 로그인
-		   @RequestMapping("login_reg")
-		   public String login_reg(HttpServletRequest req, Model model) {
-		      logger.info("URL ==> login_reg");
-		      
-		      return "login_reg";
-		   }
-		   
-			
-		   // 회원가입
-		   @RequestMapping("signUp")
-		   public String singUp(HttpServletRequest req, Model model) {
-		      logger.info("URL ==> signUp");
-		      
-		      return "signUp";
-		   }   
-			
-			
-			//중복확인 서브페이지(자바스크립트 호출,아이디가 중복된 경우)
-			@RequestMapping("confirmId")
-			public String confirmId(HttpServletRequest req,Model model) {
-				logger.info("url => confirmId");
-				
-				service.confirmId(req, model); 
-				
-				return "confirmId";
-			}
-			//회원가입처리 
-			//String userid =req.getParameter(userid) ===> 이거 대신 @RequestParam String userid이렇게 
-			@RequestMapping("regPro")
-			public String regPro(HttpServletRequest req,Model model) {
-				logger.info("url => Users/regPro");
+//=============================
+		
+// TODO 이나현 Part - Start
+   // 로그인
+   @RequestMapping("login_reg")
+   public String login_reg(HttpServletRequest req, Model model) {
+      logger.info("URL ==> login_reg");
+      
+      return "login_reg";
+   }
+   
+	
+   // 회원가입
+   @RequestMapping("signUp")
+   public String singUp(HttpServletRequest req, Model model) {
+      logger.info("URL ==> signUp");
+      
+      return "signUp";
+   }   
+	
+	
+	//중복확인 서브페이지(자바스크립트 호출,아이디가 중복된 경우)
+	@RequestMapping("confirmId")
+	public String confirmId(HttpServletRequest req,Model model) {
+		logger.info("url => confirmId");
+		
+		service.confirmId(req, model); 
+		
+		return "confirmId";
+	}
+	//회원가입처리 
+	//String userid =req.getParameter(userid) ===> 이거 대신 @RequestParam String userid이렇게 
+	@RequestMapping("regPro")
+	public String regPro(HttpServletRequest req,Model model) {
+		logger.info("url => Users/regPro");
 
-				service.regPro(req, model); 
+		service.regPro(req, model); 
 
-				return "login_reg"; // 나중에 회원가입이랑 로그인 나누면 로그인하는 화면으로 이동시켜주기 
-			}
-			
-			// 아이디 찾기 
-			@RequestMapping("forgotId")
-			public String forgotId(HttpServletRequest req, Model model) {
-				logger.info("URL ==> forgotId");
-				
-				return "forgotId";
-			}
-				
-			// 아이디찾기 시 이메일로 아이디 보내기
-			@RequestMapping(value="findId", method=RequestMethod.GET)
-			public String findId(HttpServletRequest req, Model model) {
-				System.out.println("findId");
-				
-				service.forgotidChk(req, model);
-				
-				return "find_id";
-			}
-			
-			// 비밀번호 찾기 
-			@RequestMapping("forgotPw")
-			public String forgotPw(HttpServletRequest req, Model model) {
-				logger.info("URL ==> forgotPw");
-				
-				return "forgotPw";
-			}
-			
-			// 비밀번호 찾기 시 이메일로 비밀번호 보내기
-			@RequestMapping(value="findPw", method=RequestMethod.GET)
-			public String findPw(HttpServletRequest req, Model model) {
-				System.out.println("findPw");
-				
-				service.forgotPwChk(req, model);
-				
-				return "find_pw";
-			}
+		return "login_reg"; // 나중에 회원가입이랑 로그인 나누면 로그인하는 화면으로 이동시켜주기 
+	}
+	
+	// 아이디 찾기 
+	@RequestMapping("forgotId")
+	public String forgotId(HttpServletRequest req, Model model) {
+		logger.info("URL ==> forgotId");
+		
+		return "forgotId";
+	}
+		
+	// 아이디찾기 시 이메일로 아이디 보내기
+	@RequestMapping(value="findId", method=RequestMethod.GET)
+	public String findId(HttpServletRequest req, Model model) {
+		System.out.println("findId");
+		
+		service.forgotidChk(req, model);
+		
+		return "find_id";
+	}
+	
+	// 비밀번호 찾기 
+	@RequestMapping("forgotPw")
+	public String forgotPw(HttpServletRequest req, Model model) {
+		logger.info("URL ==> forgotPw");
+		
+		return "forgotPw";
+	}
+	
+	// 비밀번호 찾기 시 이메일로 비밀번호 보내기
+	@RequestMapping(value="findPw", method=RequestMethod.GET)
+	public String findPw(HttpServletRequest req, Model model) {
+		System.out.println("findPw");
+		
+		service.forgotPwChk(req, model);
+		
+		return "find_pw";
+	}
 
-		 	
-		    // 권한이 없는 사용자에게 안내 페이지 출력 - 403 ERROR
-		 	@RequestMapping("/Users/denied")
-		 	public String denied(HttpServletRequest req, Model model, Authentication auth) {
-		 		
-		 		logger.info("경로 : denied");
-		 		AccessDeniedException ade = (AccessDeniedException) req.getAttribute(WebAttributes.ACCESS_DENIED_403);
-		 		
-		 		model.addAttribute("errMsg", ade); 
-		 		
-		 		return "Users/denied";
-		 	}
+ 	
+    // 권한이 없는 사용자에게 안내 페이지 출력 - 403 ERROR
+ 	@RequestMapping("/Users/denied")
+ 	public String denied(HttpServletRequest req, Model model, Authentication auth) {
+ 		
+ 		logger.info("경로 : denied");
+ 		AccessDeniedException ade = (AccessDeniedException) req.getAttribute(WebAttributes.ACCESS_DENIED_403);
+ 		
+ 		model.addAttribute("errMsg", ade); 
+ 		
+ 		return "Users/denied";
+ 	}
 						
 	// 마이페이지
 	@RequestMapping("myPage")
@@ -682,43 +679,43 @@ public class hellsCareController {
 		service.getUserInfo(req, model);
 		service.userModiView(req, model);
 		service.myQnaList(req, model); // 마이페이지 내 문의 목록
-		System.out.println("성공");
 		return "Users/myPage";
 	}
+
 			
-			// 마이페이지 회원정보 수정시 비밀번호 체크
-			@RequestMapping(value = "pwCheckCnt", method = RequestMethod.GET)
-			@ResponseBody
-			public int pwCheckCnt(@RequestParam("password") String password, @RequestParam("username") String username) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("password", password);
-				map.put("username", username);
-				return service.pwCheckCnt(map);
-			}
+	// 마이페이지 회원정보 수정시 비밀번호 체크
+	@RequestMapping(value = "pwCheckCnt", method = RequestMethod.GET)
+	@ResponseBody
+	public int pwCheckCnt(@RequestParam("password") String password, @RequestParam("username") String username) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("password", password);
+		map.put("username", username);
+		return service.pwCheckCnt(map);
+	}
+	
+	// 회원정보 수정처리
+	@RequestMapping("modifyPro")
+	public String modifyPro(HttpServletRequest req, Model model, Authentication auth) {
+		auth.getAuthorities(); 
+		logger.info("URL ==> modifyPro");
+		
+		service.modifyPro(req, model);
+		return "Users/modifyPro";
+	}
+	
+	// 회원 탈퇴처리
+	@RequestMapping("delMember")
+	public String delMember(HttpServletRequest req, Model model, Authentication auth) {
+		auth.getAuthorities(); 
+		logger.info("URL ==> delMember");
+		
+		service.delMember(req, model);
+		return "Users/delMember";
+	}
 			
-			// 회원정보 수정처리
-			@RequestMapping("modifyPro")
-			public String modifyPro(HttpServletRequest req, Model model, Authentication auth) {
-				auth.getAuthorities(); 
-				logger.info("URL ==> modifyPro");
-				
-				service.modifyPro(req, model);
-				return "Users/modifyPro";
-			}
-			
-			// 회원 탈퇴처리
-			@RequestMapping("delMember")
-			public String delMember(HttpServletRequest req, Model model, Authentication auth) {
-				auth.getAuthorities(); 
-				logger.info("URL ==> delMember");
-				
-				service.delMember(req, model);
-				return "Users/delMember";
-			}
-			
-		//===나현 Part -End
+//===나현 Part -End
 //=============================		
-	// 예찬 시작 =========== USER =============
+// TODO 박예찬 시작 =========== USER =============
 	// 운동정보
 	@RequestMapping("exercise")
 	public String exercise(HttpServletRequest req, Model model) {
@@ -985,11 +982,8 @@ public class hellsCareController {
 	
 //======================이하 호스트부분==================
 
-//규진 시작
-			
-//규진 끝
 
-	//재관 시작 : 관리자
+// TODO 탁재관 시작 : 관리자
 		// 관리자 메인
 	    @RequestMapping("host_main")
 	    public String main(HttpServletRequest req, Model model) {
@@ -1079,7 +1073,7 @@ public class hellsCareController {
 		}
 	//재관 끝
 			
-	// ==동렬 Part Strart
+// TODO 이동렬 Part Strart
 
 	// 관리자 - 음식 목록
 	@RequestMapping("host_foodList")
@@ -1161,15 +1155,8 @@ public class hellsCareController {
 	}
 
 	// ==동렬 Part End
-			
-//한결 시작
-			
-//한결 끝
-			
-//나현 시작
-			
-//나현 끝
-	// 예찬 시작
+
+// TODO 박예찬 시작
 	// ===================== HOST ==========================
 
 	// 관리자 운동관리페이지 / 운동 목록 리스트
@@ -1289,7 +1276,7 @@ public class hellsCareController {
 			
 			
 			
-//규진 part Start
+// TODO 박규진 part Start
 	//관리자 챌린지 관리
 	@RequestMapping("host_challenge")
 	public String host_challenge(HttpServletRequest req, Model model) {
@@ -1328,7 +1315,7 @@ public class hellsCareController {
 	
 
 	
-//==나현 Part	 Start
+// TODO 이나현 Part	 Start
 	
 	@RequestMapping("memChart")
 	public String memChart(HttpServletRequest req, Model model) {
@@ -1354,25 +1341,25 @@ public class hellsCareController {
 	
 	
 
-	// ==한결 Part Start=================================================
-		@RequestMapping("host_qna")
-		public String host_qna(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> host_qna");
-			service.boardList(req, model);
-			return "host/host_qna";
-		}
-		
-		// 게시판 목록 -> 공지사항
-		@RequestMapping("host_notice")
-		public String noticeList(HttpServletRequest req, Model model) {
-			logger.info("URL ==> noticeList");
+// TODO 한결 Part Start=================================================
+	@RequestMapping("host_qna")
+	public String host_qna(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_qna");
+		service.boardList(req, model);
+		return "host/host_qna";
+	}
+	
+	// 게시판 목록 -> 공지사항
+	@RequestMapping("host_notice")
+	public String noticeList(HttpServletRequest req, Model model) {
+		logger.info("URL ==> noticeList");
 
-			service.noticeList(req, model);
-			System.out.println("성공");
+		service.noticeList(req, model);
+		System.out.println("성공");
 
-			return "host/host_notice";
-		}
+		return "host/host_notice";
+	}
 		
 	// 공지사항 작성 처리
 	@RequestMapping("host_noticeWrite")
@@ -1385,16 +1372,6 @@ public class hellsCareController {
 		return "redirect:host_notice";
 	}
 		
-		
-	// 공지사항 글 보기
-	@RequestMapping("host_noticeContent")
-	public String host_noticeContent(HttpServletRequest req, Model model) {
-		// 로거 작성 필수!
-		logger.info("URL ==> host_noticeContent");
-
-		service.notice_contentForm(req, model);
-		return "host/host_noticeContent";
-	}
 		
 	// 공지사항 수정 뷰
 	@RequestMapping("notice_modify")
@@ -1426,29 +1403,30 @@ public class hellsCareController {
 //			return "host/board_delete";
 //		}
 		
-		@RequestMapping("host_boardContent")
-		public String host_boardContent(HttpServletRequest req, Model model) {
+    @RequestMapping("host_boardContent")
+    public String host_boardContent(HttpServletRequest req, Model model) {
 
-			logger.info("URL ==> host_boardContent");
-			
-			return "host/host_boardContent";
-		}
+       logger.info("URL ==> host_boardContent");
+       service.contentForm(req, model);
+       
+       return "host/host_boardContent";
+    }
 
-		@RequestMapping("host_board")
-		public String host_board(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> host_board");
-			service.boardList(req, model);
-			return "host/host_board";
-		}
+	@RequestMapping("host_board")
+	public String host_board(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_board");
+		service.boardList(req, model);
+		return "host/host_board";
+	}
 
-		@RequestMapping("host_qnaContent")
-		public String host_qnaContent(HttpServletRequest req, Model model) {
-			// 로거 작성 필수!
-			logger.info("URL ==> host_qnaContent");
-			service.host_qnaContent(req, model);
-			return "host/host_qnaContent";
-		}
+	@RequestMapping("host_qnaContent")
+	public String host_qnaContent(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> host_qnaContent");
+		service.host_qnaContent(req, model);
+		return "host/host_qnaContent";
+	}
 
 	// 공지사항 작성 폼으로 이동
 	@RequestMapping("notice_write")
@@ -1458,15 +1436,68 @@ public class hellsCareController {
 		return "host/notice_write";
 	}
 
-		@RequestMapping("QnAAnswer")
-		public String QnAAnswer(HttpServletRequest req, Model model) {
+	@RequestMapping("QnAAnswer")
+	public String QnAAnswer(HttpServletRequest req, Model model) {
+		// 로거 작성 필수!
+		logger.info("URL ==> QnAAnswer");
+		service.QnAAnswer(req, model);
+		service.boardList(req, model);
+		return "host/host_qna";
+	}
+	
+	//마이페이지에서 문의사항 작성 처리
+			@RequestMapping("MyqnaWritePro") 
+			public void MyqnaWritePro(HttpServletRequest req, Model model) {
+		  
+				logger.info("URL ==> MyqnaWritePro");
+		  
+				service.MyqnaWritePro(req, model);
+		  
+			}
+			
+			//마이페이지 문의사항 리스트
+			@RequestMapping("myQnaList")
+			public String myQnaList(HttpServletRequest req, Model model) {
+				
+				logger.info("URL ==> myQnaList");
+				service.myQnaList(req, model); // 마이페이지 내 문의 목록
+				System.out.println("성공");
+				
+				return "Users/myQnaList";
+			}
+
+			//관리자 - 게시글 삭제
+			@RequestMapping("hboard_delete")
+			public String hboard_delete(HttpServletRequest req, Model model) {
+
+				logger.info("URL ==> hboard_delete");
+				service.b_delete(req, model);
+		 
+				return "redirect:host_board";
+			}
+				
+			//관리자- 공지사항 삭제
+			@RequestMapping("hnboard_delete")
+			public String hnboard_delete(HttpServletRequest req, Model model) {
+
+				logger.info("URL ==> hnboard_delete");
+				service.b_delete(req, model);
+		 
+				return "redirect:host_notice";
+			}
+
+		// 공지사항 글 보기
+		@RequestMapping("host_noticeContent")
+		public String host_noticeContent(HttpServletRequest req, Model model) {
 			// 로거 작성 필수!
-			logger.info("URL ==> QnAAnswer");
-			service.QnAAnswer(req, model);
-			service.boardList(req, model);
-			return "host/host_qna";
+			logger.info("URL ==> host_noticeContent");
+
+			service.notice_contentForm(req, model);
+			return "host/host_noticeContent";
 		}
-		// ==한결 Part End==================================================
+	
+	
+// ==한결 Part End==================================================
 	
 	 
 	

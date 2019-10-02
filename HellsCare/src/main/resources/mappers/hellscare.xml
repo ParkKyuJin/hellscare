@@ -780,17 +780,6 @@
 			VALUES (BOARD_SEQ.nextval, #{username}, #{title}, #{content}, 1)
 	</insert>
     
-<!-- 내 질문 목록 조회 -->
-	<select id="getmyArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
-		<![CDATA[
-			SELECT * FROM 
-			    (SELECT qna_code, username, title, content, readCnt, qna_write_date, kind, state, rownum rNum
-			        FROM (SELECT * FROM board_qna_tbl )
-				) 
-			WHERE rNum >= #{start} AND rNum <= #{end} AND username=#{username}
-		 ]]>
-	</select>
-	
 	<!-- 내 질문글 수 -->
     <select id="getmyArticleCnt" resultType="int">
     	SELECT COUNT(*) as cnt FROM board_qna_tbl WHERE username=#{username}
@@ -807,6 +796,18 @@
     <select id="QnAHosts" parameterType="int" resultType="com.pro.hellscare.VO.CommentQnaVO">
     	select username,qna_code,content,comment_date from comment_qna_tbl where qna_code = #{qna_code}
     </select>
+    
+    	<!-- 내 질문 목록 조회 -->
+	<select id="getmyArticleList" parameterType="java.util.Map" resultType="com.pro.hellscare.VO.BoardQnaVO">
+		<![CDATA[
+			SELECT * FROM 
+			    (SELECT qna_code, username, title, content, readCnt, qna_write_date, kind, state, rownum rNum
+			        FROM (SELECT * FROM board_qna_tbl )
+			        WHERE username=#{username}
+				) 
+			WHERE rNum >= #{start} AND rNum <= #{end}
+		 ]]>
+	</select>
     
     
     
@@ -884,6 +885,28 @@
     <delete id="deleteMember" parameterType="String">
     	delete users where username=#{username}
     </delete>
+    
+    <!-- 안드로이드 회원 정보 수정 -->
+	<select resultType="com.pro.hellscare.VO.UsersVO" parameterType="String" id="andrModiPro">
+		SELECT username, password, name, address, phone_number, gender, birth, email FROM users where username = #{username} 
+	</select>
+
+	<!-- 안드로이드 건강 정보 수정 -->
+	<update parameterType="com.pro.hellscare.VO.UserInfoVO" id="andrHealthModi">
+		UPDATE users_info_tbl SET height=#{height}, weight=#{weight}, bmi=#{bmi},sightR=#{sightR}, sightL=#{sightR}, pressure=#{pressure}, pressure2=#{pressure2},glucose=#{glucose}, smokeAmount=#{smokeAmount}, drinkAmount=#{drinkAmount}, check_date=sysdateWHERE username=#{username} 
+	</update>
+	<!-- 안드로이드 일대일 문의정보  -->
+	<select id ="getOtOInfo" parameterType="String" resultType="com.pro.hellscare.VO.BoardQnaVO"> 
+		select * from (select qna_code, username, title, content, qna_password, kind, qna_write_date, state
+			from (select * from board_qna_tbl 
+					order by qna_write_date desc)
+				)
+            where username=#{username}
+    </select>
+    
+    <select id ="QnAComment" parameterType="int" resultType="com.pro.hellscare.VO.CommentQnaVO"> 
+		select username,qna_code,content,comment_date from comment_qna_tbl where qna_code = #{qna_code}
+    </select>
 <!-- 나현 종료  -->
     
     

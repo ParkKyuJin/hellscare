@@ -32,23 +32,24 @@
 			<div class="row">
 			<div class="col-lg-6 pl-lg-6">
 				<div class="entry-image" >
-							<a href="/hellscare/resources/eventimg/${dto.challenge_img}" data-lightbox="image" style="height:100%;"><img style="height:100%;"T class="image_fade" src="/hellscare/resources/eventimg/${dto.challenge_img}" alt="Standard Post with Image"></a>
+							<a href="/hellscare/resources/eventimg/${dto.challenge_img}" data-lightbox="image" style="height:100%;">
+							<img style="height:100%;" class="image_fade" src="/hellscare/resources/eventimg/${dto.challenge_img}" alt="Standard Post with Image"></a>
 				</div>
 			</div>
 			<div class="col-lg-5">
 			
 				<div style="max-width: 30rem;">
-					<label for="drug_name">도전과제명</label>
+					<label for="drug_name">이벤트명</label>
 					<hr>
 					<h3>${dto.challenge_name}</h3>
 					<hr>
-					<label for="entp_name">도전과제 내용 </label>
+					<label for="entp_name">이벤트내용</label>
 					<hr>
 					<h4>${dto.challenge_content}</h4>
 					<hr>
-					<label for="entp_name">보상포인트</label>
+					<label for="entp_name">개최지</label> 
 					<hr>
-					<h4>${dto.challenge_gift} Points</h4>
+					<%-- <h4>${dto.challenge_gift} Points</h4> --%>
 					<div id="map" style="width:100%;height:350px;"></div>
 				</div>
 				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6f11ce067be0e4302a3047b3e2f5dbe9"></script>
@@ -81,7 +82,7 @@ marker.setMap(map);
 				<br>
 				<c:if test="${cnt != 0}">
 				<div class="style-msg infomsg">
-					<div class="sb-msg"><i class="icon-info-sign"></i><strong>Fail XD !</strong> <b>이미 도전등록을 하신 과제입니다!</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Mychallenge">내 과제 보기</a></div>
+					<div class="sb-msg"><i class="icon-info-sign"></i><strong>Fail XD !</strong> <b>이미 찜하신 이벤트입니다!</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Mychallenge">내 과제 보기</a></div>
 					</div>
 				</c:if>
 				

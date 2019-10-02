@@ -81,7 +81,7 @@
 								
 									<tr>
 										<td align="center" style="width:50px">
-										${nto.rNum}
+										공지사항
 										</td>
 										
 										<td align="left">

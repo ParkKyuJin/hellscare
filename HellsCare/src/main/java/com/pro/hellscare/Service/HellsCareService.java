@@ -148,6 +148,9 @@ public interface HellsCareService {
 
 	// notice write pro
 	public void noticeWritePro(HttpServletRequest req, Model model);
+	
+	public void MyqnaWritePro(HttpServletRequest req, Model model);
+	
 	// 한결 끝
 
 	// 동렬 시작 ---------------

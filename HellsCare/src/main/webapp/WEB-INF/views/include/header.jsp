@@ -33,14 +33,15 @@
 						</li>
 						<li><a href="#"><div style="font-size:1.5em">식단</div></a>
 						<ul style="background: white">
-						<li><a href="food_diet"><div style="color: black; font-size:1.2em;">다이어트
-										식품</div></a></li>
-										<li><a href="javascript:goTodayCalory();"><div
+							<li><a href="javascript:goTodayCalory();"><div
 										style="color: black; font-size:1.2em;">오늘의 칼로리</div></a></li>
-							<li><a href="food_info"><div style="color: black; font-size:1.2em;">식단
-										정보</div></a></li>
 							<li><a href="javascript:goFoodRecommendation();"><div
 										style="color: black; font-size:1.2em;">섭취영양성분 분석</div></a></li>
+							<li><a href="food_info"><div style="color: black; font-size:1.2em;">식단
+										정보</div></a></li>
+							<li><a href="food_diet"><div style="color: black; font-size:1.2em;">다이어트
+										식품</div></a></li>
+							
 							
 							
 						</ul></li>
@@ -77,7 +78,7 @@
 						<ul style="background: white">
 							<li><a href="#" onclick="return clubSessionChk();"><div
 										style="color: black; font-size:1.2em;">동호회 목록</div></a></li>
-							<li><a href="makeClub" onclick="return clubSessionChk();"><div style="color: black; font-size:1.2em;">동호회
+							<li><a href="makeClub" ><div style="color: black; font-size:1.2em;">동호회
 										개설</div></a></li>
 							<c:if test="${memId != null}">
 								<li><a href="user_applyList"><div style="color: black; font-size:1.2em;">동호회

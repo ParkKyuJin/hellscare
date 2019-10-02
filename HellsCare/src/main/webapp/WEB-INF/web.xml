@@ -81,10 +81,14 @@
    <!-- 시큐리티 추가 종료 -->
    
    <!-- 5. 에러처리 페이지 -->
-<!--    <error-page>
+	<error-page>
       <error-code>500</error-code>
-      <location>Users/login</location>
-   </error-page> -->
+      <location>/WEB-INF/views/Users/500.jsp</location>
+   </error-page>
+   <error-page>
+      <error-code>404</error-code>
+      <location>/WEB-INF/views/Users/404.jsp</location>
+   </error-page>
    
    <!-- 6. 세션 타임 아웃 설정(20분) -->
    <session-config>

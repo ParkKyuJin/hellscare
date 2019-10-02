@@ -10,8 +10,8 @@
 		<div class="content-wrap">
 			<div class="row clearfix">
 				<div class="col-lg-6" style="margin: 0 auto;">
-					<form name="makeClubForm" class="nobottommargin" action="makeClubApply?
-						method="post" onsubmit="return subCheck();">
+					<form name="makeClubForm" class="nobottommargin" action="makeClubApply"
+							method="post" onsubmit="return subCheck();">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
 						<div id="checkCnt"></div>
 
@@ -62,10 +62,11 @@
 						</div>
 						
 						<div class="col_full">
-							<label for="bang">동호회 소개<small>(1000자 이내)</small></label>
-							<textarea id="bang" name="club_pr" cols="58" rows="7"
+							<label for="bang">동호회 소개<small>(1000자 이내)</small></label><br>
+							<input id="bang" name="club_pr" size="1000" class="sm-form-control" placeholder="동호회 소개를 작성해주세요." required>
+							<!-- <textarea id="bang" name="club_pr" cols="58" rows="7"
 								tabindex="4" class="sm-form-control"
-								placeholder="동호회 소개를 작성해주세요." required></textarea>
+								placeholder="동호회 소개를 작성해주세요." required></textarea> -->
 						</div>
 						<div class="col_full">
 							<label for="inwon">인원수</label><small>(최대인원수 :
